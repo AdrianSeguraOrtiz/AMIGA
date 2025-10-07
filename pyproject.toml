@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "amiga"
+version = "0.1.0"
+description = "AMIGA: Autonomous Multi-objective Individual GRN Autoselection"
+authors = ["Adrián Segura-Ortiz <adrianseor.99@uma.es>"]
+readme = "README.md"
+license = "MIT"
+packages = [{ include = "amiga" }]
+
+[tool.poetry.scripts]
+amiga = "amiga.cli:app"
+
+[tool.poetry.dependencies]
+python = ">=3.10.7,<3.11,"
+catboost = "1.2.8"
+lightgbm = "4.6.0"
+networkx = "3.4.2"
+scikit-learn = "1.7.2"
+scipy = "1.15.3"
+xgboost = "3.0.5"
+GENECI = "4.0.1.1"
+python-louvain = "0.16"
+
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
