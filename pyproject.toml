@@ -11,15 +11,15 @@ packages = [{ include = "amiga" }]
 amiga = "amiga.cli:app"
 
 [tool.poetry.dependencies]
-python = ">=3.10.7,<3.11,"
-catboost = "1.2.8"
-lightgbm = "4.6.0"
-networkx = "3.4.2"
-scikit-learn = "1.7.2"
-scipy = "1.15.3"
-xgboost = "3.0.5"
-GENECI = "4.0.1.1"
-python-louvain = "0.16"
+python = ">=3.13,<3.14"   # por NetworkX 3.5
+catboost = "==1.2.8"
+lightgbm = "==4.6.0"
+networkx = "==3.5"
+scikit-learn = "==1.7.2"
+scipy = "==1.16.2"
+xgboost = "==3.0.5"
+python-louvain = "==0.16"
+typer = "==0.19.2"
 
 
 [build-system]

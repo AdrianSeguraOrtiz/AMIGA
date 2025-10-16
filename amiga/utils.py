@@ -11,7 +11,7 @@ import math
 from pathlib import Path
 import pickle
 import json
-from typing import Dict
+from typing import Dict, List, Optional
 import warnings
 
 import numpy as np
@@ -164,3 +164,136 @@ def row_weights_from_front(row: pd.Series) -> Dict[str, float]:
         weights = {k: v / s for k, v in weights.items()}
 
     return weights
+
+
+def weighted_confidence(
+    weight_file_summand: List[str],
+    output_file: Optional[Path] = None,
+) -> pd.DataFrame:
+    """
+    Combine multiple edge confidence lists (CSV files with no header) via a weighted average.
+
+    Each input must be provided as '<weight>*<path_to_file>'.
+    Every CSV is expected to have exactly three columns **without header**:
+    [source, target, confidence].
+
+    Behavior
+    --------
+    - Reads each CSV as edges: (Source, Target, Confidence).
+    - If a file contains duplicate (Source, Target) edges, they are averaged.
+    - Unseen edges in a file are treated as Confidence = 0 for that file.
+    - Computes the weighted average across files using the provided weights.
+    - Returns a DataFrame with columns: 'Source', 'Target', 'Confidence' sorted descending.
+    - Optionally writes the result to `output_file` (CSV with header).
+
+    Parameters
+    ----------
+    weight_file_summand : List[str]
+        List of weighted file specs formatted as '<weight>*<path_to_file>'.
+        Example: ["0.7*/path/to/list1.csv", "0.3*/path/to/list2.csv"].
+    output_file : Optional[Path], default=None
+        Where to write the resulting CSV. If None, no file is written.
+
+    Returns
+    -------
+    pd.DataFrame
+        Columns:
+        - 'Source' (str)
+        - 'Target' (str)
+        - 'Confidence' (float): weighted average confidence.
+
+    Raises
+    ------
+    ValueError
+        If an entry is invalid, a file is missing, or the weights do not sum to ~1.0 (±0.01).
+
+    Warnings
+    --------
+    Issues a warning if the sum of weights slightly deviates and is normalized.
+    """
+    # Parse weights & file paths
+    weights: List[float] = []
+    files: List[Path] = []
+    for spec in weight_file_summand:
+        if "*" not in spec:
+            raise ValueError(f"Invalid entry '{spec}'. Use '<weight>*<file_path>'.")
+        w_str, f_path = spec.split("*", 1)
+        try:
+            w = float(w_str)
+        except ValueError:
+            raise ValueError(f"Invalid weight '{w_str}' in '{spec}'.")
+        weights.append(w)
+        files.append(Path(f_path))
+
+    # Validate / normalize weights
+    total_w = sum(weights)
+    if total_w <= 0:
+        raise ValueError("Sum of weights must be > 0.")
+    if abs(total_w - 1.0) > 0.01:
+        warnings.warn(f"Weights normalized to sum to 1.0 (was {total_w:.6f}).")
+        weights = [w / total_w for w in weights]
+
+    # Read all CSVs as (Source, Target, Confidence)
+    dfs: List[pd.DataFrame] = []
+    for fp in files:
+        if not fp.exists():
+            raise ValueError(f"File not found: {fp}")
+        df = pd.read_csv(
+            fp,
+            header=None,
+            names=["Source", "Target", "Confidence"],
+        )
+        # Normalize types / trim whitespace
+        df["Source"] = df["Source"].astype(str).str.strip()
+        df["Target"] = df["Target"].astype(str).str.strip()
+        df["Confidence"] = pd.to_numeric(df["Confidence"], errors="coerce")
+
+        # Drop rows with missing endpoints
+        df = df.dropna(subset=["Source", "Target"])
+        # Treat missing/invalid confidence as 0
+        df["Confidence"] = df["Confidence"].fillna(0.0)
+
+        # If duplicates exist, average them
+        df = (
+            df.groupby(["Source", "Target"], as_index=False, sort=False)["Confidence"]
+            .mean()
+        )
+        dfs.append(df)
+
+    if not dfs:
+        return pd.DataFrame(columns=["Source", "Target", "Confidence"])
+
+    # Create the union of all edges (Source, Target)
+    union_edges = pd.concat([d[["Source", "Target"]] for d in dfs], ignore_index=True)
+    union_edges = union_edges.drop_duplicates(ignore_index=True)
+
+    # Merge each file's confidence as a separate column
+    merged = union_edges.copy()
+    conf_cols: List[str] = []
+    for i, df in enumerate(dfs):
+        col = f"conf_{i}"
+        conf_cols.append(col)
+        merged = merged.merge(
+            df.rename(columns={"Confidence": col}),
+            on=["Source", "Target"],
+            how="left",
+        )
+
+    # Fill missing confidences with 0 (edge absent in that file)
+    merged[conf_cols] = merged[conf_cols].fillna(0.0)
+
+    # Weighted average
+    weighted = sum(merged[c] * weights[i] for i, c in enumerate(conf_cols))
+    merged["Confidence"] = weighted
+
+    # Keep only required columns, sort by Confidence desc
+    out = merged[["Source", "Target", "Confidence"]].sort_values(
+        by="Confidence", ascending=False
+    ).reset_index(drop=True)
+
+    # Optionally write CSV
+    if output_file is not None:
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        out.to_csv(output_file, index=False, header=False)
+
+    return out

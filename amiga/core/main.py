@@ -20,9 +20,8 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import GroupKFold
-from geneci.main import weighted_confidence
 
-from amiga.utils import row_weights_from_front
+from amiga.utils import row_weights_from_front, weighted_confidence
 
 from amiga.features.expression import (
     features_condition_stats,
@@ -605,18 +604,13 @@ def build_data(
             fpath = grn_dir / fname
             if not fpath.exists():
                 raise FileNotFoundError(f"GRN file not found: {fpath}")
-            # GENECI's weighted_confidence expects summands like "w*path"
+            # weighted_confidence expects summands like "w*path"
             summands.append(f"{w}*{str(fpath)}")
 
-        # Run consensus into a temporary file, then compute GRN features on the result
-        with tempfile.TemporaryDirectory() as td:
-            tmp_out = Path(td) / "weighted_confidence.csv"
-            weighted_confidence(weight_file_summand=summands, output_file=tmp_out)
-
-            # Read consensus GRN and extract features
-            df_cons = pd.read_csv(tmp_out, header=None, names=["Source", "Target", "Confidence"])
-            grn_res = extract_grnet_features(df_edges=df_cons)
-            grn_feats = grn_res.metrics
+        # Run consensus, then compute GRN features on the result
+        df_cons = weighted_confidence(weight_file_summand=summands)
+        grn_res = extract_grnet_features(df_edges=df_cons)
+        grn_feats = grn_res.metrics
 
         # Compose output row
         row_out: Dict[str, Any] = {
