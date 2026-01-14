@@ -97,6 +97,7 @@ def load_expression_matrix(csv_path: Path) -> pd.DataFrame:
     Load a gene expression matrix from a CSV file and return a numeric DataFrame (genes × conditions).
 
     Behavior:
+      - Drops the first column (gene identifiers).
       - Converts non-numeric columns to numeric where possible.
       - Drops fully empty rows/columns (all NaN).
       - Ensures the resulting DataFrame contains only valid numeric entries.
@@ -112,6 +113,9 @@ def load_expression_matrix(csv_path: Path) -> pd.DataFrame:
         Clean numeric DataFrame (genes × conditions).
     """
     df = pd.read_csv(csv_path)
+    # Drop gene identifier column
+    if df.shape[1] > 0:
+        df = df.iloc[:, 1:]
     # Attempt to coerce any remaining non-numeric columns
     df = df.apply(pd.to_numeric, errors="coerce")
     # Drop completely empty rows or columns

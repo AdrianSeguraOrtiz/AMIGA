@@ -16,7 +16,7 @@ The ranking model integrates several heterogeneous information sources:
 
 To preserve the **independent and contextual nature of each benchmark front**, AMIGA implements a *group-aware Learning-to-Rank (LTR) strategy* that constrains both label preprocessing and model validation through the following measures:
 
-1. **Intra-front normalization of target values (AUPR):** Before training, the AUPR scores are normalized *within each front* so that relevance labels represent the *relative quality of individuals* in their own context, eliminating cross-dataset scale bias.
+1. **Intra-front normalization of target values (AUPR):** Before training, the AUPR scores are normalized *within each front* so that relevance labels represent the *relative quality of individuals* in their own context, eliminating cross-dataset scale bias (default `label_mode=continuous`).
 
 2. **Group-aware cross-validation:**  The training process uses **GroupKFold**, where each front acts as a distinct group, ensuring that **no individuals from the same front appear simultaneously in training and validation folds**, thus preventing information leakage across benchmarks.
 
@@ -123,12 +123,12 @@ The second group of features corresponds to the **optimization levels achieved b
 
 All individuals in the same Pareto front originate from the **same gene expression dataset**, so these descriptors are shared among them. They characterize the statistical structure, variability and temporal behavior of the expression matrix:
 
-- **Global descriptors:** number of genes and conditions, mean, variance, range, skewness, kurtosis, and proportions of zeros/missing values.  
+- **Global descriptors:** number of genes and conditions, mean, standard deviation, min/max, skewness, kurtosis, and proportions of zeros/missing values.  
 - **Per-gene statistics:** distribution of mean, standard deviation, and coefficient of variation (CV) across genes, including quantiles (p10, p50, p90).  
 - **Per-condition statistics:** analogous descriptors across experimental conditions, plus a simple z-score outlier indicator for condition means.  
 - **Correlation-based structure:** average and variability of gene–gene and condition–condition Pearson correlations (mean, std, |corr|₉₀%).  
 - **PCA decomposition:** top-k explained variance ratios, effective rank (Shannon entropy of singular values), and spectral condition number — capturing dimensionality and redundancy of expression patterns.  
-- **Temporal dynamics:** for time-series data, lag-1 autocorrelation and per-gene linear trend statistics (slope, R², and fraction of positive slopes).
+- **Temporal dynamics:** for time-series data, lag-1 autocorrelation and per-gene linear trend statistics (slope, R², and fraction of positive slopes) (**implemented**, available via `--include-timeseries`, **not** enabled by default in the main `build-data` flow).
 
 These features summarize the **statistical and dynamical properties of the input data** driving the inference process, allowing AMIGA to contextualize results according to dataset complexity.
 
@@ -144,7 +144,7 @@ For each individual, a **consensus GRN** is built from its technique weights, an
 - **Clustering coefficient:** mean weighted clustering in the undirected projection.  
 - **Community structure:** number of communities, weighted modularity, and community size distribution (mean, max) obtained via Louvain detection.  
 - **Reciprocity:** proportion of bidirectional regulatory pairs weighted by the minimum confidence of reciprocal edges.  
-- **Entropy-based summaries:** Shannon entropies of edge-weight and node-strength distributions, capturing network heterogeneity.
+- **Entropy-based summaries:** Shannon entropies of edge-weight and node-strength distributions, capturing network heterogeneity (**implemented**, available via `--include-advanced`, **not** enabled by default in the main `build-data` flow).
 
 These descriptors quantify both the **structural organization and weight distribution** of each consensus network, providing rich topological information beyond raw performance metrics.
 
@@ -183,7 +183,7 @@ The `LabelMode` parameter specifies how **relevance labels** (training targets) 
 | **rank_dense** | 0…L–1 | Dense integer ranks without gaps; ties share the same rank, next rank is incremented by 1. | Discrete small fronts; stable and interpretable. |
 | **rank_avg** | 0…L–1 | Average rank values when ties occur, then discretized; smoother than `rank_dense`. | Noisy fronts or metrics with frequent ties. |
 | **quantiles** | 0…Q–1 | Divides AUPR values into *Q* quantile bins (e.g., quartiles or deciles). | When the distribution of AUPR is skewed or multi-modal. |
-| **continuous** | 0.0–1.0 | Min–max normalization of AUPR within the front, preserving continuous relative distances. | Large fronts or when fine-grained sensitivity is desired. |
+| **continuous** | 0.0–1.0 | Min–max normalization of AUPR within the front, preserving continuous relative distances. **Default.** | Large fronts or when fine-grained sensitivity is desired. |
 
 All labeling schemes are **intra-front only** — they never compare AUPR values across different benchmarks — ensuring that relevance remains context-specific to each front’s dynamics.
 
@@ -277,11 +277,11 @@ amiga extract-expr-features data/expression.csv -o features_expr.json
 
 Computes statistical and structural metrics from a gene expression matrix, including:
 
-* Global descriptors (size, mean, variance, skewness, kurtosis)
+* Global descriptors (size, mean, standard deviation, min/max, skewness, kurtosis)
 * Per-gene and per-condition variability
 * Correlation-based structure
 * PCA decomposition (explained variance, effective rank)
-* Optional time-series dynamics (`--include-timeseries`)
+* Optional time-series dynamics (`--include-timeseries`, **not** enabled by default in `build-data`)
 
 ### 5️⃣ Extracting GRN-level features
 
@@ -289,14 +289,14 @@ Computes statistical and structural metrics from a gene expression matrix, inclu
 amiga extract-grn-features data/GRN_GENIE3.csv -o features_grn.json
 ```
 
-Computes **weighted graph metrics** from a directed GRN file (`Source, Target, Confidence`), including:
+Computes **weighted graph metrics** from a directed GRN file with three columns (source, target, confidence; **no header required**), including:
 
 * Density, edge-weight distribution, and top-X concentration
 * Node strength statistics (in/out/total)
 * Weighted assortativity and reciprocity
 * Path-based and clustering metrics
 * Louvain modularity and community descriptors
-* Optional advanced metrics (`--include-advanced`, e.g., entropy-based)
+* Optional advanced metrics (`--include-advanced`, e.g., entropy-based; **not** enabled by default in `build-data`)
 
 ### 6️⃣ Building training datasets
 
@@ -320,6 +320,4 @@ Creates a consolidated CSV merging:
 If you use **AMIGA** in your research, please cite it as:
 
 > Segura-Ortiz, A., Giménez-Orenga, K., García-Nieto, J., Oltra, E., & Aldana-Montes, J. F. (2025). Multifaceted evolution focused on maximal exploitation of domain knowledge for the consensus inference of Gene Regulatory Networks. Computers in Biology and Medicine, 196, 110632.
-
-
 

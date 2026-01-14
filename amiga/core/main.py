@@ -180,7 +180,7 @@ def train_ltr_cv(
     target_col: str = "AUPR",
     id_col: str = "item_id",
     drop_cols: Optional[List[str]] = None,
-    label_mode: LabelMode = LabelMode.RANK_DENSE,
+    label_mode: LabelMode = LabelMode.CONTINUOUS,
     label_quantiles: int = 20,
     n_splits: int = 5,
     random_state: int = 42,
@@ -293,7 +293,7 @@ def train_ltr_full(
     target_col: str = "AUPR",
     id_col: str = "item_id",
     drop_cols: Optional[List[str]] = None,
-    label_mode: LabelMode = LabelMode.RANK_DENSE,
+    label_mode: LabelMode = LabelMode.CONTINUOUS,
     label_quantiles: int = 20,
     random_state: int = 42,
 ) -> FitResult:

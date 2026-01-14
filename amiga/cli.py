@@ -70,7 +70,7 @@ def train_cv(
         help="Additional columns to exclude from the feature set (on top of front/target/id)."
     ),
     label_mode: LabelMode = typer.Option(
-        LabelMode.RANK_DENSE, "--label-mode",
+        LabelMode.CONTINUOUS, "--label-mode",
         case_sensitive=False,
         help="Labeling strategy for LTR (e.g., RANK_DENSE, QUANTILES, CONTINUOUS...)."
     ),
@@ -156,7 +156,7 @@ def train_full(
     target_col: str = typer.Option("AUPR"),
     id_col: str = typer.Option("item_id"),
     drop_cols: List[str] = typer.Option([]),
-    label_mode: LabelMode = typer.Option(LabelMode.RANK_DENSE, "--label-mode", case_sensitive=False),
+    label_mode: LabelMode = typer.Option(LabelMode.CONTINUOUS, "--label-mode", case_sensitive=False),
     label_quantiles: int = typer.Option(20, min=2),
     random_state: int = typer.Option(42),
     out_dir: Path = typer.Option(Path("./output_full")),
