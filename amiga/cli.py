@@ -459,6 +459,10 @@ def build_data_cmd(
         ["Accuracy Mean", "AUROC"],
         help="Front columns to exclude from the output. Default: ['Accuracy Mean','AUROC']",
     ),
+    threads: int = typer.Option(
+        1, "--threads", "-j", min=1,
+        help="Number of threads for per-row consensus/GRN feature extraction (1 = sequential).",
+    ),
 ):
     """
     Steps:
@@ -482,6 +486,8 @@ def build_data_cmd(
         Output CSV path for the consolidated dataset.
     drop_front_cols : List[str]
         Front columns that will be excluded from the output.
+    threads : int
+        Number of worker threads for per-row processing.
 
     Output
     ------
@@ -498,6 +504,7 @@ def build_data_cmd(
         grn_dir=grn_folder,
         front_id=front_id,
         drop_front_cols=drop_front_cols,
+        threads=threads,
     )
 
     # Persist final dataset

@@ -22,14 +22,14 @@ Notes
 from __future__ import annotations
 
 import enum
+import warnings
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
-from scipy.stats import kendalltau, spearmanr
+from scipy.stats import ConstantInputWarning, kendalltau, spearmanr
 from sklearn.metrics import ndcg_score
-
 
 # -----------------------------------------------------------------------------
 # Enums & config
@@ -307,7 +307,10 @@ def compute_ranking_metrics(
         }
 
         # Rank correlations
-        rho = spearmanr(y_true.ravel(), y_score.ravel()).statistic
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=ConstantInputWarning)
+            rho = spearmanr(y_true.ravel(), y_score.ravel()).statistic
+        rho = 0.0 if not np.isfinite(rho) else float(rho)
         ktau = kendalltau(y_true.ravel(), y_score.ravel()).correlation
 
         per_group.append(

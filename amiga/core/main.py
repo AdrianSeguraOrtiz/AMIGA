@@ -12,6 +12,7 @@ Notes
 """
 
 from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 import tempfile
@@ -546,6 +547,7 @@ def build_data(
     grn_dir: Path,
     front_id: int,
     drop_front_cols: Optional[List[str]] = None,
+    threads: int = 1,
 ) -> pd.DataFrame:
     """
     Build a 'training'-like dataset by combining:
@@ -569,6 +571,8 @@ def build_data(
         Numeric front identifier to assign to all rows.
     drop_front_cols : list[str] | None
         Front columns to exclude from the output (defaults to ['Accuracy Mean', 'AUROC']).
+    threads : int
+        Number of worker threads to process front rows in parallel (1 = sequential).
 
     Returns
     -------
@@ -576,13 +580,17 @@ def build_data(
         Consolidated dataset with control columns, preserved front columns, and feature blocks.
     """
     drop_front_cols = drop_front_cols or ["Accuracy Mean", "AUROC"]
+    if threads < 1:
+        raise ValueError("'threads' must be >= 1.")
 
     if "AUPR" not in df_front.columns:
         raise ValueError("The evaluated front CSV must contain the 'AUPR' column.")
 
     # 1) Expression feature block (shared across individuals)
+    print("Extracting expression features...")
     expr_res = extract_expression_features(df_expr)
     expr_feats = expr_res.metrics  # flat dict
+    print(f"Extracted {len(expr_feats)} expression features.")
 
     # 2) Output rows accumulator
     out_rows: List[Dict[str, Any]] = []
@@ -592,8 +600,10 @@ def build_data(
     if not grn_dir.exists():
         raise FileNotFoundError(f"GRN directory not found: {grn_dir}")
 
-    # 4) Iterate individuals in the front
-    for idx, row in df_front.reset_index(drop=True).iterrows():
+    # 4) Worker for each individual in the front
+    def _build_row(idx_row: tuple[int, pd.Series]) -> Dict[str, Any]:
+        print(f"Processing row {idx_row[0] + 1}/{len(df_front)}...")
+        idx, row = idx_row
         # Preserve original front columns except those dropped
         base_front = row.drop(labels=[c for c in drop_front_cols if c in row.index], errors="ignore").to_dict()
 
@@ -640,7 +650,15 @@ def build_data(
                 key = f"grn_{k}"
             row_out[key] = v
 
-        out_rows.append(row_out)
+        return row_out
+
+    indexed_rows = list(df_front.reset_index(drop=True).iterrows())
+    if threads == 1:
+        out_rows = [_build_row(idx_row) for idx_row in indexed_rows]
+    else:
+        with ThreadPoolExecutor(max_workers=threads) as executor:
+            # executor.map preserves input order, so item_id/output row order stays stable.
+            out_rows = list(executor.map(_build_row, indexed_rows))
 
     df_out = pd.DataFrame(out_rows)
 
