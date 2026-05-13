@@ -9,7 +9,7 @@ Includes:
 - Enums for model types (LightGBM / XGBoost / CatBoost) and label modes.
 - Label construction (dense ranks, average ranks, quantiles, continuous).
 - Stable reordering and per-group sizes for rankers that require contiguous blocks.
-- Per-group and aggregated metrics (NDCG@k, P@1, Regret@k, Spearman, KendallTau).
+- Per-group and aggregated metrics with decision-first emphasis.
 - Per-fold training and validation predictions for the supported models.
 
 Notes
@@ -22,9 +22,9 @@ Notes
 from __future__ import annotations
 
 import enum
+import zlib
 import warnings
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
@@ -60,33 +60,17 @@ class LabelMode(str, enum.Enum):
         Quantile bins 0..Q-1 (best = Q-1).
     CONTINUOUS
         Continuous relevance 0..1 via per-front min-max scaling (best = 1).
+    REVERSED
+        Negative control: inverted per-front continuous relevance (best = 0).
+    SHUFFLED
+        Negative control: shuffled per-front continuous relevance.
     """
     RANK_DENSE = "rank_dense"
     RANK_AVG = "rank_avg"
     QUANTILES = "quantiles"
     CONTINUOUS = "continuous"
-
-
-@dataclass
-class DatasetSpec:
-    """
-    Dataset column specification and exclusions.
-
-    Attributes
-    ----------
-    front_col : str
-        Name of the group/front column.
-    target_col : str
-        Name of the target column (e.g., AUPR).
-    id_col : str
-        Name of the individual identifier column.
-    drop_cols : Sequence[str]
-        Extra columns to exclude from features.
-    """
-    front_col: str
-    target_col: str
-    id_col: str
-    drop_cols: Sequence[str]
+    REVERSED = "reversed"
+    SHUFFLED = "shuffled"
 
 
 # -----------------------------------------------------------------------------
@@ -96,6 +80,34 @@ class DatasetSpec:
 FEATURES_META = "feature_columns.json"
 CV_REPORT = "cv_report.json"
 MODEL_PREFIX = "model_fold"
+
+# Metrics are ordered so reports, plots, and logs emphasize top-k decision quality.
+METRIC_PRIORITY: Dict[str, int] = {
+    "Regret@1": 10,
+    "Regret@3": 11,
+    "Regret@5": 12,
+    "Regret@10": 13,
+    "BestAUPR@1": 20,
+    "BestAUPR@3": 21,
+    "BestAUPR@5": 22,
+    "BestAUPR@10": 23,
+    "Hit@1": 30,
+    "Hit@3": 31,
+    "Hit@5": 32,
+    "Hit@10": 33,
+    "NDCG@3": 40,
+    "NDCG@5": 41,
+    "NDCG@10": 42,
+    "NDCG@1": 43,
+    "Spearman": 50,
+    "KendallTau": 51,
+    "n_items": 99,
+}
+
+
+def metric_priority(metric: str) -> int:
+    """Return a stable sort key so decision metrics appear first."""
+    return METRIC_PRIORITY.get(metric, 1000)
 
 
 def ensure_dependencies(model_type: ModelType) -> None:
@@ -134,6 +146,7 @@ def build_labels(
     target_col: str,
     mode: LabelMode,
     n_quantiles: int = 20,
+    random_state: int = 42,
 ) -> np.ndarray:
     """
     Build intra-front labels/relevances from a continuous target (e.g., AUPR).
@@ -150,6 +163,8 @@ def build_labels(
         Label construction mode (see `LabelMode`).
     n_quantiles : int, optional
         Number of quantiles if `mode == QUANTILES`.
+    random_state : int, optional
+        Seed used by stochastic negative controls such as `SHUFFLED`.
 
     Returns
     -------
@@ -161,6 +176,8 @@ def build_labels(
     * RANK_DENSE / RANK_AVG return integer labels 0..L-1.
     * QUANTILES returns integers 0..Q-1; uses `duplicates="drop"` and robust fallback on failure.
     * CONTINUOUS returns floats 0..1 (per-front min-max).
+    * REVERSED inverts CONTINUOUS within each front.
+    * SHUFFLED permutes CONTINUOUS within each front using a deterministic seed.
     """
     if mode == LabelMode.RANK_DENSE:
         # r: 1..L (1 is best if ascending=False)
@@ -206,6 +223,27 @@ def build_labels(
                 return pd.Series(0.0, index=g.index)
         rel = df.groupby(front_col)[target_col].transform(mm).astype(float)
         return rel.to_numpy()
+
+    if mode in {LabelMode.REVERSED, LabelMode.SHUFFLED}:
+        def mm(g: pd.Series) -> pd.Series:
+            g = g.astype(float)
+            mn, mx = g.min(), g.max()
+            if mx > mn:
+                return (g - mn) / (mx - mn)
+            return pd.Series(0.0, index=g.index)
+
+        rel = df.groupby(front_col)[target_col].transform(mm).astype(float)
+        if mode == LabelMode.REVERSED:
+            return (1.0 - rel).to_numpy()
+
+        shuffled = np.empty(len(df), dtype=float)
+        for front_id, idx in df.groupby(front_col, sort=False).groups.items():
+            values = rel.loc[idx].to_numpy(copy=True)
+            seed = (zlib.crc32(str(front_id).encode("utf-8")) ^ int(random_state)) & 0xFFFFFFFF
+            rng = np.random.default_rng(seed)
+            rng.shuffle(values)
+            shuffled[np.asarray(idx, dtype=int)] = values
+        return shuffled
 
     raise ValueError(f"Unsupported label mode: {mode}")
 
@@ -253,6 +291,86 @@ def order_by_group_and_sizes(group_ids: np.ndarray) -> Tuple[np.ndarray, List[in
 # Ranking metrics
 # -----------------------------------------------------------------------------
 
+def compute_ranking_metrics_by_front(
+    df_fold: pd.DataFrame,
+    front_col: str,
+    target_col: str,
+    score_col: str,
+    ks: Sequence[int] = (1, 3, 5, 10),
+) -> pd.DataFrame:
+    """
+    Compute ranking metrics at front/group granularity.
+
+    Parameters
+    ----------
+    df_fold : pd.DataFrame
+        Subset (e.g., validation of one fold) with columns `front_col`, `target_col`, `score_col`.
+    front_col : str
+        Group/front column.
+    target_col : str
+        Column with the ground-truth value / “relevance”.
+    score_col : str
+        Column with model-predicted scores.
+    ks : Sequence[int], optional
+        Cutoffs for metrics@k.
+
+    Returns
+    -------
+    pd.DataFrame
+        One row per front with ranking metrics computed from that front only.
+
+    Notes
+    -----
+    * Regret@k = max(y_true) - max(y_true@topk_by_score)
+    * BestAUPR@k = max(y_true@topk_by_score)
+    * Hit@k = 1 if any best-AUPR item appears in the predicted top-k, else 0.
+    """
+    per_group: List[Dict[str, float]] = []
+
+    for front_id, group in df_fold.groupby(front_col):
+        y_true = group[target_col].to_numpy().reshape(1, -1)
+        y_score = group[score_col].to_numpy().reshape(1, -1)
+
+        # Order by predicted score for top-k dependent metrics
+        order = np.argsort(-y_score.ravel())
+        ndcgs = {f"NDCG@{k}": float(ndcg_score(y_true, y_score, k=k)) for k in ks if k <= group.shape[0]}
+        best_true = float(np.max(y_true.ravel())) if group.shape[0] > 0 else 0.0
+        best_mask = np.isclose(y_true.ravel(), best_true)
+        regret_at_k = {}
+        best_aupr_at_k = {}
+        hit_at_k = {}
+        for k in ks:
+            if k > group.shape[0]:
+                continue
+            topk_order = order[:k]
+            topk_best = float(np.max(y_true.ravel()[topk_order]))
+            regret_at_k[f"Regret@{k}"] = float(best_true - topk_best)
+            best_aupr_at_k[f"BestAUPR@{k}"] = topk_best
+            hit_at_k[f"Hit@{k}"] = float(np.any(best_mask[topk_order]))
+
+        # Rank correlations
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=ConstantInputWarning)
+            rho = spearmanr(y_true.ravel(), y_score.ravel()).statistic
+        rho = 0.0 if not np.isfinite(rho) else float(rho)
+        ktau = kendalltau(y_true.ravel(), y_score.ravel()).correlation
+
+        per_group.append(
+            {
+                front_col: front_id,
+                **regret_at_k,
+                **best_aupr_at_k,
+                **hit_at_k,
+                **ndcgs,
+                "Spearman": float(rho if np.isfinite(rho) else 0.0),
+                "KendallTau": float(ktau if np.isfinite(ktau) else 0.0),
+                "n_items": int(group.shape[0]),
+            }
+        )
+
+    return pd.DataFrame(per_group)
+
+
 def compute_ranking_metrics(
     df_fold: pd.DataFrame,
     front_col: str,
@@ -274,60 +392,29 @@ def compute_ranking_metrics(
     score_col : str
         Column with model-predicted scores.
     ks : Sequence[int], optional
-        Cutoffs for metrics@k (NDCG@k, Regret@k; P@1 is reported separately).
+        Cutoffs for metrics@k.
 
     Returns
     -------
     agg : dict[str, float]
         Aggregated metrics (mean over groups) for all found keys.
     per_group : list[dict[str, float]]
-        Per-group metrics including: NDCG@k, Regret@k, P@1, Spearman, KendallTau, n_items.
-
-    Notes
-    -----
-    * P@1 checks whether the argmax of y_true equals the top-1 by `score`.
-    * Regret@k = max(y_true) - max(y_true@topk_by_score)
+        Per-group metrics including decision-first top-k metrics and
+        lower-priority global rank correlations.
     """
-    per_group: List[Dict[str, float]] = []
-
-    for _, group in df_fold.groupby(front_col):
-        y_true = group[target_col].to_numpy().reshape(1, -1)
-        y_score = group[score_col].to_numpy().reshape(1, -1)
-
-        # Order by predicted score for top-k dependent metrics
-        order = np.argsort(-y_score.ravel())
-        y_true_sorted = y_true.ravel()[order]
-
-        ndcgs = {f"NDCG@{k}": float(ndcg_score(y_true, y_score, k=k)) for k in ks if k <= group.shape[0]}
-        p_at_1 = float(np.argmax(y_true.ravel()) == order[0]) if group.shape[0] > 0 else 0.0
-        regret_at_k = {
-            f"Regret@{k}": float(np.max(y_true.ravel()) - (np.max(y_true_sorted[:k]) if k <= len(y_true_sorted) else 0.0))
-            for k in ks
-            if k <= group.shape[0]
-        }
-
-        # Rank correlations
-        with warnings.catch_warnings():
-            warnings.filterwarnings("ignore", category=ConstantInputWarning)
-            rho = spearmanr(y_true.ravel(), y_score.ravel()).statistic
-        rho = 0.0 if not np.isfinite(rho) else float(rho)
-        ktau = kendalltau(y_true.ravel(), y_score.ravel()).correlation
-
-        per_group.append(
-            {
-                **ndcgs,
-                **regret_at_k,
-                "P@1": float(p_at_1),
-                "Spearman": float(rho if np.isfinite(rho) else 0.0),
-                "KendallTau": float(ktau if np.isfinite(ktau) else 0.0),
-                "n_items": int(group.shape[0]),
-            }
-        )
+    per_group_df = compute_ranking_metrics_by_front(
+        df_fold=df_fold,
+        front_col=front_col,
+        target_col=target_col,
+        score_col=score_col,
+        ks=ks,
+    )
 
     # Aggregate as simple mean across groups
     agg: Dict[str, float] = {}
+    per_group = per_group_df.to_dict(orient="records")
     if per_group:
-        keys = set().union(*per_group)
+        keys = sorted((set().union(*per_group)) - {front_col}, key=metric_priority)
         for k in keys:
             vals = [d[k] for d in per_group if k in d]
             if vals:
@@ -347,6 +434,7 @@ def fit_ranker(
     gid_train: np.ndarray,
     *,
     random_state: int = 42,
+    model_params: Optional[Dict[str, Any]] = None,
     # Optional validation set (if provided, used for early stopping/monitoring)
     X_valid: Optional[pd.DataFrame] = None,
     y_valid: Optional[np.ndarray] = None,
@@ -374,6 +462,7 @@ def fit_ranker(
         If validation was passed, array of scores aligned with the original order of `X_valid`.
     """
     ensure_dependencies(model_type)
+    model_params = dict(model_params or {})
 
     has_valid = (X_valid is not None) and (y_valid is not None) and (gid_valid is not None)
 
@@ -410,9 +499,12 @@ def fit_ranker(
                 y_va_q = np.floor(np.clip(y_va, 0, 1) * (n_bins - 1)).astype(int)
         else:
             y_tr_q = y_tr.astype(int)
-            label_gain = list(range(int(y_tr_q.max()) + 1))
             if has_valid:
                 y_va_q = y_va.astype(int)
+                max_label = int(max(y_tr_q.max(), y_va_q.max()))
+            else:
+                max_label = int(y_tr_q.max())
+            label_gain = list(range(max_label + 1))
 
         params = dict(
             objective="lambdarank",
@@ -426,6 +518,7 @@ def fit_ranker(
             random_state=random_state,
             label_gain=label_gain,
         )
+        params.update(model_params)
         model = LGBMRanker(**params)
 
         if has_valid:
@@ -456,7 +549,7 @@ def fit_ranker(
     if model_type == ModelType.XGBRanker:
         from xgboost import XGBRanker
 
-        model = XGBRanker(
+        params = dict(
             objective="rank:ndcg",
             eval_metric="ndcg@10",
             learning_rate=0.05,
@@ -464,9 +557,13 @@ def fit_ranker(
             max_depth=6,
             subsample=0.8,
             colsample_bytree=0.8,
+            min_child_weight=1,
             random_state=random_state,
             ndcg_exp_gain=False,
+            early_stopping_rounds=100 if has_valid else None,
         )
+        params.update(model_params)
+        model = XGBRanker(**params)
 
         if has_valid:
             model.fit(
@@ -497,7 +594,7 @@ def fit_ranker(
     if model_type == ModelType.CatBoostRanker:
         from catboost import CatBoostRanker, Pool
         train_pool = Pool(X_tr, y_tr, group_id=gid_train)
-        model = CatBoostRanker(
+        params = dict(
             loss_function="YetiRank",
             eval_metric="NDCG:top=10",
             learning_rate=0.05,
@@ -505,9 +602,12 @@ def fit_ranker(
             iterations=2000,
             random_seed=random_state,
             verbose=False,
+            allow_writing_files=False,
             od_type="Iter" if has_valid else "IncToDec",  # OD only if validation is present
             od_wait=100 if has_valid else None,
         )
+        params.update(model_params)
+        model = CatBoostRanker(**params)
         if has_valid:
             valid_pool = Pool(X_va, y_va, group_id=gid_valid)
             model.fit(train_pool, eval_set=valid_pool)

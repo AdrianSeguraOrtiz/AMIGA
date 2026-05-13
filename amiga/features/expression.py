@@ -19,19 +19,23 @@ EPS = 1e-12
 
 def _q(arr: np.ndarray, q: float) -> float:
     """Safe percentile with NaN handling; returns NaN if the array is empty."""
-    if arr.size == 0:
+    if arr.size == 0 or np.all(np.isnan(arr)):
         return float("nan")
     return float(np.nanpercentile(arr, q))
 
 
 def _safe_mean(arr: np.ndarray) -> float:
     """Mean that tolerates NaNs and empty arrays."""
-    return float(np.nanmean(arr)) if arr.size else float("nan")
+    if arr.size == 0 or np.all(np.isnan(arr)):
+        return float("nan")
+    return float(np.nanmean(arr))
 
 
 def _safe_std(arr: np.ndarray) -> float:
     """Std that tolerates NaNs and empty arrays."""
-    return float(np.nanstd(arr)) if arr.size else float("nan")
+    if arr.size == 0 or np.all(np.isnan(arr)):
+        return float("nan")
+    return float(np.nanstd(arr))
 
 
 def _linear_trend(y: np.ndarray) -> Tuple[float, float]:
@@ -309,20 +313,38 @@ def features_timeseries(df: pd.DataFrame, max_lag: int = 1) -> Dict[str, Any]:
     The function aggregates per-gene metrics into summary statistics
     (mean/median/p90) for each magnitude.
     """
+    if max_lag < 1:
+        raise ValueError("max_lag must be >= 1.")
+
     vals = df.values.astype(float)
     G = vals.shape[0]
     if G == 0 or df.shape[1] < 2:
+        lag_feats = {
+            f"ts_lag{lag}_autocorr_mean": float("nan")
+            for lag in range(1, max_lag + 1)
+        }
+        lag_feats.update(
+            {
+                f"ts_lag{lag}_autocorr_median": float("nan")
+                for lag in range(1, max_lag + 1)
+            }
+        )
         return {
-            "ts_lag1_autocorr_mean": float("nan"),
-            "ts_lag1_autocorr_median": float("nan"),
+            **lag_feats,
             "ts_slope_mean": float("nan"),
             "ts_slope_p90": float("nan"),
             "ts_r2_mean": float("nan"),
             "ts_pos_slope_frac": float("nan"),
         }
 
-    # Per-gene autocorrelation at lag 1
-    lag1 = np.array([_lag_autocorr(vals[i, :], lag=1) for i in range(G)], dtype=float)
+    # Per-gene autocorrelation for requested lags.
+    lag_features: Dict[str, Any] = {}
+    for lag in range(1, max_lag + 1):
+        lag_values = np.array([_lag_autocorr(vals[i, :], lag=lag) for i in range(G)], dtype=float)
+        lag_features[f"ts_lag{lag}_autocorr_mean"] = _safe_mean(lag_values)
+        lag_features[f"ts_lag{lag}_autocorr_median"] = (
+            float("nan") if np.all(np.isnan(lag_values)) else float(np.nanmedian(lag_values))
+        )
 
     # Per-gene linear trend (slope, R^2)
     slopes = np.empty(G, dtype=float)
@@ -335,8 +357,7 @@ def features_timeseries(df: pd.DataFrame, max_lag: int = 1) -> Dict[str, Any]:
     pos_frac = float(np.nanmean(slopes > 0))
 
     return {
-        "ts_lag1_autocorr_mean": _safe_mean(lag1),
-        "ts_lag1_autocorr_median": float(np.nanmedian(lag1)),
+        **lag_features,
         "ts_slope_mean": _safe_mean(slopes),
         "ts_slope_p90": _q(slopes, 90),
         "ts_r2_mean": _safe_mean(r2s),

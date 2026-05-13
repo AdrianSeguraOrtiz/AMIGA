@@ -5,6 +5,19 @@ description = "AMIGA: Autonomous Multi-objective Individual GRN Autoselection"
 authors = ["Adrián Segura-Ortiz <adrianseor.99@uma.es>"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/AdrianSeguraOrtiz/AMIGA"
+repository = "https://github.com/AdrianSeguraOrtiz/AMIGA"
+documentation = "https://github.com/AdrianSeguraOrtiz/AMIGA#readme"
+keywords = ["grn", "gene-regulatory-networks", "learning-to-rank", "bioinformatics", "multi-objective-optimization"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 packages = [{ include = "amiga" }]
 
 [tool.poetry.scripts]
@@ -14,12 +27,44 @@ amiga = "amiga.cli:app"
 python = ">=3.13,<3.14"   # por NetworkX 3.5
 catboost = "==1.2.8"
 lightgbm = "==4.6.0"
+matplotlib = "==3.10.6"
 networkx = "==3.5"
+numpy = "==2.3.3"
+pandas = "==2.3.2"
 scikit-learn = "==1.7.2"
 scipy = "==1.16.2"
+statsmodels = "==0.14.5"
 xgboost = "==3.0.5"
 python-louvain = "==0.16"
 typer = "==0.19.2"
+seaborn = "==0.13.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "==8.4.1"
+coverage = "==7.14.0"
+pytest-cov = "==7.1.0"
+twine = "==6.1.0"
+vulture = "==2.16"
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=amiga --cov-report=term-missing"
+
+
+[tool.coverage.run]
+source = ["amiga"]
+branch = true
+
+
+[tool.coverage.report]
+show_missing = true
+
+
+[tool.vulture]
+paths = ["amiga", "tests"]
+min_confidence = 60
+ignore_decorators = ["@app.command"]
 
 
 [build-system]

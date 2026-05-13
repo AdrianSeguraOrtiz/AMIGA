@@ -209,3 +209,7 @@ __marimo__/
 
 # Training data
 data/
+experiments/
+
+# CatBoost training artifacts
+catboost_info/

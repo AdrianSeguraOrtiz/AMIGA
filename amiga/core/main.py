@@ -15,7 +15,6 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
-import tempfile
 from typing import Any, Dict, List, Optional
 
 import numpy as np
@@ -65,7 +64,7 @@ class TrainFoldReport:
     fold : int
         Fold index (1..n_splits).
     agg : Dict[str, float]
-        Aggregated ranking metrics on the validation set (e.g., NDCG@k, P@k, Regret@k).
+        Aggregated ranking metrics on the validation set, ordered by decision relevance.
     groups : List[Dict[str, Any]]
         Per-group/front metrics (one entry per value of `front_col` present in validation).
     label_mode : str
@@ -185,6 +184,7 @@ def train_ltr_cv(
     label_quantiles: int = 20,
     n_splits: int = 5,
     random_state: int = 42,
+    model_params: Optional[Dict[str, Any]] = None,
 ) -> TrainResult:
     """
     Train with GroupKFold by fronts (experimental workflow).
@@ -225,7 +225,14 @@ def train_ltr_cv(
             raise ValueError(f"Missing required column: {col}")
 
     # Build intra-front labels according to the selected mode
-    targets = build_labels(df, front_col, target_col, mode=label_mode, n_quantiles=label_quantiles)
+    targets = build_labels(
+        df,
+        front_col,
+        target_col,
+        mode=label_mode,
+        n_quantiles=label_quantiles,
+        random_state=random_state,
+    )
 
     # Select feature columns
     drops = set([front_col, target_col, id_col, *drop_cols])
@@ -251,6 +258,7 @@ def train_ltr_cv(
             model_type,
             X_tr, y_tr, gid_tr,
             random_state=random_state + fold_idx,
+            model_params=model_params,
             X_valid=X_va, y_valid=y_va, gid_valid=gid_va,
         )
         models.append(model)
@@ -274,9 +282,9 @@ def train_ltr_cv(
 
         # Console-friendly summary (kept here so that CLI can capture stdout if desired)
         print(
-            f"[Fold {fold_idx}] NDCG@1={agg.get('NDCG@1', 0.0):.4f}  "
-            f"P@1={agg.get('P@1', 0.0):.4f}  "
-            f"Regret@1={agg.get('Regret@1', 0.0):.4f}",
+            f"[Fold {fold_idx}] Regret@1={agg.get('Regret@1', 0.0):.4f}  "
+            f"BestAUPR@1={agg.get('BestAUPR@1', 0.0):.4f}  "
+            f"Hit@5={agg.get('Hit@5', 0.0):.4f}",
         )
 
     return TrainResult(
@@ -297,6 +305,7 @@ def train_ltr_full(
     label_mode: LabelMode = LabelMode.CONTINUOUS,
     label_quantiles: int = 20,
     random_state: int = 42,
+    model_params: Optional[Dict[str, Any]] = None,
 ) -> FitResult:
     """
     Train a single model on the entire CSV (production workflow).
@@ -328,7 +337,14 @@ def train_ltr_full(
         if col not in df.columns:
             raise ValueError(f"Missing required column: {col}")
 
-    y = build_labels(df, front_col, target_col, mode=label_mode, n_quantiles=label_quantiles)
+    y = build_labels(
+        df,
+        front_col,
+        target_col,
+        mode=label_mode,
+        n_quantiles=label_quantiles,
+        random_state=random_state,
+    )
 
     drops = set([front_col, target_col, id_col, *drop_cols])
     feature_columns = [c for c in df.columns if c not in drops]
@@ -343,6 +359,7 @@ def train_ltr_full(
         model_type,
         X, y, groups,
         random_state=random_state,
+        model_params=model_params,
         X_valid=None, y_valid=None, gid_valid=None,
     )
 

@@ -6,11 +6,13 @@ Each command delegates core logic to `amiga.core.main` and focuses on I/O:
 reading CSV/PKL/JSON files and persisting artifacts (models, metrics, rankings).
 """
 
+import json
 from pathlib import Path
 from typing import List, Optional
 import pandas as pd
 import typer
 
+from amiga.analysis.cv_reports import plot_cv_summary, summarize_cv_reports
 from amiga.selection.learn2rank import (
     CV_REPORT, FEATURES_META, LabelMode, ModelType, MODEL_PREFIX
 )
@@ -24,10 +26,10 @@ app = typer.Typer(
     add_completion=False,
     no_args_is_help=True,
     help=(
-        "Tools to:\n"
-        "  • Train a Learn-to-Rank model with group-based cross-validation.\n"
-        "  • Produce per-front rankings using a trained model.\n"
-        "  • Extract features from gene expression matrices or weighted GRNs.\n"
+        "Utilities to:\n"
+        "  • train and apply Learn-to-Rank models,\n"
+        "  • build datasets and summarize cross-validation outputs,\n"
+        "  • extract features from expression matrices and weighted GRNs.\n"
     ),
 )
 
@@ -86,6 +88,11 @@ def train_cv(
         42,
         help="Base seed for reproducibility (offset per fold)."
     ),
+    model_params_json: Optional[Path] = typer.Option(
+        None,
+        "--model-params-json",
+        help="Optional JSON file with model-specific hyperparameters to override defaults.",
+    ),
     out_dir: Path = typer.Option(
         Path("./output"),
         help="Output directory where models, rankings, and reports will be stored."
@@ -109,6 +116,7 @@ def train_cv(
 
     # Load training data
     df = pd.read_csv(csv_path)
+    model_params = json.loads(model_params_json.read_text()) if model_params_json else None
 
     # Delegate training to core
     res = train_ltr_cv(
@@ -122,6 +130,7 @@ def train_cv(
         label_quantiles=label_quantiles,
         n_splits=n_splits,
         random_state=random_state,
+        model_params=model_params,
     )
 
     # Persist per-fold models
@@ -135,7 +144,18 @@ def train_cv(
         )
 
     # Persist CV report and feature metadata
-    fold_reports = [fr.__dict__ for fr in res.fold_reports]
+    report_meta = {
+        "model": model_type.value,
+        "label_mode": label_mode.value,
+        "label_quantiles": label_quantiles if label_mode == LabelMode.QUANTILES else None,
+        "front_col": front_col,
+        "target_col": target_col,
+        "id_col": id_col,
+        "drop_cols": drop_cols,
+        "random_state": random_state,
+        "model_params": model_params or {},
+    }
+    fold_reports = [{**fr.__dict__, "meta": report_meta} for fr in res.fold_reports]
     save_json(fold_reports, out_dir / CV_REPORT)
     save_json({"feature_columns": res.feature_columns}, out_dir / FEATURES_META)
 
@@ -145,7 +165,7 @@ def train_cv(
 @app.command(
     name="train-full",
     help=(
-        "Train a single LTR model on the ENTIRE CSV (production). "
+        "Train a single LTR model on the full input CSV. "
         "Saves model.pkl, feature_columns.json, and model_meta.json."
     ),
 )
@@ -159,10 +179,15 @@ def train_full(
     label_mode: LabelMode = typer.Option(LabelMode.CONTINUOUS, "--label-mode", case_sensitive=False),
     label_quantiles: int = typer.Option(20, min=2),
     random_state: int = typer.Option(42),
+    model_params_json: Optional[Path] = typer.Option(
+        None,
+        "--model-params-json",
+        help="Optional JSON file with model-specific hyperparameters to override defaults.",
+    ),
     out_dir: Path = typer.Option(Path("./output_full")),
 ):
     """
-    Train a production model using all available rows.
+    Train one model using all available rows.
 
     Inputs
     ------
@@ -191,6 +216,7 @@ def train_full(
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     df = pd.read_csv(csv_path)
+    model_params = json.loads(model_params_json.read_text()) if model_params_json else None
 
     # Delegate training to core
     fit = train_ltr_full(
@@ -203,6 +229,7 @@ def train_full(
         label_mode=label_mode,
         label_quantiles=label_quantiles,
         random_state=random_state,
+        model_params=model_params,
     )
 
     # Persist artifacts
@@ -364,7 +391,7 @@ def extract_expr_features(
 @app.command(
     help=(
         "Extract WEIGHTED features from a directed GRN CSV with columns [Source, Target, Confidence]. "
-        "Centralities and motifs are intentionally EXCLUDED."
+        "Centrality and motif-based metrics are not included."
     )
 )
 def extract_grn_features(
@@ -413,7 +440,6 @@ def extract_grn_features(
     Notes
     -----
     - Input format is strict: three columns (Source, Target, Confidence) with no header row.
-    - Centrality and motif-based features are purposely excluded to avoid overlap with optimization objectives.
     """
     # Load edges with explicit column names
     df_edges = pd.read_csv(csv_path, header=None, names=["Source", "Target", "Confidence"])
@@ -441,19 +467,18 @@ def extract_grn_features(
 @app.command(
     name="build-data",
     help=(
-        "Build a training dataset by combining: "
-        "an evaluated front (includes AUPR, objective levels, and per-technique weights for GRN_*.csv), "
+        "Build a tabular dataset by combining row-level metadata, "
         "an expression matrix, and a folder with GRN_*.csv files. "
-        "Copies all columns from the front except those in 'drop', and appends expr_*/grn_* features."
+        "Preserved input columns are copied and expr_*/grn_* features are appended."
     ),
 )
 def build_data_cmd(
-    evaluated_front_csv: Path = typer.Argument(..., help="CSV of the evaluated front (must include AUPR and GRN_*.csv weights)."),
+    evaluated_front_csv: Path = typer.Argument(..., help="Input CSV containing one row per candidate configuration."),
     expression_csv: Path = typer.Argument(..., help="CSV of the expression matrix (genes x conditions)."),
     grn_folder: Path = typer.Argument(..., help="Folder containing GRN_*.csv files (one network per technique)."),
     front_id: int = typer.Option(..., "--front-id", help="Numeric identifier to assign to the front."),
     out_csv: Path = typer.Option(
-        "data_front.csv", "--out", help="Path to the output CSV (similar to demo_data)."
+        "data_front.csv", "--out", help="Path to the output CSV."
     ),
     drop_front_cols: List[str] = typer.Option(
         ["Accuracy Mean", "AUROC"],
@@ -466,16 +491,16 @@ def build_data_cmd(
 ):
     """
     Steps:
-      1) Read the evaluated front and expression matrix.
-      2) For each row in the front, build the consensus network as required by the core logic, and
+      1) Read the input table and expression matrix.
+      2) For each row, build the weighted network required by the core logic and
          compute expression and GRN feature blocks.
-      3) Build the output row by copying front columns (except drop_front_cols) and appending expr_*/grn_* metrics.
+      3) Build the output row by copying preserved input columns and appending expr_*/grn_* metrics.
       4) Persist the final dataset to CSV.
 
     Inputs
     ------
     evaluated_front_csv : Path
-        Front CSV with AUPR, objective levels, and per-technique weights.
+        Input CSV with row-level metadata and GRN weight columns.
     expression_csv : Path
         Expression matrix (rows=genes, columns=conditions/timepoints).
     grn_folder : Path
@@ -511,6 +536,104 @@ def build_data_cmd(
     out_csv.parent.mkdir(parents=True, exist_ok=True)
     df_out.to_csv(out_csv, index=False)
     typer.secho(f"✔ Dataset built and saved to: {out_csv}", fg=typer.colors.GREEN)
+
+
+@app.command(
+    name="summarize-cv",
+    help=(
+        "Aggregate one or more cv_report.json files into generic CSV summaries. "
+        "This command computes tables only and does not generate figures."
+    ),
+)
+def summarize_cv(
+    reports: List[Path] = typer.Argument(
+        ...,
+        help="Paths to cv_report.json files to aggregate.",
+    ),
+    out_dir: Path = typer.Option(
+        Path("./cv_summary"),
+        "--out",
+        "-o",
+        help="Directory where summary CSV files will be written.",
+    ),
+    metrics: Optional[List[str]] = typer.Option(
+        None,
+        "--metrics",
+        help="Optional whitelist of metrics to retain in the summary.",
+    ),
+    stats: Optional[List[str]] = typer.Option(
+        None,
+        "--stats",
+        help="Optional repeated generic statistical outputs to compute. Valid value: metric_rank_stats.",
+    ),
+):
+    out_dir.mkdir(parents=True, exist_ok=True)
+    outputs = summarize_cv_reports(
+        report_paths=reports,
+        out_dir=out_dir,
+        metrics=metrics,
+        stats=stats,
+    )
+    typer.secho(f"CV summary saved to: {out_dir}", fg=typer.colors.CYAN)
+    for label, path in outputs.items():
+        typer.echo(f"{label}: {path}")
+
+
+@app.command(
+    name="plot-cv",
+    help=(
+        "Render one generic plot from summary CSV files produced by summarize-cv."
+    ),
+)
+def plot_cv(
+    input_dir: Path = typer.Option(
+        ...,
+        "--input-dir",
+        "-i",
+        help="Directory produced by summarize-cv.",
+    ),
+    plot: str = typer.Option(
+        ...,
+        "--plot",
+        help="Plot to render. Valid names: dotplot_overview, topk_curves, metric_rank_heatmap, metric_scatter.",
+    ),
+    out: Optional[Path] = typer.Option(
+        None,
+        "--out",
+        "-o",
+        help="Optional output file or directory for the generated figure.",
+    ),
+    metrics: Optional[List[str]] = typer.Option(
+        None,
+        "--metrics",
+        help="Optional metric subset for dotplot_overview or required metric list for metric_rank_heatmap.",
+    ),
+    metric_prefix: Optional[str] = typer.Option(
+        None,
+        "--metric-prefix",
+        help="Metric family for topk_curves. Valid values: Regret, Hit, BestAUPR, NDCG.",
+    ),
+    x_metric: Optional[str] = typer.Option(
+        None,
+        "--x-metric",
+        help="X-axis metric for metric_scatter.",
+    ),
+    y_metric: Optional[str] = typer.Option(
+        None,
+        "--y-metric",
+        help="Y-axis metric for metric_scatter.",
+    ),
+):
+    output_path = plot_cv_summary(
+        input_dir=input_dir,
+        plot=plot,
+        out=out,
+        metrics=metrics,
+        metric_prefix=metric_prefix,
+        x_metric=x_metric,
+        y_metric=y_metric,
+    )
+    typer.secho(f"Plot saved to: {output_path}", fg=typer.colors.CYAN)
 
 
 if __name__ == "__main__":

@@ -19,9 +19,6 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import community as community_louvain
-import typer
-
-app = typer.Typer(add_completion=False)
 EPS = 1e-9
 
 
