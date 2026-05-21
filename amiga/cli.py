@@ -14,7 +14,7 @@ import typer
 
 from amiga.analysis.cv_reports import plot_cv_summary, summarize_cv_reports
 from amiga.selection.learn2rank import (
-    CV_REPORT, FEATURES_META, LabelMode, ModelType, MODEL_PREFIX
+    CV_REPORT, FEATURES_META, LabelMode, ModelType, MODEL_PREFIX, assign_rank_in_front
 )
 from amiga.utils import load_expression_matrix, load_json, load_pickle, clean, save_json, save_pickle
 
@@ -137,11 +137,17 @@ def train_cv(
     for i, model in enumerate(res.models, start=1):
         save_pickle(model, out_dir / f"{MODEL_PREFIX}{i}.pkl")
 
-    # Persist per-fold validation rankings (sorted within fronts by score desc)
+    # Persist per-fold validation rankings with deterministic, non-positional ties.
     for i, df_va in enumerate(res.valid_folds, start=1):
-        df_va.sort_values([front_col, "score"], ascending=[True, False]).to_csv(
-            out_dir / f"valid_fold{i}_ranked.csv", index=False
+        ranked = assign_rank_in_front(
+            df_va,
+            front_col=front_col,
+            score_col="score",
+            id_col=id_col,
+            rank_col="rank_in_front",
+            tie_seed=random_state + i,
         )
+        ranked.to_csv(out_dir / f"valid_fold{i}_ranked.csv", index=False)
 
     # Persist CV report and feature metadata
     report_meta = {

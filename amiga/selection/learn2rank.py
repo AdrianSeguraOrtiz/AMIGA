@@ -22,6 +22,7 @@ Notes
 from __future__ import annotations
 
 import enum
+import math
 import zlib
 import warnings
 from typing import Any, Dict, List, Optional, Sequence, Tuple
@@ -81,8 +82,8 @@ FEATURES_META = "feature_columns.json"
 CV_REPORT = "cv_report.json"
 MODEL_PREFIX = "model_fold"
 
-# Metrics are ordered so reports, plots, and logs emphasize top-k decision quality.
-METRIC_PRIORITY: Dict[str, int] = {
+# Canonical display order for reports, plots, and logs.
+METRIC_REPORT_ORDER: Dict[str, int] = {
     "Regret@1": 10,
     "Regret@3": 11,
     "Regret@5": 12,
@@ -95,19 +96,97 @@ METRIC_PRIORITY: Dict[str, int] = {
     "Hit@3": 31,
     "Hit@5": 32,
     "Hit@10": 33,
-    "NDCG@3": 40,
-    "NDCG@5": 41,
-    "NDCG@10": 42,
-    "NDCG@1": 43,
+    "NDCG@1": 40,
+    "NDCG@3": 41,
+    "NDCG@5": 42,
+    "NDCG@10": 43,
     "Spearman": 50,
     "KendallTau": 51,
     "n_items": 99,
 }
 
 
-def metric_priority(metric: str) -> int:
-    """Return a stable sort key so decision metrics appear first."""
-    return METRIC_PRIORITY.get(metric, 1000)
+def metric_report_order(metric: str) -> int:
+    """Return a stable display-order key for known ranking metrics."""
+    return METRIC_REPORT_ORDER.get(metric, 1000)
+
+
+def stable_tie_breaker(front_id: Any, item_id: Any, *, seed: int = 0) -> int:
+    """
+    Return a deterministic pseudo-random tie-break value for a front/item pair.
+
+    The value is intentionally independent of dataframe row order. It is used
+    only to make exported ranked CSVs deterministic when predicted scores tie;
+    tie-aware metrics below do not depend on this value.
+    """
+    key = f"{int(seed)}|{front_id!s}|{item_id!s}"
+    return zlib.crc32(key.encode("utf-8")) & 0xFFFFFFFF
+
+
+def assign_rank_in_front(
+    df: pd.DataFrame,
+    *,
+    front_col: str,
+    score_col: str = "score",
+    id_col: str | None = "item_id",
+    rank_col: str = "rank_in_front",
+    tie_seed: int = 0,
+) -> pd.DataFrame:
+    """
+    Add `rank_col` using score descending and row-order-independent tie breaks.
+
+    If `id_col` is present, ties are resolved by a stable hash of
+    `(front_col, id_col, tie_seed)`. If no identifier column is available, the
+    helper falls back to a stable fingerprint of row values. Duplicate IDs
+    inside a front are rejected because they would make exported tie ordering
+    ambiguous.
+    """
+    missing = [column for column in (front_col, score_col) if column not in df.columns]
+    if missing:
+        raise ValueError(f"ranked dataframe is missing required column(s): {missing}")
+
+    working = df.copy()
+    if id_col is not None and id_col in working.columns:
+        duplicated = working.duplicated([front_col, id_col], keep=False)
+        if duplicated.any():
+            pairs = (
+                working.loc[duplicated, [front_col, id_col]]
+                .drop_duplicates()
+                .head(5)
+                .to_dict(orient="records")
+            )
+            raise ValueError(f"duplicate '{id_col}' values within fronts: {pairs}")
+        tie_values = [
+            stable_tie_breaker(front_id, item_id, seed=tie_seed)
+            for front_id, item_id in zip(working[front_col], working[id_col], strict=False)
+        ]
+    else:
+        tie_columns = [column for column in working.columns if column != rank_col]
+        tie_values = [
+            zlib.crc32(
+                "|".join(_stable_value(row[column]) for column in tie_columns).encode("utf-8")
+            )
+            & 0xFFFFFFFF
+            for _, row in working[tie_columns].iterrows()
+        ]
+
+    tie_col = "__amiga_tie_breaker"
+    working[tie_col] = tie_values
+    working = working.sort_values(
+        [front_col, score_col, tie_col],
+        ascending=[True, False, True],
+        kind="mergesort",
+    )
+    working[rank_col] = working.groupby(front_col, sort=False).cumcount() + 1
+    return working.drop(columns=[tie_col])
+
+
+def _stable_value(value: Any) -> str:
+    if pd.isna(value):
+        return "<NA>"
+    if isinstance(value, float | np.floating):
+        return repr(float(value))
+    return str(value)
 
 
 def ensure_dependencies(model_type: ModelType) -> None:
@@ -291,6 +370,119 @@ def order_by_group_and_sizes(group_ids: np.ndarray) -> Tuple[np.ndarray, List[in
 # Ranking metrics
 # -----------------------------------------------------------------------------
 
+def _comb_ratio(available: int, selected: int, total: int) -> float:
+    """Return C(available, selected) / C(total, selected) without huge integers."""
+    if selected < 0 or total < selected or available < selected:
+        return 0.0
+    if selected == 0:
+        return 1.0
+    if available == total:
+        return 1.0
+
+    ratio = 1.0
+    for offset in range(selected):
+        ratio *= (available - offset) / (total - offset)
+    return float(ratio)
+
+
+def _expected_max_with_partial_tie(
+    block_targets: np.ndarray,
+    sample_size: int,
+    base_best: float,
+) -> float:
+    """Expected max target after uniformly sampling from a tied-score block."""
+    block_targets = np.asarray(block_targets, dtype=float)
+    block_size = int(block_targets.size)
+    if sample_size <= 0:
+        return float(base_best)
+    if sample_size >= block_size:
+        return float(max(base_best, float(np.max(block_targets))))
+
+    support_values = [block_targets]
+    if np.isfinite(base_best):
+        support_values.append(np.array([base_best], dtype=float))
+    support = np.unique(np.concatenate(support_values))
+    expected = 0.0
+    previous_cdf = 0.0
+    for value in support:
+        if value < base_best:
+            continue
+        count_leq = int(np.sum(block_targets <= value))
+        cdf = _comb_ratio(count_leq, sample_size, block_size)
+        probability = max(0.0, cdf - previous_cdf)
+        expected += float(value) * probability
+        previous_cdf = cdf
+
+    if not math.isclose(previous_cdf, 1.0, rel_tol=1e-12, abs_tol=1e-12):
+        expected += float(max(base_best, float(np.max(block_targets)))) * max(0.0, 1.0 - previous_cdf)
+    return float(expected)
+
+
+def _hit_probability_with_partial_tie(
+    block_best_mask: np.ndarray,
+    sample_size: int,
+    deterministic_hit: bool,
+) -> float:
+    """Probability that a top-k with random tie-breaking includes a best item."""
+    if deterministic_hit:
+        return 1.0
+    block_best_mask = np.asarray(block_best_mask, dtype=bool)
+    block_size = int(block_best_mask.size)
+    if sample_size <= 0:
+        return 0.0
+    best_count = int(block_best_mask.sum())
+    if best_count == 0:
+        return 0.0
+    if sample_size >= block_size:
+        return 1.0
+    return float(1.0 - _comb_ratio(block_size - best_count, sample_size, block_size))
+
+
+def _tie_aware_topk_best_and_hit(
+    y_true: np.ndarray,
+    y_score: np.ndarray,
+    *,
+    k: int,
+    best_true: float,
+) -> tuple[float, float]:
+    """
+    Expected Best@k and Hit@k under uniform random ordering of score ties.
+
+    Higher score blocks are always selected first. If the cutoff falls inside a
+    tied-score block, every subset of the remaining tied candidates is treated
+    as equally likely. This makes top-k metrics invariant to dataframe row order.
+    """
+    selected = 0
+    deterministic_best = -np.inf
+    deterministic_hit = False
+
+    for score in sorted(np.unique(y_score), reverse=True):
+        block_mask = y_score == score
+        block_targets = y_true[block_mask]
+        block_size = int(block_targets.size)
+        remaining = k - selected
+        if remaining <= 0:
+            break
+        if remaining >= block_size:
+            deterministic_best = max(deterministic_best, float(np.max(block_targets)))
+            deterministic_hit = deterministic_hit or bool(np.any(np.isclose(block_targets, best_true)))
+            selected += block_size
+            continue
+
+        expected_best = _expected_max_with_partial_tie(
+            block_targets,
+            sample_size=remaining,
+            base_best=deterministic_best,
+        )
+        hit_probability = _hit_probability_with_partial_tie(
+            np.isclose(block_targets, best_true),
+            sample_size=remaining,
+            deterministic_hit=deterministic_hit,
+        )
+        return expected_best, hit_probability
+
+    return float(deterministic_best), float(deterministic_hit)
+
 def compute_ranking_metrics_by_front(
     df_fold: pd.DataFrame,
     front_col: str,
@@ -321,9 +513,12 @@ def compute_ranking_metrics_by_front(
 
     Notes
     -----
-    * Regret@k = max(y_true) - max(y_true@topk_by_score)
-    * BestAUPR@k = max(y_true@topk_by_score)
-    * Hit@k = 1 if any best-AUPR item appears in the predicted top-k, else 0.
+    * Regret@k = max(y_true) - E[max(y_true@topk_by_score)]
+    * BestAUPR@k = E[max(y_true@topk_by_score)]
+    * Hit@k = probability that a best-AUPR item appears in the top-k.
+    * If the predicted-score cutoff falls inside a tie, every ordering of the
+      tied items is treated uniformly; metrics never depend on dataframe row
+      order.
     """
     per_group: List[Dict[str, float]] = []
 
@@ -331,22 +526,29 @@ def compute_ranking_metrics_by_front(
         y_true = group[target_col].to_numpy().reshape(1, -1)
         y_score = group[score_col].to_numpy().reshape(1, -1)
 
-        # Order by predicted score for top-k dependent metrics
-        order = np.argsort(-y_score.ravel())
-        ndcgs = {f"NDCG@{k}": float(ndcg_score(y_true, y_score, k=k)) for k in ks if k <= group.shape[0]}
-        best_true = float(np.max(y_true.ravel())) if group.shape[0] > 0 else 0.0
-        best_mask = np.isclose(y_true.ravel(), best_true)
+        y_true_flat = y_true.ravel().astype(float)
+        y_score_flat = y_score.ravel().astype(float)
+        ndcgs = {
+            f"NDCG@{k}": float(ndcg_score(y_true, y_score, k=k, ignore_ties=False))
+            for k in ks
+            if k <= group.shape[0]
+        }
+        best_true = float(np.max(y_true_flat)) if group.shape[0] > 0 else 0.0
         regret_at_k = {}
         best_aupr_at_k = {}
         hit_at_k = {}
         for k in ks:
             if k > group.shape[0]:
                 continue
-            topk_order = order[:k]
-            topk_best = float(np.max(y_true.ravel()[topk_order]))
-            regret_at_k[f"Regret@{k}"] = float(best_true - topk_best)
-            best_aupr_at_k[f"BestAUPR@{k}"] = topk_best
-            hit_at_k[f"Hit@{k}"] = float(np.any(best_mask[topk_order]))
+            expected_best, hit_probability = _tie_aware_topk_best_and_hit(
+                y_true_flat,
+                y_score_flat,
+                k=int(k),
+                best_true=best_true,
+            )
+            regret_at_k[f"Regret@{k}"] = float(max(0.0, best_true - expected_best))
+            best_aupr_at_k[f"BestAUPR@{k}"] = float(expected_best)
+            hit_at_k[f"Hit@{k}"] = float(hit_probability)
 
         # Rank correlations
         with warnings.catch_warnings():
@@ -414,7 +616,7 @@ def compute_ranking_metrics(
     agg: Dict[str, float] = {}
     per_group = per_group_df.to_dict(orient="records")
     if per_group:
-        keys = sorted((set().union(*per_group)) - {front_col}, key=metric_priority)
+        keys = sorted((set().union(*per_group)) - {front_col}, key=metric_report_order)
         for k in keys:
             vals = [d[k] for d in per_group if k in d]
             if vals:

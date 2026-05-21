@@ -22,6 +22,11 @@ class LinearDummyModel:
         return X.sum(axis=1).to_numpy(dtype=float)
 
 
+class ConstantDummyModel:
+    def predict(self, X: pd.DataFrame) -> np.ndarray:
+        return np.zeros(len(X), dtype=float)
+
+
 def tiny_training_df() -> pd.DataFrame:
     rows = []
     for front_id in range(4):
@@ -67,6 +72,28 @@ def test_rank_with_model_aligns_hinted_features_and_validates_missing_columns():
             model=LinearDummyModel(),
             drop_cols=[],
         )
+
+
+def test_rank_with_model_ties_do_not_depend_on_input_order():
+    df = pd.DataFrame(
+        {
+            "front_id": [1, 1, 1, 2, 2],
+            "item_id": [1, 2, 3, 1, 2],
+            "f1": [0.3, 0.2, 0.1, 0.5, 0.4],
+        }
+    )
+    shuffled = df.iloc[[2, 0, 4, 1, 3]].reset_index(drop=True)
+
+    ranked = rank_with_model(df, model=ConstantDummyModel(), feature_columns_hint=["f1"]).df_ranked
+    ranked_shuffled = rank_with_model(
+        shuffled,
+        model=ConstantDummyModel(),
+        feature_columns_hint=["f1"],
+    ).df_ranked
+
+    assert ranked.groupby("front_id")["item_id"].apply(list).to_dict() == (
+        ranked_shuffled.groupby("front_id")["item_id"].apply(list).to_dict()
+    )
 
 
 def test_train_ltr_core_wrappers_return_expected_artifacts():

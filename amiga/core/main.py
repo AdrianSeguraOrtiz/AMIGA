@@ -45,6 +45,7 @@ from amiga.features.grn import (
 from amiga.selection.learn2rank import (
     LabelMode,
     ModelType,
+    assign_rank_in_front,
     build_labels,
     compute_ranking_metrics,
     fit_ranker,
@@ -437,10 +438,14 @@ def rank_with_model(
 
     df_out = df.copy()
     df_out["score"] = scores
-    df_out["rank_in_front"] = (
-        df_out.groupby(front_col)["score"].rank(ascending=False, method="first").astype(int)
+    df_out = assign_rank_in_front(
+        df_out,
+        front_col=front_col,
+        score_col="score",
+        id_col=id_col,
+        rank_col="rank_in_front",
+        tie_seed=0,
     )
-    df_out = df_out.sort_values([front_col, "rank_in_front"], ascending=[True, True])
 
     return RankResult(df_ranked=df_out, feature_columns_used=feature_columns)
 
