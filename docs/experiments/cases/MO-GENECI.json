@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "case": "MO-GENECI",
+  "data_csv": "data_104.csv",
+  "split_manifest": "docs/experiments/splits/MO-GENECI_split_manifest.json",
+  "group_column": "front_id",
+  "item_column": "item_id",
+  "target_column": "AUPR",
+  "primary_metric": "Regret@5",
+  "primary_k": 5,
+  "objective_columns": [
+    "quality",
+    "degreedistribution",
+    "motifs"
+  ],
+  "objective_directions": {
+    "quality": "minimize",
+    "degreedistribution": "minimize",
+    "motifs": "minimize"
+  },
+  "feature_blocks": {
+    "objectives": {
+      "columns": [
+        "quality",
+        "degreedistribution",
+        "motifs"
+      ]
+    },
+    "technique_weights": {
+      "prefixes": ["GRN_"]
+    },
+    "expression": {
+      "prefixes": ["expr_", "exp_", "ts_"]
+    },
+    "network": {
+      "prefixes": ["grn_", "net_", "entropy_"]
+    }
+  },
+  "feature_sets": {
+    "full": ["objectives", "technique_weights", "expression", "network"],
+    "objectives_only": ["objectives"],
+    "technique_weights_only": ["technique_weights"],
+    "expression_only": ["expression"],
+    "network_only": ["network"],
+    "no_objectives": ["technique_weights", "expression", "network"],
+    "no_technique_weights": ["objectives", "expression", "network"],
+    "no_expression": ["objectives", "technique_weights", "network"],
+    "no_network": ["objectives", "technique_weights", "expression"]
+  },
+  "excluded_feature_columns": [
+    "expr_cond_missing_frac_mean",
+    "expr_gene_missing_frac_mean",
+    "expr_prop_missing"
+  ],
+  "excluded_feature_column_reasons": {
+    "expr_cond_missing_frac_mean": "Constant zero column in the current case-study dataset.",
+    "expr_gene_missing_frac_mean": "Constant zero column in the current case-study dataset.",
+    "expr_prop_missing": "Constant zero column in the current case-study dataset."
+  },
+  "allow_unassigned_columns": false
+}

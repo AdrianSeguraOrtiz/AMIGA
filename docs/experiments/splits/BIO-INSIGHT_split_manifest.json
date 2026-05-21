@@ -1,0 +1,1140 @@
+{
+  "schema_version": 1,
+  "case": "BIO-INSIGHT",
+  "created_at_utc": "2026-05-13T17:36:51+00:00",
+  "created_by": "scripts/experiments/create_split_manifest.py",
+  "git_commit": "423023e140e070bccdbbe0806154487eaf03a9b1",
+  "input": {
+    "training_csv": "data_104.csv",
+    "training_csv_sha256": "b95b2613481682e315250c7cf33433373f30db1100db352941cca43433c008f7",
+    "n_rows": 31200,
+    "n_fronts": 104
+  },
+  "protocol": {
+    "name": "held_out_development_test_by_front",
+    "front_key": "front_name",
+    "group_column": "front_id",
+    "seed": 42,
+    "test_fraction": 0.2,
+    "target_test_fronts": 21,
+    "actual_test_fronts": 21,
+    "actual_development_fronts": 83,
+    "quota_level": "family",
+    "family_test_quotas": {
+      "BioGrid": 6,
+      "GRNdb": 2,
+      "InSilico": 3,
+      "RegNetwork": 1,
+      "TFLink": 1,
+      "dream4": 2,
+      "eipo-modular": 2,
+      "gnw": 0,
+      "rogers": 0,
+      "scale-free": 2,
+      "switch": 1,
+      "syntren": 1
+    },
+    "within_family_selection": "deterministic greedy metadata diversity over size, condition, and source; stable hash tie-break by front_name",
+    "target_column_used_for_assignment": false,
+    "singleton_family_policy": "development"
+  },
+  "summary": {
+    "split_counts": {
+      "development": 83,
+      "test": 21
+    },
+    "family_split_counts": {
+      "BioGrid": {
+        "development": 26,
+        "test": 6
+      },
+      "GRNdb": {
+        "development": 9,
+        "test": 2
+      },
+      "InSilico": {
+        "development": 12,
+        "test": 3
+      },
+      "RegNetwork": {
+        "development": 1,
+        "test": 1
+      },
+      "TFLink": {
+        "development": 3,
+        "test": 1
+      },
+      "dream4": {
+        "development": 8,
+        "test": 2
+      },
+      "eipo-modular": {
+        "development": 10,
+        "test": 2
+      },
+      "gnw": {
+        "development": 1,
+        "test": 0
+      },
+      "rogers": {
+        "development": 1,
+        "test": 0
+      },
+      "scale-free": {
+        "development": 10,
+        "test": 2
+      },
+      "switch": {
+        "development": 1,
+        "test": 1
+      },
+      "syntren": {
+        "development": 1,
+        "test": 1
+      }
+    }
+  },
+  "assignments_csv": "docs/experiments/splits/BIO-INSIGHT_split_assignments.csv",
+  "assignments": [
+    {
+      "front_id": 1,
+      "front_name": "dream4_010_01_exp",
+      "family": "dream4",
+      "source": "dream4_01",
+      "size": 10.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 2,
+      "front_name": "dream4_010_02_exp",
+      "family": "dream4",
+      "source": "dream4_02",
+      "size": 10.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 3,
+      "front_name": "dream4_010_03_exp",
+      "family": "dream4",
+      "source": "dream4_03",
+      "size": 10.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 4,
+      "front_name": "dream4_010_04_exp",
+      "family": "dream4",
+      "source": "dream4_04",
+      "size": 10.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 5,
+      "front_name": "dream4_010_05_exp",
+      "family": "dream4",
+      "source": "dream4_05",
+      "size": 10.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 6,
+      "front_name": "dream4_100_01_exp",
+      "family": "dream4",
+      "source": "dream4_01",
+      "size": 100.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 7,
+      "front_name": "dream4_100_02_exp",
+      "family": "dream4",
+      "source": "dream4_02",
+      "size": 100.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 8,
+      "front_name": "dream4_100_03_exp",
+      "family": "dream4",
+      "source": "dream4_03",
+      "size": 100.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 9,
+      "front_name": "dream4_100_04_exp",
+      "family": "dream4",
+      "source": "dream4_04",
+      "size": 100.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 10,
+      "front_name": "dream4_100_05_exp",
+      "family": "dream4",
+      "source": "dream4_05",
+      "size": 100.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 11,
+      "front_name": "gnw1565_exp",
+      "family": "gnw",
+      "source": "gnw",
+      "size": 1565.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 13,
+      "front_name": "InSilicoSize100-Ecoli1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli1",
+      "size": 100.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 14,
+      "front_name": "InSilicoSize100-Ecoli2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli2",
+      "size": 100.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 15,
+      "front_name": "InSilicoSize100-Yeast1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast1",
+      "size": 100.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 16,
+      "front_name": "InSilicoSize100-Yeast2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast2",
+      "size": 100.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 17,
+      "front_name": "InSilicoSize100-Yeast3-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast3",
+      "size": 100.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 18,
+      "front_name": "InSilicoSize10-Ecoli1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli1",
+      "size": 10.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 19,
+      "front_name": "InSilicoSize10-Ecoli2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli2",
+      "size": 10.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 20,
+      "front_name": "InSilicoSize10-Yeast1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast1",
+      "size": 10.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 21,
+      "front_name": "InSilicoSize10-Yeast2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast2",
+      "size": 10.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 22,
+      "front_name": "InSilicoSize10-Yeast3-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast3",
+      "size": 10.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 23,
+      "front_name": "InSilicoSize50-Ecoli1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli1",
+      "size": 50.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 24,
+      "front_name": "InSilicoSize50-Ecoli2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli2",
+      "size": 50.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 25,
+      "front_name": "InSilicoSize50-Yeast1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast1",
+      "size": 50.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 26,
+      "front_name": "InSilicoSize50-Yeast2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast2",
+      "size": 50.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 27,
+      "front_name": "InSilicoSize50-Yeast3-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast3",
+      "size": 50.0,
+      "condition": "trajectories",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 28,
+      "front_name": "rogers1000_exp",
+      "family": "rogers",
+      "source": "rogers",
+      "size": 1000.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 29,
+      "front_name": "sim_BioGrid_Bacillus_subtilis_168_mixed_exp",
+      "family": "BioGrid",
+      "source": "Bacillus_subtilis_168",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 30,
+      "front_name": "sim_BioGrid_Bos_taurus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Bos_taurus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 31,
+      "front_name": "sim_BioGrid_Canis_familiaris_mixed_exp",
+      "family": "BioGrid",
+      "source": "Canis_familiaris",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 32,
+      "front_name": "sim_BioGrid_Chlamydomonas_reinhardtii_mixed_exp",
+      "family": "BioGrid",
+      "source": "Chlamydomonas_reinhardtii",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 33,
+      "front_name": "sim_BioGrid_Chlorocebus_sabaeus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Chlorocebus_sabaeus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 34,
+      "front_name": "sim_BioGrid_Cricetulus_griseus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Cricetulus_griseus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 35,
+      "front_name": "sim_BioGrid_Danio_rerio_mixed_exp",
+      "family": "BioGrid",
+      "source": "Danio_rerio",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 36,
+      "front_name": "sim_BioGrid_Emericella_nidulans_FGSC_A4_mixed_exp",
+      "family": "BioGrid",
+      "source": "Emericella_nidulans_FGSC_A4",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 37,
+      "front_name": "sim_BioGrid_Gallus_gallus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Gallus_gallus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 38,
+      "front_name": "sim_BioGrid_Glycine_max_mixed_exp",
+      "family": "BioGrid",
+      "source": "Glycine_max",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 39,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_1_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_1",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 40,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_4_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_4",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 41,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_5_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_5",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 42,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_8_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_8",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 43,
+      "front_name": "sim_BioGrid_Human_Immunodeficiency_Virus_2_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Immunodeficiency_Virus_2",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 44,
+      "front_name": "sim_BioGrid_Human_papillomavirus_16_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_papillomavirus_16",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 45,
+      "front_name": "sim_BioGrid_Human_papillomavirus_5_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_papillomavirus_5",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 46,
+      "front_name": "sim_BioGrid_Human_papillomavirus_6b_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_papillomavirus_6b",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 47,
+      "front_name": "sim_BioGrid_Macaca_mulatta_mixed_exp",
+      "family": "BioGrid",
+      "source": "Macaca_mulatta",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 48,
+      "front_name": "sim_BioGrid_Middle-East_Respiratory_Syndrome-related_Coronavirus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Middle-East_Respiratory_Syndrome-related_Coronavirus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 49,
+      "front_name": "sim_BioGrid_Neurospora_crassa_OR74A_mixed_exp",
+      "family": "BioGrid",
+      "source": "Neurospora_crassa_OR74A",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 50,
+      "front_name": "sim_BioGrid_Oryctolagus_cuniculus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Oryctolagus_cuniculus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 51,
+      "front_name": "sim_BioGrid_Oryza_sativa_Japonica_mixed_exp",
+      "family": "BioGrid",
+      "source": "Oryza_sativa_Japonica",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 52,
+      "front_name": "sim_BioGrid_Plasmodium_falciparum_3D7_mixed_exp",
+      "family": "BioGrid",
+      "source": "Plasmodium_falciparum_3D7",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 53,
+      "front_name": "sim_BioGrid_Simian_Immunodeficiency_Virus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Simian_Immunodeficiency_Virus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 54,
+      "front_name": "sim_BioGrid_Simian_Virus_40_mixed_exp",
+      "family": "BioGrid",
+      "source": "Simian_Virus_40",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 55,
+      "front_name": "sim_BioGrid_Streptococcus_pneumoniae_ATCCBAA255_mixed_exp",
+      "family": "BioGrid",
+      "source": "Streptococcus_pneumoniae_ATCCBAA255",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 56,
+      "front_name": "sim_BioGrid_Strongylocentrotus_purpuratus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Strongylocentrotus_purpuratus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 57,
+      "front_name": "sim_BioGrid_Sus_scrofa_mixed_exp",
+      "family": "BioGrid",
+      "source": "Sus_scrofa",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 58,
+      "front_name": "sim_BioGrid_Vaccinia_Virus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Vaccinia_Virus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 59,
+      "front_name": "sim_BioGrid_Xenopus_laevis_mixed_exp",
+      "family": "BioGrid",
+      "source": "Xenopus_laevis",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 60,
+      "front_name": "sim_BioGrid_Zea_mays_mixed_exp",
+      "family": "BioGrid",
+      "source": "Zea_mays",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 61,
+      "front_name": "sim_eipo-modular_size-100_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 100.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 62,
+      "front_name": "sim_eipo-modular_size-100_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 100.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 63,
+      "front_name": "sim_eipo-modular_size-100_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 100.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 64,
+      "front_name": "sim_eipo-modular_size-200_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 200.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 65,
+      "front_name": "sim_eipo-modular_size-200_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 200.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 66,
+      "front_name": "sim_eipo-modular_size-200_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 200.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 67,
+      "front_name": "sim_eipo-modular_size-20_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 20.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 68,
+      "front_name": "sim_eipo-modular_size-20_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 20.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 69,
+      "front_name": "sim_eipo-modular_size-20_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 20.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 70,
+      "front_name": "sim_eipo-modular_size-50_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 50.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 71,
+      "front_name": "sim_eipo-modular_size-50_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 50.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 72,
+      "front_name": "sim_eipo-modular_size-50_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "size": 50.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 73,
+      "front_name": "sim_GRNdb_Adult-Adipose_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Adipose",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 74,
+      "front_name": "sim_GRNdb_Adult-Ascending-Colon_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Ascending-Colon",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 75,
+      "front_name": "sim_GRNdb_Adult-Epityphlon_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Epityphlon",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 76,
+      "front_name": "sim_GRNdb_Adult-Liver_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Liver",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 77,
+      "front_name": "sim_GRNdb_Adult-Lung_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Lung",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 78,
+      "front_name": "sim_GRNdb_Adult-Muscle_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Muscle",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 79,
+      "front_name": "sim_GRNdb_Adult-Pancreas_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Pancreas",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 80,
+      "front_name": "sim_GRNdb_Adult-Rectum_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Rectum",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 81,
+      "front_name": "sim_GRNdb_Fetal-Brain_mixed_exp",
+      "family": "GRNdb",
+      "source": "Fetal-Brain",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 82,
+      "front_name": "sim_GRNdb_Fetal-Calvaria_mixed_exp",
+      "family": "GRNdb",
+      "source": "Fetal-Calvaria",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 83,
+      "front_name": "sim_GRNdb_Fetal-Thymus_mixed_exp",
+      "family": "GRNdb",
+      "source": "Fetal-Thymus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 84,
+      "front_name": "sim_RegNetwork_human_mixed_exp",
+      "family": "RegNetwork",
+      "source": "human",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 85,
+      "front_name": "sim_RegNetwork_mouse_mixed_exp",
+      "family": "RegNetwork",
+      "source": "mouse",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 87,
+      "front_name": "sim_scale-free_size-100_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 100.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 88,
+      "front_name": "sim_scale-free_size-100_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 100.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 89,
+      "front_name": "sim_scale-free_size-100_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 100.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 90,
+      "front_name": "sim_scale-free_size-200_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 200.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 91,
+      "front_name": "sim_scale-free_size-200_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 200.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 92,
+      "front_name": "sim_scale-free_size-200_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 200.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 93,
+      "front_name": "sim_scale-free_size-20_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 20.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 94,
+      "front_name": "sim_scale-free_size-20_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 20.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 95,
+      "front_name": "sim_scale-free_size-20_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 20.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 96,
+      "front_name": "sim_scale-free_size-50_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 50.0,
+      "condition": "knockdown",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 97,
+      "front_name": "sim_scale-free_size-50_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 50.0,
+      "condition": "knockout",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 98,
+      "front_name": "sim_scale-free_size-50_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "size": 50.0,
+      "condition": "overexpression",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 99,
+      "front_name": "sim_TFLink_Caenorhabditis_elegans_mixed_exp",
+      "family": "TFLink",
+      "source": "Caenorhabditis_elegans",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 100,
+      "front_name": "sim_TFLink_Drosophila_melanogaster_mixed_exp",
+      "family": "TFLink",
+      "source": "Drosophila_melanogaster",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 101,
+      "front_name": "sim_TFLink_Rattus_norvegicus_mixed_exp",
+      "family": "TFLink",
+      "source": "Rattus_norvegicus",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 102,
+      "front_name": "sim_TFLink_Saccharomyces_cerevisiae_mixed_exp",
+      "family": "TFLink",
+      "source": "Saccharomyces_cerevisiae",
+      "size": NaN,
+      "condition": "mixed",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 103,
+      "front_name": "switch-off_exp",
+      "family": "switch",
+      "source": "switch",
+      "size": NaN,
+      "condition": "off",
+      "n_items": 300,
+      "split": "development"
+    },
+    {
+      "front_id": 104,
+      "front_name": "switch-on_exp",
+      "family": "switch",
+      "source": "switch",
+      "size": NaN,
+      "condition": "on",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 105,
+      "front_name": "syntren1000_exp",
+      "family": "syntren",
+      "source": "syntren",
+      "size": 1000.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "test"
+    },
+    {
+      "front_id": 106,
+      "front_name": "syntren300_exp",
+      "family": "syntren",
+      "source": "syntren",
+      "size": 300.0,
+      "condition": "unknown",
+      "n_items": 300,
+      "split": "development"
+    }
+  ]
+}

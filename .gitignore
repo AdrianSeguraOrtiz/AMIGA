@@ -208,8 +208,12 @@ __marimo__/
 
 
 # Training data
-data/
-experiments/
+/data/
+/experiments/
+/scripts/pipeline/gnw2000_exp_*/
+
+# Local literature-review material for paper drafting
+/paper/
 
 # CatBoost training artifacts
-catboost_info/
+/catboost_info/

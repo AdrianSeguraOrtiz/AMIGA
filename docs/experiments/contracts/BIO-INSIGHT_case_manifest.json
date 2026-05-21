@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "case": "BIO-INSIGHT",
+  "generated_at_utc": "2026-05-13T17:46:28+00:00",
+  "generated_by": "scripts/experiments/validate_case_contract.py",
+  "git_commit": "423023e140e070bccdbbe0806154487eaf03a9b1",
+  "config_path": "docs/experiments/cases/BIO-INSIGHT.json",
+  "data_manifest": "docs/experiments/contracts/BIO-INSIGHT_data_manifest.json",
+  "feature_columns": "docs/experiments/contracts/BIO-INSIGHT_feature_columns.json",
+  "validation_report": "docs/experiments/contracts/BIO-INSIGHT_validation_report.json",
+  "split_manifest": "docs/experiments/splits/BIO-INSIGHT_split_manifest.json",
+  "primary_metric": "Regret@5",
+  "primary_k": 5,
+  "target_column": "AUPR",
+  "group_column": "front_id",
+  "item_column": "item_id",
+  "objective_directions": {
+    "quality": "minimize",
+    "degreedistribution": "minimize",
+    "motifs": "minimize",
+    "reducenonessentialsinteractions": "minimize",
+    "dynamicity": "minimize",
+    "metricdistribution": "minimize"
+  }
+}

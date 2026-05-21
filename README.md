@@ -63,6 +63,10 @@ amiga/
 
 AMIGA is implemented in Python and designed to interoperate with **GENECI**, **MO-GENECI**, and **BIO-INSIGHT**, using the same file formats and feature conventions for GRNs and expression data.
 
+For the repository's research workflow and phase-oriented experimentation, see
+[`docs/experiments.md`](./docs/experiments.md). That document is intentionally
+separate from the package API described here.
+
 ---
 
 ## 🚀 Installation
@@ -205,8 +209,9 @@ For every front in the validation split, the following metrics are calculated:
 | Metric | Description | Intuition |
 |:--------|:-------------|:-----------|
 | **NDCG@k** | *Normalized Discounted Cumulative Gain* at cutoff *k*. Measures how well the top-*k* ranked individuals match the ideal ordering based on true AUPR values. Values range from 0 to 1 (best). | Captures global ranking quality with emphasis on high ranks. |
-| **P@1** | *Precision at rank 1*. Checks whether the top predicted individual is truly the best according to AUPR. | Simple accuracy on the top prediction. |
 | **Regret@k** | Difference between the best possible AUPR and the best AUPR among the top-*k* predicted individuals. | Quantifies the expected loss of quality if only the top-*k* are selected. |
+| **BestAUPR@k** | Best true AUPR found among the top-*k* predicted individuals. | Directly measures the biological quality recovered after inspecting only the top-*k*. |
+| **Hit@k** | Whether at least one truly best individual is present within the predicted top-*k*. | Robust success indicator for decision support under ties or near-equivalent optima. |
 | **Spearman ρ** | Spearman rank correlation between predicted scores and true AUPR values. | Measures monotonic agreement between predicted and actual orderings. |
 | **Kendall τ** | Kendall rank correlation between the same vectors. | More conservative measure of pairwise ranking consistency. |
 | **n_items** | Number of individuals in the evaluated front. | Used for weighting and sanity checks. |
@@ -222,7 +227,8 @@ This produces a single summary per fold (e.g., mean NDCG@10, mean Spearman), whi
 This design provides a rigorous and interpretable validation protocol:
 - Metrics are **context-aware** (computed per front, not globally).  
 - The aggregation is **front-balanced**, preventing large fronts from dominating the evaluation.  
-- The combination of *position-based (NDCG, P@1)* and *order-based (Spearman, Kendall)* metrics offers a complete view of ranking quality.
+- The evaluation is **decision-first**: `Regret@k`, `BestAUPR@k`, and `Hit@k` are the primary metrics because AMIGA is meant to help select a few promising individuals, not necessarily reconstruct the full front ordering.
+- `NDCG@k` remains a useful secondary measure of top-ranked quality, while *Spearman* and *Kendall* are retained as lower-priority global-order diagnostics.
 
 ---
 
@@ -234,7 +240,7 @@ Each command is implemented as a Typer subcommand and delegates the core logic t
 ### 1️⃣ Cross-validated training
 
 ```bash
-amiga train-cv data/training.csv --model LGBMRanker --n-splits 5 --label-mode rank_dense -o output/
+amiga train-cv <training_csv> --model LGBMRanker --n-splits 5 --label-mode rank_dense -o output/
 ```
 
 Performs **GroupKFold cross-validation** by Pareto fronts. Generates:
@@ -247,20 +253,45 @@ Performs **GroupKFold cross-validation** by Pareto fronts. Generates:
 ### 2️⃣ Full training for production
 
 ```bash
-amiga train-full data/training.csv --out ./output_full/
+amiga train-full <training_csv> --out ./output_full/
 ```
 
 Trains a single **production-ready model** on the entire dataset.
 Outputs:
 
 * `model.pkl` – final model
-* `feature_columns.json` – ordered list of features used during training
-* `model_meta.json` – metadata including labeling mode and quantiles used
 
-### 3️⃣ Ranking new fronts
+### 3️⃣ Summarizing cross-validation reports
 
 ```bash
-amiga rank-csv data/new_front.csv output_full/model.pkl --out ranked.csv
+amiga summarize-cv <cv_reports_dir>/*/cv_report.json \
+  --out ./cv_summary \
+  --stats metric_rank_stats
+```
+
+Aggregates multiple `cv_report.json` files and writes generic summary tables:
+
+* `metrics_long.csv`
+* `metrics_summary.csv`
+* `metric_ranks.csv`
+* `metric_rank_stats.csv` (when requested with `--stats metric_rank_stats`)
+
+You can then render one generic figure at a time from those summaries:
+
+```bash
+amiga plot-cv --input-dir ./cv_summary --plot dotplot_overview
+amiga plot-cv --input-dir ./cv_summary --plot topk_curves --metric-prefix Regret
+amiga plot-cv --input-dir ./cv_summary --plot metric_rank_heatmap --metrics Regret@1 --metrics Hit@10
+amiga plot-cv --input-dir ./cv_summary --plot metric_scatter --x-metric Regret@1 --y-metric Hit@10
+```
+
+For repository-level research orchestration, phase scripts, and paper-specific
+analysis flows, see [`docs/experiments.md`](./docs/experiments.md).
+
+### 4️⃣ Ranking new fronts
+
+```bash
+amiga rank-csv <front_csv> output_full/model.pkl --out ranked.csv
 ```
 
 Applies a trained model to unseen fronts and ranks individuals **within each front**.
@@ -269,10 +300,10 @@ Outputs a CSV with all original columns plus:
 * `score` – model-predicted relevance
 * `rank_in_front` – rank computed per front (1 = highest predicted quality)
 
-### 4️⃣ Extracting expression-level features
+### 5️⃣ Extracting expression-level features
 
 ```bash
-amiga extract-expr-features data/expression.csv -o features_expr.json
+amiga extract-expr-features <expression_csv> -o features_expr.json
 ```
 
 Computes statistical and structural metrics from a gene expression matrix, including:
@@ -283,10 +314,10 @@ Computes statistical and structural metrics from a gene expression matrix, inclu
 * PCA decomposition (explained variance, effective rank)
 * Optional time-series dynamics (`--include-timeseries`, **not** enabled by default in `build-data`)
 
-### 5️⃣ Extracting GRN-level features
+### 6️⃣ Extracting GRN-level features
 
 ```bash
-amiga extract-grn-features data/GRN_GENIE3.csv -o features_grn.json
+amiga extract-grn-features <grn_csv> -o features_grn.json
 ```
 
 Computes **weighted graph metrics** from a directed GRN file with three columns (source, target, confidence; **no header required**), including:
@@ -298,7 +329,7 @@ Computes **weighted graph metrics** from a directed GRN file with three columns 
 * Louvain modularity and community descriptors
 * Optional advanced metrics (`--include-advanced`, e.g., entropy-based; **not** enabled by default in `build-data`)
 
-### 6️⃣ Building training datasets
+### 7️⃣ Building training datasets
 
 Combines an evaluated Pareto front, its gene expression matrix, and the corresponding GRN files:
 
@@ -320,4 +351,3 @@ Creates a consolidated CSV merging:
 If you use **AMIGA** in your research, please cite it as:
 
 > Segura-Ortiz, A., Giménez-Orenga, K., García-Nieto, J., Oltra, E., & Aldana-Montes, J. F. (2025). Multifaceted evolution focused on maximal exploitation of domain knowledge for the consensus inference of Gene Regulatory Networks. Computers in Biology and Medicine, 196, 110632.
-
