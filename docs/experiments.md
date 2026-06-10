@@ -404,6 +404,11 @@ Output layout:
 Paper-facing figure policy and caption drafts live in the methodological
 design document.
 
+The phase-03 ablation figure combines development-CV ranks from
+`03_ablation/summary/primary_rank_table.csv` with held-out test ranks from
+`summaries/statistical_tests.csv`; therefore run `summarize-paper` before
+regenerating phase-03 or all paper plots.
+
 Primary figure files:
 
 ```text

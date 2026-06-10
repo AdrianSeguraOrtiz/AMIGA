@@ -128,6 +128,25 @@ def _write_metrics_summary(context, phase: str) -> Path:
     return summary_path
 
 
+def _write_statistical_tests(context) -> Path:
+    path = context.results_root / "summaries" / "statistical_tests.csv"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "\n".join(
+            [
+                "comparison_type,metric,method,avg_rank,holm_p_adj,is_winner,significantly_worse,friedman_stat,friedman_p,n_fronts,n_methods,n_fronts_common",
+                "ablation,Regret@5,AMIGA_final,1.5,,True,False,5.0,0.08,1,4,1",
+                "ablation,Regret@5,full,1.5,1.0,False,False,5.0,0.08,1,4,1",
+                "ablation,Regret@5,no_network,2.0,0.4,False,False,5.0,0.08,1,4,1",
+                "ablation,Regret@5,expression_only,3.0,0.01,False,True,5.0,0.08,1,4,1",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
 def _write_shortlisted_configs(context) -> Path:
     path = context.results_root / "01_model_screening" / "shortlisted_configs.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -251,6 +270,7 @@ def test_prepare_phase_plots_can_include_supplementary_topk_context(tmp_path):
 def test_prepare_phase03_plots_writes_ablation_feature_matrix_and_plotted_data(tmp_path):
     context = _context(tmp_path)
     _write_primary_rank_table(context, "03_ablation")
+    _write_statistical_tests(context)
 
     result = prepare_phase_plots(context, "03_ablation", options=WriteOptions())
 
@@ -262,12 +282,16 @@ def test_prepare_phase03_plots_writes_ablation_feature_matrix_and_plotted_data(t
     assert outputs["png"].stat().st_size > 1000
     plotted = outputs["csv"].read_text(encoding="utf-8").splitlines()
     assert plotted[0].startswith(
-        "config,display_label,objectives,technique_weights,expression,network,avg_rank"
+        "config,display_label,objectives,technique_weights,expression,network,development_avg_rank"
     )
+    assert "test_avg_rank" in plotted[0]
+    assert "test_p_value_label" in plotted[0]
     assert "full,Full AMIGA,True,True,True,True,1.0,,winner" in plotted[1]
+    assert ",1.5,,winner" in plotted[1]
     joined = "\n".join(plotted)
     assert "no_network,No network,True,True,True,False,2.0,0.8,p=0.800" in joined
     assert "expression_only,Expression only,False,False,True,False,3.0,0.01,p=0.010" in joined
+    assert ",3.0,0.01,p=0.010" in joined
     manifest = json.loads(result.plot_manifest.read_text(encoding="utf-8"))
     assert manifest["status"] == "generated"
     assert manifest["generated_outputs"]["primary"]["csv"].endswith("ablation_feature_matrix.csv")
@@ -311,6 +335,7 @@ def test_prepare_all_phase_plots_writes_one_manifest_per_phase(tmp_path):
         _write_primary_rank_table(context, phase)
     _write_shortlisted_configs(context)
     _write_selected_config(context)
+    _write_statistical_tests(context)
 
     result = prepare_all_phase_plots(context, options=WriteOptions())
 
@@ -363,8 +388,17 @@ def test_prepare_phase03_plots_requires_full_reference(tmp_path):
         + "\n",
         encoding="utf-8",
     )
+    _write_statistical_tests(context)
 
     with pytest.raises(PlotPreparationError, match="'full' reference"):
+        prepare_phase_plots(context, "03_ablation", options=WriteOptions())
+
+
+def test_prepare_phase03_plots_requires_held_out_statistical_tests(tmp_path):
+    context = _context(tmp_path)
+    _write_primary_rank_table(context, "03_ablation")
+
+    with pytest.raises(PlotPreparationError, match="summarize-paper"):
         prepare_phase_plots(context, "03_ablation", options=WriteOptions())
 
 

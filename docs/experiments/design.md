@@ -643,7 +643,7 @@ Primary paper figures:
    AMIGA configuration marked by a distinctive point border.
 3. `03_ablation`: feature-block matrix showing which blocks are active in each
    ablation variant, with paired `Regret@5` average rank and Holm-adjusted
-   p-value in the final column.
+   p-value shown separately for development CV and held-out test evidence.
 4. `04_decision_baselines`: rank plot comparing frozen AMIGA against
    non-learned decision baselines on held-out test fronts.
 
@@ -676,9 +676,10 @@ Caption-ready descriptions:
   model-specific abbreviations, and original parameter tags are retained in the
   plotted CSV.
 - **Ablation:** Feature-set ablation under the frozen AMIGA protocol. Values
-  show feature-set variants ordered by paired average rank, which feature
-  blocks are active in each variant, and Holm-adjusted p-values against the best
-  average-rank configuration in the same final column.
+  show feature-set variants ordered by development paired average rank, which
+  feature blocks are active in each variant, and Holm-adjusted p-values against
+  the best average-rank configuration separately for development CV and
+  held-out test evidence.
 - **Decision Baselines:** Held-out comparison between frozen AMIGA and
   non-learned post-Pareto decision rules. Methods include single-objective
   selection, rank aggregation, WSM-style aggregation, ideal-L2, TOPSIS, VIKOR,

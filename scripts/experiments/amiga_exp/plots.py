@@ -167,6 +167,7 @@ def prepare_phase_plots(
     plots_dir = phase_dir / "plots"
     primary_rank_table = summary_dir / "primary_rank_table.csv"
     metrics_summary = summary_dir / "metrics_summary.csv"
+    statistical_tests = layout.summaries / "statistical_tests.csv"
     primary_table = load_primary_rank_table(primary_rank_table)
     planned_outputs = _planned_outputs(phase, plots_dir, include_secondary=include_secondary)
 
@@ -178,6 +179,7 @@ def prepare_phase_plots(
         phase,
         phase_dir=phase_dir,
         metrics_summary=metrics_summary,
+        statistical_tests=statistical_tests,
         primary_table=primary_table,
         planned_outputs=planned_outputs,
         options=options,
@@ -188,6 +190,7 @@ def prepare_phase_plots(
         phase=phase,
         plots_dir=plots_dir,
         primary_rank_table=primary_rank_table,
+        statistical_tests=statistical_tests if phase == "03_ablation" else None,
         primary_table=primary_table,
         include_secondary=include_secondary,
         planned_outputs=planned_outputs,
@@ -257,6 +260,37 @@ def load_metrics_summary(path: Path) -> pd.DataFrame:
     return table.loc[:, [*required, "rank"]].copy()
 
 
+def load_ablation_statistical_tests(path: Path) -> pd.DataFrame:
+    """Load held-out ablation rank evidence written by ``summarize-paper``."""
+    path = Path(path)
+    if not path.exists():
+        raise PlotPreparationError(
+            "phase 03 ablation plot requires held-out statistical tests; "
+            f"run 'amiga-exp summarize-paper' first or provide: {path}"
+        )
+    table = pd.read_csv(path)
+    required = [
+        "comparison_type",
+        "metric",
+        "method",
+        "avg_rank",
+        "holm_p_adj",
+        "n_fronts",
+    ]
+    missing = [column for column in required if column not in table.columns]
+    if missing:
+        raise PlotPreparationError(f"statistical tests table is missing required column(s): {missing}")
+    ablation = table[
+        (table["comparison_type"].astype(str) == "ablation")
+        & (table["metric"].astype(str) == "Regret@5")
+    ].copy()
+    if ablation.empty:
+        raise PlotPreparationError(
+            "statistical tests table does not contain ablation rows for Regret@5"
+        )
+    return ablation
+
+
 def planned_phase_plot_outputs(phase_dir: Path, phase: str) -> dict[str, Any]:
     """Return manifest-ready paths for the plot artifacts planned for a phase."""
     if phase not in PLOT_PHASES:
@@ -309,6 +343,7 @@ def _generate_phase_outputs(
     *,
     phase_dir: Path,
     metrics_summary: Path,
+    statistical_tests: Path,
     primary_table: pd.DataFrame,
     planned_outputs: Mapping[str, Mapping[str, Path]],
     options: WriteOptions,
@@ -349,8 +384,10 @@ def _generate_phase_outputs(
                 selected_config=selected_config,
             )
         elif phase == "03_ablation":
+            ablation_test_table = load_ablation_statistical_tests(statistical_tests)
             save_ablation_feature_matrix_plot(
                 primary_table,
+                ablation_test_table=ablation_test_table,
                 outputs=outputs,
             )
         elif phase == "04_decision_baselines":
@@ -659,11 +696,11 @@ def save_model_screening_heatmap(
         rc={
             "axes.spines.top": False,
             "axes.spines.right": False,
-            "font.size": 10,
-            "axes.titlesize": 13,
-            "axes.labelsize": 11,
-            "xtick.labelsize": 9,
-            "ytick.labelsize": 9,
+            "font.size": 13,
+            "axes.titlesize": 15,
+            "axes.labelsize": 14,
+            "xtick.labelsize": 12,
+            "ytick.labelsize": 12,
         },
     )
     fig_width = max(7.8, 1.35 * len(label_order) + 2.8)
@@ -685,6 +722,10 @@ def save_model_screening_heatmap(
         },
         ax=ax,
     )
+    cbar = ax.collections[0].colorbar
+    if cbar is not None:
+        cbar.ax.tick_params(labelsize=11)
+        cbar.ax.set_ylabel("Avg. rank on Regret@5", fontsize=12.5)
     control_boundary = _control_label_boundary(label_order)
     if control_boundary is not None:
         ax.axvline(
@@ -705,7 +746,7 @@ def save_model_screening_heatmap(
                 f"{float(row.avg_rank):.2f}",
                 ha="center",
                 va="center",
-                fontsize=9,
+                fontsize=12,
                 fontweight="bold" if bool(row.selected) else "normal",
                 color="#111111",
             )
@@ -715,7 +756,7 @@ def save_model_screening_heatmap(
                 str(row.p_value_label),
                 ha="center",
                 va="center",
-                fontsize=7.5,
+                fontsize=10.5,
                 fontweight="bold",
                 color=str(row.p_value_color),
                 bbox={
@@ -732,7 +773,7 @@ def save_model_screening_heatmap(
                     "*",
                     ha="center",
                     va="center",
-                    fontsize=16,
+                    fontsize=20,
                     fontweight="bold",
                     color="#111111",
                 )
@@ -763,6 +804,7 @@ def save_model_screening_heatmap(
         frameon=True,
         columnspacing=1.2,
         handletextpad=0.5,
+        fontsize=11,
     )
     fig.tight_layout()
 
@@ -915,10 +957,14 @@ def save_hyperparameter_regret_scatter(
 def save_ablation_feature_matrix_plot(
     primary_table: pd.DataFrame,
     *,
+    ablation_test_table: pd.DataFrame,
     outputs: Mapping[str, Path],
 ) -> None:
     """Render the phase-03 feature-block ablation matrix."""
-    plot_df = _ablation_matrix_plot_frame(primary_table)
+    plot_df = _ablation_matrix_plot_frame(
+        primary_table,
+        ablation_test_table=ablation_test_table,
+    )
 
     sns.set_theme(
         style="white",
@@ -927,17 +973,17 @@ def save_ablation_feature_matrix_plot(
         rc={
             "axes.spines.top": False,
             "axes.spines.right": False,
-            "font.size": 10,
-            "axes.titlesize": 13,
-            "axes.labelsize": 11,
-            "xtick.labelsize": 9,
-            "ytick.labelsize": 8,
+            "font.size": 13,
+            "axes.titlesize": 15,
+            "axes.labelsize": 13,
+            "xtick.labelsize": 11.5,
+            "ytick.labelsize": 10.5,
         },
     )
-    fig_width = 9.2
-    fig_height = max(4.4, 0.46 * len(plot_df) + 1.5)
+    fig_width = 8.25
+    fig_height = max(5.0, 0.58 * len(plot_df) + 1.7)
     fig = plt.figure(figsize=(fig_width, fig_height))
-    grid = fig.add_gridspec(1, 2, width_ratios=[4.9, 1.22], wspace=0.035)
+    grid = fig.add_gridspec(1, 2, width_ratios=[4.9, 2.35], wspace=0.035)
     block_ax = fig.add_subplot(grid[0, 0])
     rank_ax = fig.add_subplot(grid[0, 1])
 
@@ -967,51 +1013,57 @@ def save_ablation_feature_matrix_plot(
                 "ON" if is_active else "OFF",
                 ha="center",
                 va="center",
-                fontsize=8,
+                fontsize=10.5,
                 fontweight="bold" if is_active else "normal",
                 color="white" if is_active else "#777777",
             )
 
-    rank_values = plot_df[["avg_rank"]]
+    rank_values = plot_df[["development_avg_rank", "test_avg_rank"]]
+    rank_min = float(rank_values.min().min())
+    rank_max = float(rank_values.max().max())
     sns.heatmap(
         rank_values,
         cmap=sns.light_palette("#2A6FBB", as_cmap=True, reverse=True),
+        vmin=rank_min,
+        vmax=rank_max,
         cbar=False,
         linewidths=0.75,
         linecolor="white",
-        xticklabels=["Avg. rank"],
+        xticklabels=["Development", "Held-out\ntest"],
         yticklabels=False,
         ax=rank_ax,
     )
 
     for y_idx, row in plot_df.iterrows():
-        is_winner = pd.isna(row["p_value"])
-        rank_ax.text(
-            0.5,
-            y_idx + 0.39,
-            f"{float(row['avg_rank']):.2f}",
-            ha="center",
-            va="center",
-            fontsize=9,
-            fontweight="bold" if is_winner else "normal",
-            color="#111111",
-        )
-        rank_ax.text(
-            0.5,
-            y_idx + 0.64,
-            str(row["p_value_label"]),
-            ha="center",
-            va="center",
-            fontsize=7.4,
-            fontweight="bold",
-            color=str(row["p_value_color"]),
-            bbox={
-                "boxstyle": "round,pad=0.14",
-                "facecolor": "white",
-                "edgecolor": "none",
-                "alpha": 0.68,
-            },
-        )
+        for x_idx, prefix in enumerate(("development", "test")):
+            p_value = row[f"{prefix}_p_value"]
+            is_winner = pd.isna(p_value)
+            rank_ax.text(
+                x_idx + 0.5,
+                y_idx + 0.39,
+                f"{float(row[f'{prefix}_avg_rank']):.2f}",
+                ha="center",
+                va="center",
+                fontsize=11,
+                fontweight="bold" if is_winner else "normal",
+                color="#111111",
+            )
+            rank_ax.text(
+                x_idx + 0.5,
+                y_idx + 0.64,
+                str(row[f"{prefix}_p_value_label"]),
+                ha="center",
+                va="center",
+                fontsize=9.2,
+                fontweight="bold",
+                color=str(row[f"{prefix}_p_value_color"]),
+                bbox={
+                    "boxstyle": "round,pad=0.12",
+                    "facecolor": "white",
+                    "edgecolor": "none",
+                    "alpha": 0.68,
+                },
+            )
 
     block_ax.set_xlabel("Feature block")
     block_ax.set_ylabel("Ablation variant")
@@ -1024,7 +1076,7 @@ def save_ablation_feature_matrix_plot(
     rank_ax.set_xticklabels(rank_ax.get_xticklabels(), rotation=0)
     for axis in (block_ax, rank_ax):
         axis.tick_params(axis="both", length=0)
-    fig.subplots_adjust(left=0.24, right=0.985, bottom=0.13, top=0.985, wspace=0.035)
+    fig.subplots_adjust(left=0.27, right=0.985, bottom=0.18, top=0.985, wspace=0.035)
 
     plotted_csv = outputs.get("csv")
     if plotted_csv is not None:
@@ -1058,15 +1110,15 @@ def save_decision_baseline_rank_plot(
         rc={
             "axes.spines.top": False,
             "axes.spines.right": False,
-            "font.size": 10,
-            "axes.titlesize": 13,
-            "axes.labelsize": 11,
-            "xtick.labelsize": 9,
-            "ytick.labelsize": 8,
+            "font.size": 13,
+            "axes.titlesize": 15,
+            "axes.labelsize": 13,
+            "xtick.labelsize": 11,
+            "ytick.labelsize": 10.2,
         },
     )
-    fig_width = 9.2
-    fig_height = max(4.5, 0.43 * len(plot_df) + 1.7)
+    fig_width = 7.2
+    fig_height = max(5.0, 0.55 * len(plot_df) + 1.7)
     fig, ax = plt.subplots(figsize=(fig_width, fig_height))
 
     ax.axvline(
@@ -1093,7 +1145,7 @@ def save_decision_baseline_rank_plot(
     ax.scatter(
         baseline_df["avg_rank"],
         baseline_df["y"],
-        s=84,
+        s=110,
         color="#7D848C",
         edgecolor="white",
         linewidth=0.9,
@@ -1102,7 +1154,7 @@ def save_decision_baseline_rank_plot(
     ax.scatter(
         amiga_df["avg_rank"],
         amiga_df["y"],
-        s=170,
+        s=210,
         marker="D",
         color="#009E73",
         edgecolor="#111111",
@@ -1123,7 +1175,7 @@ def save_decision_baseline_rank_plot(
             row["p_value_label"],
             va="center",
             ha="left" if label_side > 0 else "right",
-            fontsize=8,
+            fontsize=10,
             color=str(row["p_value_color"]),
             fontweight="bold" if row["is_amiga"] else "normal",
             bbox={
@@ -1182,9 +1234,15 @@ def save_decision_baseline_rank_plot(
     ]
     ax.legend(
         handles=legend_handles,
-        loc="upper right",
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.015),
+        ncol=2,
         frameon=True,
         title="Method and p-value",
+        fontsize=10,
+        title_fontsize=10.5,
+        columnspacing=1.0,
+        handletextpad=0.5,
     )
     x_min = float(plot_df["avg_rank"].min())
     x_max = float(plot_df["avg_rank"].max())
@@ -1309,7 +1367,11 @@ def _hyperparameter_plot_frame(primary_table: pd.DataFrame, *, selected_config: 
     return plot_df
 
 
-def _ablation_matrix_plot_frame(primary_table: pd.DataFrame) -> pd.DataFrame:
+def _ablation_matrix_plot_frame(
+    primary_table: pd.DataFrame,
+    *,
+    ablation_test_table: pd.DataFrame,
+) -> pd.DataFrame:
     plot_df = primary_table.copy()
     plot_df["config"] = plot_df["config"].astype(str)
     if "full" not in set(plot_df["config"]):
@@ -1322,32 +1384,87 @@ def _ablation_matrix_plot_frame(primary_table: pd.DataFrame) -> pd.DataFrame:
             "phase 03 ablation matrix cannot infer feature blocks for config(s): "
             f"{unknown_configs}"
         )
-    plot_df["avg_rank"] = pd.to_numeric(plot_df["avg_rank"], errors="raise")
-    plot_df["mean_regret5"] = pd.to_numeric(plot_df["mean_regret5"], errors="raise")
-    plot_df["std_regret5"] = pd.to_numeric(plot_df["std_regret5"], errors="coerce")
-    plot_df["p_value"] = pd.to_numeric(plot_df["p_value"], errors="coerce")
+    plot_df["development_avg_rank"] = pd.to_numeric(plot_df["avg_rank"], errors="raise")
+    plot_df["development_mean_regret5"] = pd.to_numeric(plot_df["mean_regret5"], errors="raise")
+    plot_df["development_std_regret5"] = pd.to_numeric(plot_df["std_regret5"], errors="coerce")
+    plot_df["development_p_value"] = pd.to_numeric(plot_df["p_value"], errors="coerce")
     plot_df["display_label"] = plot_df["config"].map(_feature_set_display_label)
-    plot_df["p_value_label"] = plot_df["p_value"].map(_format_p_value)
-    plot_df["p_value_significance"] = plot_df["p_value"].map(_p_value_significance)
-    plot_df["p_value_color"] = plot_df["p_value"].map(_p_value_color)
+    plot_df["development_p_value_label"] = plot_df["development_p_value"].map(_format_p_value)
+    plot_df["development_p_value_significance"] = plot_df["development_p_value"].map(_p_value_significance)
+    plot_df["development_p_value_color"] = plot_df["development_p_value"].map(_p_value_color)
+    plot_df["development_n_fronts"] = pd.to_numeric(plot_df["n_fronts"], errors="raise").astype(int)
     for block_key, _ in ABLATION_BLOCK_COLUMNS:
         plot_df[block_key] = plot_df["config"].map(
             lambda config, key=block_key: bool(ABLATION_FEATURE_BLOCKS[str(config)][key])
         )
-    plot_df = plot_df.sort_values(["avg_rank", "config"], kind="mergesort").reset_index(drop=True)
+
+    test_df = _ablation_test_plot_frame(ablation_test_table)
+    plot_df = plot_df.merge(test_df, on="config", how="left", validate="one_to_one")
+    missing_test = sorted(
+        str(config)
+        for config in plot_df.loc[plot_df["test_avg_rank"].isna(), "config"].tolist()
+    )
+    if missing_test:
+        raise PlotPreparationError(
+            "phase 03 ablation matrix cannot find held-out test evidence for config(s): "
+            f"{missing_test}"
+        )
+
+    plot_df = plot_df.sort_values(["development_avg_rank", "config"], kind="mergesort").reset_index(drop=True)
     return plot_df[
         [
             "config",
             "display_label",
             *[key for key, _ in ABLATION_BLOCK_COLUMNS],
-            "avg_rank",
-            "p_value",
-            "p_value_label",
-            "p_value_significance",
-            "p_value_color",
-            "mean_regret5",
-            "std_regret5",
-            "n_fronts",
+            "development_avg_rank",
+            "development_p_value",
+            "development_p_value_label",
+            "development_p_value_significance",
+            "development_p_value_color",
+            "development_mean_regret5",
+            "development_std_regret5",
+            "development_n_fronts",
+            "test_avg_rank",
+            "test_p_value",
+            "test_p_value_label",
+            "test_p_value_significance",
+            "test_p_value_color",
+            "test_n_fronts",
+        ]
+    ]
+
+
+def _ablation_test_plot_frame(statistical_tests: pd.DataFrame) -> pd.DataFrame:
+    test_df = statistical_tests.copy()
+    test_df["method"] = test_df["method"].astype(str)
+    test_df["config"] = test_df["method"].replace({"AMIGA_final": "full"})
+    unknown_configs = sorted(set(test_df["config"]) - set(ABLATION_FEATURE_BLOCKS))
+    if unknown_configs:
+        raise PlotPreparationError(
+            "phase 03 ablation held-out tests contain unknown ablation config(s): "
+            f"{unknown_configs}"
+        )
+    test_df["_amiga_final_priority"] = (test_df["method"] == "AMIGA_final").astype(int)
+    test_df = (
+        test_df.sort_values(["config", "_amiga_final_priority"], ascending=[True, False])
+        .drop_duplicates("config", keep="first")
+        .copy()
+    )
+    test_df["test_avg_rank"] = pd.to_numeric(test_df["avg_rank"], errors="raise")
+    test_df["test_p_value"] = pd.to_numeric(test_df["holm_p_adj"], errors="coerce")
+    test_df["test_p_value_label"] = test_df["test_p_value"].map(_format_p_value)
+    test_df["test_p_value_significance"] = test_df["test_p_value"].map(_p_value_significance)
+    test_df["test_p_value_color"] = test_df["test_p_value"].map(_p_value_color)
+    test_df["test_n_fronts"] = pd.to_numeric(test_df["n_fronts"], errors="raise").astype(int)
+    return test_df[
+        [
+            "config",
+            "test_avg_rank",
+            "test_p_value",
+            "test_p_value_label",
+            "test_p_value_significance",
+            "test_p_value_color",
+            "test_n_fronts",
         ]
     ]
 
@@ -2185,8 +2302,6 @@ def _format_p_value(value: Any) -> str:
     numeric = float(value)
     if numeric < 0.001:
         return "p<0.001"
-    if numeric < 0.05 and f"{numeric:.3f}" == "0.050":
-        return "p<0.050"
     return f"p={numeric:.3f}"
 
 
@@ -2279,6 +2394,7 @@ def _plot_manifest_payload(
     phase: str,
     plots_dir: Path,
     primary_rank_table: Path,
+    statistical_tests: Path | None,
     primary_table: pd.DataFrame,
     include_secondary: bool,
     planned_outputs: Mapping[str, Mapping[str, Path]],
@@ -2293,6 +2409,9 @@ def _plot_manifest_payload(
         "plot_generation_status": "generated" if has_generated_outputs else "phase_specific_plots_pending",
         "plots_dir": repo_relative(plots_dir),
         "primary_rank_table": repo_relative(primary_rank_table),
+        "supporting_inputs": {
+            "statistical_tests": repo_relative(statistical_tests)
+        } if statistical_tests is not None else {},
         "primary_rank_table_rows": int(len(primary_table)),
         "primary_rank_table_columns": list(primary_table.columns),
         "secondary_outputs_policy": {
