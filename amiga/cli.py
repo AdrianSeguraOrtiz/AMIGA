@@ -494,6 +494,16 @@ def build_data_cmd(
         1, "--threads", "-j", min=1,
         help="Number of threads for per-row consensus/GRN feature extraction (1 = sequential).",
     ),
+    target_col: str = typer.Option(
+        "AUPR",
+        "--target-col",
+        help="Name of the supervised target column expected in labelled fronts.",
+    ),
+    require_target: bool = typer.Option(
+        True,
+        "--require-target/--allow-unlabeled",
+        help="Require the target column. Use --allow-unlabeled for real fronts without gold-standard labels.",
+    ),
 ):
     """
     Steps:
@@ -519,6 +529,10 @@ def build_data_cmd(
         Front columns that will be excluded from the output.
     threads : int
         Number of worker threads for per-row processing.
+    target_col : str
+        Supervised target column expected in labelled fronts.
+    require_target : bool
+        Disable with --allow-unlabeled to build inference-only datasets.
 
     Output
     ------
@@ -536,6 +550,8 @@ def build_data_cmd(
         front_id=front_id,
         drop_front_cols=drop_front_cols,
         threads=threads,
+        target_col=target_col,
+        require_target=require_target,
     )
 
     # Persist final dataset

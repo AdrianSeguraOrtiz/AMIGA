@@ -570,21 +570,25 @@ def build_data(
     front_id: int,
     drop_front_cols: Optional[List[str]] = None,
     threads: int = 1,
+    target_col: str = "AUPR",
+    require_target: bool = True,
 ) -> pd.DataFrame:
     """
     Build a 'training'-like dataset by combining:
-      - ALL columns from the evaluated front (minus 'drop_front_cols'),
+      - ALL columns from the front (minus 'drop_front_cols'),
       - expr_features (shared by all rows),
       - grnet_features (specific per individual after consensus).
 
     Requirements
     ------------
-    - `df_front` must contain 'AUPR' and 'GRN_*.csv' columns (per-technique weights).
+    - `df_front` must contain 'GRN_*.csv' columns (per-technique weights).
+    - If `require_target=True`, `df_front` must contain `target_col`.
 
     Parameters
     ----------
     df_front : pd.DataFrame
-        Evaluated front with AUPR, objective levels and GRN weight columns.
+        Front with objective levels and GRN weight columns. It may also contain
+        the target column when building labelled training data.
     df_expr : pd.DataFrame
         Expression matrix (rows=genes, columns=conditions/timepoints).
     grn_dir : Path
@@ -595,6 +599,11 @@ def build_data(
         Front columns to exclude from the output (defaults to ['Accuracy Mean', 'AUROC']).
     threads : int
         Number of worker threads to process front rows in parallel (1 = sequential).
+    target_col : str
+        Name of the supervised target column expected in labelled/evaluated fronts.
+    require_target : bool
+        Whether `target_col` is mandatory. Use False for real, unlabelled fronts
+        that will only be ranked with a trained model.
 
     Returns
     -------
@@ -605,8 +614,8 @@ def build_data(
     if threads < 1:
         raise ValueError("'threads' must be >= 1.")
 
-    if "AUPR" not in df_front.columns:
-        raise ValueError("The evaluated front CSV must contain the 'AUPR' column.")
+    if require_target and target_col not in df_front.columns:
+        raise ValueError(f"The evaluated front CSV must contain the '{target_col}' column.")
 
     # 1) Expression feature block (shared across individuals)
     print("Extracting expression features...")

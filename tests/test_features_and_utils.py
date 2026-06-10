@@ -115,6 +115,28 @@ def test_utils_and_build_data_smoke(tmp_path, tiny_expression_df):
     assert any(col.startswith("grn_") for col in built.columns)
 
 
+def test_build_data_supports_unlabelled_fronts(tmp_path, tiny_expression_df):
+    grn_dir = tmp_path / "grn"
+    grn_dir.mkdir()
+    (grn_dir / "GRN_A.csv").write_text("A,B,1.0\nB,C,0.4\n", encoding="utf-8")
+    (grn_dir / "GRN_B.csv").write_text("A,B,0.5\nC,A,0.9\n", encoding="utf-8")
+
+    front = pd.DataFrame(
+        {
+            "objective_x": [1.2],
+            "GRN_A.csv": [0.6],
+            "GRN_B.csv": [0.4],
+        }
+    )
+
+    built = build_data(front, tiny_expression_df, grn_dir, front_id=7, threads=1, require_target=False)
+    assert built.loc[0, "front_id"] == 7
+    assert built.loc[0, "item_id"] == 1
+    assert "AUPR" not in built.columns
+    assert any(col.startswith("expr_") for col in built.columns)
+    assert any(col.startswith("grn_") for col in built.columns)
+
+
 def test_weighted_confidence_validates_inputs():
     with pytest.raises(ValueError, match="Use '<weight>\\*<file_path>'"):
         weighted_confidence(["bad_spec"])
