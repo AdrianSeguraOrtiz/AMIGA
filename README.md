@@ -1,353 +1,329 @@
-# 🧬 AMIGA: Autonomous Multi-objective Individual GRN Autoselection
+# AMIGA
 
-<img src="./docs/logo.png" width="40%" align="right" style="margin: 1em">
+<img src="https://raw.githubusercontent.com/AdrianSeguraOrtiz/AMIGA/main/docs/logo.png" width="38%" align="right" alt="AMIGA logo">
 
-**AMIGA** is an intelligent advisor designed to **assist users in the interpretation and selection of promising individuals** within Pareto fronts obtained from multi-objective algorithms for **consensus inference of Gene Regulatory Networks (GRNs)**.
+**AMIGA** (*Automated Multi-objective Individual GRN Assessment*) is a Python
+package and command-line tool for ranking candidate consensus Gene Regulatory
+Networks (GRNs) produced by multi-objective evolutionary algorithms.
 
-In this domain, multi-objective algorithms often generate **large Pareto fronts** spanning a **high-dimensional and complex objective space**, making it difficult to identify the most reliable consensus solutions. AMIGA addresses this challenge by learning to **rank individuals according to their expected quality**, leveraging knowledge extracted from multiple benchmark instances where the ground-truth GRNs are known.
+AMIGA acts as a post-Pareto decision layer. It learns from labelled benchmark
+fronts where candidate quality is known, and applies the trained ranker to new
+fronts where no gold standard is available.
 
-The ranking model integrates several heterogeneous information sources:
+The project is distributed on PyPI as `amiga-grn`; the import package and CLI
+entry point are both named `amiga`.
 
-- The **weights** assigned to each inference technique within the ensemble.  
-- The **optimization levels** achieved by the objectives composing the multi-objective problem.  
-- A set of **features derived from the gene expression data**, shared by all individuals within a given front.  
-- A comprehensive collection of **topological and structural features** computed over the **consensus networks** generated from each individual’s weight configuration.  
-- The **target variable (AUPR)**, representing the similarity between each inferred consensus network and its corresponding gold-standard reference, used as the supervised signal during training.
-
-To preserve the **independent and contextual nature of each benchmark front**, AMIGA implements a *group-aware Learning-to-Rank (LTR) strategy* that constrains both label preprocessing and model validation through the following measures:
-
-1. **Intra-front normalization of target values (AUPR):** Before training, the AUPR scores are normalized *within each front* so that relevance labels represent the *relative quality of individuals* in their own context, eliminating cross-dataset scale bias (default `label_mode=continuous`).
-
-2. **Group-aware cross-validation:**  The training process uses **GroupKFold**, where each front acts as a distinct group, ensuring that **no individuals from the same front appear simultaneously in training and validation folds**, thus preventing information leakage across benchmarks.
-
-3. **Native group-based optimization in ranking models:**  The underlying models natively support the `group` (or `group_id`) parameter, which enforces the computation of **pairwise ranking gradients exclusively within each group**, never between them.
-
-Together, these measures implement the standard *“learning-to-rank with grouped queries”* paradigm. This design enables AMIGA to capture **intra-front ranking patterns** while generalizing effectively across heterogeneous benchmarks.
-
-By combining these elements, AMIGA provides a **generalizable mechanism for guiding the user** towards the most promising consensus networks, effectively transforming benchmark-derived experience into an **automatic ranking-based advisory system**. It serves as a **complementary module** to the [GENECI](https://github.com/AdrianSeguraOrtiz/GENECI) research line, ensuring full compatibility with all consensus-based tools developed within it, including [MO-GENECI](https://github.com/AdrianSeguraOrtiz/MO-GENECI) and [BIO-INSIGHT](https://github.com/AdrianSeguraOrtiz/BIO-INSIGHT).
-
-
----
-
-## 🔬 Context and Motivation
-
-During the development of **MO-GENECI**, an empirical pattern was identified: **the precision of individuals (AUROC and AUPR) varied smoothly across the Pareto front**, revealing a gradient-like behavior in the objective space.  Neighboring solutions tended to show similar performance when compared against the gold standards, which suggested the existence of **regions of consistently high precision**.  
-
-This observation led to the design of **[PBEvoGen](https://github.com/AdrianSeguraOrtiz/PBEvoGen)**, where this insight was translated into a **preference-based evolutionary mechanism**.  In PBEvoGen, the evolutionary process was guided toward promising areas of the objective space by prioritizing individuals located near previously well-performing ones, enabling a more informed exploration strategy.
-
-As the framework evolved into **[BIO-INSIGHT](https://github.com/AdrianSeguraOrtiz/BIO-INSIGHT)**, the optimization problem expanded to **six simultaneous objectives**, considerably increasing the dimensionality and complexity of the Pareto fronts.  In such a high-dimensional setting, **manual expert guidance becomes unfeasible**, as visually identifying the most promising regions or maintaining an intuitive sense of the front’s structure is no longer possible.
-
-To address this limitation, **AMIGA** was conceived as an intelligent assistant capable of **learning from previously evaluated benchmark fronts** to support the user in two complementary ways:
-
-1. **Post-optimization guidance:** helping experts interpret new Pareto fronts by ranking individuals according to their predicted biological precision.  
-2. **Future integration with evolutionary search:** extending the philosophy of PBEvoGen by automatically selecting reference points or promising regions to **guide the ongoing optimization process**.
-
-Through this design, AMIGA transforms accumulated benchmark knowledge into an **autonomous decision-support system**, bridging the gap between expert intuition and machine-driven exploration in multi-objective GRN inference.
-
----
-
-## ⚙️ Architecture Overview
-
-```
-amiga/
- ├─ core/
- │   └─ main.py                # Core logic: LTR training, ranking, and feature extraction
- ├─ features/
- │   ├─ expression.py          # Metrics from gene expression matrices
- │   └─ grn.py                 # Metrics from GRNs
- ├─ selection/
- │   └─ learn2rank.py          # Learning-to-Rank models (LightGBM / XGBoost / CatBoost)
- ├─ utils.py                   # I/O utilities and data normalization
- └─ cli.py                     # Typer-based command-line interface
-```
-
-AMIGA is implemented in Python and designed to interoperate with **GENECI**, **MO-GENECI**, and **BIO-INSIGHT**, using the same file formats and feature conventions for GRNs and expression data.
-
-For the repository's research workflow and phase-oriented experimentation, see
-[`docs/experiments.md`](./docs/experiments.md). That document is intentionally
-separate from the package API described here.
-
----
-
-## 🚀 Installation
-
-AMIGA is managed with **Poetry**, which handles both dependency resolution and virtual environment management.
-
-### 1️⃣ Create and activate a virtual environment (recommended)
+## Installation
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+pip install amiga-grn
 ```
 
-### 2️⃣ Install Poetry (if not already installed)
+For local development:
 
 ```bash
-pip install poetry
-```
-
-### 3️⃣ Install AMIGA and all its dependencies
-
-```bash
+git clone https://github.com/AdrianSeguraOrtiz/AMIGA.git
+cd AMIGA
 poetry install
 ```
 
-This command will automatically create a local environment (if not active) and install all dependencies listed in `pyproject.toml`, including:
-
-* **GENECI 4.0.1.1**
-* **LightGBM 4.6.0**
-* **XGBoost 3.0.5**
-* **CatBoost 1.2.8**
-* **scikit-learn**, **scipy**, **networkx**, **python-louvain**, etc.
-
-Once installed, the `amiga` CLI command becomes available system-wide.
-
-
-## 🧩 Learning Process
-
-<img src="./docs/workflow.png" style="margin: 1em">
-
-AMIGA is trained on a **composite dataset built from multiple benchmark networks**, each one corresponding to a different academic reference GRN.  For every benchmark, the individuals belonging to its Pareto front form an independent *group*, and AMIGA creates **one training instance per individual** by combining all its numerical descriptors.  
-
-This hierarchical structure —**individual < front < complete dataset**— allows the model to learn from diverse optimization scenarios while preserving the contextual independence of each front. The AUPR value obtained by comparing each individual’s consensus network against its benchmark gold standard acts as the supervised target variable.
-
-
-### 1️⃣ Technique Weights per Individual
-
-Each individual in a Pareto front encodes a **set of weights assigned to the base inference techniques** (e.g., GENIE3, ARACNE, CLR...).  
-These weights determine how the consensus GRN is constructed from the ensemble of inferred networks and are used as direct numeric features. They capture how the contribution of each technique influences the resulting topology and precision of the consensus.
-
-
-### 2️⃣ Objective Optimization Levels
-
-The second group of features corresponds to the **optimization levels achieved by each objective function** during the evolutionary process. These values define the individual’s **position within the multi-objective space** (e.g., quality, degree distribution, motifs, dynamicity, etc.). By learning correlations between objective-space coordinates and real precision (AUPR), AMIGA can infer which regions of the front are likely to contain biologically relevant solutions.
-
-
-### 3️⃣ Expression-based Features (shared across the front)
-
-All individuals in the same Pareto front originate from the **same gene expression dataset**, so these descriptors are shared among them. They characterize the statistical structure, variability and temporal behavior of the expression matrix:
-
-- **Global descriptors:** number of genes and conditions, mean, standard deviation, min/max, skewness, kurtosis, and proportions of zeros/missing values.  
-- **Per-gene statistics:** distribution of mean, standard deviation, and coefficient of variation (CV) across genes, including quantiles (p10, p50, p90).  
-- **Per-condition statistics:** analogous descriptors across experimental conditions, plus a simple z-score outlier indicator for condition means.  
-- **Correlation-based structure:** average and variability of gene–gene and condition–condition Pearson correlations (mean, std, |corr|₉₀%).  
-- **PCA decomposition:** top-k explained variance ratios, effective rank (Shannon entropy of singular values), and spectral condition number — capturing dimensionality and redundancy of expression patterns.  
-- **Temporal dynamics:** for time-series data, lag-1 autocorrelation and per-gene linear trend statistics (slope, R², and fraction of positive slopes) (**implemented**, available via `--include-timeseries`, **not** enabled by default in the main `build-data` flow).
-
-These features summarize the **statistical and dynamical properties of the input data** driving the inference process, allowing AMIGA to contextualize results according to dataset complexity.
-
-
-### 4️⃣ Consensus Network Features per Individual
-
-For each individual, a **consensus GRN** is built from its technique weights, and a wide range of **weighted graph-theoretic descriptors** are extracted:
-
-- **Global network metrics:** number of nodes and edges, total and average edge weight, weighted density, Gini coefficient of edge weights, and concentration of the top-X% strongest interactions.  
-- **Strength-based features:** statistics (mean, std, max, Gini) of in-strengths, out-strengths, and total strengths; plus a *hub count* above mean + 2·σ.  
-- **Assortativity:** weighted correlation between node out- and in-degrees, reflecting preferential attachment patterns.  
-- **Shortest-path descriptors:** weighted average path length and 95th-percentile diameter within the largest strongly connected component (distances = 1 / Confidence).  
-- **Clustering coefficient:** mean weighted clustering in the undirected projection.  
-- **Community structure:** number of communities, weighted modularity, and community size distribution (mean, max) obtained via Louvain detection.  
-- **Reciprocity:** proportion of bidirectional regulatory pairs weighted by the minimum confidence of reciprocal edges.  
-- **Entropy-based summaries:** Shannon entropies of edge-weight and node-strength distributions, capturing network heterogeneity (**implemented**, available via `--include-advanced`, **not** enabled by default in the main `build-data` flow).
-
-These descriptors quantify both the **structural organization and weight distribution** of each consensus network, providing rich topological information beyond raw performance metrics.
-
-
-### 5️⃣ AUPR (Target Variable)
-
-Finally, each individual is labeled with its **Area Under the Precision–Recall Curve (AUPR)**, computed by comparing its consensus GRN against the corresponding **gold-standard regulatory network**. This value acts as the **supervised target** in the Learning-to-Rank (LTR) model, enabling AMIGA to learn how combinations of technique weights, objective levels, and network or expression features relate to actual biological precision.
-
-
-## ⚙️ Model and Labeling Parameters
-
-AMIGA provides several configurable parameters that control how the ranking model is trained and how relevance labels are assigned within each Pareto front.
-
----
-
-### 🧠 Ranking Model (`--model-type`)
-
-The `ModelType` parameter defines which **Learning-to-Rank (LTR)** algorithm is used during training. All supported models are tree-based gradient boosting frameworks with built-in ranking objectives and native support for *grouped queries* (the Pareto fronts).
-
-| Model | Objective | Description | Recommended use |
-|:------|:-----------|:-------------|:----------------|
-| **LGBMRanker** | `lambdarank` | Optimizes a differentiable approximation of NDCG using pairwise gradients. Highly efficient and scalable, ideal for most experiments. | **Default choice** — best balance between accuracy and speed. |
-| **XGBRanker** | `rank:ndcg` | Uses a listwise NDCG loss with robust regularization and interpretability of feature importance. | Suitable for sensitivity analysis and feature relevance studies. |
-| **CatBoostRanker** | `YetiRank` | Employs ordered boosting and internal randomization to mitigate overfitting. Handles categorical or imbalanced features gracefully. | Recommended when training data are limited or heterogeneous. |
-
-All three models natively accept the `group` (or `group_id`) argument, ensuring that **pairwise ranking gradients are computed within each front only**, never across groups. This preserves the independence of benchmark fronts while still allowing the model to learn cross-front generalization patterns.
-
----
-
-### 🏷️ Intra-front Label Construction (`--label-mode`)
-
-The `LabelMode` parameter specifies how **relevance labels** (training targets) are derived from the AUPR scores **within each Pareto front**. Each mode defines a different way of expressing “how good” an individual is in the context of its front:
-
-| Mode | Output range | Definition | Suitable for |
-|:-----|:--------------|:------------|:--------------|
-| **rank_dense** | 0…L–1 | Dense integer ranks without gaps; ties share the same rank, next rank is incremented by 1. | Discrete small fronts; stable and interpretable. |
-| **rank_avg** | 0…L–1 | Average rank values when ties occur, then discretized; smoother than `rank_dense`. | Noisy fronts or metrics with frequent ties. |
-| **quantiles** | 0…Q–1 | Divides AUPR values into *Q* quantile bins (e.g., quartiles or deciles). | When the distribution of AUPR is skewed or multi-modal. |
-| **continuous** | 0.0–1.0 | Min–max normalization of AUPR within the front, preserving continuous relative distances. **Default.** | Large fronts or when fine-grained sensitivity is desired. |
-
-All labeling schemes are **intra-front only** — they never compare AUPR values across different benchmarks — ensuring that relevance remains context-specific to each front’s dynamics.
-
----
-
-By combining these two components —a robust ranking model (`ModelType`) and a consistent label definition (`LabelMode`)— AMIGA can flexibly adapt to different dataset sizes, noise levels, and evaluation granularities while preserving the contextual independence of each benchmark.
-
-
-## 📈 Evaluation Metrics
-
-When using the `train-cv` command, AMIGA performs **group-aware cross-validation** via `GroupKFold`, where each benchmark front acts as an independent group. For each validation fold, several **ranking-oriented metrics** are computed both *per front* and *as aggregate means* across all fronts. These metrics evaluate the consistency and predictive power of the model in reproducing the true AUPR-based ranking within each front.
-
----
-
-### 🧩 Per-front evaluation
-
-For every front in the validation split, the following metrics are calculated:
-
-| Metric | Description | Intuition |
-|:--------|:-------------|:-----------|
-| **NDCG@k** | *Normalized Discounted Cumulative Gain* at cutoff *k*. Measures how well the top-*k* ranked individuals match the ideal ordering based on true AUPR values. Values range from 0 to 1 (best). | Captures global ranking quality with emphasis on high ranks. |
-| **Regret@k** | Difference between the best possible AUPR and the best AUPR among the top-*k* predicted individuals. | Quantifies the expected loss of quality if only the top-*k* are selected. |
-| **BestAUPR@k** | Best true AUPR found among the top-*k* predicted individuals. | Directly measures the biological quality recovered after inspecting only the top-*k*. |
-| **Hit@k** | Whether at least one truly best individual is present within the predicted top-*k*. | Robust success indicator for decision support under ties or near-equivalent optima. |
-| **Spearman ρ** | Spearman rank correlation between predicted scores and true AUPR values. | Measures monotonic agreement between predicted and actual orderings. |
-| **Kendall τ** | Kendall rank correlation between the same vectors. | More conservative measure of pairwise ranking consistency. |
-| **n_items** | Number of individuals in the evaluated front. | Used for weighting and sanity checks. |
-
-All metrics are computed **independently per front** to avoid mixing data from different benchmarks, ensuring that each evaluation reflects the model’s ability to reproduce intra-front orderings.
-
-
-### 📊 Aggregated results
-
-After evaluating all fronts in the validation fold, AMIGA aggregates results by taking the **mean across fronts** for every metric.  
-This produces a single summary per fold (e.g., mean NDCG@10, mean Spearman), which can be averaged again across folds to assess global generalization.
-
-This design provides a rigorous and interpretable validation protocol:
-- Metrics are **context-aware** (computed per front, not globally).  
-- The aggregation is **front-balanced**, preventing large fronts from dominating the evaluation.  
-- The evaluation is **decision-first**: `Regret@k`, `BestAUPR@k`, and `Hit@k` are the primary metrics because AMIGA is meant to help select a few promising individuals, not necessarily reconstruct the full front ordering.
-- `NDCG@k` remains a useful secondary measure of top-ranked quality, while *Spearman* and *Kendall* are retained as lower-priority global-order diagnostics.
-
----
-
-## 💻 Basic Usage
-
-Below are the main commands provided by AMIGA for training, ranking, and feature extraction.  
-Each command is implemented as a Typer subcommand and delegates the core logic to `amiga.core.main`.
-
-### 1️⃣ Cross-validated training
+Check the CLI:
 
 ```bash
-amiga train-cv <training_csv> --model LGBMRanker --n-splits 5 --label-mode rank_dense -o output/
+amiga --help
 ```
 
-Performs **GroupKFold cross-validation** by Pareto fronts. Generates:
+## What AMIGA Uses
 
-* Trained models per fold (`model_fold1.pkl`, …)
-* Validation rankings per fold (`valid_fold1_ranked.csv`, …)
-* Cross-validation metrics report (`cv_report.json`)
-* Feature metadata (`feature_columns.json`)
+AMIGA expects one row per candidate solution in a Pareto front. A training table
+usually contains:
 
-### 2️⃣ Full training for production
+- `front_id`: identifier of the Pareto front used as a learning-to-rank group;
+- `item_id`: candidate identifier, generated when absent;
+- a target column such as `AUPR` for labelled benchmark fronts;
+- numerical predictors describing the candidate, objectives, expression context
+  and consensus network.
+
+At prediction time, the target column is not required. The new front must provide
+the same predictor schema expected by the trained model.
+
+## Quickstart
+
+The usual AMIGA workflow is:
+
+```mermaid
+flowchart LR
+    subgraph IN["Input files"]
+        A(["Gold standard"])
+        B["Front CSV"]
+        T(["target_col<br/>e.g. AUPR"])
+        C["Expression CSV"]
+        D["Base GRNs<br/>GRN_*.csv"]
+    end
+
+    A -.-> T
+    B -.-> T
+    B --> E(["amiga build-data<br/>--target-col AUPR"])
+    T -. "labelled benchmark" .-> E
+    C --> E
+    D --> E
+
+    B --> F(["amiga build-data<br/>--allow-unlabeled"])
+    C --> F
+    D --> F
+
+    E --> G["Labelled table<br/>target + features"]
+    F --> H["Unlabelled table<br/>features only"]
+    S{{"Required for ranking:<br/>same feature columns<br/>as the trained model"}}
+
+    subgraph CV["Model selection"]
+        I(["amiga train-cv"]) --> J(["amiga summarize-cv"]) --> K(["amiga plot-cv"])
+    end
+
+    subgraph FINAL["Final ranking"]
+        L(["amiga train-full"]) --> M["trained model<br/>feature schema"]
+        M --> N(["amiga rank-csv"])
+    end
+
+    G --> I
+    G --> L
+    H --> N
+    S -.-> H
+    S -.-> M
+    N --> O["Ranked front<br/>score + rank"]
+
+    classDef input fill:#eef6ff,stroke:#5083c7,color:#1d2b3a;
+    classDef command fill:#14796f,stroke:#0a4f49,color:#ffffff,font-weight:bold;
+    classDef artifact fill:#fff8e6,stroke:#d39b28,color:#3a2b10;
+    classDef report fill:#f4edff,stroke:#8065bd,color:#2d2148;
+    classDef chip fill:#fff3d9,stroke:#d39b28,color:#3a2b10;
+    classDef note fill:#f8fafc,stroke:#64748b,stroke-dasharray: 4 3,color:#334155;
+    classDef group fill:#ffffff,stroke:#cbd5e1,color:#334155;
+
+    class B,C,D input;
+    class A,T chip;
+    class E,F,I,J,K,L,N command;
+    class G,H,M,O artifact;
+    class J,K report;
+    class S note;
+    class IN,CV,FINAL group;
+```
+
+### 1. Build AMIGA Tables
+
+`build-data` is the main adapter between a consensus front and AMIGA. It takes
+a candidate table, the expression matrix used to generate the front, and the
+folder of base GRNs. The front table must contain one row per candidate and
+weight columns named like `GRN_*.csv`.
+
+For labelled benchmark fronts:
 
 ```bash
-amiga train-full <training_csv> --out ./output_full/
+amiga build-data front.csv expression.csv base_networks/ \
+  --front-id 1 \
+  --target-col AUPR \
+  --out labelled_front.csv
 ```
 
-Trains a single **production-ready model** on the entire dataset.
-Outputs:
+For real or unlabelled fronts:
 
-* `model.pkl` – final model
+```bash
+amiga build-data front.csv expression.csv base_networks/ \
+  --front-id 1 \
+  --allow-unlabeled \
+  --out unlabelled_front.csv
+```
 
-### 3️⃣ Summarizing cross-validation reports
+`build-data` preserves candidate/objective columns, assigns `front_id` and
+`item_id`, extracts expression-level descriptors once per front, reconstructs
+each weighted consensus GRN from the base networks and appends network
+descriptors as `grn_*` columns. Useful options include:
+
+- `--drop-front-cols`: remove columns from the original front before training;
+- `--threads`: parallelize per-candidate consensus reconstruction;
+- `--target-col`: choose the supervised quality column in labelled fronts;
+- `--allow-unlabeled`: allow inference tables without a target column.
+
+If you already have a complete AMIGA-compatible table, you can skip
+`build-data` and train directly from that CSV.
+
+### 2. Train And Evaluate With Grouped CV
+
+`train-cv` trains one model per fold using fronts as groups. This is useful for
+model selection, parameter tuning and reporting.
+
+```bash
+amiga train-cv labelled_fronts.csv \
+  --model LGBMRanker \
+  --label-mode continuous \
+  --n-splits 5 \
+  --model-params-json params.json \
+  --out-dir cv_results/
+```
+
+Common options:
+
+- `--model`: `LGBMRanker`, `XGBRanker` or `CatBoostRanker`;
+- `--label-mode`: label construction strategy inside each front;
+- `--label-quantiles`: number of bins when using quantile labels;
+- `--front-col`, `--target-col`, `--id-col`: control-column names;
+- `--drop-cols`: extra columns excluded from the feature matrix;
+- `--model-params-json`: backend-specific hyperparameters;
+- `--random-state`: base seed for reproducibility.
+
+### 3. Summarise And Plot CV Results
+
+`summarize-cv` aggregates one or more `cv_report.json` files into CSV tables.
 
 ```bash
 amiga summarize-cv <cv_reports_dir>/*/cv_report.json \
-  --out ./cv_summary \
+  --out summary/ \
   --stats metric_rank_stats
 ```
 
-Aggregates multiple `cv_report.json` files and writes generic summary tables:
-
-* `metrics_long.csv`
-* `metrics_summary.csv`
-* `metric_ranks.csv`
-* `metric_rank_stats.csv` (when requested with `--stats metric_rank_stats`)
-
-You can then render one generic figure at a time from those summaries:
+`plot-cv` renders generic figures from the summaries:
 
 ```bash
-amiga plot-cv --input-dir ./cv_summary --plot dotplot_overview
-amiga plot-cv --input-dir ./cv_summary --plot topk_curves --metric-prefix Regret
-amiga plot-cv --input-dir ./cv_summary --plot metric_rank_heatmap --metrics Regret@1 --metrics Hit@10
-amiga plot-cv --input-dir ./cv_summary --plot metric_scatter --x-metric Regret@1 --y-metric Hit@10
+amiga plot-cv --input-dir summary/ --plot dotplot_overview
 ```
 
-For repository-level research orchestration, phase scripts, and paper-specific
-analysis flows, see [`docs/experiments.md`](./docs/experiments.md).
+Available plot names include `dotplot_overview`, `topk_curves`,
+`metric_rank_heatmap` and `metric_scatter`.
 
-### 4️⃣ Ranking new fronts
+### 4. Train A Final Model
 
 ```bash
-amiga rank-csv <front_csv> output_full/model.pkl --out ranked.csv
+amiga train-full labelled_fronts.csv \
+  --model LGBMRanker \
+  --label-mode continuous \
+  --model-params-json params.json \
+  --out-dir trained_model/
 ```
 
-Applies a trained model to unseen fronts and ranks individuals **within each front**.
-Outputs a CSV with all original columns plus:
+`train-full` uses the complete labelled table and stores `model.pkl`,
+`feature_columns.json` and model metadata.
 
-* `score` – model-predicted relevance
-* `rank_in_front` – rank computed per front (1 = highest predicted quality)
-
-### 5️⃣ Extracting expression-level features
+### 5. Rank A New Front
 
 ```bash
-amiga extract-expr-features <expression_csv> -o features_expr.json
+amiga rank-csv unlabelled_front.csv trained_model/model.pkl \
+  --out-csv ranked_front.csv
 ```
 
-Computes statistical and structural metrics from a gene expression matrix, including:
+When `feature_columns.json` is present next to the model, `rank-csv` uses the
+same feature order learned during training.
 
-* Global descriptors (size, mean, standard deviation, min/max, skewness, kurtosis)
-* Per-gene and per-condition variability
-* Correlation-based structure
-* PCA decomposition (explained variance, effective rank)
-* Optional time-series dynamics (`--include-timeseries`, **not** enabled by default in `build-data`)
+### Optional Feature Utilities
 
-### 6️⃣ Extracting GRN-level features
+`extract-expr-features` and `extract-grn-features` are standalone diagnostics
+for inspecting descriptor blocks. They are not required before `build-data`,
+because `build-data` calls the same feature extractors internally.
 
 ```bash
-amiga extract-grn-features <grn_csv> -o features_grn.json
+amiga extract-expr-features expression.csv --out expression_features.json
+amiga extract-grn-features network.csv --out network_features.json
 ```
 
-Computes **weighted graph metrics** from a directed GRN file with three columns (source, target, confidence; **no header required**), including:
+## Rankers And Labels
 
-* Density, edge-weight distribution, and top-X concentration
-* Node strength statistics (in/out/total)
-* Weighted assortativity and reciprocity
-* Path-based and clustering metrics
-* Louvain modularity and community descriptors
-* Optional advanced metrics (`--include-advanced`, e.g., entropy-based; **not** enabled by default in `build-data`)
+AMIGA currently supports three tree-based learning-to-rank backends:
 
-### 7️⃣ Building training datasets
+- `LGBMRanker`
+- `XGBRanker`
+- `CatBoostRanker`
 
-Combines an evaluated Pareto front, its gene expression matrix, and the corresponding GRN files:
+Labels are constructed within each front, never across unrelated fronts.
+Supported label modes include continuous intra-front normalization, dense ranks,
+average ranks, quantiles and negative-control modes for validation experiments.
+
+Ranker-specific hyperparameters can be passed with `--model-params-json` in
+training commands. This keeps AMIGA's CLI stable while still allowing advanced
+configuration of the underlying backend.
+
+## Reporting Metrics
+
+`train-cv` evaluates rankings per front and then aggregates across fronts. The
+main top-k metrics include:
+
+- `Regret@k`: gap between the best true quality in the front and the best true
+  quality found among the top-k recommendations;
+- `BestAUPR@k`: best true AUPR recovered in the top-k;
+- `Hit@k`: whether at least one true best candidate appears in the top-k;
+- `NDCG@k`, Spearman and Kendall as complementary ranking diagnostics.
+
+This design focuses on the practical decision problem: placing high-quality
+candidate networks near the top of a short recommendation list.
+
+## Research Workflow
+
+The installable `amiga` package contains the reusable software core: feature
+extraction, data construction, model training, cross-validation, reporting and
+ranking.
+
+The repository also contains an article-oriented workflow called `amiga-exp`
+under `scripts/experiments/amiga_exp/`. It is not published as part of the PyPI
+package in this release. It is tied to the repository layout, versioned case
+manifests and publication plots, so it should be treated as a reproducible
+research protocol rather than as a stable public API.
+
+To use it, clone the repository and install the experiment dependency group:
 
 ```bash
-amiga build-data evaluated_front.csv expression.csv ./lists --front-id 1 --out data.csv
+git clone https://github.com/AdrianSeguraOrtiz/AMIGA.git
+cd AMIGA
+poetry install --with experiments
+scripts/experiments/amiga-exp --help
 ```
 
-Creates a consolidated CSV merging:
+The expected case directory contains a `data/` folder with `data_*.csv` files
+and an `audit/` subfolder. The wrapper sets the repository on `PYTHONPATH`, so
+it can call the local `amiga` implementation without requiring a separate
+PyPI-only install.
 
-* All columns from the evaluated front (except optional drops)
-* Expression-level (`expr_*`) and GRN-level (`grn_*`) features
-* The AUPR target for supervised training
-  Each resulting row corresponds to **one individual** within the given front.
+Recommended command order:
 
----
+```bash
+scripts/experiments/amiga-exp inspect <case_dir>
+scripts/experiments/amiga-exp validate <case_dir>
+scripts/experiments/amiga-exp init-results <case_dir>
+scripts/experiments/amiga-exp run-all <case_dir>
+scripts/experiments/amiga-exp plot-all --case-dir <case_dir> --force
+```
 
-## 🧠 Citation
+Useful lower-level commands:
 
-If you use **AMIGA** in your research, please cite it as:
+```bash
+scripts/experiments/amiga-exp run-phase <case_dir> 01_model_screening
+scripts/experiments/amiga-exp run-phase <case_dir> 02_hyperparameter_tuning
+scripts/experiments/amiga-exp run-phase <case_dir> final_test
+scripts/experiments/amiga-exp run-phase <case_dir> 03_ablation
+scripts/experiments/amiga-exp run-phase <case_dir> 04_decision_baselines
+scripts/experiments/amiga-exp summarize-paper <case_dir>
+scripts/experiments/amiga-exp plot-phase --case-dir <case_dir> --phase 01_model_screening
+```
 
-> Segura-Ortiz, A., Giménez-Orenga, K., García-Nieto, J., Oltra, E., & Aldana-Montes, J. F. (2025). Multifaceted evolution focused on maximal exploitation of domain knowledge for the consensus inference of Gene Regulatory Networks. Computers in Biology and Medicine, 196, 110632.
+The standard phases are:
+
+- `01_model_screening`: compare ranker families and label modes;
+- `02_hyperparameter_tuning`: tune shortlisted configurations on development fronts;
+- `final_test`: evaluate the frozen selected configuration on held-out fronts;
+- `03_ablation`: quantify feature-block contributions;
+- `04_decision_baselines`: compare AMIGA with post-Pareto decision baselines.
+
+For now, `amiga-grn[exp]` is intentionally not provided. An optional PyPI extra
+would install dependencies, but it would not make the article-specific case
+manifests, plots and workflow a clean reusable API. If the experiment runner is
+generalized later, it should become either a documented extra or a separate
+research package.
+
+See [`docs/experiments.md`](./docs/experiments.md) for the article-specific
+workflow.
+
+## Citation
+
+If you use AMIGA, please cite the corresponding software release. A related
+manuscript is currently in preparation.
+
+## License
+
+AMIGA is released under the MIT License.
