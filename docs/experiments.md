@@ -20,9 +20,9 @@ Expected minimal layout:
 
 ```text
 <case_dir>/
-  data
+  data/
     data_*.csv
-    audit
+    audit/
 ```
 
 For the paper cases, the command also resolves the versioned contracts under:
@@ -33,8 +33,18 @@ docs/experiments/splits/<CASE>_split_manifest.json
 docs/experiments/contracts/<CASE>_feature_columns.json
 ```
 
-The pipeline must use these manifests instead of inferring split assignments or
-feature columns silently.
+These files are not descriptive notes. They are executable experiment contracts
+used by `amiga-exp` when no explicit `--config` override is provided:
+
+- `cases/<CASE>.json` defines the case data file, target/control columns,
+  objective directions, feature blocks and ablation feature sets.
+- `splits/<CASE>_split_manifest.json` freezes the development/test assignment
+  by front.
+- `contracts/<CASE>_*` records validated data, feature-column and split
+  contracts generated from the case data.
+
+The pipeline must use these manifests instead of inferring split assignments,
+objective directions or feature columns silently.
 
 ## 2. Current Commands
 
@@ -111,6 +121,7 @@ Output layout:
     metrics_summary.csv
     metric_ranks.csv
     metric_rank_stats.csv
+    primary_rank_table.csv
   screening_manifest.json
   shortlisted_configs.json
   plots/
@@ -187,6 +198,7 @@ Output layout:
     metrics_summary.csv
     metric_ranks.csv
     metric_rank_stats.csv
+    primary_rank_table.csv
   tuning_manifest.json
   selected_config.json
 ```
@@ -265,6 +277,7 @@ Output layout:
     metrics_summary.csv
     metric_ranks.csv
     metric_rank_stats.csv
+    primary_rank_table.csv
   ablation_manifest.json
 ```
 

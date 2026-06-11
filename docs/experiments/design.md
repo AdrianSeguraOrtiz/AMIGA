@@ -1,13 +1,8 @@
 # AMIGA Experimental Design
 
-This document defines the experimental protocol we want to implement for the
-AMIGA paper. It is intentionally written before rebuilding the automation
-scripts, so the scientific design drives the pipeline instead of the other way
-around.
-
-The current experimental scripts are considered prototypes. They are useful for
-understanding the intended workflow, but the new implementation does not need
-to preserve their structure or interfaces.
+This document defines the experimental protocol implemented by the
+repository-level `amiga-exp` workflow. It records the scientific decisions that
+the automation must preserve, independently from the public `amiga` package API.
 
 ## 1. Main Scientific Goal
 
