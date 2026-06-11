@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use AMIGA, please cite this software release. A related manuscript is in preparation."
+title: "AMIGA: Automated Multi-objective Individual GRN Assessment"
+version: "0.1.0"
+license: MIT
+repository-code: "https://github.com/AdrianSeguraOrtiz/AMIGA"
+abstract: "AMIGA is a Python package for learning-to-rank based post-Pareto selection of consensus gene regulatory networks."
+authors:
+  - given-names: "Adrián"
+    family-names: "Segura-Ortiz"
+    email: "adrianseor.99@uma.es"
