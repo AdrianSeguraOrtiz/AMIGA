@@ -63,6 +63,7 @@ scripts/experiments/amiga-exp summarize-paper <case_dir>
 scripts/experiments/amiga-exp run-all <case_dir>
 scripts/experiments/amiga-exp plot-all --case-dir <case_dir>
 scripts/experiments/amiga-exp plot-phase --case-dir <case_dir> --phase 01_model_screening
+scripts/experiments/amiga-exp real-world-validate experiments/BIO-INSIGHT/real-world/tcga_brca
 ```
 
 `run-all` is the standard end-to-end entry point. It initializes the result
@@ -434,3 +435,43 @@ Primary figure files:
 Supplementary Top-K figures generated with `--include-secondary` are optional
 context. They may be mentioned textually or placed in supplementary material,
 but they do not change the primary `Regret@5` conclusions.
+
+## 11. Reported TCGA-BRCA Real-World Validation
+
+The TCGA-BRCA application in the manuscript has a deliberately narrow
+reproducibility command:
+
+```bash
+scripts/experiments/amiga-exp real-world-validate \
+  experiments/BIO-INSIGHT/real-world/tcga_brca \
+  --force
+```
+
+This command assumes the real-world front has already been generated with
+BIO-INSIGHT and ranked with AMIGA. It does not download TCGA, run BIO-INSIGHT,
+train AMIGA or compute exploratory metrics. It only regenerates the reported
+Top1 source-support table for the five BIO-INSIGHT finalists:
+
+- `AMIGA`;
+- `reducenonessentialsinteractions`;
+- objective mean rank;
+- `TOPSIS`;
+- `metricdistribution`.
+
+The protocol is fixed to the evidence sources and cuts used in the paper:
+
+- CollecTRI, DoRothEA, TRRUST v2 and JASPAR PWM at top-250;
+- Cistrome Cancer BRCA-COR at top-5000;
+- `TF-target` and `TF-source` counts only.
+
+Default output layout:
+
+```text
+<real_world_case>/validation/amiga_exp_reported/
+  selected_candidates.csv
+  reported_external_tf_target_evidence.csv
+  real_world_source_support_top1.csv
+  real_world_source_support_top1.md
+  real_world_validation_manifest.json
+  selected_networks/
+```

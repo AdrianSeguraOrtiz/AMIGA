@@ -300,6 +300,7 @@ scripts/experiments/amiga-exp run-phase <case_dir> 03_ablation
 scripts/experiments/amiga-exp run-phase <case_dir> 04_decision_baselines
 scripts/experiments/amiga-exp summarize-paper <case_dir>
 scripts/experiments/amiga-exp plot-phase --case-dir <case_dir> --phase 01_model_screening
+scripts/experiments/amiga-exp real-world-validate experiments/BIO-INSIGHT/real-world/tcga_brca
 ```
 
 The standard phases are:
@@ -309,6 +310,14 @@ The standard phases are:
 - `final_test`: evaluate the frozen selected configuration on held-out fronts;
 - `03_ablation`: quantify feature-block contributions;
 - `04_decision_baselines`: compare AMIGA with post-Pareto decision baselines.
+
+The `real-world-validate` command is specific to the TCGA-BRCA case reported in
+the manuscript. It regenerates only the published real-world validation table:
+Top1 recommendations for the five BIO-INSIGHT finalists, CollecTRI/DoRothEA/
+TRRUST/JASPAR at top-250, Cistrome Cancer BRCA-COR at top-5000, and the two
+reported metrics (`TF-target` and `TF-source`). It does not run the TCGA
+download, BIO-INSIGHT optimization, AMIGA training or exploratory validation
+analyses.
 
 For now, `amiga-grn[exp]` is intentionally not provided. An optional PyPI extra
 would install dependencies, but it would not make the article-specific case

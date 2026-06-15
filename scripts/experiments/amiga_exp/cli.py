@@ -51,6 +51,10 @@ from scripts.experiments.amiga_exp.plots import (
     prepare_all_phase_plots,
     prepare_phase_plots,
 )
+from scripts.experiments.amiga_exp.real_world_validation import (
+    RealWorldValidationError,
+    validate_real_world_case,
+)
 
 KNOWN_PHASES = (
     "01_model_screening",
@@ -730,6 +734,71 @@ def summarize_paper_command(
     typer.echo(f"summary_dir: {repo_relative(result.summary_dir)}")
     for name, path in result.outputs.items():
         typer.echo(f"{name}: {repo_relative(path)}")
+
+
+@app.command(name="real-world-validate")
+def real_world_validate_command(
+    case_dir: Path = typer.Argument(..., help="Path to a real-world TCGA-BRCA case directory."),
+    ranked_csv: Path | None = typer.Option(
+        None,
+        "--ranked-csv",
+        help="AMIGA-ranked real-world front. Defaults to <case_dir>/amiga/ranked_real.csv.",
+    ),
+    grn_dir: Path | None = typer.Option(
+        None,
+        "--grn-dir",
+        help="Folder with BIO-INSIGHT base GRN_*.csv files. Inferred from <case_dir>/bioinsight/*/lists.",
+    ),
+    gene_universe_csv: Path | None = typer.Option(
+        None,
+        "--gene-universe-csv",
+        help="Gene-universe CSV. Defaults to <case_dir>/data/gene_universe_top500.csv.",
+    ),
+    output_dir: Path | None = typer.Option(
+        None,
+        "--output-dir",
+        help="Output directory. Defaults to <case_dir>/validation/amiga_exp_reported.",
+    ),
+    cache_dir: Path | None = typer.Option(
+        None,
+        "--cache-dir",
+        help="External-resource cache. Defaults to <case_dir>/validation/cache.",
+    ),
+    timeout: int = typer.Option(120, "--timeout", help="HTTP timeout in seconds for external resources."),
+    force_refresh: bool = typer.Option(False, "--force-refresh", help="Refresh cached external resources."),
+    force: bool = typer.Option(False, "--force", help="Overwrite existing manifest."),
+    skip_existing: bool = typer.Option(False, "--skip-existing", help="Keep existing manifest instead of failing."),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Show planned outputs without writing files."),
+) -> None:
+    """Generate only the TCGA-BRCA real-world validation reported in the paper."""
+    options = _write_options_or_exit(force=force, skip_existing=skip_existing, dry_run=dry_run)
+    try:
+        result = validate_real_world_case(
+            case_dir=case_dir,
+            ranked_csv=ranked_csv,
+            grn_dir=grn_dir,
+            gene_universe_csv=gene_universe_csv,
+            output_dir=output_dir,
+            cache_dir=cache_dir,
+            timeout=timeout,
+            force_refresh=force_refresh,
+            options=options,
+        )
+    except (RealWorldValidationError, OSError, ValueError) as exc:
+        _fail(str(exc))
+
+    if dry_run:
+        typer.secho("Real-world validation dry-run complete.", fg=typer.colors.GREEN)
+    else:
+        typer.secho("Real-world validation complete.", fg=typer.colors.GREEN)
+    typer.echo(f"output_dir: {repo_relative(result.output_dir)}")
+    typer.echo(f"selected_candidates: {repo_relative(result.selected_candidates)}")
+    typer.echo(f"selected_networks_dir: {repo_relative(result.selected_networks_dir)}")
+    typer.echo(f"evidence: {repo_relative(result.evidence)}")
+    typer.echo(f"table_csv: {repo_relative(result.table_csv)}")
+    typer.echo(f"table_md: {repo_relative(result.table_md)}")
+    typer.echo(f"manifest: {repo_relative(result.manifest)}")
+    typer.echo(f"manifest_status: {result.manifest_status}")
 
 
 def main() -> None:
