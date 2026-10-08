@@ -6,6 +6,14 @@ from pathlib import Path
 
 import typer
 
+from scripts.experiments.amiga_exp.grouped_validation.commands import app as grouped_app
+from scripts.experiments.amiga_exp.sequential_selection.commands import app as sequential_app
+from scripts.experiments.amiga_exp.outer_evaluation.commands import app as outer_app
+from scripts.experiments.amiga_exp.top5_classification.commands import app as top5_app
+from scripts.experiments.amiga_exp.top10_classification.commands import app as top10_app
+from scripts.experiments.amiga_exp.reporting.commands import app as reporting_app
+from scripts.experiments.amiga_exp.version import __version__
+
 from scripts.experiments.amiga_exp.context import (
     BasicCaseInfo,
     CaseContextError,
@@ -73,6 +81,25 @@ app = typer.Typer(
         "This command is intentionally separate from the public amiga package CLI."
     ),
 )
+
+app.add_typer(grouped_app, name="grouped")
+app.add_typer(sequential_app, name="sequential")
+app.add_typer(outer_app, name="outer")
+app.add_typer(top5_app, name="top5-classification")
+app.add_typer(top10_app, name="top10-classification")
+app.add_typer(reporting_app, name="report")
+
+
+def _show_version(value: bool) -> None:
+    if value:
+        typer.echo(f"amiga-exp {__version__}")
+        raise typer.Exit()
+
+
+@app.callback()
+def main(version: bool = typer.Option(False, "--version", callback=_show_version,
+                                      is_eager=True, help="Show the experimental workflow version.")):
+    """Repository-distributed experimental workflow; versioned independently of PyPI."""
 
 
 def _fail(message: str, *, code: int = 1) -> None:

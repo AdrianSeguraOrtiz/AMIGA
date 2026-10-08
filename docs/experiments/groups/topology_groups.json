@@ -1,0 +1,2017 @@
+{
+  "schema_version": 1,
+  "description": "Label-preserving topology groups for the shared GRN benchmark collection.",
+  "cases": [
+    "BIO-INSIGHT",
+    "MO-GENECI"
+  ],
+  "source_collection": {
+    "name": "GENECI",
+    "relative_root": "input_data",
+    "expression_files_match_both_cases": true
+  },
+  "signature": {
+    "algorithm": "SHA-256",
+    "canonical_payload": "[sorted(node_labels), sorted(nonzero_directed_edges)]",
+    "serialization": {
+      "format": "JSON",
+      "ensure_ascii": false,
+      "separators": [
+        ",",
+        ":"
+      ],
+      "encoding": "UTF-8"
+    },
+    "edge_rule": "float(adjacency_value) != 0",
+    "include_isolated_nodes": true,
+    "preserve_node_labels": true,
+    "ignore_edge_sign_and_magnitude": true,
+    "limitations": [
+      "Not graph isomorphism under relabeling.",
+      "Does not establish genealogical, biological, or statistical independence."
+    ]
+  },
+  "counts": {
+    "fronts": 104,
+    "topology_groups": 87,
+    "source_gold_standard_files": 103
+  },
+  "fronts": [
+    {
+      "front_id": 1,
+      "front_name": "dream4_010_01_exp",
+      "family": "dream4",
+      "source": "dream4_01",
+      "condition": "unknown",
+      "topology_sha256": "762d7770a47710cf925b339aac02e284b4357dca892b6dcc6b7df88785237a1f",
+      "n_nodes": 10,
+      "n_edges": 14,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_010_01_exp.csv",
+        "sha256": "09a0ede54f126e936998cd964175a4c8f9b8ffb40e514a8f6b8f1672938bf2c4"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_010_01_gs.csv",
+        "sha256": "a898f5fe652cd92b7fba08a3cc44beba638d57a0bd1655f0625340a92f0a48dc"
+      }
+    },
+    {
+      "front_id": 2,
+      "front_name": "dream4_010_02_exp",
+      "family": "dream4",
+      "source": "dream4_02",
+      "condition": "unknown",
+      "topology_sha256": "5eb4b2ef9c94260c8471e418081fe210ef69414fdfdeb85824bf98d2382b34f1",
+      "n_nodes": 10,
+      "n_edges": 15,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_010_02_exp.csv",
+        "sha256": "ddfdd20747f6eabe08d2ead55afe570b318d13862c15c81d75593b8d56efd40b"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_010_02_gs.csv",
+        "sha256": "34ff9459940c1dd55ec6a11ca2b77c5cece5cce9b8dbab76f095648ea344697e"
+      }
+    },
+    {
+      "front_id": 3,
+      "front_name": "dream4_010_03_exp",
+      "family": "dream4",
+      "source": "dream4_03",
+      "condition": "unknown",
+      "topology_sha256": "58e758e6aad81a2ce9b597a2eb4662d2d66d6fe65067ec51727cefb7c328d590",
+      "n_nodes": 10,
+      "n_edges": 14,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_010_03_exp.csv",
+        "sha256": "bb23fa29a475f01dbf87d97e3004a009c3cffa6b889842a5c171cc1ce5b3ca6c"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_010_03_gs.csv",
+        "sha256": "63abed47c1a17758fba59f4300b9f63299ac1906424387fd98b470ecad46effb"
+      }
+    },
+    {
+      "front_id": 4,
+      "front_name": "dream4_010_04_exp",
+      "family": "dream4",
+      "source": "dream4_04",
+      "condition": "unknown",
+      "topology_sha256": "a01f05f139db18cdd6b31355e4411de6e0463b2f2798eb608ee1550025fbda57",
+      "n_nodes": 10,
+      "n_edges": 12,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_010_04_exp.csv",
+        "sha256": "0c1bfad15f99517224f17da16136467734679f2b910a37b3a37c5a501cc83f70"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_010_04_gs.csv",
+        "sha256": "085eb8718a0af618c96f61a106bb58d1fc707e48e766cd1f502f007a80cfff2c"
+      }
+    },
+    {
+      "front_id": 5,
+      "front_name": "dream4_010_05_exp",
+      "family": "dream4",
+      "source": "dream4_05",
+      "condition": "unknown",
+      "topology_sha256": "3fb04e9eb7c68c4fdd54f8091a37d4fd2559ab527b1a1d853517a72903486148",
+      "n_nodes": 10,
+      "n_edges": 11,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_010_05_exp.csv",
+        "sha256": "af1fe34d0182224bba56aacf27638ae142daf716d6719620cbcec715ea5e3d30"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_010_05_gs.csv",
+        "sha256": "130f85f54aa589387b073b20e1ac3a086f1c647e71cac16a65bb6e8e71b00d82"
+      }
+    },
+    {
+      "front_id": 6,
+      "front_name": "dream4_100_01_exp",
+      "family": "dream4",
+      "source": "dream4_01",
+      "condition": "unknown",
+      "topology_sha256": "31a69dde09fed38665ee6f300437daba55b7deed66c68b0ffe605482a4dbfce3",
+      "n_nodes": 100,
+      "n_edges": 175,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_100_01_exp.csv",
+        "sha256": "cb44afae444e0178021e3f5ba058dca65497084f55f873d6438979e34789ef88"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_100_01_gs.csv",
+        "sha256": "180d052716dd9c34078b102debbf22dff48065ca57f184a539bd3f4f0369c499"
+      }
+    },
+    {
+      "front_id": 7,
+      "front_name": "dream4_100_02_exp",
+      "family": "dream4",
+      "source": "dream4_02",
+      "condition": "unknown",
+      "topology_sha256": "90601108a040a8bb11d0c81bd954978355289eb49cf0a5dea00aff46baa5ce48",
+      "n_nodes": 100,
+      "n_edges": 248,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_100_02_exp.csv",
+        "sha256": "4ea4f88a8461a5942ff2f98d489bf128323418239b2e07fa7ff84f441d7ec24f"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_100_02_gs.csv",
+        "sha256": "3e82cb77e507ecee77c3198680d465f912f1a034465db1470ddd573b220b5476"
+      }
+    },
+    {
+      "front_id": 8,
+      "front_name": "dream4_100_03_exp",
+      "family": "dream4",
+      "source": "dream4_03",
+      "condition": "unknown",
+      "topology_sha256": "bb7a8f36edae76d1bdc5efee90f5f39ef589efe1a9df98cc1ba5a15722fe3e32",
+      "n_nodes": 100,
+      "n_edges": 194,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_100_03_exp.csv",
+        "sha256": "ff9941f75ad4187cf3e74c544b361f85e8d1e708effb41db829b782aeab8161f"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_100_03_gs.csv",
+        "sha256": "2a4a0a284c6276936340b5dd7ee853f37a97d6105759e97e6d4c625158f980b7"
+      }
+    },
+    {
+      "front_id": 9,
+      "front_name": "dream4_100_04_exp",
+      "family": "dream4",
+      "source": "dream4_04",
+      "condition": "unknown",
+      "topology_sha256": "dbba19101e67d201acbe00e3b3bb1e4d76f2c8532755416988559980aff85f13",
+      "n_nodes": 100,
+      "n_edges": 210,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_100_04_exp.csv",
+        "sha256": "3109a9673a4bb9deb41853389394c60a4e7c665de9d671622a55e33ade91814c"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_100_04_gs.csv",
+        "sha256": "4d126a918787626af220d03f4989c15516baecb240c4b0130e04144617d0830d"
+      }
+    },
+    {
+      "front_id": 10,
+      "front_name": "dream4_100_05_exp",
+      "family": "dream4",
+      "source": "dream4_05",
+      "condition": "unknown",
+      "topology_sha256": "31fdf46d709165027e4935bd62a1cdb23b480abb5b3fe179164cd3f8a1bc67cf",
+      "n_nodes": 100,
+      "n_edges": 192,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM4/EXP/dream4_100_05_exp.csv",
+        "sha256": "0207474d64ea15b2b0885f8544d0e1dcd5d4be1b9f2a11a31dd08e80222384ad"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM4/GS/dream4_100_05_gs.csv",
+        "sha256": "09bc6998b2ae586df33e5e521c142851e9d3cdad28183e6a1660fe5326cb8e7c"
+      }
+    },
+    {
+      "front_id": 11,
+      "front_name": "gnw1565_exp",
+      "family": "gnw",
+      "source": "gnw",
+      "condition": "unknown",
+      "topology_sha256": "d21922b6ee5e9a6007183875af8d7aac1ad86bbd9f1c1ee5418a18ea4012fdc2",
+      "n_nodes": 1565,
+      "n_edges": 7264,
+      "size": 1565,
+      "expression": {
+        "source_path": "input_data/GeneNetWeaver/EXP/gnw1565_exp.csv",
+        "sha256": "e638514260307f09a757648be2e977cc08f3419cea64415cf35f6de8776c5136"
+      },
+      "gold_standard": {
+        "source_path": "input_data/GeneNetWeaver/GS/gnw1565_gs.csv",
+        "sha256": "f85d2685baafa4e5f9fa20ebc97887f92488b92c599a32537f242aa654a5d96b"
+      }
+    },
+    {
+      "front_id": 13,
+      "front_name": "InSilicoSize100-Ecoli1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli1",
+      "condition": "trajectories",
+      "topology_sha256": "9cd491523699ad5366e4a28b4116b94ba356c51b70bcd587adf7640b9f0b6ffa",
+      "n_nodes": 100,
+      "n_edges": 124,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize100-Ecoli1-trajectories_exp.csv",
+        "sha256": "2d04764469eac53a17626b625d83aff9290941dea98793b63141c2fa75d4b159"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize100_Ecoli1_gs.csv",
+        "sha256": "f1e32f339d3299b86f807eb36e566d789c59616537897e747e50d03c400c391e"
+      }
+    },
+    {
+      "front_id": 14,
+      "front_name": "InSilicoSize100-Ecoli2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli2",
+      "condition": "trajectories",
+      "topology_sha256": "a8fe5ef8b5f2a4a8179f3df2b115883cb2645fc600bb942f9db8c6b86a6c05a5",
+      "n_nodes": 100,
+      "n_edges": 118,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize100-Ecoli2-trajectories_exp.csv",
+        "sha256": "6d1e4a9cb8a35975cbb22ff48f1b067fe1ea1b0a4c620f5786662d392ffce234"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize100_Ecoli2_gs.csv",
+        "sha256": "d39b00ea4c085278d01625003f69821b98589a8fb5ef4cca362a314efd2d6407"
+      }
+    },
+    {
+      "front_id": 15,
+      "front_name": "InSilicoSize100-Yeast1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast1",
+      "condition": "trajectories",
+      "topology_sha256": "921e4bc6e494110808f490e948b414c753de9706d6312bfb98630e8c96a90eb4",
+      "n_nodes": 100,
+      "n_edges": 165,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize100-Yeast1-trajectories_exp.csv",
+        "sha256": "81198d06a150ae717d5622578991d64b2622b5fd988bbd0ac8e7c9b807e71714"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize100_Yeast1_gs.csv",
+        "sha256": "28094383ba6395cf9acbcabb5369f941b76da37eeb651d0a2951b4197159bc46"
+      }
+    },
+    {
+      "front_id": 16,
+      "front_name": "InSilicoSize100-Yeast2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast2",
+      "condition": "trajectories",
+      "topology_sha256": "e83635a745108be3e4cfd3f018648fb8e7fea8e56f2cddd9a1ca865abdd0f95f",
+      "n_nodes": 100,
+      "n_edges": 388,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize100-Yeast2-trajectories_exp.csv",
+        "sha256": "1a1d8d191125adea79d8bb2f0a8408bed8ca19eb68ab0d7244b7f55a9ea2f87b"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize100_Yeast2_gs.csv",
+        "sha256": "c3efdcf4807e28e2b1a696cd51ef4af0acaac0c853485e31dd952dd16a633c76"
+      }
+    },
+    {
+      "front_id": 17,
+      "front_name": "InSilicoSize100-Yeast3-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast3",
+      "condition": "trajectories",
+      "topology_sha256": "e1acc9878546861134bae40677139f7b73f2360022a76fccbf50917062b9e66e",
+      "n_nodes": 100,
+      "n_edges": 550,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize100-Yeast3-trajectories_exp.csv",
+        "sha256": "4061ee599da1dc7ff589f9fdae53d7765a98399e5b0925087ce44a7134784213"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize100_Yeast3_gs.csv",
+        "sha256": "1e6c491969d0ff4fabcd2afd3789a453ef932d3dbe8f157d7238e64e5d592ba0"
+      }
+    },
+    {
+      "front_id": 18,
+      "front_name": "InSilicoSize10-Ecoli1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli1",
+      "condition": "trajectories",
+      "topology_sha256": "ec7743956ac96b84b4a816a005e0ecd9e2fdcb1e42c31de2c9695106a868fd41",
+      "n_nodes": 10,
+      "n_edges": 10,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize10-Ecoli1-trajectories_exp.csv",
+        "sha256": "f1f06db62f3815754b4548ed7f31d5b64c4e3a3d5f00ad6d8c7ab3752ea63281"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize10_Ecoli1_gs.csv",
+        "sha256": "0f4bb28ad8d304310f48c753b48180cb4f7715571756940598f49ed78db66571"
+      }
+    },
+    {
+      "front_id": 19,
+      "front_name": "InSilicoSize10-Ecoli2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli2",
+      "condition": "trajectories",
+      "topology_sha256": "89ef6c7b9c02705168db1662e1df7f3319cda63209467ca6783cc45ba6f5dac0",
+      "n_nodes": 10,
+      "n_edges": 14,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize10-Ecoli2-trajectories_exp.csv",
+        "sha256": "81e9e8f7f189007bb9aa8e9a065d5957cf93e8cf02bd561eb4bbc9d3206e8ec4"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize10_Ecoli2_gs.csv",
+        "sha256": "39a68b801de39cebfca27f09bb39869c8096b9f5d9f24cde6c1a80ef51fcdb19"
+      }
+    },
+    {
+      "front_id": 20,
+      "front_name": "InSilicoSize10-Yeast1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast1",
+      "condition": "trajectories",
+      "topology_sha256": "6be9b715a7d7ae694c7927e52d776ca5dfd7502c9dfc2eccbdfb3640aea8d70e",
+      "n_nodes": 10,
+      "n_edges": 9,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize10-Yeast1-trajectories_exp.csv",
+        "sha256": "03148336f1e60e8492f8e5958a515eb60623aad902188e7d6ba342e11ae8c6ae"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize10_Yeast1_gs.csv",
+        "sha256": "7a827e4fd0af07e7df34395be33076a505e1d335811e1ea22f2b414b4cd6ec99"
+      }
+    },
+    {
+      "front_id": 21,
+      "front_name": "InSilicoSize10-Yeast2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast2",
+      "condition": "trajectories",
+      "topology_sha256": "ab4840f3e751540ecce1692470d9aea56b2bbd8af281b6cf689d78783a867c33",
+      "n_nodes": 10,
+      "n_edges": 24,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize10-Yeast2-trajectories_exp.csv",
+        "sha256": "b29bb61a06dc16d528a273075b1dd4cf0fc24c7dd6db95617dd9267d9e1c2ee3"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize10_Yeast2_gs.csv",
+        "sha256": "3811aa495847900d742bed3978350268a6c4a1e731b6fe07148633e159df5871"
+      }
+    },
+    {
+      "front_id": 22,
+      "front_name": "InSilicoSize10-Yeast3-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast3",
+      "condition": "trajectories",
+      "topology_sha256": "438fd1430893607eab1f34ef23e96ff77ba37e521c1c0bc45277daf13a50ced8",
+      "n_nodes": 10,
+      "n_edges": 21,
+      "size": 10,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize10-Yeast3-trajectories_exp.csv",
+        "sha256": "446f9864dbe9efaa3f219013a9ae227516295d8852d899aa0444363f61e39103"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize10_Yeast3_gs.csv",
+        "sha256": "4d636e4b118674cf41b3919ba2f8c167b95adc24c0b14cc960c2ad0ffa100da4"
+      }
+    },
+    {
+      "front_id": 23,
+      "front_name": "InSilicoSize50-Ecoli1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli1",
+      "condition": "trajectories",
+      "topology_sha256": "61658e048b6bd45c4d4a5d38c2d06a23091523c3e04cace1f1a5be8ec8345e1c",
+      "n_nodes": 50,
+      "n_edges": 61,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize50-Ecoli1-trajectories_exp.csv",
+        "sha256": "3cc9e0339b04754a72200ab7bde6d1f1a5cd354685a31881247780c8f84e7bd8"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize50_Ecoli1_gs.csv",
+        "sha256": "2d4831598c09f6ec1c3060453df4262e4578581873a2df2646123679e27aba5a"
+      }
+    },
+    {
+      "front_id": 24,
+      "front_name": "InSilicoSize50-Ecoli2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Ecoli2",
+      "condition": "trajectories",
+      "topology_sha256": "f9d5326cea2ceb96ecfed9dcca927a0675aea00958af597699005a9b5b0c0311",
+      "n_nodes": 50,
+      "n_edges": 81,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize50-Ecoli2-trajectories_exp.csv",
+        "sha256": "2769985036b79f73b10c56e4a554be7acfbce783cf02831b53171cbeba179b1b"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize50_Ecoli2_gs.csv",
+        "sha256": "4ed2e52e13a215f745322686759e76bf695bfe8f7b3e237a33430fa1d383e67e"
+      }
+    },
+    {
+      "front_id": 25,
+      "front_name": "InSilicoSize50-Yeast1-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast1",
+      "condition": "trajectories",
+      "topology_sha256": "1b439b0036122258902a7291d58bfe1b1c43ab1a6158324304040280f2cf40d8",
+      "n_nodes": 50,
+      "n_edges": 76,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize50-Yeast1-trajectories_exp.csv",
+        "sha256": "c18a29eb62c07c8341bcec27c633b69c9c26e3a7b6a660ff2aab9acb8cc6ac26"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize50_Yeast1_gs.csv",
+        "sha256": "8d2cd577e983ee30c9777478afe5b285c27e33d6da5911517c8c78ee366b9ad4"
+      }
+    },
+    {
+      "front_id": 26,
+      "front_name": "InSilicoSize50-Yeast2-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast2",
+      "condition": "trajectories",
+      "topology_sha256": "5b90af30cd2465ab9ec99ddf66af31a0a5622e4808c4c80333ed35972f388543",
+      "n_nodes": 50,
+      "n_edges": 159,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize50-Yeast2-trajectories_exp.csv",
+        "sha256": "1cfec259375af1b349e5e82ae8dbcd3ac8ea0865775f9fe4be1b848943283d5d"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize50_Yeast2_gs.csv",
+        "sha256": "2c3ba7938777d4124b20d5c36170af06b501554801cf329faa3ee72b7d102bd2"
+      }
+    },
+    {
+      "front_id": 27,
+      "front_name": "InSilicoSize50-Yeast3-trajectories_exp",
+      "family": "InSilico",
+      "source": "Yeast3",
+      "condition": "trajectories",
+      "topology_sha256": "b18b590d938e5dc89c81b86ab2c8747e5e6422965d7e898a80db49810d584265",
+      "n_nodes": 50,
+      "n_edges": 172,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/DREAM3/EXP/InSilicoSize50-Yeast3-trajectories_exp.csv",
+        "sha256": "4809eea87695be3f89f26fc11eb2cfd7739a560edaff4467d2ac1cc21b61827d"
+      },
+      "gold_standard": {
+        "source_path": "input_data/DREAM3/GS/DREAM3GoldStandard_InSilicoSize50_Yeast3_gs.csv",
+        "sha256": "459cd7e48f2c0216e0553007037cffcf658840f77b2bcceecef5bb0cabe8e10b"
+      }
+    },
+    {
+      "front_id": 28,
+      "front_name": "rogers1000_exp",
+      "family": "rogers",
+      "source": "rogers",
+      "condition": "unknown",
+      "topology_sha256": "ff7598f007f6a990af1b865d12c63502ffa71b6a2eb603ea4264b31d9960995f",
+      "n_nodes": 1000,
+      "n_edges": 1350,
+      "size": 1000,
+      "expression": {
+        "source_path": "input_data/Rogers/EXP/rogers1000_exp.csv",
+        "sha256": "2fe6c7ec6cfacc0638d9917697172103741c119f7be6e25324cbf31c9c97464e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/Rogers/GS/rogers1000_gs.csv",
+        "sha256": "e9ec535c379cbf766fca9f991cf08287f8a3aaed82c57d1fd06acf5ac82de0c6"
+      }
+    },
+    {
+      "front_id": 29,
+      "front_name": "sim_BioGrid_Bacillus_subtilis_168_mixed_exp",
+      "family": "BioGrid",
+      "source": "Bacillus_subtilis_168",
+      "condition": "mixed",
+      "topology_sha256": "c9eaddbea48ba3a8019bcb972c2b984cf4898b2b11f70acbf4c658d45a54ae6a",
+      "n_nodes": 9,
+      "n_edges": 15,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Bacillus_subtilis_168_mixed_exp.csv",
+        "sha256": "4544685bfea87f4f20477068a9fa68a36daf0fb3213252454bc88bfb530208ea"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Bacillus_subtilis_168_mixed_gs.csv",
+        "sha256": "d7cccd81074ed45d4706b4ba57372459cb94e2d5f3effa8ea66b602d7ea2762a"
+      }
+    },
+    {
+      "front_id": 30,
+      "front_name": "sim_BioGrid_Bos_taurus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Bos_taurus",
+      "condition": "mixed",
+      "topology_sha256": "a158fd1f70dcc7a931b67f5736fe00e6cfd2b8b5793f74f21d17f4111a172e4e",
+      "n_nodes": 552,
+      "n_edges": 588,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Bos_taurus_mixed_exp.csv",
+        "sha256": "2389b57b2e1cdec8d9242a578d89bd23a0d163b6f0f857ed2b6250ce7ae56cd2"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Bos_taurus_mixed_gs.csv",
+        "sha256": "d6c5233855c298f1bab1a320406fff55cf9548d66266c040e2201c04823a7680"
+      }
+    },
+    {
+      "front_id": 31,
+      "front_name": "sim_BioGrid_Canis_familiaris_mixed_exp",
+      "family": "BioGrid",
+      "source": "Canis_familiaris",
+      "condition": "mixed",
+      "topology_sha256": "cb87af77619ce2c78c25132b7eccc5b92c626800745604f09c79ebded7bcfbfb",
+      "n_nodes": 151,
+      "n_edges": 136,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Canis_familiaris_mixed_exp.csv",
+        "sha256": "c693e170be1dd8d26331c456f6145b2a8deb44f146b740b3799a476e312bef9e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Canis_familiaris_mixed_gs.csv",
+        "sha256": "2120a0457ab5136f1f7c567fb4638bf3e8976406facfca901a3a0e06c5ee6ceb"
+      }
+    },
+    {
+      "front_id": 32,
+      "front_name": "sim_BioGrid_Chlamydomonas_reinhardtii_mixed_exp",
+      "family": "BioGrid",
+      "source": "Chlamydomonas_reinhardtii",
+      "condition": "mixed",
+      "topology_sha256": "8cf14cd91f00babb93e7920307ffedd91d742afb07020fa7dee74b1a4a821d3d",
+      "n_nodes": 19,
+      "n_edges": 16,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Chlamydomonas_reinhardtii_mixed_exp.csv",
+        "sha256": "953e01c756ddf2199861510134d50f2fc1e6c1fb2b0a4d0cb984a5e2400f24b2"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Chlamydomonas_reinhardtii_mixed_gs.csv",
+        "sha256": "54963515d9229bcf1a62dabb668687be12323e03d4c7367806437bfb53026a33"
+      }
+    },
+    {
+      "front_id": 33,
+      "front_name": "sim_BioGrid_Chlorocebus_sabaeus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Chlorocebus_sabaeus",
+      "condition": "mixed",
+      "topology_sha256": "96262ae4b5411dbc84496ca94bac8805f60104d9500471db82fce40a021d6052",
+      "n_nodes": 58,
+      "n_edges": 46,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Chlorocebus_sabaeus_mixed_exp.csv",
+        "sha256": "91da1aa8181bff108653b6a64e7f48cd81411c06480ae239be788cbfcb286805"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Chlorocebus_sabaeus_mixed_gs.csv",
+        "sha256": "cd5b839eeb899ca66b36f8e71dd68bf1b3ea68a49c2c99411b62370eaf0d84f1"
+      }
+    },
+    {
+      "front_id": 34,
+      "front_name": "sim_BioGrid_Cricetulus_griseus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Cricetulus_griseus",
+      "condition": "mixed",
+      "topology_sha256": "abbe48e73844bf8523684f8c95dc0cb0f388780aeaa0f881fd77e06cdae12e42",
+      "n_nodes": 77,
+      "n_edges": 63,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Cricetulus_griseus_mixed_exp.csv",
+        "sha256": "e9b1be40da3f391645b4bedba6ba67dd41f221b005e2b282d038b90d0298badb"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Cricetulus_griseus_mixed_gs.csv",
+        "sha256": "18c0a79dc85cc613a1e570f3bb5f0cd8f9ec1ea1fa1bb1bbd0e4d3c97e0aa96f"
+      }
+    },
+    {
+      "front_id": 35,
+      "front_name": "sim_BioGrid_Danio_rerio_mixed_exp",
+      "family": "BioGrid",
+      "source": "Danio_rerio",
+      "condition": "mixed",
+      "topology_sha256": "01459c0f118ee8dc4b94181fd32d38666e92da1ff025d74a99af88686f9ce1f7",
+      "n_nodes": 515,
+      "n_edges": 545,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Danio_rerio_mixed_exp.csv",
+        "sha256": "73adcae1af593ef9f262c696b041a42c1f8bd0c0bdc2758d1ef1edabf4a3fbae"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Danio_rerio_mixed_gs.csv",
+        "sha256": "861dc03f1cd91471220e10624aeb6d561a361971df2cbbf637fec6c82c6474fd"
+      }
+    },
+    {
+      "front_id": 36,
+      "front_name": "sim_BioGrid_Emericella_nidulans_FGSC_A4_mixed_exp",
+      "family": "BioGrid",
+      "source": "Emericella_nidulans_FGSC_A4",
+      "condition": "mixed",
+      "topology_sha256": "78fb4d7103ab31641c25daebcc9d35a3f8b9d24612adf8f683bf1944fa9463dd",
+      "n_nodes": 64,
+      "n_edges": 65,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Emericella_nidulans_FGSC_A4_mixed_exp.csv",
+        "sha256": "3cf28bbb31f8ac99416807e4e412a54685bd8139f7ec5049ddabd650bbbf7f46"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Emericella_nidulans_FGSC_A4_mixed_gs.csv",
+        "sha256": "ac777dd8b069bcc1ef7299c4d9ed8b0f45847ff8251325826f0563b68b6836a5"
+      }
+    },
+    {
+      "front_id": 37,
+      "front_name": "sim_BioGrid_Gallus_gallus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Gallus_gallus",
+      "condition": "mixed",
+      "topology_sha256": "4fd6208d2dbcfdf2b516e614e883baa47b3c18fb91a1ec3c6ae4dbb18fde518f",
+      "n_nodes": 436,
+      "n_edges": 519,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Gallus_gallus_mixed_exp.csv",
+        "sha256": "43812a241b18b42fe548d776b0fc619dca87a79dcda79b32dd28d21b6dc10ffb"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Gallus_gallus_mixed_gs.csv",
+        "sha256": "c2133ef14000d31a0c4ece33da70181ddb4758f20ed90dc31cbd3a4600ab44bc"
+      }
+    },
+    {
+      "front_id": 38,
+      "front_name": "sim_BioGrid_Glycine_max_mixed_exp",
+      "family": "BioGrid",
+      "source": "Glycine_max",
+      "condition": "mixed",
+      "topology_sha256": "c210ef1b404eadde426e122d2383f7382b7b1fd5a5c0c0eb225e88622f3aa011",
+      "n_nodes": 45,
+      "n_edges": 40,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Glycine_max_mixed_exp.csv",
+        "sha256": "ff7d76c463b2200ba3ffc658c72889cd557662030ee6f0985e4f0875fafce0d4"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Glycine_max_mixed_gs.csv",
+        "sha256": "4da72112137256284dd978aef7723e719e98aa57e89a901c24b3ca702511f844"
+      }
+    },
+    {
+      "front_id": 39,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_1_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_1",
+      "condition": "mixed",
+      "topology_sha256": "4a81ba635e93dcb5087da10224469c58bb1f605d2e0df67b457897d1f3195b04",
+      "n_nodes": 201,
+      "n_edges": 278,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_Herpesvirus_1_mixed_exp.csv",
+        "sha256": "681ccbcb3230c31c20d48bb625a821cc4291e406127253da2f81e41201570017"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_Herpesvirus_1_mixed_gs.csv",
+        "sha256": "31ddfc056183572f1f1fabced2cd218da88ee28b107c89c0f8c7eb6bbb421f31"
+      }
+    },
+    {
+      "front_id": 40,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_4_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_4",
+      "condition": "mixed",
+      "topology_sha256": "e792cf0b573985efb5e22a4fdfe1f97eeb5dbfe3d0e40585bd477515c1808298",
+      "n_nodes": 503,
+      "n_edges": 583,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_Herpesvirus_4_mixed_exp.csv",
+        "sha256": "6be495d3f28cb7e47e4e870d887b0fbc6eb3501fff8fc0f275b707949e126792"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_Herpesvirus_4_mixed_gs.csv",
+        "sha256": "1aa55c19c54f7c79d7b3fac352433f2a56691791bdb54f6b5c9985abea3375ea"
+      }
+    },
+    {
+      "front_id": 41,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_5_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_5",
+      "condition": "mixed",
+      "topology_sha256": "f4b584d659ecc66e5a51f9c1965b4842c1e8a03560d407f9dc9ec6baa3ebbd53",
+      "n_nodes": 140,
+      "n_edges": 152,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_Herpesvirus_5_mixed_exp.csv",
+        "sha256": "97ef9e3e50e1d8b997e57e9a6795731fb85a22f1dcc4df583dccccfaf96b495f"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_Herpesvirus_5_mixed_gs.csv",
+        "sha256": "0f468895d2fa73ddf9d70608232f31aff430d41f7f0b23b878623d8c2dc4d2b9"
+      }
+    },
+    {
+      "front_id": 42,
+      "front_name": "sim_BioGrid_Human_Herpesvirus_8_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Herpesvirus_8",
+      "condition": "mixed",
+      "topology_sha256": "d09394ab33558c1e483b038a69d40cd09d4a1e756d3b569f5686c33e8c39fbb8",
+      "n_nodes": 889,
+      "n_edges": 942,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_Herpesvirus_8_mixed_exp.csv",
+        "sha256": "afefaf11c24df1e47a62c978cc3b22981677abeef48e88417278a06749c96a08"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_Herpesvirus_8_mixed_gs.csv",
+        "sha256": "96e3b455b91f92f1f4b2956d22c8d5f5eb33d260080759db1c6499189fc1bf5b"
+      }
+    },
+    {
+      "front_id": 43,
+      "front_name": "sim_BioGrid_Human_Immunodeficiency_Virus_2_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_Immunodeficiency_Virus_2",
+      "condition": "mixed",
+      "topology_sha256": "5dafaf499ec7cead6a62b6d795853528980480a8ed8c63d9ea9cb55ee9dca458",
+      "n_nodes": 63,
+      "n_edges": 82,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_Immunodeficiency_Virus_2_mixed_exp.csv",
+        "sha256": "4969d1eaedd3fb00d003109ae3e66ecf92adc8b58feb0607e932764d47a4cf65"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_Immunodeficiency_Virus_2_mixed_gs.csv",
+        "sha256": "57dee2ddb2ec5783e7ffdeac46217b2fdca35772cd1689192c9570587a24a251"
+      }
+    },
+    {
+      "front_id": 44,
+      "front_name": "sim_BioGrid_Human_papillomavirus_16_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_papillomavirus_16",
+      "condition": "mixed",
+      "topology_sha256": "1e1685a4fe436ff34568f644b291a3d7dbfd07c37cd3e96b27e96c145f9b70e4",
+      "n_nodes": 483,
+      "n_edges": 562,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_papillomavirus_16_mixed_exp.csv",
+        "sha256": "49623531326b6ac26053404215f5843e0a59b647b8a0248fb2ea049551aeb1c3"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_papillomavirus_16_mixed_gs.csv",
+        "sha256": "35d7299c5ece2421558b6319f4fb1b9db04ed4f4607005f8be71d1982f979439"
+      }
+    },
+    {
+      "front_id": 45,
+      "front_name": "sim_BioGrid_Human_papillomavirus_5_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_papillomavirus_5",
+      "condition": "mixed",
+      "topology_sha256": "bddb2af8389afe9d4b756714523aed7469e77c83aae90d75261c0da6a49e29d6",
+      "n_nodes": 128,
+      "n_edges": 145,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_papillomavirus_5_mixed_exp.csv",
+        "sha256": "2c5473d4ec35eb50fe19fe5b8a1c8d8d77da612b45246c85e3606fc60ea0b69f"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_papillomavirus_5_mixed_gs.csv",
+        "sha256": "76fad45d57e348ddba88f12197124cd564bad5edce08660eefc703f0788183c1"
+      }
+    },
+    {
+      "front_id": 46,
+      "front_name": "sim_BioGrid_Human_papillomavirus_6b_mixed_exp",
+      "family": "BioGrid",
+      "source": "Human_papillomavirus_6b",
+      "condition": "mixed",
+      "topology_sha256": "c81755d7421fe0470b940715735c1badc01bff02d73065065a2cf30d6e34109f",
+      "n_nodes": 459,
+      "n_edges": 587,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Human_papillomavirus_6b_mixed_exp.csv",
+        "sha256": "de5abe16edec155b879fcb35409bd5f7a2fb29e219ffda11c7cc30f802c5be5e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Human_papillomavirus_6b_mixed_gs.csv",
+        "sha256": "4e2afe00f617c774740d975a503350f784f7179509f2da93e13bf5e26834c849"
+      }
+    },
+    {
+      "front_id": 47,
+      "front_name": "sim_BioGrid_Macaca_mulatta_mixed_exp",
+      "family": "BioGrid",
+      "source": "Macaca_mulatta",
+      "condition": "mixed",
+      "topology_sha256": "67c4aa01d3c5966aaa9b5072e3f48acd68cd93177f4181da1537e0b7d7f1dae3",
+      "n_nodes": 308,
+      "n_edges": 307,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Macaca_mulatta_mixed_exp.csv",
+        "sha256": "4e01488b4ed58254aaa649e800b83995cccb75fc3aeec820d8de9d3d1c70a9a6"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Macaca_mulatta_mixed_gs.csv",
+        "sha256": "e490a59cf9e76b9c7f7ecc2cae1ccc352cf108ed9a231c2627421d0944cf6394"
+      }
+    },
+    {
+      "front_id": 48,
+      "front_name": "sim_BioGrid_Middle-East_Respiratory_Syndrome-related_Coronavirus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Middle-East_Respiratory_Syndrome-related_Coronavirus",
+      "condition": "mixed",
+      "topology_sha256": "150eb571749c76ce15334e4d5f4f6ca60dfefaad9a547e37558a144823dcd63b",
+      "n_nodes": 975,
+      "n_edges": 1041,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Middle-East_Respiratory_Syndrome-related_Coronavirus_mixed_exp.csv",
+        "sha256": "c1043bc8f09526495efc842272cf7e70d69c0ac874d22e062289fa421d2e261c"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Middle-East_Respiratory_Syndrome-related_Coronavirus_mixed_gs.csv",
+        "sha256": "ad0b2efc36e975be4e53b50ccaa6edc2ccd02c78678a9eff739336da0966061d"
+      }
+    },
+    {
+      "front_id": 49,
+      "front_name": "sim_BioGrid_Neurospora_crassa_OR74A_mixed_exp",
+      "family": "BioGrid",
+      "source": "Neurospora_crassa_OR74A",
+      "condition": "mixed",
+      "topology_sha256": "5203743d5dfd3dbe53ed6a63964e0c74a72bab7ffb8040aec6056ff14badbcc2",
+      "n_nodes": 35,
+      "n_edges": 32,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Neurospora_crassa_OR74A_mixed_exp.csv",
+        "sha256": "1d9d16d8fc5a323c7525bd8bb4a5e557908203b431e7fd674329d978606f6a97"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Neurospora_crassa_OR74A_mixed_gs.csv",
+        "sha256": "f507d5dbc2ed25909d63770c9523e7b8005e187c3f5a8d3cc0c0359fa3d8f349"
+      }
+    },
+    {
+      "front_id": 50,
+      "front_name": "sim_BioGrid_Oryctolagus_cuniculus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Oryctolagus_cuniculus",
+      "condition": "mixed",
+      "topology_sha256": "87d3cff993014ab0fa8debd06708d627d6e95283fdd09e302690367948502ba8",
+      "n_nodes": 331,
+      "n_edges": 343,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Oryctolagus_cuniculus_mixed_exp.csv",
+        "sha256": "b6684d3a09e094a29aec7392c38830c7399ec757f17bd05651f051d45fc0df55"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Oryctolagus_cuniculus_mixed_gs.csv",
+        "sha256": "40a921c45b2ffa2c142514039af6c0c675889a0ef9a5038a66348e88fdae18f3"
+      }
+    },
+    {
+      "front_id": 51,
+      "front_name": "sim_BioGrid_Oryza_sativa_Japonica_mixed_exp",
+      "family": "BioGrid",
+      "source": "Oryza_sativa_Japonica",
+      "condition": "mixed",
+      "topology_sha256": "2d2aae74a62c4ff93406a1a3e0d622ce269e95d84efd691cdf2e53bc45e2f2cd",
+      "n_nodes": 327,
+      "n_edges": 350,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Oryza_sativa_Japonica_mixed_exp.csv",
+        "sha256": "1b6525145587e9191f4514e841a7802606fc8e6f24b9ced8eb7ad7a59b2d47cd"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Oryza_sativa_Japonica_mixed_gs.csv",
+        "sha256": "62dbb062d2e5b61695ced828e94f7a8fa52acda7bf0df4871c355e4659aa2e63"
+      }
+    },
+    {
+      "front_id": 52,
+      "front_name": "sim_BioGrid_Plasmodium_falciparum_3D7_mixed_exp",
+      "family": "BioGrid",
+      "source": "Plasmodium_falciparum_3D7",
+      "condition": "mixed",
+      "topology_sha256": "41d8acc97996aa703d1910c20b3b1aac53c32b1fbca2e363ee2087406a4a9277",
+      "n_nodes": 1209,
+      "n_edges": 2527,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Plasmodium_falciparum_3D7_mixed_exp.csv",
+        "sha256": "194ce032b22018fadebbedb46fea4c2517ad6a94a8904c85b5023611dd420561"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Plasmodium_falciparum_3D7_mixed_gs.csv",
+        "sha256": "73423a07a7e0cc0952f2eb4daa673379165f56c7739f80da0aad7f2a1bc00f94"
+      }
+    },
+    {
+      "front_id": 53,
+      "front_name": "sim_BioGrid_Simian_Immunodeficiency_Virus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Simian_Immunodeficiency_Virus",
+      "condition": "mixed",
+      "topology_sha256": "82b4cfb0f4aaf71242c8ed6b32af827ce0e69b2c5fcf91be19e5dc8e7530cd90",
+      "n_nodes": 19,
+      "n_edges": 18,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Simian_Immunodeficiency_Virus_mixed_exp.csv",
+        "sha256": "ec419b009411f2cdd88e9f8586f2bea59cdfc419cebd335fb87755874eed7288"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Simian_Immunodeficiency_Virus_mixed_gs.csv",
+        "sha256": "c5face3004c0e0beb9872d4fb66919ca82db8be737c086c8f29485d7c3e01b9b"
+      }
+    },
+    {
+      "front_id": 54,
+      "front_name": "sim_BioGrid_Simian_Virus_40_mixed_exp",
+      "family": "BioGrid",
+      "source": "Simian_Virus_40",
+      "condition": "mixed",
+      "topology_sha256": "f64e224b011f693a1df223ac34c460645d85317688ed862e22f5cf85e3424ffc",
+      "n_nodes": 6,
+      "n_edges": 7,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Simian_Virus_40_mixed_exp.csv",
+        "sha256": "e551246558617a9b922040758d538ca49021512856753d20a4b15534a4606726"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Simian_Virus_40_mixed_gs.csv",
+        "sha256": "03122a98ad78b53531f5e3cbb9431b487f985b8ca55a7d5e93d603f6738bf933"
+      }
+    },
+    {
+      "front_id": 55,
+      "front_name": "sim_BioGrid_Streptococcus_pneumoniae_ATCCBAA255_mixed_exp",
+      "family": "BioGrid",
+      "source": "Streptococcus_pneumoniae_ATCCBAA255",
+      "condition": "mixed",
+      "topology_sha256": "18bb40b9c011c82265ba6840a8f58b1906289a857d9f5776e21377ec5c59d3c9",
+      "n_nodes": 6,
+      "n_edges": 13,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Streptococcus_pneumoniae_ATCCBAA255_mixed_exp.csv",
+        "sha256": "45453aea2f9f112c3a5f87be09e9ace44dc2a836522006a0df1b4577f80527fb"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Streptococcus_pneumoniae_ATCCBAA255_mixed_gs.csv",
+        "sha256": "d3e282a3b08925a2b721fd6ea39b2873cdc536db040f50891e3fde9dd61008b5"
+      }
+    },
+    {
+      "front_id": 56,
+      "front_name": "sim_BioGrid_Strongylocentrotus_purpuratus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Strongylocentrotus_purpuratus",
+      "condition": "mixed",
+      "topology_sha256": "d040a2e20a2bfa85ed832c41455daf55ed2d6b5e528a715da83a584af3040300",
+      "n_nodes": 17,
+      "n_edges": 16,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Strongylocentrotus_purpuratus_mixed_exp.csv",
+        "sha256": "cf2a1f3cee06679482cf5cb08e33d294a8dfe05b6484dedcdd26cb9aa8ecc2a3"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Strongylocentrotus_purpuratus_mixed_gs.csv",
+        "sha256": "d8f6b56652566389f742c9e206c81436b0e641b98904e7907b731c38d26b6990"
+      }
+    },
+    {
+      "front_id": 57,
+      "front_name": "sim_BioGrid_Sus_scrofa_mixed_exp",
+      "family": "BioGrid",
+      "source": "Sus_scrofa",
+      "condition": "mixed",
+      "topology_sha256": "94ee5a6680b648c4bd5e268141351bfd7d3a9f871ab2ce88c9bf0b882baf1ab2",
+      "n_nodes": 119,
+      "n_edges": 105,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Sus_scrofa_mixed_exp.csv",
+        "sha256": "cd6d536f2a76f68d3bfef5ac3f30ef81ea562e2a86304a9caa80fbecdef40b06"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Sus_scrofa_mixed_gs.csv",
+        "sha256": "f4ebd38c26e97f65575a5fef2a37630c511780b13174d624830b81ffc0633d70"
+      }
+    },
+    {
+      "front_id": 58,
+      "front_name": "sim_BioGrid_Vaccinia_Virus_mixed_exp",
+      "family": "BioGrid",
+      "source": "Vaccinia_Virus",
+      "condition": "mixed",
+      "topology_sha256": "0c6600fb389b6616fd8447b0c3538718f87ab4453bb1c448fc79f8f669f84efa",
+      "n_nodes": 13,
+      "n_edges": 14,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Vaccinia_Virus_mixed_exp.csv",
+        "sha256": "0bf022e17b4b0eada33073c93f77ff9d7e306dc8d7f03b4e2524d228bfbf5b27"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Vaccinia_Virus_mixed_gs.csv",
+        "sha256": "8039bf8e0cbbecf358c5e6afc750affa8c3d368ff653641e77bb387a9933344c"
+      }
+    },
+    {
+      "front_id": 59,
+      "front_name": "sim_BioGrid_Xenopus_laevis_mixed_exp",
+      "family": "BioGrid",
+      "source": "Xenopus_laevis",
+      "condition": "mixed",
+      "topology_sha256": "86255c0245eb03dfb9d88973c42407e07ea56230f6cee72ce027a647db7d1d1f",
+      "n_nodes": 1505,
+      "n_edges": 1996,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Xenopus_laevis_mixed_exp.csv",
+        "sha256": "e419b5326d02f31ad2cc5d985c6646794713f20d3deab24c31c183290ef85c90"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Xenopus_laevis_mixed_gs.csv",
+        "sha256": "b66a9a53739e53640d9fd5c6568e4aaa03fe5bf1dcc67c61b7b81142061aa987"
+      }
+    },
+    {
+      "front_id": 60,
+      "front_name": "sim_BioGrid_Zea_mays_mixed_exp",
+      "family": "BioGrid",
+      "source": "Zea_mays",
+      "condition": "mixed",
+      "topology_sha256": "7359d9996a04f919f7ca9582e00508046ed79e6859107900e29478043058f336",
+      "n_nodes": 21,
+      "n_edges": 13,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_BioGrid_Zea_mays_mixed_exp.csv",
+        "sha256": "5ad2a0823a7c1abeb86e43c4ca226b322c46677d03d449eca2c4c1d71f0fc6de"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_BioGrid_Zea_mays_mixed_gs.csv",
+        "sha256": "037d21d23ada871d89cb6f762b27b5f2a11b6ea0cec10501524d5ee7f09657d7"
+      }
+    },
+    {
+      "front_id": 61,
+      "front_name": "sim_eipo-modular_size-100_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockdown",
+      "topology_sha256": "2b8b55ab5f8183bbdd440a43f05ff2db0b5058111e38180d9ab81f641693d712",
+      "n_nodes": 100,
+      "n_edges": 390,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-100_knockdown_exp.csv",
+        "sha256": "51762b91def73f3874a0c87800fddcba55bfab40a0421e796ecd46f0f3a5d3c9"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-100_knockdown_gs.csv",
+        "sha256": "98a885a24ee2d70873fb3d3f72b96c2ba5c345a8a0fdd48b02da9e68c8dd6c9e"
+      }
+    },
+    {
+      "front_id": 62,
+      "front_name": "sim_eipo-modular_size-100_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockout",
+      "topology_sha256": "2b8b55ab5f8183bbdd440a43f05ff2db0b5058111e38180d9ab81f641693d712",
+      "n_nodes": 100,
+      "n_edges": 390,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-100_knockout_exp.csv",
+        "sha256": "279beb027ca68002f89148d20bfe77eecda0f4029f6917af0976d0dde27875ad"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-100_knockout_gs.csv",
+        "sha256": "98a885a24ee2d70873fb3d3f72b96c2ba5c345a8a0fdd48b02da9e68c8dd6c9e"
+      }
+    },
+    {
+      "front_id": 63,
+      "front_name": "sim_eipo-modular_size-100_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "overexpression",
+      "topology_sha256": "2b8b55ab5f8183bbdd440a43f05ff2db0b5058111e38180d9ab81f641693d712",
+      "n_nodes": 100,
+      "n_edges": 390,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-100_overexpression_exp.csv",
+        "sha256": "11cbf980e115e26b18800f2032d02b2a87ebb7b552bb4ec84540e575ca733c4f"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-100_overexpression_gs.csv",
+        "sha256": "98a885a24ee2d70873fb3d3f72b96c2ba5c345a8a0fdd48b02da9e68c8dd6c9e"
+      }
+    },
+    {
+      "front_id": 64,
+      "front_name": "sim_eipo-modular_size-200_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockdown",
+      "topology_sha256": "60ea1973130ed2298f2e0a4ac58869d0038f4a582a6e22acc489f56535a5ffa1",
+      "n_nodes": 200,
+      "n_edges": 793,
+      "size": 200,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-200_knockdown_exp.csv",
+        "sha256": "c5efbc1055b2c438c90c84271c7204e98ec62836c6a5981573dfd5c05090a4a7"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-200_knockdown_gs.csv",
+        "sha256": "a4f0c55f88b4381ced58111877160678573fac74a6217957c3bad8f77d3d9ca2"
+      }
+    },
+    {
+      "front_id": 65,
+      "front_name": "sim_eipo-modular_size-200_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockout",
+      "topology_sha256": "60ea1973130ed2298f2e0a4ac58869d0038f4a582a6e22acc489f56535a5ffa1",
+      "n_nodes": 200,
+      "n_edges": 793,
+      "size": 200,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-200_knockout_exp.csv",
+        "sha256": "48aedfd45c60ac41d40faf1cbe626ce568311661698fda1a8a3c119a9963f074"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-200_knockout_gs.csv",
+        "sha256": "a4f0c55f88b4381ced58111877160678573fac74a6217957c3bad8f77d3d9ca2"
+      }
+    },
+    {
+      "front_id": 66,
+      "front_name": "sim_eipo-modular_size-200_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "overexpression",
+      "topology_sha256": "60ea1973130ed2298f2e0a4ac58869d0038f4a582a6e22acc489f56535a5ffa1",
+      "n_nodes": 200,
+      "n_edges": 793,
+      "size": 200,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-200_overexpression_exp.csv",
+        "sha256": "52ed8409bf93fe4be75f870cb9a40bbc06df6064ebdbcc3d3befa3692e117db9"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-200_overexpression_gs.csv",
+        "sha256": "a4f0c55f88b4381ced58111877160678573fac74a6217957c3bad8f77d3d9ca2"
+      }
+    },
+    {
+      "front_id": 67,
+      "front_name": "sim_eipo-modular_size-20_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockdown",
+      "topology_sha256": "933a0bcc314afc16438bb44fabc283fa26cb0b3c9fcc7b73b5a2be55ff788369",
+      "n_nodes": 20,
+      "n_edges": 80,
+      "size": 20,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-20_knockdown_exp.csv",
+        "sha256": "e29c0a59540dd7209b7c5c23b140910512786e78c0ebd54c2b1ad1e00fc9f7a8"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-20_knockdown_gs.csv",
+        "sha256": "9bfd899ad9a670a198ca2fa4e4d5aff6dca601c626bd7be4a9dbef5515f3d960"
+      }
+    },
+    {
+      "front_id": 68,
+      "front_name": "sim_eipo-modular_size-20_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockout",
+      "topology_sha256": "933a0bcc314afc16438bb44fabc283fa26cb0b3c9fcc7b73b5a2be55ff788369",
+      "n_nodes": 20,
+      "n_edges": 80,
+      "size": 20,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-20_knockout_exp.csv",
+        "sha256": "01c3fd748d1d1a50dd0af991e2a6c4632a56cf0dbe3a85a0c8faf0ebbdd85158"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-20_knockout_gs.csv",
+        "sha256": "9bfd899ad9a670a198ca2fa4e4d5aff6dca601c626bd7be4a9dbef5515f3d960"
+      }
+    },
+    {
+      "front_id": 69,
+      "front_name": "sim_eipo-modular_size-20_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "overexpression",
+      "topology_sha256": "933a0bcc314afc16438bb44fabc283fa26cb0b3c9fcc7b73b5a2be55ff788369",
+      "n_nodes": 20,
+      "n_edges": 80,
+      "size": 20,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-20_overexpression_exp.csv",
+        "sha256": "d69583658cc0158fb6d86282c383896188929b528716b2b4c9ab3c4fde2ba884"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-20_overexpression_gs.csv",
+        "sha256": "9bfd899ad9a670a198ca2fa4e4d5aff6dca601c626bd7be4a9dbef5515f3d960"
+      }
+    },
+    {
+      "front_id": 70,
+      "front_name": "sim_eipo-modular_size-50_knockdown_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockdown",
+      "topology_sha256": "847305fd6023e70001a273d3644629e19e6e8b257e7e517ba091ee991918e9a4",
+      "n_nodes": 50,
+      "n_edges": 192,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-50_knockdown_exp.csv",
+        "sha256": "a5c793fed700fb27ec6ed3951908b22b4df3a2793c52f89cdd89dd135a1479db"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-50_knockdown_gs.csv",
+        "sha256": "133597cd5b8ed92473ecc34d5a0ea6d239b9065d1937c59e63f484a5cef19449"
+      }
+    },
+    {
+      "front_id": 71,
+      "front_name": "sim_eipo-modular_size-50_knockout_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "knockout",
+      "topology_sha256": "847305fd6023e70001a273d3644629e19e6e8b257e7e517ba091ee991918e9a4",
+      "n_nodes": 50,
+      "n_edges": 192,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-50_knockout_exp.csv",
+        "sha256": "691a6bd1b97f40c862d11349996b458ad143f676f3ef2b8d1f1d96f326ec3e35"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-50_knockout_gs.csv",
+        "sha256": "133597cd5b8ed92473ecc34d5a0ea6d239b9065d1937c59e63f484a5cef19449"
+      }
+    },
+    {
+      "front_id": 72,
+      "front_name": "sim_eipo-modular_size-50_overexpression_exp",
+      "family": "eipo-modular",
+      "source": "eipo-modular",
+      "condition": "overexpression",
+      "topology_sha256": "847305fd6023e70001a273d3644629e19e6e8b257e7e517ba091ee991918e9a4",
+      "n_nodes": 50,
+      "n_edges": 192,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_eipo-modular_size-50_overexpression_exp.csv",
+        "sha256": "af03fa6cea3862d4e81665c600b5055f59b60166cbc07a813350d4e7b73a3913"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_eipo-modular_size-50_overexpression_gs.csv",
+        "sha256": "133597cd5b8ed92473ecc34d5a0ea6d239b9065d1937c59e63f484a5cef19449"
+      }
+    },
+    {
+      "front_id": 73,
+      "front_name": "sim_GRNdb_Adult-Adipose_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Adipose",
+      "condition": "mixed",
+      "topology_sha256": "132a9272850c7ed4df3e2c04813a32f3d96b8665efaa8695f5a6eb7619e4b86d",
+      "n_nodes": 1057,
+      "n_edges": 1276,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Adipose_mixed_exp.csv",
+        "sha256": "c27c1be21e5de3a273ba89df4f06d1c2eb7c46a386f4eb9d9061c8d36ce895bc"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Adipose_mixed_gs.csv",
+        "sha256": "7af66ff90eb861610a421d4e1b204e419dc18d48745fea046e39ee3992dbb1fc"
+      }
+    },
+    {
+      "front_id": 74,
+      "front_name": "sim_GRNdb_Adult-Ascending-Colon_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Ascending-Colon",
+      "condition": "mixed",
+      "topology_sha256": "3efecf533c7b5b57b3dcfe966a514d34ebb5e96e295c4f130d705032dba8bfa3",
+      "n_nodes": 1107,
+      "n_edges": 1404,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Ascending-Colon_mixed_exp.csv",
+        "sha256": "f299360cdef939788991a2e7c398fae310a4c687783886538710149db99692df"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Ascending-Colon_mixed_gs.csv",
+        "sha256": "eb88c454376bb5a4517ef5df7d1c80a054cb568c17c7a504bf12b162bf86ede4"
+      }
+    },
+    {
+      "front_id": 75,
+      "front_name": "sim_GRNdb_Adult-Epityphlon_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Epityphlon",
+      "condition": "mixed",
+      "topology_sha256": "df0246b0bffe0940eeab0009f21b05d5b25400d0c160c8b8708ec9358bf20003",
+      "n_nodes": 1486,
+      "n_edges": 2109,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Epityphlon_mixed_exp.csv",
+        "sha256": "a59ac69c4c48b28e7f76dad3124ebdab19016a431fabb6cbebac29e4dd0eec01"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Epityphlon_mixed_gs.csv",
+        "sha256": "60187d6c48f754925ca1abd4a7f9de2f047df0f96716607691c05ceb83ca772b"
+      }
+    },
+    {
+      "front_id": 76,
+      "front_name": "sim_GRNdb_Adult-Liver_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Liver",
+      "condition": "mixed",
+      "topology_sha256": "3d351df6bdc3b0a598f0ecee45ebb2ee40f3f27098f30f5e9bb2d50220d0c65b",
+      "n_nodes": 1230,
+      "n_edges": 1697,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Liver_mixed_exp.csv",
+        "sha256": "ceb158dcbe4f9e6c2716df9c35bb67f9279c39b9220e5096aa6c841db9c42cbe"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Liver_mixed_gs.csv",
+        "sha256": "f171b00bab1407e5c400462fbc5839e6654139015d7ea1ac73f89db9b392a1a8"
+      }
+    },
+    {
+      "front_id": 77,
+      "front_name": "sim_GRNdb_Adult-Lung_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Lung",
+      "condition": "mixed",
+      "topology_sha256": "24d1edb6d50e6a6d704802712790c1f27ecfbed73f0edba222597deff75b1b70",
+      "n_nodes": 1074,
+      "n_edges": 1960,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Lung_mixed_exp.csv",
+        "sha256": "90e6c24d446ea0804648b27c60727d560c282b7fe04d36deca222ad2d62534a4"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Lung_mixed_gs.csv",
+        "sha256": "4fe88af2f968047cb67e36e60153a69700734269a3ec3beba864187cbee245db"
+      }
+    },
+    {
+      "front_id": 78,
+      "front_name": "sim_GRNdb_Adult-Muscle_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Muscle",
+      "condition": "mixed",
+      "topology_sha256": "09f61ddaed52f7a7b7fd34b43783861a76f7864f42809df5a512e3b64482ffbe",
+      "n_nodes": 1130,
+      "n_edges": 1537,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Muscle_mixed_exp.csv",
+        "sha256": "7b53c5641451a3950cd22e8a092dd52eca03a5dea4537a4e7b28df982c22ac0e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Muscle_mixed_gs.csv",
+        "sha256": "e01642c51ee169f23e006bf5a1f2197b176a2091b6208feb0c728d078e6e8730"
+      }
+    },
+    {
+      "front_id": 79,
+      "front_name": "sim_GRNdb_Adult-Pancreas_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Pancreas",
+      "condition": "mixed",
+      "topology_sha256": "99ad890fa1bb3b543dbc1c31a1a25cc83abf3f0bb4719f57b09870652c49b55d",
+      "n_nodes": 969,
+      "n_edges": 1314,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Pancreas_mixed_exp.csv",
+        "sha256": "f543fd835d95af68406dc7d540e53f8026844d7a527fab098848035152b29091"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Pancreas_mixed_gs.csv",
+        "sha256": "b3330af6d7d30ebfb92ac56bed683bb8e8c22ab3c2dcad8790ef34a8711d3f11"
+      }
+    },
+    {
+      "front_id": 80,
+      "front_name": "sim_GRNdb_Adult-Rectum_mixed_exp",
+      "family": "GRNdb",
+      "source": "Adult-Rectum",
+      "condition": "mixed",
+      "topology_sha256": "b3141a96d0b0c244ef3a50ae417ddb096cecb6a0fb7ec2721c691804765a3c74",
+      "n_nodes": 1598,
+      "n_edges": 2313,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Adult-Rectum_mixed_exp.csv",
+        "sha256": "4d66be9d9601b1f971c3837e7e4d1f1aaa707f1bbe7a5e44aa5319ebb733e3d0"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Adult-Rectum_mixed_gs.csv",
+        "sha256": "8f832f29eac54466dfea83a1925e3d446b074406093690f69f181a253b81fe2f"
+      }
+    },
+    {
+      "front_id": 81,
+      "front_name": "sim_GRNdb_Fetal-Brain_mixed_exp",
+      "family": "GRNdb",
+      "source": "Fetal-Brain",
+      "condition": "mixed",
+      "topology_sha256": "459c85e95ce5e82481759712f49b7376b2c6f1751f7460b83b69a7e1c50cacb1",
+      "n_nodes": 320,
+      "n_edges": 392,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Fetal-Brain_mixed_exp.csv",
+        "sha256": "b95b430923ab1c39c02900c9b65dae3949a4b7c8e6d11c4611c263edcba6e64e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Fetal-Brain_mixed_gs.csv",
+        "sha256": "a6e69c00afe68c3c799945d0e9107943daa0a9bf1b735894a425ef34dc435b1d"
+      }
+    },
+    {
+      "front_id": 82,
+      "front_name": "sim_GRNdb_Fetal-Calvaria_mixed_exp",
+      "family": "GRNdb",
+      "source": "Fetal-Calvaria",
+      "condition": "mixed",
+      "topology_sha256": "6e2131dc490e29b71d592d48ab0cc99885c252a185ce4ecd3822b03aa1b179ee",
+      "n_nodes": 1582,
+      "n_edges": 2002,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Fetal-Calvaria_mixed_exp.csv",
+        "sha256": "27f94326e5f0b0f2b50dd204608aff49c6346a45ffc2efe0b84069171024ec82"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Fetal-Calvaria_mixed_gs.csv",
+        "sha256": "d11505301bc06540a7e5247cd992526d704f041261d3bdc88b47a29081f840ea"
+      }
+    },
+    {
+      "front_id": 83,
+      "front_name": "sim_GRNdb_Fetal-Thymus_mixed_exp",
+      "family": "GRNdb",
+      "source": "Fetal-Thymus",
+      "condition": "mixed",
+      "topology_sha256": "568553db3d605b1fe5638237076133bbb11ee31d2601ed5ec49ce9d3ea1ec2d7",
+      "n_nodes": 709,
+      "n_edges": 867,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_GRNdb_Fetal-Thymus_mixed_exp.csv",
+        "sha256": "c1ec71e3f74805f8203883ca21a12921c40e6a85c5df0a01da499a3d9c702a6e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_GRNdb_Fetal-Thymus_mixed_gs.csv",
+        "sha256": "c692b4dc33fd3fa06fde093e08a3e6e44022ed6ed8db0c6161cf65db7cffed3e"
+      }
+    },
+    {
+      "front_id": 84,
+      "front_name": "sim_RegNetwork_human_mixed_exp",
+      "family": "RegNetwork",
+      "source": "human",
+      "condition": "mixed",
+      "topology_sha256": "309672a833cd35aab914ece3b82a01f64499b791a6de219298c4416b9b98fbe2",
+      "n_nodes": 983,
+      "n_edges": 3946,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_RegNetwork_human_mixed_exp.csv",
+        "sha256": "d0fab3a5192c765b80dcb9767abb65441faefd0e59be0257ab6fc42d7cab7666"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_RegNetwork_human_mixed_gs.csv",
+        "sha256": "979e1a21ea007678cf240de0e479c177744e65bce1bd812fd4fe736d290d915b"
+      }
+    },
+    {
+      "front_id": 85,
+      "front_name": "sim_RegNetwork_mouse_mixed_exp",
+      "family": "RegNetwork",
+      "source": "mouse",
+      "condition": "mixed",
+      "topology_sha256": "be14d1f02859e59863e38b59cce1025e0b6f764954e8b0853abb37d1ff65808c",
+      "n_nodes": 1033,
+      "n_edges": 4026,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_RegNetwork_mouse_mixed_exp.csv",
+        "sha256": "eac4d256deb3d53783eaa9af2dfd6c360f526106061035e9816dd751e45d43b2"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_RegNetwork_mouse_mixed_gs.csv",
+        "sha256": "ff7e9398b1ebe901b70083fdb5ad3ae047ab064663b742ddbff4599804834807"
+      }
+    },
+    {
+      "front_id": 87,
+      "front_name": "sim_scale-free_size-100_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockdown",
+      "topology_sha256": "4eafdd0e21fee9ab6ee856ab26bbf630b6f10e358b78c88cc759af97b6f50307",
+      "n_nodes": 100,
+      "n_edges": 399,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-100_knockdown_exp.csv",
+        "sha256": "943daa1b1df31ff544e9e8ab17ac3a2d5a8804d69b903935a3260bf84b166a6e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-100_knockdown_gs.csv",
+        "sha256": "a594175c6bd56ef191aef4f35e90b91aedcfe18d38a9b8a6a9de6cd4d81bfb6e"
+      }
+    },
+    {
+      "front_id": 88,
+      "front_name": "sim_scale-free_size-100_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockout",
+      "topology_sha256": "4eafdd0e21fee9ab6ee856ab26bbf630b6f10e358b78c88cc759af97b6f50307",
+      "n_nodes": 100,
+      "n_edges": 399,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-100_knockout_exp.csv",
+        "sha256": "7912288214e151104dbeaaefcf1d6710dfd9a038611daa4f31cdda9b359d246e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-100_knockout_gs.csv",
+        "sha256": "a594175c6bd56ef191aef4f35e90b91aedcfe18d38a9b8a6a9de6cd4d81bfb6e"
+      }
+    },
+    {
+      "front_id": 89,
+      "front_name": "sim_scale-free_size-100_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "overexpression",
+      "topology_sha256": "4eafdd0e21fee9ab6ee856ab26bbf630b6f10e358b78c88cc759af97b6f50307",
+      "n_nodes": 100,
+      "n_edges": 399,
+      "size": 100,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-100_overexpression_exp.csv",
+        "sha256": "7573a7f1b761c103c2c0ec2a4744f978ca424e632f671173c47157190889f774"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-100_overexpression_gs.csv",
+        "sha256": "a594175c6bd56ef191aef4f35e90b91aedcfe18d38a9b8a6a9de6cd4d81bfb6e"
+      }
+    },
+    {
+      "front_id": 90,
+      "front_name": "sim_scale-free_size-200_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockdown",
+      "topology_sha256": "57981c3f35fda80a0eec25476635b6cecfd2b5bb838db9ff42d31dc432a9eb6f",
+      "n_nodes": 200,
+      "n_edges": 642,
+      "size": 200,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-200_knockdown_exp.csv",
+        "sha256": "6d61e21de757826d683553070b0b7af6122715f9b728ebc0f95cc582f724ecff"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-200_knockdown_gs.csv",
+        "sha256": "b24d3e3e90ffa857cef9cace3a4e75b5b5f1a50e5325ebe377f074c01b0f32dd"
+      }
+    },
+    {
+      "front_id": 91,
+      "front_name": "sim_scale-free_size-200_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockout",
+      "topology_sha256": "57981c3f35fda80a0eec25476635b6cecfd2b5bb838db9ff42d31dc432a9eb6f",
+      "n_nodes": 200,
+      "n_edges": 642,
+      "size": 200,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-200_knockout_exp.csv",
+        "sha256": "164034dbeb7c5f55c00d24d64a8248d4aae860eb7a5ecb9cbdc4600d30c83b1e"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-200_knockout_gs.csv",
+        "sha256": "b24d3e3e90ffa857cef9cace3a4e75b5b5f1a50e5325ebe377f074c01b0f32dd"
+      }
+    },
+    {
+      "front_id": 92,
+      "front_name": "sim_scale-free_size-200_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "overexpression",
+      "topology_sha256": "57981c3f35fda80a0eec25476635b6cecfd2b5bb838db9ff42d31dc432a9eb6f",
+      "n_nodes": 200,
+      "n_edges": 642,
+      "size": 200,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-200_overexpression_exp.csv",
+        "sha256": "73e9aa95edfa9f700fd5bbe8ed6bb2b57e3f5a26b74f5beb9081b6aaa02895ee"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-200_overexpression_gs.csv",
+        "sha256": "b24d3e3e90ffa857cef9cace3a4e75b5b5f1a50e5325ebe377f074c01b0f32dd"
+      }
+    },
+    {
+      "front_id": 93,
+      "front_name": "sim_scale-free_size-20_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockdown",
+      "topology_sha256": "00567c5cb5734a30566ed32e9dbed307ebfee8a507d7811bfe7cc0edc4178f61",
+      "n_nodes": 20,
+      "n_edges": 153,
+      "size": 20,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-20_knockdown_exp.csv",
+        "sha256": "f2f9e34883d7dfa56450f7e6a4a1970b33ad046047705fae189f85231fba9e34"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-20_knockdown_gs.csv",
+        "sha256": "41a706692f6396d7065773feb0aa1619b1496c3a8ec94f2216afd70549c32baf"
+      }
+    },
+    {
+      "front_id": 94,
+      "front_name": "sim_scale-free_size-20_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockout",
+      "topology_sha256": "00567c5cb5734a30566ed32e9dbed307ebfee8a507d7811bfe7cc0edc4178f61",
+      "n_nodes": 20,
+      "n_edges": 153,
+      "size": 20,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-20_knockout_exp.csv",
+        "sha256": "e8dc0e78c1dffa2a00800a1d79cb63a04cd896a418c947e1aabeed7e29fd1fb3"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-20_knockout_gs.csv",
+        "sha256": "41a706692f6396d7065773feb0aa1619b1496c3a8ec94f2216afd70549c32baf"
+      }
+    },
+    {
+      "front_id": 95,
+      "front_name": "sim_scale-free_size-20_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "overexpression",
+      "topology_sha256": "00567c5cb5734a30566ed32e9dbed307ebfee8a507d7811bfe7cc0edc4178f61",
+      "n_nodes": 20,
+      "n_edges": 153,
+      "size": 20,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-20_overexpression_exp.csv",
+        "sha256": "175458e9ad2175c8079cdfce5c50878aae6c9d93006f6e07b6b9373694b43c02"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-20_overexpression_gs.csv",
+        "sha256": "41a706692f6396d7065773feb0aa1619b1496c3a8ec94f2216afd70549c32baf"
+      }
+    },
+    {
+      "front_id": 96,
+      "front_name": "sim_scale-free_size-50_knockdown_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockdown",
+      "topology_sha256": "c0f6c42b145c771c718c61248a2ff3b121134ae9caf3250921c43878763759db",
+      "n_nodes": 50,
+      "n_edges": 284,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-50_knockdown_exp.csv",
+        "sha256": "8754e7bea0223671dbec76b840783803fc782cb005178fd901871c9cf7770c74"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-50_knockdown_gs.csv",
+        "sha256": "38b26830ca0afec1b34f344b8873a1e873fdab5d9d7a62d33aea40a8fee87041"
+      }
+    },
+    {
+      "front_id": 97,
+      "front_name": "sim_scale-free_size-50_knockout_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "knockout",
+      "topology_sha256": "c0f6c42b145c771c718c61248a2ff3b121134ae9caf3250921c43878763759db",
+      "n_nodes": 50,
+      "n_edges": 284,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-50_knockout_exp.csv",
+        "sha256": "ed0492a618ae732df3356c22c53891f79d35c55c4042565b756b4e0a019a907d"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-50_knockout_gs.csv",
+        "sha256": "38b26830ca0afec1b34f344b8873a1e873fdab5d9d7a62d33aea40a8fee87041"
+      }
+    },
+    {
+      "front_id": 98,
+      "front_name": "sim_scale-free_size-50_overexpression_exp",
+      "family": "scale-free",
+      "source": "scale-free",
+      "condition": "overexpression",
+      "topology_sha256": "c0f6c42b145c771c718c61248a2ff3b121134ae9caf3250921c43878763759db",
+      "n_nodes": 50,
+      "n_edges": 284,
+      "size": 50,
+      "expression": {
+        "source_path": "input_data/simulated_scratch/EXP/sim_scale-free_size-50_overexpression_exp.csv",
+        "sha256": "170dba05ed8a3dcba9b70ae078ce7e05989e07dbcb9ff00a9fdad513cfa5a267"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_scratch/GS/sim_scale-free_size-50_overexpression_gs.csv",
+        "sha256": "38b26830ca0afec1b34f344b8873a1e873fdab5d9d7a62d33aea40a8fee87041"
+      }
+    },
+    {
+      "front_id": 99,
+      "front_name": "sim_TFLink_Caenorhabditis_elegans_mixed_exp",
+      "family": "TFLink",
+      "source": "Caenorhabditis_elegans",
+      "condition": "mixed",
+      "topology_sha256": "c222699bee8957fdd7fd4a5e1c3e984e0be0853c77205a5307ffe773948d9e1b",
+      "n_nodes": 75,
+      "n_edges": 79,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_TFLink_Caenorhabditis_elegans_mixed_exp.csv",
+        "sha256": "1e926e816686cb4a0b20a3dc75b31be532d0d54e3b4a45439fbd5c084db54f44"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_TFLink_Caenorhabditis_elegans_mixed_gs.csv",
+        "sha256": "5c58712361e548a748500bbc09c72ffb46341ff046f82f70c384acffa335506e"
+      }
+    },
+    {
+      "front_id": 100,
+      "front_name": "sim_TFLink_Drosophila_melanogaster_mixed_exp",
+      "family": "TFLink",
+      "source": "Drosophila_melanogaster",
+      "condition": "mixed",
+      "topology_sha256": "4ab3db1b38a0e3f4e115739fcd1c2981db6cf96cf02ffcea2b5bdf3aa697bc52",
+      "n_nodes": 163,
+      "n_edges": 253,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_TFLink_Drosophila_melanogaster_mixed_exp.csv",
+        "sha256": "63d3262d7b4c8a877df7ac83c7799592603e3cda94d0e17e299a9727e636e99d"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_TFLink_Drosophila_melanogaster_mixed_gs.csv",
+        "sha256": "64b65025bc0e2bbb1791dbac3f48c5f2c86f9db8d80123f2bfadd920ccf806db"
+      }
+    },
+    {
+      "front_id": 101,
+      "front_name": "sim_TFLink_Rattus_norvegicus_mixed_exp",
+      "family": "TFLink",
+      "source": "Rattus_norvegicus",
+      "condition": "mixed",
+      "topology_sha256": "cd87f2aa8341f84266d1c2903b56d297f4c4edf4f5b1c7d96b1baea06af3b8c6",
+      "n_nodes": 12,
+      "n_edges": 8,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_TFLink_Rattus_norvegicus_mixed_exp.csv",
+        "sha256": "b7b321ee72b086afc7291161eb93518e7d8f2654f8f4f1264949a0416af776df"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_TFLink_Rattus_norvegicus_mixed_gs.csv",
+        "sha256": "3f614b26e3b65b8e1290d4820f6557fbf4d87bdb51b484e11e1edd29aa7666e2"
+      }
+    },
+    {
+      "front_id": 102,
+      "front_name": "sim_TFLink_Saccharomyces_cerevisiae_mixed_exp",
+      "family": "TFLink",
+      "source": "Saccharomyces_cerevisiae",
+      "condition": "mixed",
+      "topology_sha256": "cb47822779287fa15e1d631bc9e44dfe7ebb34848c5fc4b5782535742e3bc6fb",
+      "n_nodes": 371,
+      "n_edges": 445,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/simulated_based_on_real/EXP/sim_TFLink_Saccharomyces_cerevisiae_mixed_exp.csv",
+        "sha256": "0df134834236723b9812d99088b20a9d2dec7c0528e1027a3a9e69e3005c52ef"
+      },
+      "gold_standard": {
+        "source_path": "input_data/simulated_based_on_real/GS/sim_TFLink_Saccharomyces_cerevisiae_mixed_gs.csv",
+        "sha256": "50418abf4fb8b4ecad168bfc44b4bb7354426ff0d5f072081548a9ac31a635f4"
+      }
+    },
+    {
+      "front_id": 103,
+      "front_name": "switch-off_exp",
+      "family": "switch",
+      "source": "switch",
+      "condition": "off",
+      "topology_sha256": "b9bd47f2706d016e3f64ddfe49cc9837d1b1aba6ed20201d6d5d1a053ef52019",
+      "n_nodes": 5,
+      "n_edges": 6,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/IRMA/EXP/switch-off_exp.csv",
+        "sha256": "800b28ec7cca8d9ff60d34f103a263e4942bf71037b4a441383e64e8359fab07"
+      },
+      "gold_standard": {
+        "source_path": "input_data/IRMA/GS/irma_gs.csv",
+        "sha256": "faea6c7345f2187ef8843039987e9febf272dfa52daf4b53ca7bdf659b23edcd"
+      }
+    },
+    {
+      "front_id": 104,
+      "front_name": "switch-on_exp",
+      "family": "switch",
+      "source": "switch",
+      "condition": "on",
+      "topology_sha256": "b9bd47f2706d016e3f64ddfe49cc9837d1b1aba6ed20201d6d5d1a053ef52019",
+      "n_nodes": 5,
+      "n_edges": 6,
+      "size": null,
+      "expression": {
+        "source_path": "input_data/IRMA/EXP/switch-on_exp.csv",
+        "sha256": "5ebd0f70f7c1ef2d1723f06d66d35f85112c1186126b6c1b2407db71a237bc5d"
+      },
+      "gold_standard": {
+        "source_path": "input_data/IRMA/GS/irma_gs.csv",
+        "sha256": "faea6c7345f2187ef8843039987e9febf272dfa52daf4b53ca7bdf659b23edcd"
+      }
+    },
+    {
+      "front_id": 105,
+      "front_name": "syntren1000_exp",
+      "family": "syntren",
+      "source": "syntren",
+      "condition": "unknown",
+      "topology_sha256": "b08386beac030eaa3b66c4ff6712681d4522ff8949aa7d4e62ae8d3408615f91",
+      "n_nodes": 1000,
+      "n_edges": 4695,
+      "size": 1000,
+      "expression": {
+        "source_path": "input_data/SynTReN/EXP/syntren1000_exp.csv",
+        "sha256": "baa87fde23a45fba8747791f86820d8160aea019633652a383a147ebad9aebc9"
+      },
+      "gold_standard": {
+        "source_path": "input_data/SynTReN/GS/syntren1000_gs.csv",
+        "sha256": "e2dbb21903f3453474cca5cdb1a823c7943e7577169b6495110f78c40555558d"
+      }
+    },
+    {
+      "front_id": 106,
+      "front_name": "syntren300_exp",
+      "family": "syntren",
+      "source": "syntren",
+      "condition": "unknown",
+      "topology_sha256": "849f41b9ed6a132848d9633ab1e6872da22bfead2bb0977887deb73308d4b7b5",
+      "n_nodes": 300,
+      "n_edges": 468,
+      "size": 300,
+      "expression": {
+        "source_path": "input_data/SynTReN/EXP/syntren300_exp.csv",
+        "sha256": "3e18a3d189c32b262f31ba34279f651ac311f2dee953c797d44658288cd82ed3"
+      },
+      "gold_standard": {
+        "source_path": "input_data/SynTReN/GS/syntren300_gs.csv",
+        "sha256": "67504eb034f8abb9c851e6ce2cddd990979899d4ec246bda8453eb99f0ab3cfb"
+      }
+    }
+  ]
+}

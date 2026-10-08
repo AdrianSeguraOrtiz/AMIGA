@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this experimental workflow, cite this repository release."
+title: "AMIGA experimental workflow: topology-grouped post-Pareto selection"
+version: "0.2.0"
+license: MIT
+repository-code: "https://github.com/AdrianSeguraOrtiz/AMIGA"
+url: "https://github.com/AdrianSeguraOrtiz/AMIGA/tree/amiga-exp-v0.2.0"
+type: software
+authors:
+  - given-names: "Adrián"
+    family-names: "Segura-Ortiz"
+    email: "adrianseor.99@uma.es"

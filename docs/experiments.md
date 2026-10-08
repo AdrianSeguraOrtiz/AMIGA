@@ -1,477 +1,125 @@
-# Experimental Workflow
+# Experimental workflow
 
-This document is the operational entry point for the AMIGA paper experiments.
-The methodological design is described in `docs/experiments/design.md`.
+This is the entry point for the current BIO-INSIGHT and MO-GENECI benchmark
+workflow. Its [scientific design](experiments/design.md) is separate from the
+public `amiga` API. Run repository experiments through
+`scripts/experiments/amiga-exp`; install dependencies with
+`poetry install --with experiments`.
 
-The experiment orchestration is intentionally separate from the public AMIGA
-package API. Public package commands remain under `amiga`; paper-specific
-orchestration lives under `scripts/experiments/amiga-exp`.
+The current source release is **amiga-exp 0.2.0**, tagged `amiga-exp-v0.2.0`.
+Start with the [installation and input-data guide](experiments/reproducibility.md)
+and [release notes](experiments/releases.md). The PyPI package retains its own
+independent version. Check this workflow with `scripts/experiments/amiga-exp --version`.
 
-## 1. Case Layout
+## Current phases
 
-Every case is addressed by passing the path to its case directory:
+Both cases use 104 fronts, 87 topology groups, five outer folds and three inner
+folds. All conditions of a topology remain together. Configuration selection
+uses seed 1101; final fits use seeds 1201–1205.
 
-```bash
-scripts/experiments/amiga-exp inspect <case_dir>
-scripts/experiments/amiga-exp validate <case_dir>
-```
+| Phase | Purpose | Implementation and specification |
+| --- | --- | --- |
+| 0 | Validate inputs, freeze partitions and calibrate CPU resources | [Grouped data policies](experiments/grouped-validation.md) and [sequential execution](experiments/sequential-selection.md) |
+| 1 | Choose relevance labels separately for each ranker | `sequential`: LightGBM, XGBoost and CatBoost |
+| 2 | Tune parameters using the complete family-specific grids | `sequential`: inner validation only |
+| 3 | Select columns and model family | `sequential`: recursive training TreeSHAP and inner validation |
+| 4 | Evaluate the selected procedures on held-out topologies | [`outer`](experiments/outer-evaluation.md): five final seeds and objective-only comparators |
+| Classification thresholds | Extend the supervised comparison | [`top5-classification`](experiments/top5-classification.md) and [`top10-classification`](experiments/top10-classification.md) |
 
-Expected minimal layout:
+AMIGA is the procedure that selects a family, relevance labels, parameters and
+feature fraction inside each outer training complement. It is not a universally
+fixed CatBoost configuration. The main supervised presentation contains AMIGA,
+direct AUPR regression and top-5%, top-10% and top-20% classification.
 
-```text
-<case_dir>/
-  data/
-    data_*.csv
-    audit/
-```
+The detailed specifications describe the immutable runs that produced their
+artifacts. Some complete runs contain additional methods. Reporting a selected
+method set does not modify those contracts, fit counts or original results.
+The 5% and 10% thresholds are exploratory sensitivity analyses.
 
-For the paper cases, the command also resolves the versioned contracts under:
+## Completed runs and monitoring
 
-```text
-docs/experiments/cases/<CASE>.json
-docs/experiments/splits/<CASE>_split_manifest.json
-docs/experiments/contracts/<CASE>_feature_columns.json
-```
-
-These files are not descriptive notes. They are executable experiment contracts
-used by `amiga-exp` when no explicit `--config` override is provided:
-
-- `cases/<CASE>.json` defines the case data file, target/control columns,
-  objective directions, feature blocks and ablation feature sets.
-- `splits/<CASE>_split_manifest.json` freezes the development/test assignment
-  by front.
-- `contracts/<CASE>_*` records validated data, feature-column and split
-  contracts generated from the case data.
-
-The pipeline must use these manifests instead of inferring split assignments,
-objective directions or feature columns silently.
-
-## 2. Current Commands
-
-Useful commands:
+Inspect completed pipelines without launching training:
 
 ```bash
-scripts/experiments/amiga-exp inspect <case_dir>
-scripts/experiments/amiga-exp validate <case_dir>
-scripts/experiments/amiga-exp init-results <case_dir>
-scripts/experiments/amiga-exp run-phase <case_dir> 01_model_screening
-scripts/experiments/amiga-exp run-phase <case_dir> 02_hyperparameter_tuning
-scripts/experiments/amiga-exp run-phase <case_dir> final_test
-scripts/experiments/amiga-exp run-phase <case_dir> 03_ablation
-scripts/experiments/amiga-exp run-phase <case_dir> 04_decision_baselines
-scripts/experiments/amiga-exp summarize-paper <case_dir>
-scripts/experiments/amiga-exp run-all <case_dir>
-scripts/experiments/amiga-exp plot-all --case-dir <case_dir>
-scripts/experiments/amiga-exp plot-phase --case-dir <case_dir> --phase 01_model_screening
-scripts/experiments/amiga-exp real-world-validate experiments/BIO-INSIGHT/real-world/tcga_brca
+scripts/experiments/amiga-exp sequential status \
+  --run experiments/sequential-selection/runs/full-001
+
+scripts/experiments/amiga-exp outer status \
+  --run experiments/outer-evaluation/launches/evaluation-001
+
+scripts/experiments/amiga-exp top5-classification status \
+  --run experiments/top5-classification/launches/full-001
+
+scripts/experiments/amiga-exp top10-classification status \
+  --run experiments/top10-classification/launches/full-001
 ```
 
-`run-all` is the standard end-to-end entry point. It initializes the result
-layout, runs all experimental phases in order, and finishes with
-`summarize-paper`.
-
-```bash
-scripts/experiments/amiga-exp run-all <bio_case_dir> --seed 42
-scripts/experiments/amiga-exp run-all <mogeneci_case_dir> --seed 42
-```
-
-## 3. Implemented Phase: `01_model_screening`
-
-The first experimental phase is now implemented by `amiga-exp`:
-
-```bash
-scripts/experiments/amiga-exp run-phase <bio_case_dir> 01_model_screening
-scripts/experiments/amiga-exp run-phase <mogeneci_case_dir> 01_model_screening
-```
-
-For a quick dry run:
-
-```bash
-scripts/experiments/amiga-exp run-phase <case_dir> 01_model_screening --dry-run
-```
-
-This phase:
-
-- uses only development fronts from the frozen split manifest;
-- uses the `full` feature set from the feature contract;
-- trains the model/label-mode screening grid with `train_ltr_cv`;
-- uses fixed reference hyperparameters centered on the phase-02 tuning grid, so
-  phase 1 screens label formulations rather than performing hidden tuning;
-- includes `reversed` and `shuffled` as ordinary label modes in the phase-01
-  ranking, while interpreting them as sanity checks in the paper discussion;
-- summarizes all CV reports through the common `summarize-cv` wrapper;
-- selects the best label formulation independently for each model family;
-- writes a phase-01 `primary_rank_table.csv` where `avg_rank` and `p_value`
-  are computed within each `model_type`;
-- writes one shortlisted configuration per model family.
-
-Reference hyperparameters are fixed by the methodological design document.
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/01_model_screening/
-  runs/
-    <run_id>/
-      cv_report.json
-      feature_columns.json
-      valid_fold*_ranked.csv
-      run_manifest.json
-  summary/
-    metrics_long.csv
-    metrics_summary.csv
-    metric_ranks.csv
-    metric_rank_stats.csv
-    primary_rank_table.csv
-  screening_manifest.json
-  shortlisted_configs.json
-  plots/
-    plot_manifest.json
-    model_screening_heatmap.png
-    model_screening_heatmap.pdf
-```
-
-The publication figure for this phase is generated by
-`amiga-exp plot-phase --phase 01_model_screening` from
-`summary/primary_rank_table.csv`.
-
-## 4. Selection Rule
-
-The shared selector lives in `scripts/experiments/amiga_exp/config_selection.py`
-and is used by `01_model_screening` and `02_hyperparameter_tuning`.
-
-In `01_model_screening`, selection is grouped by `model_type`: each model
-family advances with its best label mode, so hyperparameter tuning can still
-decide between model families after tuning.
-
-Official order:
-
-```text
-1. lower paired average rank on Regret@5
-2. lower mean Regret@5
-3. higher Hit@5
-4. lower Regret@1
-5. higher BestAUPR@5
-6. simpler/stable model family when selecting across model families
-```
-
-The selector records:
-
-- the explicit selection rule;
-- selected configurations;
-- excluded configurations;
-- a human-readable `selection_reason` for each selected configuration.
-
-## 5. Implemented Phase: `02_hyperparameter_tuning`
-
-The second experimental phase tunes only the configurations shortlisted by
-`01_model_screening`:
-
-```bash
-scripts/experiments/amiga-exp run-phase <bio_case_dir> 02_hyperparameter_tuning
-scripts/experiments/amiga-exp run-phase <mogeneci_case_dir> 02_hyperparameter_tuning
-```
-
-This phase:
-
-- reads `01_model_screening/shortlisted_configs.json`;
-- expands model-specific hyperparameter grids;
-- uses only development fronts;
-- writes one compatible run directory per parameter setting;
-- summarizes all CV reports through the common `summarize-cv` wrapper;
-- freezes the selected AMIGA configuration in `selected_config.json`.
-
-The default tuning grid is pre-specified in the methodological design document.
-Validation folds use early stopping when supported by the underlying ranker.
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/02_hyperparameter_tuning/
-  runs/
-    <run_id>/
-      cv_report.json
-      feature_columns.json
-      valid_fold*_ranked.csv
-      run_manifest.json
-  summary/
-    metrics_long.csv
-    metrics_summary.csv
-    metric_ranks.csv
-    metric_rank_stats.csv
-    primary_rank_table.csv
-  tuning_manifest.json
-  selected_config.json
-```
-
-Held-out test evaluation is intentionally not used for selection. It starts
-from the frozen `selected_config.json` in the `final_test` step.
-
-## 6. Held-Out Step: `final_test`
-
-The final held-out evaluation trains the frozen configuration on all
-development fronts and evaluates it once on the test fronts:
-
-```bash
-scripts/experiments/amiga-exp run-phase <bio_case_dir> final_test
-scripts/experiments/amiga-exp run-phase <mogeneci_case_dir> final_test
-```
-
-This step:
-
-- reads `02_hyperparameter_tuning/selected_config.json`;
-- trains a single model on all development fronts;
-- predicts/ranks only held-out test fronts;
-- evaluates with the common ranking evaluator;
-- writes a `cv_report.json` compatible with later summaries and comparisons.
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/02_hyperparameter_tuning/final_test/
-  model.pkl
-  feature_columns.json
-  final_test_ranked.csv
-  final_test_report.json
-  cv_report.json
-```
-
-This step must not change `selected_config.json` and evaluates the frozen
-configuration without re-selecting.
-
-## 7. Implemented Phase: `03_ablation`
-
-The ablation phase measures the contribution of feature blocks using the frozen
-AMIGA protocol from `selected_config.json`:
-
-```bash
-scripts/experiments/amiga-exp run-phase <bio_case_dir> 03_ablation
-scripts/experiments/amiga-exp run-phase <mogeneci_case_dir> 03_ablation
-```
-
-This phase:
-
-- reads `02_hyperparameter_tuning/selected_config.json`;
-- uses the same model family, label mode and hyperparameters for every variant;
-- runs development CV for each feature set in the feature contract;
-- evaluates each feature set once on held-out test fronts;
-- writes `ablation_manifest.json` with feature-column audits, including an
-  explicit `expression_only_audit`.
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/03_ablation/
-  runs/
-    <feature_set>/
-      cv_report.json
-      feature_columns.json
-      valid_fold*_ranked.csv
-      run_manifest.json
-  final_test/
-    <feature_set>/
-      final_test_ranked.csv
-      final_test_report.json
-      cv_report.json
-  summary/
-    metrics_long.csv
-    metrics_summary.csv
-    metric_ranks.csv
-    metric_rank_stats.csv
-    primary_rank_table.csv
-  ablation_manifest.json
-```
-
-This phase does not choose a new model per feature set. Any such analysis would
-be a separate experimental question.
-
-## 8. Implemented Phase: `04_decision_baselines`
-
-The decision-baseline phase compares the frozen AMIGA final-test ranking
-against non-learned post-Pareto objective-based decision rules on the same
-held-out test fronts:
-
-```bash
-scripts/experiments/amiga-exp run-phase <bio_case_dir> 04_decision_baselines
-scripts/experiments/amiga-exp run-phase <mogeneci_case_dir> 04_decision_baselines
-```
-
-This phase:
-
-- reads `02_hyperparameter_tuning/final_test/` as the AMIGA reference;
-- runs one single-objective baseline per declared objective;
-- runs mean-rank objective aggregation;
-- runs normalized equal-weight objective aggregation / WSM;
-- runs ideal-L2, TOPSIS and VIKOR compromise rules;
-- runs augmented Tchebycheff and simple Tchebycheff, where the augmented
-  variant adds a small weighted-sum term to break ties among solutions with the
-  same worst normalized objective;
-- respects the declared objective direction, currently `minimize` for the
-  paper cases;
-- summarizes all baseline reports through the common `summarize-cv` wrapper.
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/04_decision_baselines/
-  runs/
-    AMIGA_final/
-      ranked.csv
-      cv_report.json
-      run_manifest.json
-    <baseline_id>/
-      ranked.csv
-      cv_report.json
-      run_manifest.json
-  summary/
-    metrics_long.csv
-    metrics_summary.csv
-    metric_ranks.csv
-    metric_rank_stats.csv
-  baseline_manifest.json
-  plots/
-    plot_manifest.json
-    decision_baseline_rank.png
-    decision_baseline_rank.pdf
-    decision_baseline_rank.csv
-```
-
-The publication figure for this phase is generated by
-`amiga-exp plot-phase --phase 04_decision_baselines` from
-`summary/primary_rank_table.csv`.
-
-## 9. Paper Summary
-
-After `final_test`, `03_ablation` and `04_decision_baselines` have completed,
-the paper-level tables are generated with:
-
-```bash
-scripts/experiments/amiga-exp summarize-paper <bio_case_dir>
-scripts/experiments/amiga-exp summarize-paper <mogeneci_case_dir>
-```
-
-This command:
-
-- reads the frozen AMIGA held-out report;
-- reads ablation held-out reports from `03_ablation/final_test/`;
-- reads decision-baseline held-out reports from `04_decision_baselines/runs/`;
-- compares methods only over common `front_id` values;
-- uses `Regret@5` as the default primary metric;
-- writes paired Friedman/Holm statistical tests over fronts.
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/summaries/
-  final_test_comparison.csv
-  ablation_comparison.csv
-  baseline_comparison.csv
-  statistical_tests.csv
-  statistical_tests.json
-```
-
-## 10. Paper Plots
-
-Publication figures are generated by `amiga-exp`, not by the public
-`amiga plot-cv` command. The plots use each phase `primary_rank_table.csv` as
-the canonical input and write a `plots/plot_manifest.json` next to the figure
-files.
-
-Generate every phase plot for a case study with:
-
-```bash
-scripts/experiments/amiga-exp plot-all --case-dir <bio_case_dir> --force
-scripts/experiments/amiga-exp plot-all --case-dir <mogeneci_case_dir> --force
-```
-
-Optional complementary Top-K context plots can be added with
-`--include-secondary`. These supplementary plots are diagnostics only and must
-not change selected configurations:
-
-```bash
-scripts/experiments/amiga-exp plot-all \
-  --case-dir <case_dir> \
-  --include-secondary \
-  --force
-```
-
-Or regenerate one phase:
-
-```bash
-scripts/experiments/amiga-exp plot-phase \
-  --case-dir <case_dir> \
-  --phase 01_model_screening \
-  --force
-```
-
-Output layout:
-
-```text
-<case_dir>/results/amiga-exp/<phase>/plots/
-  plot_manifest.json
-  <phase_specific_plot>.png
-  <phase_specific_plot>.pdf
-  <phase_specific_plot>.csv  # when the plot writes transformed data
-  supplementary/              # only with --include-secondary
-```
-
-Paper-facing figure policy and caption drafts live in the methodological
-design document.
-
-The phase-03 ablation figure combines development-CV ranks from
-`03_ablation/summary/primary_rank_table.csv` with held-out test ranks from
-`summaries/statistical_tests.csv`; therefore run `summarize-paper` before
-regenerating phase-03 or all paper plots.
-
-Primary figure files:
-
-```text
-01_model_screening/plots/model_screening_heatmap.{png,pdf}
-02_hyperparameter_tuning/plots/hyperparameter_regret_scatter.{png,pdf}
-03_ablation/plots/ablation_feature_matrix.{png,pdf}
-04_decision_baselines/plots/decision_baseline_rank.{png,pdf}
-```
-
-Supplementary Top-K figures generated with `--include-secondary` are optional
-context. They may be mentioned textually or placed in supplementary material,
-but they do not change the primary `Regret@5` conclusions.
-
-## 11. Reported TCGA-BRCA Real-World Validation
-
-The TCGA-BRCA application in the manuscript has a deliberately narrow
-reproducibility command:
-
-```bash
-scripts/experiments/amiga-exp real-world-validate \
-  experiments/BIO-INSIGHT/real-world/tcga_brca \
-  --force
-```
-
-This command assumes the real-world front has already been generated with
-BIO-INSIGHT and ranked with AMIGA. It does not download TCGA, run BIO-INSIGHT,
-train AMIGA or compute exploratory metrics. It only regenerates the reported
-Top1 source-support table for the five BIO-INSIGHT finalists:
-
-- `AMIGA`;
-- `reducenonessentialsinteractions`;
-- objective mean rank;
-- `TOPSIS`;
-- `metricdistribution`.
-
-The protocol is fixed to the evidence sources and cuts used in the paper:
-
-- CollecTRI, DoRothEA, TRRUST v2 and JASPAR PWM at top-250;
-- Cistrome Cancer BRCA-COR at top-5000;
-- `TF-target` and `TF-source` counts only.
-
-Default output layout:
-
-```text
-<real_world_case>/validation/amiga_exp_reported/
-  selected_candidates.csv
-  reported_external_tf_target_evidence.csv
-  real_world_source_support_top1.csv
-  real_world_source_support_top1.md
-  real_world_validation_manifest.json
-  selected_networks/
-```
+For a new execution, use the freeze and pipeline commands in the corresponding
+specification, with new output directories. The complete selection uses the
+original parameter grids. Technical failures require inspection and explicit
+resumption; source or policy changes require a new contract.
+
+The measured parallel layout is 16 workers with four disjoint CPU threads each
+on the 64-CPU machine, with single-thread BLAS pools. Runtime limits, package
+versions, effective parameters and input/source hashes belong to each run.
+
+## Results and figures
+
+| Output | Location relative to the repository |
+| --- | --- |
+| Selected procedures, candidate scores and column stability | `experiments/sequential-selection/summaries/full-001/` |
+| Phase-1 label figures | `plots/<case>/outer-<fold>/label_screening.{csv,png,pdf}` within the selection summary |
+| Phase-2 tuning figures | `plots/<case>/outer-<fold>/hyperparameters.{csv,png,pdf}` within the selection summary |
+| Phase-3 column curves | `plots/<case>/outer-<fold>/feature_curves.{csv,png,pdf}` within the selection summary |
+| Column inclusion figures | `plots/<case>/column_stability.{png,pdf}` within the selection summary |
+| Original phase-4 evaluation | `experiments/outer-evaluation/summaries/evaluation-001/` |
+| Top-5% selection and evaluation | `experiments/top5-classification/full-001/{selection-summary,outer-summary}/` |
+| Combined results including all three classification thresholds | `experiments/top10-classification/full-001/outer-summary/` |
+
+The combined `topology_metrics.csv` contains seed-averaged and condition-averaged
+metrics for all 87 topologies in each case. Use it for final mean-rank tables.
+`front_metrics.csv` provides the 104-front sensitivity summary;
+`metrics_long.csv` preserves seed-specific rows. Source manifests identify which
+completed runs supplied the reused comparator predictions.
+
+Regret@5 remains primary. Regret@1, Hit@1 and Hit@5 provide secondary context.
+The selected five-method rank presentation can be regenerated from saved metrics
+without fitting models using [`report supervised`](experiments/reporting.md).
+The [design](experiments/design.md) describes its exploratory Friedman and Holm analysis.
+
+Selection figures describe inner-validation decisions; final comparison figures
+describe outer predictions. Compact figures must preserve this distinction and
+represent all five outer folds. The top-5% and top-10% searches have complete
+candidate tables; their tuning and column-selection figures still require
+presentation work. Existing complete comparison figures may contain additional
+methods and can be rendered again for the selected presentation.
+
+## Remaining evaluation blocks
+
+Phases 0–4 and the additional classifier evaluations are complete. The following
+blocks need separate treatment before being attributed to the current procedure:
+
+- Learning curves: existing runs use an earlier fixed configuration. Evaluating
+  label scarcity for the current procedure requires restricting training and
+  configuration selection to the available labels at each size.
+- Leave-family-out evaluation: earlier results describe their recorded fixed
+  configuration. Updating it is a separate experiment if that claim is retained.
+- TCGA-BRCA application: select and fit deployment procedures using the 104
+  benchmark fronts, score the existing real front, and recalculate source support
+  for the resulting recommendations.
+
+The existing `real-world-validate <case_dir>` command regenerates the earlier
+Top1 source-support table from an already ranked front. It does not select or
+train the current deployment model. The input front and evidence resources can
+be reused, with their versions and provenance checked.
+
+## Compatibility and generated files
+
+`grouped`, `run-phase`, `run-all`, `summarize-paper`, `plot-phase` and `plot-all`
+remain available for their recorded workflows. They do not replace the current
+sequential and outer pipelines.
+
+Generated contracts, raw results and figures belong under the Git-ignored
+`experiments/` directory. Frozen dependencies stay at their recorded paths.
+Protocols, source code and tests are versioned; private working archives stay
+under the Git-ignored `.local-work/` directory.

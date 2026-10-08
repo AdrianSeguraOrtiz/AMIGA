@@ -105,7 +105,6 @@ ipython_config.py
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-poetry.lock
 #poetry.toml
 
 # pdm
@@ -211,6 +210,9 @@ __marimo__/
 /data/
 /experiments/
 /scripts/pipeline/gnw2000_exp_*/
+
+# Local working notes and scratch artifacts
+/.local-work/
 
 # Local literature-review material for paper drafting
 /paper/

@@ -266,13 +266,20 @@ package in this release. It is tied to the repository layout, versioned case
 manifests and publication plots, so it should be treated as a reproducible
 research protocol rather than as a stable public API.
 
+The experimental workflow is versioned independently: **amiga-exp 0.2.0**,
+Git tag `amiga-exp-v0.2.0`. See the
+[installation and reproducibility guide](docs/experiments/reproducibility.md),
+[release notes](docs/experiments/releases.md), and
+[workflow citation](docs/experiments/CITATION.cff).
+
 To use it, clone the repository and install the experiment dependency group:
 
 ```bash
-git clone https://github.com/AdrianSeguraOrtiz/AMIGA.git
+git clone --branch amiga-exp-v0.2.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
 cd AMIGA
-poetry install --with experiments
+POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with experiments
 scripts/experiments/amiga-exp --help
+scripts/experiments/amiga-exp --version
 ```
 
 The expected case directory contains a `data/` folder with `data_*.csv` files
@@ -280,36 +287,20 @@ and an `audit/` subfolder. The wrapper sets the repository on `PYTHONPATH`, so
 it can call the local `amiga` implementation without requiring a separate
 PyPI-only install.
 
-Recommended command order:
+The current benchmark workflow uses whole topologies as partition groups:
 
-```bash
-scripts/experiments/amiga-exp inspect <case_dir>
-scripts/experiments/amiga-exp validate <case_dir>
-scripts/experiments/amiga-exp init-results <case_dir>
-scripts/experiments/amiga-exp run-all <case_dir>
-scripts/experiments/amiga-exp plot-all --case-dir <case_dir> --force
-```
+- `sequential`: select relevance labels, hyperparameters and columns, keeping
+  LightGBM, XGBoost and CatBoost eligible throughout selection;
+- `outer`: evaluate the selected procedures on held-out topologies with five
+  final training seeds and compare them with objective-only selectors;
+- `top5-classification` and `top10-classification`: fit and evaluate the additional
+  classification thresholds with the same full parameter and column searches.
+- `report supervised`: audit completed summary artifacts and regenerate the
+  five-formulation mean-rank, Friedman/Holm and raw-metric tables without fitting.
 
-Useful lower-level commands:
-
-```bash
-scripts/experiments/amiga-exp run-phase <case_dir> 01_model_screening
-scripts/experiments/amiga-exp run-phase <case_dir> 02_hyperparameter_tuning
-scripts/experiments/amiga-exp run-phase <case_dir> final_test
-scripts/experiments/amiga-exp run-phase <case_dir> 03_ablation
-scripts/experiments/amiga-exp run-phase <case_dir> 04_decision_baselines
-scripts/experiments/amiga-exp summarize-paper <case_dir>
-scripts/experiments/amiga-exp plot-phase --case-dir <case_dir> --phase 01_model_screening
-scripts/experiments/amiga-exp real-world-validate experiments/BIO-INSIGHT/real-world/tcga_brca
-```
-
-The standard phases are:
-
-- `01_model_screening`: compare ranker families and label modes;
-- `02_hyperparameter_tuning`: tune shortlisted configurations on development fronts;
-- `final_test`: evaluate the frozen selected configuration on held-out fronts;
-- `03_ablation`: quantify feature-block contributions;
-- `04_decision_baselines`: compare AMIGA with post-Pareto decision baselines.
+The main supervised comparison presents AMIGA, direct AUPR regression, and
+classification of the top 5%, 10% and 20% candidates. Original contracts and
+complete run artifacts retain their recorded method sets and provenance.
 
 The `real-world-validate` command is specific to the TCGA-BRCA case reported in
 the manuscript. It regenerates only the published real-world validation table:
@@ -325,8 +316,10 @@ manifests, plots and workflow a clean reusable API. If the experiment runner is
 generalized later, it should become either a documented extra or a separate
 research package.
 
-See [`docs/experiments.md`](./docs/experiments.md) for the article-specific
-workflow.
+See [`docs/experiments.md`](./docs/experiments.md) for the current workflow,
+commands, output locations and remaining evaluation blocks, and
+[`docs/experiments/design.md`](./docs/experiments/design.md) for its scientific
+design. Earlier commands remain available to reproduce their saved contracts.
 
 ## Citation
 
