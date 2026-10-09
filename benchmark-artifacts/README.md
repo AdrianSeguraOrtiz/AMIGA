@@ -10,7 +10,7 @@ SHA-256 and sizes for every container and restored file. Containers stay below
 | Deposit | Scope | Status |
 | --- | --- | --- |
 | `comparison-v0.3.0/` | Processed inputs, completed phase figures and saved supervised/objective predictions | Complete; artifact tag `amiga-exp-benchmarks-v0.3.0` |
-| `supplementary-v0.3.1/` | Fixed-AMIGA learning curves, original TCGA analysis and prediction-only timing | Pending completion of fixed-AMIGA execution |
+| `supplementary-v0.3.1/` | Fixed-AMIGA learning curves, original TCGA analysis and prediction-only timing | Complete; artifact tag `amiga-exp-data-v0.3.1` |
 
 The [supplementary guide](../docs/experiments/supplementary.md) describes the
 451-fit fixed-model scope. A source release does not establish completed evidence;
