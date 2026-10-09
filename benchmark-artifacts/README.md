@@ -37,6 +37,12 @@ the current supervised presentation uses five formulations. Full inner
 candidate predictions are regenerable intermediates, not included in this
 compact distribution.
 
+The supplementary deposit preserves execution definitions and completion
+receipts as provenance. It omits detailed inner predictions and is therefore
+not a resumable working directory. Native models and their JSON metadata can
+be loaded using `supplementary.deployment.load_native`; feature names and model
+hashes are recorded with each estimator.
+
 For a new full execution, use a separate source checkout with only the two
 processed input CSVs restored at their documented locations; existing completed
 run destinations must not be reused as fresh runs. Follow the installation and

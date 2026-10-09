@@ -173,6 +173,8 @@ def build_archive(pipeline,output):
     add('inputs',root/'docs/experiments/groups/topology_groups.json')
     add('inputs',pipeline/'run/contract.json')
     add('inputs',pipeline/'run/plan.json')
+    add('inputs',pipeline/'run/manifest.json')
+    add('inputs',pipeline/'run/state.json')
     for path in (pipeline/'summary').rglob('*'):
         if path.is_file(): add('learning-summary',path)
     figure_root=root/'experiments/reports/figures-002'
