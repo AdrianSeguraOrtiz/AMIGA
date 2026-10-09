@@ -366,5 +366,3 @@ class Figure:
         (self.out/'layout_checks.json').write_text(json.dumps(checks,indent=2)+'\n',encoding='utf-8')
         (self.out/'text_geometry.json').write_text(json.dumps(self.texts,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
         return checks
-
-
