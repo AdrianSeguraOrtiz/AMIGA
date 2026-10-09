@@ -3,6 +3,18 @@
 The experimental workflow has its own version and Git tag. Its version does
 not change the independently distributed `amiga-grn` PyPI package version.
 
+## 0.3.1 — amiga-exp-v0.3.1
+
+- Replace extended supplementary searches with AMIGA-only refits of the exact
+  configurations and predictor columns saved by phase 4: 451 fits in 91 jobs.
+- Keep the original five-selector real-case analysis and fixed evidence snapshot,
+  using one updated AMIGA deployment model.
+- Measure prepared-front prediction and ranking costs only.
+- Remove supplementary selection, feature-preparation profiling and multi-method
+  deployment code. Earlier extended contracts cannot be resumed with this version.
+- Preserve completed phase 0–4 results, figure sources and benchmark deposits;
+  the core package and its PyPI version remain unchanged.
+
 ## 0.3.0 — amiga-exp-v0.3.0
 
 - Current phase 1–4 figures, including recursive column-selection diagnostics

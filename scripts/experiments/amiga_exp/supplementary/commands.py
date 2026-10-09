@@ -1,9 +1,9 @@
-"""CLI for complete label-scarcity, deployment and computational-cost analyses."""
+"""CLI for fixed-AMIGA learning curves, real-case ranking and prediction timing."""
 import json
 from pathlib import Path
 import typer
 
-app=typer.Typer(no_args_is_help=True,help='Full-grid learning curves, deployment and empirical computational costs.')
+app=typer.Typer(no_args_is_help=True,help='Fixed-AMIGA learning curves, original real-case analysis and prediction costs.')
 
 
 @app.command('freeze')
@@ -13,8 +13,7 @@ def freeze_command(output:Path=typer.Option(...)):
     freeze(output,c)
     plan=build_plan(c)
     typer.echo(json.dumps(dict(contract=str(output),jobs=len(plan),
-                              planned_fits=sum(j['planned_fits'] for j in plan),
-                              maximum_additional_mask_fits=sum(j.get('maximum_mask_parent_fits',0) for j in plan)),indent=2))
+                              planned_fits=sum(j['planned_fits'] for j in plan)),indent=2))
 
 
 @app.command('run')

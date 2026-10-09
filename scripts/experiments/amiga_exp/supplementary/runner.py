@@ -16,7 +16,7 @@ import traceback
 
 from .execution import completed_job, execute_job
 from scripts.experiments.amiga_exp.grouped_validation.pilot import sha256, terminate_process_group, utc, write_json
-from .spec import build_plan, validate_contract
+from .spec import OUTER, build_plan, validate_contract
 from scripts.experiments.amiga_exp.sequential_selection.resources import layout, worker_command, worker_environment
 
 REPO = Path(__file__).resolve().parents[4]
@@ -34,6 +34,12 @@ def verify_sources(root: Path, contract: dict):
     for relative, digest in contract['source_hashes'].items():
         if sha256(root / relative) != digest:
             raise ValueError(f'Source changed after the contract was frozen: {relative}')
+    if contract['original'] != json.loads((root / OUTER / 'contract.json').read_text()):
+        raise ValueError('Embedded phase-4 contract differs from its recorded source')
+    for recipe in contract['recipes']:
+        info = json.loads((root / recipe['source_model_metadata']).read_text())
+        if info['procedure'] != recipe['procedure'] or info['feature_columns'] != recipe['feature_columns']:
+            raise ValueError('Fixed recipe differs from the saved phase-4 model metadata')
 
 
 def read_run(run: Path, *, verify_environment=True):
@@ -124,9 +130,6 @@ def run_evaluation(contract_path: Path, output: Path, *, root=REPO, jobs=2, thre
                 done.add(job['id'])
             elif list((output / 'jobs' / job['id']).glob('attempt-*')):
                 failed.append(job['id'])
-        for job in plan:
-            if job['id'] in done and not set(job['dependencies']) <= done:
-                raise ValueError('Completed job has missing configuration-selection dependencies')
         if failed and not retry_failed:
             raise ValueError('Failed or interrupted attempts exist; inspect logs, then use --resume --retry-failed')
         if dry_run:
@@ -175,8 +178,6 @@ def run_evaluation(contract_path: Path, output: Path, *, root=REPO, jobs=2, thre
                 for job in list(pending):
                     if len(active) >= jobs:
                         break
-                    if not set(job['dependencies']) <= done:
-                        continue
                     parent = output / 'jobs' / job['id']
                     parent.mkdir(parents=True, exist_ok=True)
                     attempts = list(parent.glob('attempt-*'))
@@ -196,8 +197,6 @@ def run_evaluation(contract_path: Path, output: Path, *, root=REPO, jobs=2, thre
                     active.append((process, job, destination, time.monotonic(), log))
                     slots[process.pid] = slot
                     pending.remove(job)
-                if pending and not active:
-                    raise RuntimeError('No runnable job remains; dependency graph is incomplete')
                 checkpoint('running')
                 if active:
                     time.sleep(0.2)

@@ -70,7 +70,7 @@ def summarize(run,output):
     verify_manifest(root/c['full_endpoint_summary']/'manifest.json')
     full=pd.read_csv(root/c['full_endpoint_summary']/'metrics_long.csv')
     full=full[full.method.isin(c['learning_methods'])].copy()
-    if len(full)!=2*2*104*5 or full.duplicated(['case','method','front_id','seed']).any():
+    if len(full)!=2*104*5 or full.duplicated(['case','method','front_id','seed']).any():
         raise ValueError('Full-size endpoint must contain every final seed and front')
     full['training_size']='full'
     full['subset_seed']=np.nan
@@ -85,7 +85,7 @@ def summarize(run,output):
     pd.DataFrame(times).to_csv(output/'runtimes.csv',index=False)
     write_json(output/'selected_procedures.json',selections)
     plot_curves(curves,output)
-    result=dict(status='complete',workflow='supplementary_evaluation',
+    result=dict(status='complete',workflow='fixed_amiga_supplement',
                 contract_sha256=sha256(run/'contract.json'),sources=sources,
                 scope=c['learning_scope'],aggregation=c['aggregation'],intervals=c['intervals'],
                 final_seeds=c['final_seeds'],deployment_seed=c['deployment_seed'],
@@ -99,8 +99,8 @@ def plot_curves(curves,output):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    colors={'ranking':'#2e9d78','reg_aupr':'#7561b4'}
-    names={'ranking':'AMIGA','reg_aupr':'Direct AUPR regression'}
+    colors={'ranking':'#2e9d78'}
+    names={'ranking':'AMIGA'}
     for case,part in curves.groupby('case'):
         fig,axes=plt.subplots(1,2,figsize=(10,4.2))
         for ax,metric in zip(axes,('Regret@5','Hit@5')):
@@ -114,8 +114,8 @@ def plot_curves(curves,output):
             ax.set_ylabel(metric)
             ax.grid(alpha=.2)
         axes[0].legend(frameon=False)
-        fig.suptitle(case+' — full selection repeated at each labelled training size')
-        fig.text(.5,.02,'Five outer folds; three nested subsets at 10/20/40; five final seeds. Bands: conditional topology bootstrap 95% intervals.',ha='center',fontsize=8)
+        fig.suptitle(case+' — AMIGA with fixed phase-4 configurations')
+        fig.text(.5,.02,'Fixed configuration and columns within each outer fold; three subsets; five seeds. Bands: conditional topology bootstrap 95% intervals.',ha='center',fontsize=8)
         fig.tight_layout(rect=(0,.05,1,.94))
         for suffix in ('pdf','png'): fig.savefig(output/f'{case}-learning-curves.{suffix}',dpi=180,bbox_inches='tight')
         plt.close(fig)

@@ -1,7 +1,7 @@
-# Installing and reproducing amiga-exp 0.3.0
+# Installing and reproducing amiga-exp 0.3.1
 
 `amiga-exp` is distributed in this Git repository and versioned independently
-of the `amiga-grn` PyPI package. The release tag is `amiga-exp-v0.3.0`.
+of the `amiga-grn` PyPI package. The release tag is `amiga-exp-v0.3.1`.
 Installing `amiga-grn` alone does not install this workflow or its benchmark data.
 
 ## Installation
@@ -11,7 +11,7 @@ recorded execution environment; each run additionally records actual libraries
 and numerical thread pools. CPU training is used by the current protocol.
 
 ```bash
-git clone --branch amiga-exp-v0.3.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
+git clone --branch amiga-exp-v0.3.1 https://github.com/AdrianSeguraOrtiz/AMIGA.git
 cd AMIGA
 POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with experiments
 poetry run scripts/experiments/amiga-exp --version

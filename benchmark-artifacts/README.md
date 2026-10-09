@@ -1,24 +1,21 @@
 # Versioned benchmark artifacts
 
-This directory distributes checksummed benchmark evidence for **amiga-exp
-0.3.0**, independently of the `amiga-grn` PyPI package. The source tag is
-`amiga-exp-v0.3.0`; the completed benchmark deposit has the separate immutable
-tag `amiga-exp-benchmarks-v0.3.0`. Each deposit has a JSON inventory with SHA-256 and sizes for
-every compressed container and restored file. Individual containers stay below
+This directory distributes checksummed benchmark evidence independently of the
+`amiga-grn` PyPI package. The current source tag is `amiga-exp-v0.3.1`; the
+completed benchmark deposit retains its immutable `amiga-exp-benchmarks-v0.3.0`
+tag and original source identities. Each deposit has a JSON inventory with
+SHA-256 and sizes for every container and restored file. Containers stay below
 90 MiB and can be downloaded through GitHub without Git LFS.
 
 | Deposit | Scope | Status |
 | --- | --- | --- |
-| `comparison-v0.3.0/` | Processed benchmark inputs, phase 1–4 figure inputs/results, saved five-formulation and objective-selector evaluation predictions | Complete; artifact tag `amiga-exp-benchmarks-v0.3.0` |
-| `supplementary-v0.3.0/` | Extended learning curves, deployment and cost measurements | Not available; extended execution stopped before completion |
+| `comparison-v0.3.0/` | Processed inputs, completed phase figures and saved supervised/objective predictions | Complete; artifact tag `amiga-exp-benchmarks-v0.3.0` |
+| `supplementary-v0.3.1/` | Fixed-AMIGA learning curves, original TCGA analysis and prediction-only timing | Pending completion of fixed-AMIGA execution |
 
-The supplementary execution is independent of the completed benchmark phases.
-Its automatic publication has been stopped. No supplementary deposit or artifact
-tag has been created. The [experimental overview](../docs/experiments.md#supplementary-evaluation-blocks)
-records the reduced, unexecuted scope. The
-[extended workflow guide](../docs/experiments/supplementary.md) and archiving
-commands below document implemented functionality; they are not additional
-steps required to reproduce the completed benchmark phases.
+The [supplementary guide](../docs/experiments/supplementary.md) describes the
+451-fit fixed-model scope. A source release does not establish completed evidence;
+only a complete, verified deposit can be used as results. Distributing existing
+evidence does not require another experimental phase.
 
 ## Verify and restore
 
@@ -43,11 +40,11 @@ the current supervised presentation uses five formulations. Full inner
 candidate predictions are regenerable intermediates, not included in this
 compact distribution.
 
-The supplementary deposit preserves execution definitions and completion
-receipts as provenance. It omits detailed inner predictions and is therefore
-not a resumable working directory. Native models and their JSON metadata can
-be loaded using `supplementary.deployment.load_native`; feature names and model
-hashes are recorded with each estimator.
+The supplementary deposit preserves fixed-model predictions, execution
+definitions and completion receipts. It is portable evidence rather than a
+working directory for resuming fits. Native AMIGA models and their JSON metadata
+can be loaded using `supplementary.deployment.load_native`; feature names and
+model hashes are recorded with each estimator.
 
 For a new full execution, use a separate source checkout with only the two
 processed input CSVs restored at their documented locations; existing completed
@@ -58,7 +55,7 @@ The supplementary deposit omits patient-level expression matrices and original
 unfiltered external resource downloads. Derived evidence has incomplete
 coverage and represents contextual support. Source attribution and original
 data terms remain applicable; the software license does not relicense external
-data. Feature-profile receipts identify the omitted matrix by hash.
+data. The prepared real-front predictors and fixed evidence snapshot are included.
 
 ## Create a deposit
 
@@ -66,8 +63,8 @@ data. Feature-profile receipts identify the omitted matrix by hash.
 scripts/experiments/amiga-exp supplement archive-comparison \
   --output benchmark-artifacts/comparison-v0.3.0
 scripts/experiments/amiga-exp supplement archive \
-  --run experiments/supplementary/full-001 \
-  --output benchmark-artifacts/supplementary-v0.3.0
+  --run experiments/supplementary/fixed-001 \
+  --output benchmark-artifacts/supplementary-v0.3.1
 ```
 
 Creation requires new destinations and verifies all included source identities.

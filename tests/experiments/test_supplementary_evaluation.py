@@ -1,7 +1,7 @@
-"""Subset isolation, exact selection, native deployment and deposit integrity."""
+"""Fixed recipes, training-size isolation, original real-case scope and deposits."""
 import hashlib
 import json
-from pathlib import Path
+from copy import deepcopy
 from itertools import product
 
 import numpy as np
@@ -9,53 +9,14 @@ import pandas as pd
 import pytest
 from typer.testing import CliRunner
 
-from test_sequential_selection import toy_frame,tiny_params
+from test_sequential_selection import toy_frame, tiny_params
 from scripts.experiments.amiga_exp.sequential_selection import models
-from scripts.experiments.amiga_exp.grouped_validation.contract import _partitions,_front_ids,_learning_subsets
-from scripts.experiments.amiga_exp.sequential_selection.summary import choose
-from scripts.experiments.amiga_exp.supplementary import spec,selection,execution,archive
-from scripts.experiments.amiga_exp.supplementary.deployment import load_native,stable_choice
+from scripts.experiments.amiga_exp.grouped_validation.contract import _partitions, _front_ids, _learning_subsets
+from scripts.experiments.amiga_exp.supplementary import spec, execution, archive, deployment
+from scripts.experiments.amiga_exp.supplementary.deployment import load_native, prediction_costs
 from scripts.experiments.amiga_exp.supplementary.summary import aggregate_learning
 from scripts.experiments.amiga_exp.grouped_validation.metrics import METRICS
 from scripts.experiments.amiga_exp.supplementary.pipeline import atomic_stage
-
-
-def test_full_inner_selection_is_insulated_from_unavailable_labels(tmp_path,monkeypatch):
-    frame=toy_frame()
-    features=[f'x{i}' for i in range(8)]
-    scope=dict(id='learning/fold-0/size-6/subset-1301',train_front_ids=list(range(1,7)),
-               test_front_ids=[7,8],inner_folds=[dict(fold=i,validation_front_ids=valid,
-               train_front_ids=sorted(set(range(1,7))-set(valid)))
-               for i,valid in enumerate(([1,2],[3,4],[5,6]))])
-    mapping={str(i):str(i) for i in range(1,9)}
-    params=dict(tiny_params('LightGBM'),id='tiny')
-    contract=dict(contexts=[scope],original=dict(labels=list(models.LABELS),
-        references={'LightGBM':params},grids={'LightGBM':[params]},
-        split_contract=dict(topology_by_front=mapping,cases={'BIO-INSIGHT':dict(feature_columns=features)})))
-    job=dict(context_id=scope['id'],case='BIO-INSIGHT',family='LightGBM',
-             arms=['ranking','reg_aupr'],planned_fits=54)
-    loaded=[]
-    def restricted(root,original,case,ids):
-        loaded.append(set(ids))
-        assert set(ids).isdisjoint({7,8})
-        return frame[frame.front_id.isin(ids)].copy()
-    monkeypatch.setattr(selection,'load_rows',restricted)
-    first=tmp_path/'first'
-    second=tmp_path/'second'
-    first.mkdir()
-    second.mkdir()
-    selection.select(tmp_path,contract,job,first,1)
-    # Altering unavailable test labels cannot alter any inner decision.
-    frame.loc[frame.front_id.isin([7,8]),'AUPR']=1-frame.loc[frame.front_id.isin([7,8]),'AUPR']
-    selection.select(tmp_path,contract,job,second,1)
-    assert loaded==[set(range(1,7))]*2
-    assert (first/'selected_procedures.json').read_bytes()==(second/'selected_procedures.json').read_bytes()
-    candidates=pd.read_csv(first/'selection_candidates.csv')
-    for procedure in json.loads((first/'selected_procedures.json').read_text()):
-        expected=choose(candidates[(candidates.stage=='phase3')&(candidates.arm==procedure['arm'])].to_dict('records'),features=True)
-        assert expected['candidate']==procedure['candidate']
-    progress=json.loads((first/'progress.json').read_text())
-    assert progress['completed_fits']==progress['planned_fits']==54
 
 
 def test_learning_summary_gives_equal_topology_weights_after_seed_and_subset_means():
@@ -102,40 +63,6 @@ def test_completion_receipt_requires_scientific_outputs(tmp_path):
     with pytest.raises(ValueError,match='omits'): execution.completed_job(tmp_path,job)
 
 
-def test_final_fit_writes_predictions_before_requesting_test_quality(tmp_path,monkeypatch):
-    frame=toy_frame()
-    features=[f'x{i}' for i in range(8)]
-    scope=dict(id='learning/fold-0/size-6/subset-1301',kind='learning',training_size=6,
-               train_front_ids=list(range(1,7)),test_front_ids=[7,8])
-    c=dict(contexts=[scope],final_seeds=list(range(1201,1206)),
-        original=dict(split_contract=dict(topology_by_front={str(i):str(i) for i in range(1,9)},
-                        cases={'BIO-INSIGHT':dict(feature_columns=features)})))
-    job=dict(id='BIO-INSIGHT/'+scope['id']+'/final',stage='final',case='BIO-INSIGHT',
-             context_id=scope['id'],arms=['ranking','reg_aupr'],dependencies=['dep'])
-    dep=tmp_path/'dependency'
-    dep.mkdir()
-    procedures=[dict(arm=arm,family='LightGBM',label='rank_dense',config=tiny_params('LightGBM'),
-        fraction=1.,n_features=8,candidate=arm,mean_regret5=.1,mean_regret1=.2) for arm in job['arms']]
-    (dep/'selected_procedures.json').write_text(json.dumps(procedures))
-    (dep/'result.json').write_text('{}')
-    monkeypatch.setattr(execution,'completed_job',lambda *args:({},dep))
-    dest=tmp_path/'final'
-    dest.mkdir()
-    label_reads=[]
-    def restricted(root,original,case,ids,cols,labels=True):
-        if ids==[7,8] and labels:
-            label_reads.append(1)
-            assert len(list(dest.glob('*.predictions.csv.gz')))==len(label_reads)
-        columns=['front_id','item_id',*cols,*(['AUPR'] if labels else [])]
-        return frame.loc[frame.front_id.isin(ids),columns].copy().reset_index(drop=True)
-    monkeypatch.setattr(execution,'load_rows',restricted)
-    result=execution.execute_job(tmp_path,c,job,{'dep':{}},tmp_path,dest,1)
-    assert result['status']=='complete' and len(label_reads)==10
-    recorded=pd.read_csv(dest/'metrics.csv')
-    assert len(recorded)==2*2*5
-    assert set(recorded.seed)==set(range(1201,1206))
-
-
 def base_splits():
     mapping={str(i+1):f'{i:064x}' for i in range(87)}
     # Conditions of one topology must stay together at every training size.
@@ -146,65 +73,6 @@ def base_splits():
         outer.append(dict(fold=fold,train_topology_ids=train,test_topology_ids=test,
                           learning_subsets=_learning_subsets(mapping,train)))
     return dict(topology_by_front=mapping,outer_folds=outer,seeds={'deployment_split':20260916})
-
-
-def test_learning_contexts_are_nested_and_never_use_outer_groups():
-    base=base_splits()
-    contexts=spec.contexts(base)
-    assert len(contexts)==46
-    mapping=base['topology_by_front']
-    for scope in contexts:
-        train={mapping[str(f)] for f in scope['train_front_ids']}
-        test={mapping[str(f)] for f in scope['test_front_ids']}
-        assert not train & test and len(train)==scope['training_size']
-        assert set(scope['train_front_ids'])==set(_front_ids(mapping,sorted(train)))
-        observed=[]
-        for inner in scope['inner_folds']:
-            a={mapping[str(f)] for f in inner['train_front_ids']}
-            b={mapping[str(f)] for f in inner['validation_front_ids']}
-            assert not a & b and a | b==train and not (a|b)&test
-            observed.extend(inner['validation_front_ids'])
-        assert sorted(observed)==scope['train_front_ids']
-    for fold,seed in product(range(5),(1301,1302,1303)):
-        subsets=[set(s['train_front_ids']) for s in contexts if s['outer_fold']==fold and s['subset_seed']==seed]
-        assert subsets[0]<subsets[1]<subsets[2]
-
-
-@pytest.mark.parametrize('family,arm',product(models.FAMILIES,spec.METHODS))
-def test_native_model_round_trip_preserves_predictions(family,arm,tmp_path):
-    frame=toy_frame()
-    features=[f'x{i}' for i in range(8)]
-    library=selection.adapter(arm)
-    data=library.prepare(frame,'BIO-INSIGHT',{i:str(i) for i in range(1,9)},features)
-    model,_=library.fit(data,family,arm,tiny_params(family),threads=1)
-    expected=library.scores(model,family,arm,data['X'],1)
-    path=execution.save_model(model,family,tmp_path/'model')
-    info=dict(procedure=dict(family=family,arm=arm),model_file=path.name,
-              model_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
-    loaded=load_native(tmp_path,info)
-    np.testing.assert_allclose(library.scores(loaded,family,arm,data['X'],1),expected,rtol=1e-12,atol=1e-12)
-    path.write_bytes(path.read_bytes()+b'changed')
-    with pytest.raises(ValueError,match='identity'): load_native(tmp_path,info)
-
-
-@pytest.mark.parametrize('family',models.FAMILIES)
-def test_relearned_mask_matches_original_recursive_path(family):
-    frame=toy_frame()
-    features=[f'x{i}' for i in range(8)]
-    data=models.prepare(frame,'BIO-INSIGHT',{i:str(i) for i in range(1,9)},features)
-    params=tiny_params(family)
-    paths,_=models.feature_path(data,family,'ranking',params,threads=1)
-    for fraction in (1.,.75,.5,.25):
-        procedure=dict(family=family,arm='ranking',config=params,fraction=fraction,
-                       n_features=int(np.ceil(8*fraction)))
-        mask,_=execution.learn_mask(data,procedure,models,1)
-        assert mask==next(p['features'] for p in paths if p['fraction']==fraction)
-
-
-def test_real_choice_uses_item_identity_for_ties_and_rejects_nonfinite():
-    frame=pd.DataFrame({'item_id':[8,2,5]})
-    assert stable_choice(frame,[1.,1.,0.])==(1,2)
-    with pytest.raises(ValueError): stable_choice(frame,[1.,np.nan,0.])
 
 
 def test_deposit_detects_tampering_and_restores_without_overwriting(tmp_path):
@@ -248,3 +116,169 @@ def test_cli_exposes_monitoring_and_safe_restore():
     assert result.exit_code==0
     for word in ['freeze','run','status','archive','restore-archive','verify-archive']:
         assert word in result.stdout
+
+
+def test_fixed_refits_ignore_unavailable_labels_and_never_reselect_columns(tmp_path, monkeypatch):
+    frame = toy_frame()
+    features = ['x0', 'x3']
+    scope = dict(id='learning/fold-0/size-4/subset-1301', kind='learning', training_size=4,
+                 train_front_ids=[1, 2, 3, 4], test_front_ids=[7, 8])
+    procedure = dict(case='BIO-INSIGHT', outer_fold=0, arm='ranking', family='LightGBM',
+                     label='rank_dense', config=tiny_params('LightGBM'), fraction=.25, n_features=2)
+    recipe = dict(procedure=procedure, feature_columns=features, source_model_metadata='original/model.json')
+    c = dict(contexts=[scope], final_seeds=list(range(1201, 1206)),
+        original=dict(split_contract=dict(topology_by_front={str(i): str(i) for i in range(1, 9)})))
+    job = dict(id='BIO-INSIGHT/'+scope['id']+'/final', stage='final', case='BIO-INSIGHT',
+               context_id=scope['id'], arms=['ranking'], recipe=recipe, planned_fits=5)
+    calls = []
+    original_fit = models.fit
+    def fit(data, family, arm, params, **kwargs):
+        assert data['feature_names'] == features
+        assert set(data['group_id']) == {1, 2, 3, 4}
+        assert params == procedure['config'] and family == 'LightGBM' and arm == 'ranking'
+        calls.append(kwargs['seed'])
+        return original_fit(data, family, arm, params, **kwargs)
+    def forbidden(*args, **kwargs):
+        pytest.fail('Fixed-model curve must not run feature selection')
+    monkeypatch.setattr(models, 'fit', fit)
+    monkeypatch.setattr(models, 'feature_importance', forbidden)
+    monkeypatch.setattr(models, 'feature_path', forbidden)
+    def execute(name):
+        run = tmp_path/name
+        dest = run/'jobs'/job['id']/'attempt-001'
+        dest.mkdir(parents=True)
+        reads = []
+        def load(root, original, case, ids, cols, *, labels=True):
+            assert set(ids) in ({1, 2, 3, 4}, {7, 8})
+            if ids == [7, 8] and labels:
+                reads.append(1)
+                assert len(list(dest.glob('*.predictions.csv.gz'))) == len(reads)
+            return frame.loc[frame.front_id.isin(ids), ['front_id', 'item_id', *cols,
+                             *(['AUPR'] if labels else [])]].copy().reset_index(drop=True)
+        monkeypatch.setattr(execution, 'load_rows', load)
+        execution.execute_job(tmp_path, c, job, {}, run, dest, 1)
+        assert execution.completed_job(run, job) is not None
+        assert len(reads) == 5
+        return dest
+    first = execute('first')
+    frame.loc[frame.front_id.isin([5, 6, 7, 8]), 'AUPR'] = 1-frame.loc[frame.front_id.isin([5, 6, 7, 8]), 'AUPR']
+    second = execute('second')
+    assert calls == list(range(1201, 1206))*2
+    for seed in range(1201, 1206):
+        name = f'ranking-seed-{seed}.predictions.csv.gz'
+        assert (first/name).read_bytes() == (second/name).read_bytes()
+        info = json.loads((second/f'ranking-seed-{seed}.model.json').read_text())
+        assert info['feature_columns'] == features and not info['selection_repeated']
+    assert set(pd.read_csv(second/'metrics.csv').seed) == set(range(1201, 1206))
+
+
+def test_learning_contexts_are_nested_and_never_use_outer_groups():
+    base = base_splits()
+    scopes = spec.contexts(base)
+    assert len(scopes) == 46
+    mapping = base['topology_by_front']
+    for scope in scopes:
+        train = {mapping[str(f)] for f in scope['train_front_ids']}
+        test = {mapping[str(f)] for f in scope['test_front_ids']}
+        assert not train & test and len(train) == scope['training_size']
+        assert set(scope['train_front_ids']) == set(_front_ids(mapping, sorted(train)))
+        assert 'inner_folds' not in scope
+    for fold, seed in product(range(5), (1301, 1302, 1303)):
+        subsets = [set(s['train_front_ids']) for s in scopes if s['outer_fold'] == fold and s['subset_seed'] == seed]
+        assert subsets[0] < subsets[1] < subsets[2]
+
+
+@pytest.mark.parametrize('family', models.FAMILIES)
+def test_native_ranker_round_trip_and_prepared_front_timing(family, tmp_path):
+    features = [f'x{i}' for i in range(8)]
+    data = models.prepare(toy_frame(), 'BIO-INSIGHT', {i: str(i) for i in range(1, 9)}, features)
+    model, _ = models.fit(data, family, 'ranking', tiny_params(family), threads=1)
+    expected = models.scores(model, family, 'ranking', data['X'], 1)
+    path = execution.save_model(model, family, tmp_path/'model')
+    info = dict(procedure=dict(family=family, arm='ranking'), model_file=path.name,
+                model_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    loaded = load_native(tmp_path, info)
+    actual, timings = prediction_costs(loaded, family, data['X'], np.arange(len(data['X'])), 1)
+    np.testing.assert_allclose(actual, expected, rtol=1e-12, atol=1e-12)
+    assert len(timings) == 5 and set(timings.method) == {'AMIGA'}
+    np.testing.assert_allclose(timings.total_seconds, timings.prediction_seconds+timings.ranking_seconds)
+    path.write_bytes(path.read_bytes()+b'changed')
+    with pytest.raises(ValueError, match='identity'):
+        load_native(tmp_path, info)
+
+
+def test_deployment_choice_uses_only_recorded_inner_validation():
+    recipes = [dict(procedure=dict(case='BIO-INSIGHT', outer_fold=i, inner_mean_regret5=value))
+               for i, value in enumerate((.2, .1, .1, .3, .4))]
+    assert spec.deployment_recipe(recipes) == recipes[1]
+    altered = deepcopy(recipes)
+    for i, r in enumerate(altered):
+        r['outer_test_regret'] = 1/(i+1)
+        r['tcga_support'] = i
+    assert spec.deployment_recipe(altered)['procedure'] == recipes[1]['procedure']
+
+
+def test_real_case_keeps_original_five_selectors_and_fixed_evidence(tmp_path, monkeypatch):
+    from scripts.experiments.amiga_exp.real_world_validation import OBJECTIVE_COLUMNS, REPORTED_SOURCES, REPORTED_SELECTOR_IDS
+    case = tmp_path/'case'
+    (case/'amiga').mkdir(parents=True)
+    evidence_dir = case/'validation/amiga_exp_reported'
+    evidence_dir.mkdir(parents=True)
+    grns = case/'bioinsight/input/lists'
+    grns.mkdir(parents=True)
+    (grns/'GRN_TOY.csv').write_text('TF1,G1,0.9\nTF1,G2,0.8\n')
+    frame = toy_frame().query('front_id == 1').drop(columns='AUPR').reset_index(drop=True)
+    for i, objective in enumerate(OBJECTIVE_COLUMNS):
+        frame[objective] = np.arange(len(frame))*(i+1)/len(frame)
+    frame['GRN_TOY.csv'] = 1.0
+    frame.to_csv(case/'amiga/data_real.csv', index=False)
+    evidence = pd.DataFrame([dict(resource=s['resource'], source='TF1', target='G1') for s in REPORTED_SOURCES])
+    evidence.to_csv(evidence_dir/'reported_external_tf_target_evidence.csv', index=False)
+    directory = tmp_path/'model'
+    directory.mkdir()
+    features = [f'x{i}' for i in range(8)]
+    data = models.prepare(toy_frame(), 'BIO-INSIGHT', {i: str(i) for i in range(1, 9)}, features)
+    model, _ = models.fit(data, 'LightGBM', 'ranking', tiny_params('LightGBM'), threads=1)
+    native = execution.save_model(model, 'LightGBM', directory/'ranking')
+    info = dict(procedure=dict(family='LightGBM', arm='ranking'), feature_columns=features,
+                model_file=native.name, model_sha256=hashlib.sha256(native.read_bytes()).hexdigest())
+    (directory/'ranking-seed-1201.model.json').write_text(json.dumps(info))
+    c = dict(deployment_seed=1201, deployment_policy=spec.DEPLOYMENT_POLICY,
+             prediction_cost_scope='prepared-front prediction and ranking only')
+    monkeypatch.setattr(deployment, 'read_run', lambda run: (dict(repo_root=str(tmp_path), threads=1), c, [dict(context_id='deployment')]))
+    monkeypatch.setattr(deployment, 'verify_sources', lambda *args: None)
+    monkeypatch.setattr(deployment, 'completed_job', lambda *args: ({}, directory))
+    output = tmp_path/'application'
+    result = deployment.apply(tmp_path/'run', case, output)
+    assert result['selectors'] == list(REPORTED_SELECTOR_IDS)
+    assert len(pd.read_csv(output/'real_world_source_support_top1.csv')) == 5
+    assert len(pd.read_csv(output/'prediction_costs.csv')) == 5
+    pd.testing.assert_frame_equal(pd.read_csv(output/'source_evidence_snapshot.csv'), evidence)
+    assert (case/'amiga/data_real.csv').read_bytes() == frame.to_csv(index=False).encode()
+
+
+def test_plan_has_only_fixed_amiga_refits_and_rejects_comparators():
+    base = base_splits()
+    base['cases'] = {case: dict(feature_columns=['x0']) for case in ('BIO-INSIGHT', 'MO-GENECI')}
+    recipes = [dict(procedure=dict(case=case, outer_fold=fold, arm='ranking', n_features=1,
+                                  inner_mean_regret5=.01+fold*.001),
+                    feature_columns=['x0'], source_model_metadata=f'{case}/{fold}/model.json')
+               for case in base['cases'] for fold in range(5)]
+    c = dict(schema_version=2, workflow='fixed_amiga_supplement', status='frozen',
+        original=dict(split_contract=base, procedures=[r['procedure'] for r in recipes], source_hashes={}),
+        contexts=spec.contexts(base), recipes=recipes, deployment_recipe=spec.deployment_recipe(recipes),
+        deployment_policy=spec.DEPLOYMENT_POLICY, learning_methods=['ranking'], deployment_methods=['ranking'],
+        final_seeds=list(range(1201, 1206)), deployment_seed=1201, full_endpoint_summary=spec.SUMMARY,
+        source_hashes={}, failures=dict(total_budget_seconds=518400, per_job_timeout_seconds=43200, automatic_retries=0))
+    plan = spec.build_plan(c)
+    assert len(plan) == 91 and sum(j['planned_fits'] for j in plan) == 451
+    assert all(j['stage'] == 'final' and j['arms'] == ['ranking'] and not j['dependencies'] for j in plan)
+    assert sum(j['context_id'] == 'deployment' for j in plan) == 1
+    changed = deepcopy(c)
+    changed['learning_methods'].append('reg_aupr')
+    with pytest.raises(ValueError, match='fixed-AMIGA'):
+        spec.build_plan(changed)
+    changed = deepcopy(c)
+    changed['recipes'][0]['feature_columns'] = []
+    with pytest.raises(ValueError, match='Fixed recipe'):
+        spec.build_plan(changed)

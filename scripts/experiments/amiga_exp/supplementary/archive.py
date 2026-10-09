@@ -7,8 +7,6 @@ import subprocess
 import tarfile
 from tempfile import TemporaryDirectory
 
-import pandas as pd
-
 from scripts.experiments.amiga_exp.grouped_validation.pilot import sha256,write_json
 from scripts.experiments.amiga_exp.reporting.supervised import verify_manifest
 from scripts.experiments.amiga_exp.version import __version__
@@ -152,86 +150,57 @@ def restore(folder,root):
     return written
 
 
-def build_archive(pipeline,output):
-    pipeline,output=Path(pipeline).resolve(),Path(output).resolve()
-    if json.loads((pipeline/'state.json').read_text())['status']!='complete' or output.exists():
+def build_archive(pipeline, output):
+    """Package only completed fixed-AMIGA evidence; phase 0–4 have their own deposit."""
+    pipeline, output = Path(pipeline).resolve(), Path(output).resolve()
+    if json.loads((pipeline / 'state.json').read_text())['status'] != 'complete' or output.exists():
         raise ValueError('Require a complete pipeline and a new deposit destination')
-    manifest,c,jobs=read_run(pipeline/'run')
-    root=Path(manifest['repo_root'])
-    verify_sources(root,c)
-    for stage in ('summary','application','costs'): verify_manifest(pipeline/stage/'manifest.json')
-    methods=set(c['deployment_methods'])
-    groups={name:{} for name in ['inputs','comparison-and-figures','learning-summary','learning-BIO-INSIGHT','learning-MO-GENECI','deployment-and-application']}
+    manifest, c, jobs = read_run(pipeline / 'run')
+    root = Path(manifest['repo_root'])
+    verify_sources(root, c)
+    for stage in ('summary', 'application'):
+        verify_manifest(pipeline / stage / 'manifest.json')
+    groups = {name: {} for name in ('inputs', 'summary', 'learning-BIO-INSIGHT',
+                                    'learning-MO-GENECI', 'application')}
 
-    def add(group,path,name=None):
-        path=Path(path)
-        groups[group][name or path.relative_to(root).as_posix()]=path
+    def add(group, path):
+        path = Path(path)
+        groups[group][path.relative_to(root).as_posix()] = path
 
-    for case,info in c['original']['split_contract']['cases'].items():
-        add('inputs',root/info['data_path'])
-        add('inputs',root/f'docs/experiments/contracts/{case}_feature_columns.json')
-    add('inputs',root/'docs/experiments/groups/topology_groups.json')
-    add('inputs',pipeline/'run/contract.json')
-    add('inputs',pipeline/'run/plan.json')
-    add('inputs',pipeline/'run/manifest.json')
-    add('inputs',pipeline/'run/state.json')
-    for path in (pipeline/'summary').rglob('*'):
-        if path.is_file(): add('learning-summary',path)
-    figure_root=root/'experiments/reports/figures-002'
-    figure_manifest,_=verify_manifest(figure_root/'manifest.json')
-    # Preserve the original inputs needed to audit and regenerate every phase
-    # figure, including the checked feature-result identities. Do not rewrite
-    # immutable source summaries to match a presentation subset.
-    for name,digest in figure_manifest['inputs_sha256'].items():
-        path=Path(name)
-        if not path.is_relative_to(root) or sha256(path)!=digest:
-            raise ValueError('Figure input identity differs or lies outside the repository')
-        add('comparison-and-figures',path)
-    for path in figure_root.rglob('*'):
-        if path.is_file(): add('comparison-and-figures',path)
-    source=root/c['full_endpoint_summary']
-    # The presentation deposit includes the five agreed supervised formulations.
-    selected={}
-    for name in ['topology_metrics.csv','front_metrics.csv','metrics_long.csv']:
-        data=pd.read_csv(source/name)
-        payload=data[data.method.isin(methods)].to_csv(index=False).encode()
-        member=f'experiments/deposited-comparison/{name}'
-        groups['comparison-and-figures'][member]=payload
-        selected[name]=hashlib.sha256(payload).hexdigest()
-    groups['comparison-and-figures']['experiments/deposited-comparison/manifest.json']=(json.dumps(
-        dict(status='complete',scope='selected supervised presentation',methods=list(c['deployment_methods']),
-             source_manifest_sha256=sha256(source/'manifest.json'),artifacts=selected),indent=2)+'\n').encode()
+    for info in c['original']['split_contract']['cases'].values():
+        add('inputs', root / info['data_path'])
+    for name in ('contract.json', 'plan.json', 'manifest.json', 'state.json'):
+        add('summary', pipeline / 'run' / name)
+    add('summary', pipeline / 'state.json')
+    for folder in ('summary', 'application'):
+        for path in (pipeline / folder).rglob('*'):
+            if path.is_file():
+                add(folder, path)
     for job in jobs:
-        _,directory=completed_job(pipeline/'run',job)
-        scope=next(s for s in c['contexts'] if s['id']==job['context_id'])
-        group='deployment-and-application' if scope['kind']=='deployment' else 'learning-'+job['case']
-        if job['stage']=='selection':
-            # Compact candidate metrics suffice to check all recorded selection decisions;
-            # detailed inner candidate scores are retained locally and reproducible from inputs.
-            for name in ['selection_candidates.csv','selected_procedures.json','fit_reports.json']:
-                add(group,directory/name)
-        else:
-            for path in directory.iterdir():
-                if path.is_file() and path.name!='worker.log': add(group,path)
-    for folder in [pipeline/'application',pipeline/'costs']:
-        for path in folder.rglob('*'):
-            if path.is_file(): add('deployment-and-application',path)
-    add('deployment-and-application',root/'experiments/BIO-INSIGHT/real-world/tcga_brca/amiga/data_real.csv')
-    grn=root/'experiments/BIO-INSIGHT/real-world/tcga_brca/bioinsight'
-    for path in grn.glob('*/lists/GRN_*.csv'): add('deployment-and-application',path)
-    output.parent.mkdir(parents=True,exist_ok=True)
-    with TemporaryDirectory(prefix='.benchmark-deposit-',dir=output.parent) as temporary:
-        staged=Path(temporary)/'deposit'
+        complete = completed_job(pipeline / 'run', job)
+        if complete is None:
+            raise ValueError('Incomplete AMIGA fit')
+        _, directory = complete
+        group = 'application' if job['context_id'] == 'deployment' else 'learning-' + job['case']
+        for path in directory.iterdir():
+            if path.is_file() and path.name != 'worker.log':
+                add(group, path)
+    case = root / 'experiments/BIO-INSIGHT/real-world/tcga_brca'
+    add('application', case / 'amiga/data_real.csv')
+    for path in (case / 'bioinsight').glob('*/lists/GRN_*.csv'):
+        add('application', path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(prefix='.amiga-deposit-', dir=output.parent) as temporary:
+        staged = Path(temporary) / 'deposit'
         staged.mkdir()
-        archives={name+'.tar.xz':pack(staged/(name+'.tar.xz'),files) for name,files in groups.items()}
-        result=dict(schema_version=1,status='complete',workflow_version=__version__,
-                    source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
-                    supplementary_contract_sha256=sha256(pipeline/'run/contract.json'),archives=archives,
-                    data_scope='Processed benchmark predictors/labels, selected comparison metrics, learning curves/predictions, native deployment models and contextual application',
-                    excluded_inputs='Patient-level expression matrices and original unfiltered external resource downloads; provenance and measured cost receipts remain available',
-                    excluded_intermediates='Detailed inner candidate scores: kept locally, reproducible by rerunning full selection; compact metrics for all candidates are deposited',
-                    resource_terms='External resource evidence retains original attribution and terms; the repository software license does not replace source data terms')
-        write_json(staged/'manifest.json',result)
+        archives = {name+'.tar.xz': pack(staged / (name+'.tar.xz'), files) for name, files in groups.items()}
+        result = dict(schema_version=1, status='complete', workflow_version=__version__,
+            source_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip(),
+            supplementary_contract_sha256=sha256(pipeline / 'run/contract.json'), archives=archives,
+            scope='Fixed-AMIGA learning curves, original five-selector TCGA analysis and prediction-only timing',
+            benchmark_reference='amiga-exp-benchmarks-v0.3.0; completed phase 0–4 evidence remains unchanged',
+            resource_terms='External regulatory evidence retains its original attribution and terms')
+        write_json(staged / 'manifest.json', result)
         verify_archive(staged)
         staged.rename(output)
     return result

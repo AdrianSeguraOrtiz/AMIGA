@@ -6,7 +6,7 @@ public `amiga` API. Run repository experiments through
 `scripts/experiments/amiga-exp`; install dependencies with
 `poetry install --with experiments`.
 
-The current source release is **amiga-exp 0.3.0**, tagged `amiga-exp-v0.3.0`.
+The current source release is **amiga-exp 0.3.1**, tagged `amiga-exp-v0.3.1`.
 Start with the [installation and input-data guide](experiments/reproducibility.md)
 and [release notes](experiments/releases.md). The PyPI package retains its own
 independent version. Check this workflow with `scripts/experiments/amiga-exp --version`.
@@ -101,40 +101,26 @@ The reporting command is included in the 0.3.0 source release.
 
 ## Supplementary evaluation blocks
 
-Phases 0–4 and the additional classifier evaluations are complete. The extended
-supplementary execution has been stopped; its partial outputs are not completed
-learning-curve or application evidence. No replacement execution is scheduled.
-The reduced supplementary scope is planned, not yet implemented or executed:
+Phases 0–4 and the additional classifier evaluations are complete. The
+[`supplement` workflow](experiments/supplementary.md) adds only:
 
-- Learning curves for AMIGA only: reuse the family, relevance labels,
-  hyperparameters and exact predictor columns already selected for each outer
-  fold. Refit at smaller labelled training sizes, retaining the original test
-  partitions and final seeds. Reuse the completed full-size endpoint. This
-  measures data-size sensitivity conditional on fixed model selection; it does
-  not repeat selection or compare supervised alternatives.
-- TCGA-BRCA application: retain the existing real-case analysis and evidence
-  resources, updating the AMIGA model and its resulting ranking. Do not add a
-  new supervised comparison or a new full model-selection search.
-- Costs: measure prediction and ranking on a prepared front. Feature generation,
-  upstream inference, evolutionary optimization and training are outside this
-  timing scope.
-- Reproducibility: retain versioned source, processed inputs, saved predictions,
-  figures and instructions in the existing
-  [benchmark deposits](../benchmark-artifacts/README.md). This is artifact
-  distribution and verification, not another experimental phase.
+- AMIGA-only learning curves with fixed phase-4 configurations and exact columns
+  at 10/20/40 labelled topology groups; no search or feature reselection.
+- The original TCGA-BRCA five-selector analysis with an updated AMIGA model.
+- Prediction and ranking times for the prepared real front.
 
-The implemented [extended workflow](experiments/supplementary.md) is retained as
-a reference for its frozen contract, not as the current supplementary plan.
-Inspect its stopped execution with:
+The plan contains 451 fits in 91 independent jobs. Inspect execution with:
 
 ```bash
 scripts/experiments/amiga-exp supplement status \
-  --run experiments/supplementary/full-001
+  --run experiments/supplementary/fixed-001
 ```
 
 Completed analyses require a `complete` state and verified output manifests.
-The stopped extended execution must not be resumed as the reduced analysis:
-its contract specifies different methods and model-selection rules.
+The previous extended workflow is removed; its interrupted contract cannot be
+resumed with the fixed-model implementation. Reproducibility means preserving
+and distributing code, inputs and outputs through the
+[benchmark deposits](../benchmark-artifacts/README.md), not another experiment.
 
 Leave-family-out evaluation is outside this supplementary scope. Earlier
 exclusion results describe their own fixed configuration; they cannot be

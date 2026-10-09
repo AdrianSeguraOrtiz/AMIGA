@@ -271,8 +271,8 @@ package in this release. It is tied to the repository layout, versioned case
 manifests and publication plots, so it should be treated as a reproducible
 research protocol rather than as a stable public API.
 
-The experimental workflow is versioned independently: **amiga-exp 0.3.0**,
-Git tag `amiga-exp-v0.3.0`. See the
+The experimental workflow is versioned independently: **amiga-exp 0.3.1**,
+Git tag `amiga-exp-v0.3.1`. See the
 [installation and reproducibility guide](docs/experiments/reproducibility.md),
 [release notes](docs/experiments/releases.md), and
 [workflow citation](docs/experiments/CITATION.cff).
@@ -280,7 +280,7 @@ Git tag `amiga-exp-v0.3.0`. See the
 To use it, clone the repository and install the experiment dependency group:
 
 ```bash
-git clone --branch amiga-exp-v0.3.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
+git clone --branch amiga-exp-v0.3.1 https://github.com/AdrianSeguraOrtiz/AMIGA.git
 cd AMIGA
 POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with experiments
 scripts/experiments/amiga-exp --help
@@ -306,9 +306,9 @@ The current benchmark workflow uses whole topologies as partition groups:
   and objective-selector panels and complete column-selection supplements
   from saved results;
   see the [figure generation guide](docs/experiments/figures.md).
-- `supplement`: repeat full selection at smaller labelled training sizes,
-  select native deployment models, score the real front and measure feature,
-  training and scoring costs. See the [supplementary evaluation guide](docs/experiments/supplementary.md).
+- `supplement`: build AMIGA-only learning curves using fixed phase-4 recipes,
+  update the original real-case analysis and measure prepared-front prediction
+  and ranking times. See the [supplementary evaluation guide](docs/experiments/supplementary.md).
 
 Processed benchmark inputs, predictions and figure evidence are distributed
 through a [versioned benchmark deposit](benchmark-artifacts/README.md), with

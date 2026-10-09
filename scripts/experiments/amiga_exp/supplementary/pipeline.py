@@ -1,4 +1,4 @@
-"""Complete supplementary evaluation, audit, biological application and costs."""
+"""Fixed-configuration AMIGA refits, learning curves and original real-case analysis."""
 import argparse
 import fcntl
 import json
@@ -12,7 +12,6 @@ from .runner import run_evaluation
 from .spec import REPO
 from .summary import summarize
 from .deployment import apply
-from .costs import profile,summarize_fitting_costs
 from scripts.experiments.amiga_exp.reporting.supervised import verify_manifest
 
 
@@ -54,21 +53,8 @@ def run_stages(contract,output,*,jobs,threads,retry_failed):
                                    completed_stages=sorted(completed),**extra))
 
     try:
-        # Profile on an otherwise idle machine before the parallel training run.
-        if 'costs' not in completed:
-            checkpoint('profiling_features_and_scoring')
-            def costs(path):
-                profile(REPO,path,threads=threads)
-                summarize_fitting_costs(REPO,path)
-                from scripts.experiments.amiga_exp.grouped_validation.pilot import sha256
-                p=path/'manifest.json'
-                m=json.loads(p.read_text())
-                m['artifacts'].update({q.name:sha256(q) for q in path.glob('recorded*.csv')})
-                write_json(p,m)
-            atomic_stage(output,'costs',costs)
-            completed.add('costs')
         if 'fits' not in completed:
-            checkpoint('running_selection_and_fits')
+            checkpoint('running_fixed_amiga_fits')
             run=output/'run'
             result=run_evaluation(Path(contract),run,jobs=jobs,threads=threads,
                                   resume=run.exists(),retry_failed=retry_failed)
@@ -82,7 +68,7 @@ def run_stages(contract,output,*,jobs,threads,retry_failed):
             checkpoint('scoring_and_supporting_tcga')
             atomic_stage(output,'application',lambda path:apply(output/'run',REPO/'experiments/BIO-INSIGHT/real-world/tcga_brca',path))
             completed.add('application')
-        checkpoint('complete',summary=str(output/'summary'),application=str(output/'application'),costs=str(output/'costs'))
+        checkpoint('complete',summary=str(output/'summary'),application=str(output/'application'))
     except BaseException:
         checkpoint('interrupted' if isinstance(__import__('sys').exc_info()[1],KeyboardInterrupt) else 'failed',error=traceback.format_exc())
         raise
