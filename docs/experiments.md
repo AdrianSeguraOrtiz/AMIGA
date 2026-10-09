@@ -6,7 +6,7 @@ public `amiga` API. Run repository experiments through
 `scripts/experiments/amiga-exp`; install dependencies with
 `poetry install --with experiments`.
 
-The current source release is **amiga-exp 0.2.0**, tagged `amiga-exp-v0.2.0`.
+The current source release is **amiga-exp 0.3.0**, tagged `amiga-exp-v0.3.0`.
 Start with the [installation and input-data guide](experiments/reproducibility.md)
 and [release notes](experiments/releases.md). The PyPI package retains its own
 independent version. Check this workflow with `scripts/experiments/amiga-exp --version`.
@@ -87,26 +87,48 @@ The selected five-method rank presentation can be regenerated from saved metrics
 without fitting models using [`report supervised`](experiments/reporting.md).
 The [design](experiments/design.md) describes its exploratory Friedman and Holm analysis.
 
-Selection figures describe inner-validation decisions; final comparison figures
-describe outer predictions. Compact figures must preserve this distinction and
-represent all five outer folds. The top-5% and top-10% searches have complete
-candidate tables; their tuning and column-selection figures still require
-presentation work. Existing complete comparison figures may contain additional
-methods and can be rendered again for the selected presentation.
+[`report figures`](experiments/figures.md) generates compact figures for all four
+phases from these completed summaries, preserving the original visual style.
+Selection figures describe inner-validation decisions across all five outer
+training complements; final comparison figures describe outer predictions.
+Phase 4 has supervised and objective-selector panels side by side, each showing
+Regret@5 ranks and raw means with Friedman/Holm. Hit@1 and Hit@5 remain in the
+saved comparison CSV for textual reporting. Phase 3 displays original budget
+selection counts and columns at both extremes of training SHAP importance.
+Supplementary figures cover tuning and column selection for all four supervised
+alternatives, plus complete predictor-importance matrices for every formulation.
+The reporting command is included in the 0.3.0 source release.
 
-## Remaining evaluation blocks
+## Supplementary evaluation blocks
 
-Phases 0–4 and the additional classifier evaluations are complete. The following
-blocks need separate treatment before being attributed to the current procedure:
+Phases 0–4 and the additional classifier evaluations are complete. The
+[`supplement` workflow](experiments/supplementary.md) adds separate analyses:
 
-- Learning curves: existing runs use an earlier fixed configuration. Evaluating
-  label scarcity for the current procedure requires restricting training and
-  configuration selection to the available labels at each size.
-- Leave-family-out evaluation: earlier results describe their recorded fixed
-  configuration. Updating it is a separate experiment if that claim is retained.
-- TCGA-BRCA application: select and fit deployment procedures using the 104
-  benchmark fronts, score the existing real front, and recalculate source support
-  for the resulting recommendations.
+- Learning curves: repeat complete selection using only 10/20/40 labelled
+  topology groups, with three nested subsamples and five final seeds; reuse the
+  completed full-size endpoint.
+- TCGA-BRCA application: grouped selection over all 104 benchmark fronts,
+  native deployment export, scoring of the existing real front and contextual
+  support against one fixed evidence snapshot.
+- Costs: isolated feature preparation, stored fitting times/peak memory and
+  repeated real-front scoring.
+- Data accessibility: versioned [benchmark deposits](../benchmark-artifacts/README.md)
+  contain processed inputs, saved predictions and figure evidence.
+
+Monitor a launched supplementary pipeline with:
+
+```bash
+scripts/experiments/amiga-exp supplement status \
+  --run experiments/supplementary/full-001
+```
+
+The source implementation does not by itself establish completion: require a
+`complete` pipeline state and verified output manifests. The supplementary
+guide lists output paths and all selection/aggregation rules.
+
+Leave-family-out evaluation is outside this supplementary scope. Earlier
+exclusion results describe their own fixed configuration; they cannot be
+attributed to the current selected procedure.
 
 The existing `real-world-validate <case_dir>` command regenerates the earlier
 Top1 source-support table from an already ranked front. It does not select or
@@ -120,6 +142,7 @@ remain available for their recorded workflows. They do not replace the current
 sequential and outer pipelines.
 
 Generated contracts, raw results and figures belong under the Git-ignored
-`experiments/` directory. Frozen dependencies stay at their recorded paths.
+`experiments/` directory. Portable, versioned distribution archives belong under
+`benchmark-artifacts/`. Frozen dependencies stay at their recorded paths.
 Protocols, source code and tests are versioned; private working archives stay
 under the Git-ignored `.local-work/` directory.

@@ -266,8 +266,8 @@ package in this release. It is tied to the repository layout, versioned case
 manifests and publication plots, so it should be treated as a reproducible
 research protocol rather than as a stable public API.
 
-The experimental workflow is versioned independently: **amiga-exp 0.2.0**,
-Git tag `amiga-exp-v0.2.0`. See the
+The experimental workflow is versioned independently: **amiga-exp 0.3.0**,
+Git tag `amiga-exp-v0.3.0`. See the
 [installation and reproducibility guide](docs/experiments/reproducibility.md),
 [release notes](docs/experiments/releases.md), and
 [workflow citation](docs/experiments/CITATION.cff).
@@ -275,7 +275,7 @@ Git tag `amiga-exp-v0.2.0`. See the
 To use it, clone the repository and install the experiment dependency group:
 
 ```bash
-git clone --branch amiga-exp-v0.2.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
+git clone --branch amiga-exp-v0.3.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
 cd AMIGA
 POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with experiments
 scripts/experiments/amiga-exp --help
@@ -297,6 +297,17 @@ The current benchmark workflow uses whole topologies as partition groups:
   classification thresholds with the same full parameter and column searches.
 - `report supervised`: audit completed summary artifacts and regenerate the
   five-formulation mean-rank, Friedman/Holm and raw-metric tables without fitting.
+- `report figures`: render the four current phase designs, separate supervised
+  and objective-selector panels and complete column-selection supplements
+  from saved results;
+  see the [figure generation guide](docs/experiments/figures.md).
+- `supplement`: repeat full selection at smaller labelled training sizes,
+  select native deployment models, score the real front and measure feature,
+  training and scoring costs. See the [supplementary evaluation guide](docs/experiments/supplementary.md).
+
+Processed benchmark inputs, predictions and figure evidence are distributed
+through a [versioned benchmark deposit](benchmark-artifacts/README.md), with
+SHA-256 verification and a safe restore command.
 
 The main supervised comparison presents AMIGA, direct AUPR regression, and
 classification of the top 5%, 10% and 20% candidates. Original contracts and

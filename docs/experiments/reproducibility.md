@@ -1,7 +1,7 @@
-# Installing and reproducing amiga-exp 0.2.0
+# Installing and reproducing amiga-exp 0.3.0
 
 `amiga-exp` is distributed in this Git repository and versioned independently
-of the `amiga-grn` PyPI package. The release tag is `amiga-exp-v0.2.0`.
+of the `amiga-grn` PyPI package. The release tag is `amiga-exp-v0.3.0`.
 Installing `amiga-grn` alone does not install this workflow or its benchmark data.
 
 ## Installation
@@ -11,7 +11,7 @@ recorded execution environment; each run additionally records actual libraries
 and numerical thread pools. CPU training is used by the current protocol.
 
 ```bash
-git clone --branch amiga-exp-v0.2.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
+git clone --branch amiga-exp-v0.3.0 https://github.com/AdrianSeguraOrtiz/AMIGA.git
 cd AMIGA
 POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with experiments
 poetry run scripts/experiments/amiga-exp --version
@@ -30,9 +30,10 @@ an interpreter. Always run the commands below from the repository root.
 
 The release contains source code, scientific specifications, case/feature
 metadata, topology groups, dependency lock and tests. Generated datasets,
-contracts, model outputs and figures under `experiments/` are separate artifacts;
-they are not included in the Git source archive. This source release is not a
-self-contained archive of all benchmark and biological inputs.
+contracts, model outputs and figures under `experiments/` are separate artifacts.
+The [versioned benchmark deposit](../../benchmark-artifacts/README.md) distributes
+processed inputs, completed figure evidence and held-out predictions in verified
+compressed containers. It does not include all biological raw inputs.
 
 Full benchmark execution needs these exact processed CSVs:
 
@@ -56,11 +57,18 @@ poetry run python -m scripts.experiments.amiga_exp.grouped_validation.topology \
   --source-root /path/to/GENECI/input_data
 ```
 
-Dataset and result distribution needs a separate, persistent data deposit.
-Until that deposit is provided, the commands document the executable workflow
-for users who already possess the checksummed inputs; the source tag alone
-does not provide complete data accessibility. TCGA-BRCA resources and the
-deployment refit have a separate scope described in the workflow guide.
+Restore the processed data and evidence with:
+
+```bash
+scripts/experiments/amiga-exp supplement restore-archive \
+  --archive benchmark-artifacts/comparison-v0.3.0 --destination .
+```
+
+For a fresh full execution, copy only the two processed input CSVs from the
+restored evidence to another checkout. Restoring completed summaries/job
+receipts and then trying to use their paths as new execution destinations will
+correctly fail. TCGA-BRCA resources and supplementary completion have a separate
+scope documented in the [supplementary guide](supplementary.md).
 
 ## Execution order
 
@@ -74,6 +82,8 @@ deployment refit have a separate scope described in the workflow guide.
    preceding comparator outputs and require the documented directory layout.
 5. Run the [supervised report](reporting.md) to regenerate the final rank tables,
    exploratory tests and figures from those completed summaries.
+6. Generate the [phase figures](figures.md), then freeze and run the separate
+   [learning-curve/deployment/cost pipeline](supplementary.md).
 
 The detailed specifications contain freeze, run, summarize, resume and status
 commands. Completed recorded runs use the `full-001` and `evaluation-001`

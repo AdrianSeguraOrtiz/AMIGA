@@ -12,6 +12,7 @@ from scripts.experiments.amiga_exp.outer_evaluation.commands import app as outer
 from scripts.experiments.amiga_exp.top5_classification.commands import app as top5_app
 from scripts.experiments.amiga_exp.top10_classification.commands import app as top10_app
 from scripts.experiments.amiga_exp.reporting.commands import app as reporting_app
+from scripts.experiments.amiga_exp.supplementary.commands import app as supplementary_app
 from scripts.experiments.amiga_exp.version import __version__
 
 from scripts.experiments.amiga_exp.context import (
@@ -88,6 +89,7 @@ app.add_typer(outer_app, name="outer")
 app.add_typer(top5_app, name="top5-classification")
 app.add_typer(top10_app, name="top10-classification")
 app.add_typer(reporting_app, name="report")
+app.add_typer(supplementary_app, name="supplement")
 
 
 def _show_version(value: bool) -> None:

@@ -76,3 +76,9 @@ training sets and the exploratory classifier thresholds limit inference.
 The manifest records the selected method set and numerical policy explicitly.
 Source summaries continue to contain every method evaluated in their frozen
 contracts. Regenerating a report in a new directory never changes those results.
+
+For the original four phase designs, including separate supervised and
+objective-selector comparison panels, use [`report figures`](figures.md).
+It displays these five-method ranks and Holm values in panel A, together with
+the original metric means, and generates tuning and column-selection figures
+for every reported formulation.
