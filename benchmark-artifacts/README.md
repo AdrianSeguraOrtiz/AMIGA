@@ -2,13 +2,14 @@
 
 This directory distributes checksummed benchmark evidence for **amiga-exp
 0.3.0**, independently of the `amiga-grn` PyPI package. The source tag is
-`amiga-exp-v0.3.0`. Each deposit has a JSON inventory with SHA-256 and sizes for
+`amiga-exp-v0.3.0`; the completed benchmark deposit has the separate immutable
+tag `amiga-exp-benchmarks-v0.3.0`. Each deposit has a JSON inventory with SHA-256 and sizes for
 every compressed container and restored file. Individual containers stay below
 90 MiB and can be downloaded through GitHub without Git LFS.
 
 | Deposit | Scope | Status |
 | --- | --- | --- |
-| `comparison-v0.3.0/` | Processed benchmark inputs, phase 1–4 figure inputs/results, saved five-formulation and objective-selector evaluation predictions | Prepared for publication with the source release |
+| `comparison-v0.3.0/` | Processed benchmark inputs, phase 1–4 figure inputs/results, saved five-formulation and objective-selector evaluation predictions | Complete; artifact tag `amiga-exp-benchmarks-v0.3.0` |
 | `supplementary-v0.3.0/` | Learning curves, native deployment models, TCGA contextual support and cost measurements | Available after the full supplementary pipeline completes |
 
 The supplementary execution is independent of the completed benchmark phases.
@@ -21,6 +22,8 @@ seeds, metrics, intervals, monitoring and technical resumption.
 After cloning this repository and installing experimental dependencies:
 
 ```bash
+git fetch origin tag amiga-exp-benchmarks-v0.3.0
+git restore --source=amiga-exp-benchmarks-v0.3.0 -- benchmark-artifacts/comparison-v0.3.0
 scripts/experiments/amiga-exp supplement verify-archive \
   --archive benchmark-artifacts/comparison-v0.3.0
 scripts/experiments/amiga-exp supplement restore-archive \

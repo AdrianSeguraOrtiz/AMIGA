@@ -60,6 +60,8 @@ poetry run python -m scripts.experiments.amiga_exp.grouped_validation.topology \
 Restore the processed data and evidence with:
 
 ```bash
+git fetch origin tag amiga-exp-benchmarks-v0.3.0
+git restore --source=amiga-exp-benchmarks-v0.3.0 -- benchmark-artifacts/comparison-v0.3.0
 scripts/experiments/amiga-exp supplement restore-archive \
   --archive benchmark-artifacts/comparison-v0.3.0 --destination .
 ```
