@@ -1,0 +1,12 @@
+{
+  "python": "3.13.5",
+  "platform": "Linux-5.15.0-173-generic-x86_64-with-glibc2.35",
+  "dependencies": {
+    "reportlab": "4.4.9",
+    "PyMuPDF": "1.26.7",
+    "fonttools": "4.63.0",
+    "pillow": "12.3.0",
+    "charset-normalizer": "3.5.2"
+  },
+  "note": "Binary regeneration depends on the recorded dependency and font versions."
+}

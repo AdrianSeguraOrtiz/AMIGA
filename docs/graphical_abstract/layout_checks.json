@@ -1,0 +1,36 @@
+{
+  "text_elements": 134,
+  "vector_primitives": 1039,
+  "pdf_drawing_objects": 1039,
+  "pdf_text_spans": 134,
+  "raster_images_in_pdf": 0,
+  "text_outside_regions": [],
+  "text_box_overlaps": [],
+  "reference_image_used_by_builder": false,
+  "bbox_note": "Font ascent/descent boxes; no claim of a complete geometry proof.",
+  "scientific_scope": "Reusable AMIGA core, not the complete amiga-exp study.",
+  "sources_revision": "1eaef45bee2d58807e8563b01eefee4724fe4b2f",
+  "fonts": {
+    "regular": {
+      "filename": "DejaVuSans.ttf",
+      "sha256": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648"
+    },
+    "bold": {
+      "filename": "DejaVuSans-Bold.ttf",
+      "sha256": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b"
+    }
+  },
+  "sources_sha256": {
+    "build_figure.py": "b0b110cbd789301abf293d723243652978e7b8f417e31d89b6ca5e14abbf4f55",
+    "vector_engine.py": "01e2040e3672b6746e590dcf6d8bd576a04b77f3305ffbdd7dd8cd5d1502b0e2",
+    "figure_config.json": "df888d54507b13532a141a1286302e46135e562b39ff8802f89a7331e680d882",
+    "figure_text.json": "7869195eb4929f5d65d305c7bd092380dcb33cfbaeffeb96914362f2ff602c0d"
+  },
+  "artifacts": {
+    "AMIGA_graphical_abstract.pdf": "e7a368e6f7c3e28b70f0c1d9dfc5cb5b2d1bbad3e0112b692f884e194ca77b23",
+    "AMIGA_graphical_abstract.png": "6d7bb946f99dd0668b7b6bcd7ec9fcf1a9ac89109e741e7a90216d56cae9e9b1",
+    "AMIGA_graphical_abstract.svg": "08c57d1c392c20ccde3b29cee550e30d2fe2410f78682dabfe6fca7746a7a015",
+    "AMIGA_graphical_abstract_outlined.svg": "e899c96c6bdc313ed820735c8d5708d45f2d9ddc302924a0a2244e7cc9a4df54",
+    "AMIGA_graphical_abstract_preview.png": "935427d77a166ba5d1780d2551dad5cdbb2d910f237fa8f9ed8ed9f5782c383c"
+  }
+}

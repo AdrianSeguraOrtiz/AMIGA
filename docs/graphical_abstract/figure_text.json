@@ -1,0 +1,102 @@
+{
+  "brand": "AMIGA",
+  "expansion": "Automated Multi-objective Individual GRN Assessment",
+  "headline": "Learn which network to choose.",
+  "subtitle": "From alternative consensus networks to a ranked recommendation \u2014 without reference labels at prediction time.",
+  "upstream_label": "UPSTREAM  /  GENERATE ALTERNATIVES",
+  "amiga_label": "AMIGA  /  DESCRIBE, LEARN AND RANK",
+  "training_title": "Learn from benchmark networks",
+  "training_subtitle": "Known reference links reveal which candidates deserve higher priority.",
+  "application_title": "Recommend a network for new data",
+  "application_subtitle": "The learned decision rule scores new candidates without a reference network.",
+  "data_title_training": "Benchmark data",
+  "data_title_application": "New study data",
+  "data_subtitle": "Expression + base networks",
+  "expression_label": "Gene expression",
+  "networks_label": "Base GRNs",
+  "reference_title": [
+    "Reference",
+    "network"
+  ],
+  "reference_subtitle": "Known links",
+  "reference_note": "For candidate evaluation only",
+  "no_reference": [
+    "No reference network",
+    "is needed here"
+  ],
+  "no_reference_note": "Only experimental inputs",
+  "candidate_title": "Explore candidate networks",
+  "candidate_subtitle": "Multi-objective consensus optimization",
+  "objective_y": "Objective 2",
+  "objective_x": "Objective 1",
+  "front_explanation": [
+    "One point = one weighted consensus.",
+    "The Pareto front contains trade-offs."
+  ],
+  "measure_quality": "Compare with reference links",
+  "quality_label": "Measured quality label (AUPR)",
+  "no_quality": [
+    "Several alternatives.",
+    "No reference-based quality label."
+  ],
+  "feature_title": "Describe each candidate",
+  "feature_subtitle": "One table row per candidate network",
+  "feature_labels": [
+    [
+      "Blend",
+      "weights"
+    ],
+    [
+      "Objective",
+      "values"
+    ],
+    [
+      "Network",
+      "structure"
+    ],
+    [
+      "Data",
+      "context"
+    ]
+  ],
+  "label_header": [
+    "Quality",
+    "labels"
+  ],
+  "absent_label_header": [
+    "Quality",
+    "labels"
+  ],
+  "feature_note_training": [
+    "Network descriptors vary by candidate;",
+    "expression context is shared by a front."
+  ],
+  "feature_note_application": [
+    "Use the same predictor columns",
+    "and order saved during training."
+  ],
+  "learn_title": "Learn to rank within each front",
+  "learn_subtitle": "Features predict an ordering, not a cutoff",
+  "learn_order_note": "Prefer candidates with higher quality labels",
+  "train_short": "Training folds",
+  "heldout_short": "Validation folds",
+  "cv_note": [
+    "Grouped validation",
+    "Keep fronts intact"
+  ],
+  "model_saved": "Save the ranker + feature schema",
+  "model_refit": "Refit on all labelled fronts after CV",
+  "transfer_title": "Reuse the learned decision rule",
+  "transfer_subtitle": "Trained model + saved predictor columns",
+  "quality_boundary": "Quality labels supervise learning; they are not prediction inputs.",
+  "rank_title": "Score, rank and recommend",
+  "rank_subtitle": "Apply the saved AMIGA model",
+  "predicted_order": "Predicted order",
+  "top_choice": "TOP CHOICE",
+  "chosen_label": "Top-ranked candidate",
+  "select_note": "Choose one network or a short list",
+  "export_note": "Output: score + rank within each front",
+  "footer": "AMIGA prioritizes existing candidates; it does not generate a new network.",
+  "schematic_note": "Schematics, not experimental results. Ranking scores are not measured network accuracy.",
+  "revision_note": "AMIGA core workflow \u00b7 1eaef45bee2d"
+}

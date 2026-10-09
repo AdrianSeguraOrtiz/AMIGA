@@ -1,0 +1,48 @@
+{
+  "vector_check": "passed",
+  "layout_check": "passed",
+  "pdf": {
+    "pages": 1,
+    "raster_images": 0,
+    "vector_drawings": 1039
+  },
+  "text_elements": 134,
+  "source_only_rebuild": {
+    "inputs": [
+      "build_figure.py",
+      "vector_engine.py",
+      "figure_text.json",
+      "figure_config.json"
+    ],
+    "uses_reference_image": false,
+    "all_five_artifacts_byte_identical": true,
+    "compared_files": {
+      "AMIGA_graphical_abstract.pdf": {
+        "identical": true,
+        "delivered_sha256": "e7a368e6f7c3e28b70f0c1d9dfc5cb5b2d1bbad3e0112b692f884e194ca77b23",
+        "rebuilt_sha256": "e7a368e6f7c3e28b70f0c1d9dfc5cb5b2d1bbad3e0112b692f884e194ca77b23"
+      },
+      "AMIGA_graphical_abstract.svg": {
+        "identical": true,
+        "delivered_sha256": "08c57d1c392c20ccde3b29cee550e30d2fe2410f78682dabfe6fca7746a7a015",
+        "rebuilt_sha256": "08c57d1c392c20ccde3b29cee550e30d2fe2410f78682dabfe6fca7746a7a015"
+      },
+      "AMIGA_graphical_abstract_outlined.svg": {
+        "identical": true,
+        "delivered_sha256": "e899c96c6bdc313ed820735c8d5708d45f2d9ddc302924a0a2244e7cc9a4df54",
+        "rebuilt_sha256": "e899c96c6bdc313ed820735c8d5708d45f2d9ddc302924a0a2244e7cc9a4df54"
+      },
+      "AMIGA_graphical_abstract.png": {
+        "identical": true,
+        "delivered_sha256": "6d7bb946f99dd0668b7b6bcd7ec9fcf1a9ac89109e741e7a90216d56cae9e9b1",
+        "rebuilt_sha256": "6d7bb946f99dd0668b7b6bcd7ec9fcf1a9ac89109e741e7a90216d56cae9e9b1"
+      },
+      "AMIGA_graphical_abstract_preview.png": {
+        "identical": true,
+        "delivered_sha256": "935427d77a166ba5d1780d2551dad5cdbb2d910f237fa8f9ed8ed9f5782c383c",
+        "rebuilt_sha256": "935427d77a166ba5d1780d2551dad5cdbb2d910f237fa8f9ed8ed9f5782c383c"
+      }
+    },
+    "qualification": "Binary identity is environment- and font-version-dependent."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "repository": "AdrianSeguraOrtiz/AMIGA",
+  "revision": "1eaef45bee2d58807e8563b01eefee4724fe4b2f",
+  "scope": "Reusable core training and prediction workflow",
+  "sources": [
+    {
+      "id": "S1",
+      "path": "README.md",
+      "url": "https://github.com/AdrianSeguraOrtiz/AMIGA/blob/1eaef45bee2d58807e8563b01eefee4724fe4b2f/README.md",
+      "supports": [
+        "post-Pareto decision layer",
+        "labelled/unlabelled tables",
+        "model and schema artifacts",
+        "core versus experimental workflow"
+      ]
+    },
+    {
+      "id": "S2",
+      "path": "amiga/core/main.py",
+      "url": "https://github.com/AdrianSeguraOrtiz/AMIGA/blob/1eaef45bee2d58807e8563b01eefee4724fe4b2f/amiga/core/main.py",
+      "symbols": [
+        "build_data",
+        "train_ltr_cv",
+        "train_ltr_full",
+        "rank_with_model",
+        "extract_expression_features",
+        "extract_grnet_features"
+      ]
+    },
+    {
+      "id": "S3",
+      "path": "amiga/selection/learn2rank.py",
+      "url": "https://github.com/AdrianSeguraOrtiz/AMIGA/blob/1eaef45bee2d58807e8563b01eefee4724fe4b2f/amiga/selection/learn2rank.py",
+      "symbols": [
+        "ModelType",
+        "LabelMode",
+        "build_labels",
+        "assign_rank_in_front"
+      ]
+    }
+  ],
+  "reference_image_used_to_build": false,
+  "schematic_not_empirical": true
+}

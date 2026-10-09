@@ -13,6 +13,11 @@ fronts where no gold standard is available.
 The project is distributed on PyPI as `amiga-grn`; the import package and CLI
 entry point are both named `amiga`.
 
+[![AMIGA workflow: learning from labelled benchmark fronts and ranking new candidates without reference labels](docs/graphical_abstract/AMIGA_graphical_abstract_preview.png)](docs/graphical_abstract/AMIGA_graphical_abstract.pdf)
+
+The [graphical overview](docs/graphical_abstract/README.md) includes editable SVG,
+vector PDF and the code needed to regenerate the figure.
+
 ## Installation
 
 ```bash

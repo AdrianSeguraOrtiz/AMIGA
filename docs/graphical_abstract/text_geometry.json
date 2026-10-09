@@ -1,0 +1,1342 @@
+[
+  {
+    "text": "AMIGA",
+    "x": 64.0,
+    "y": 44.29687500000001,
+    "width": 268.98046875000006,
+    "height": 72.0,
+    "size": 72,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Learn which network to choose.",
+    "x": 428.0,
+    "y": 52.609375,
+    "width": 720.21484375,
+    "height": 40.0,
+    "size": 40,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Automated Multi-objective Individual GRN Assessment",
+    "x": 430.0,
+    "y": 103.9443359375,
+    "width": 504.68505859375,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "From alternative consensus networks to a ranked recommendation — without reference labels at prediction time.",
+    "x": 66.0,
+    "y": 144.525390625,
+    "width": 1312.58349609375,
+    "height": 23.0,
+    "size": 23,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "UPSTREAM  /  GENERATE ALTERNATIVES",
+    "x": 80.0,
+    "y": 206.603515625,
+    "width": 338.95751953125,
+    "height": 15.0,
+    "size": 15,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "AMIGA  /  DESCRIBE, LEARN AND RANK",
+    "x": 1000.0,
+    "y": 206.603515625,
+    "width": 326.5576171875,
+    "height": 15.0,
+    "size": 15,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "1",
+    "x": 79.998291015625,
+    "y": 262.525390625,
+    "width": 16.00341796875,
+    "height": 23.0,
+    "size": 23,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Learn from benchmark networks",
+    "x": 125.0,
+    "y": 248.7265625,
+    "width": 515.62109375,
+    "height": 28.0,
+    "size": 28,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Known reference links reveal which candidates deserve higher priority.",
+    "x": 125.0,
+    "y": 283.7041015625,
+    "width": 624.1125488281251,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "2",
+    "x": 79.998291015625,
+    "y": 852.525390625,
+    "width": 16.00341796875,
+    "height": 23.0,
+    "size": 23,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Recommend a network for new data",
+    "x": 125.0,
+    "y": 838.7265625,
+    "width": 572.4140625,
+    "height": 28.0,
+    "size": 28,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "The learned decision rule scores new candidates without a reference network.",
+    "x": 125.0,
+    "y": 873.7041015625,
+    "width": 686.8920898437501,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Benchmark data",
+    "x": 102.0,
+    "y": 330.765625,
+    "width": 221.3671875,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "Expression + base networks",
+    "x": 102.0,
+    "y": 363.93203125,
+    "width": 244.3693359375,
+    "height": 17.2,
+    "size": 17.2,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "Gene expression",
+    "x": 103.0359375,
+    "y": 522.691796875,
+    "width": 135.928125,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "Base GRNs",
+    "x": 285.517236328125,
+    "y": 522.691796875,
+    "width": 88.96552734375,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "Reference",
+    "x": 213.0,
+    "y": 586.9443359375,
+    "width": 105.74267578125,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "network",
+    "x": 213.0,
+    "y": 609.9443359375,
+    "width": 85.788330078125,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "Known links",
+    "x": 213.0,
+    "y": 639.995703125,
+    "width": 94.17509765625,
+    "height": 15.8,
+    "size": 15.8,
+    "horizontal_scale": 1.0,
+    "region": "training-data"
+  },
+  {
+    "text": "Explore candidate networks",
+    "x": 522.0,
+    "y": 331.1455078125,
+    "width": 370.33154296875,
+    "height": 23.5,
+    "size": 23.5,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "Multi-objective consensus optimization",
+    "x": 522.0,
+    "y": 364.53984375,
+    "width": 319.31152343749994,
+    "height": 16.4,
+    "size": 16.4,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "Objective 2",
+    "x": 558.0,
+    "y": 414.275,
+    "width": 72.90625,
+    "height": 12.8,
+    "size": 12.8,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "Objective 1",
+    "x": 663.09375,
+    "y": 526.275,
+    "width": 72.90625,
+    "height": 12.8,
+    "size": 12.8,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "A",
+    "x": 576.098193359375,
+    "y": 440.946484375,
+    "width": 8.20361328125,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "B",
+    "x": 611.120302734375,
+    "y": 445.146484375,
+    "width": 8.07939453125,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "C",
+    "x": 644.710400390625,
+    "y": 454.146484375,
+    "width": 7.77919921875,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "D",
+    "x": 671.5605859375,
+    "y": 469.746484375,
+    "width": 8.798828125,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "E",
+    "x": 698.179541015625,
+    "y": 487.146484375,
+    "width": 7.24091796875,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "A",
+    "x": 791.0,
+    "y": 410.034765625,
+    "width": 9.132324218750002,
+    "height": 11.8,
+    "size": 11.8,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "B",
+    "x": 799.0,
+    "y": 449.034765625,
+    "width": 8.994042968750001,
+    "height": 11.8,
+    "size": 11.8,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "C",
+    "x": 807.0,
+    "y": 488.034765625,
+    "width": 8.65986328125,
+    "height": 11.8,
+    "size": 11.8,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "One point = one weighted consensus.",
+    "x": 524.0,
+    "y": 557.3119140625,
+    "width": 318.221435546875,
+    "height": 16.7,
+    "size": 16.7,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "The Pareto front contains trade-offs.",
+    "x": 524.0,
+    "y": 581.3119140625,
+    "width": 303.82094726562497,
+    "height": 16.7,
+    "size": 16.7,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "Compare with reference links",
+    "x": 570.383740234375,
+    "y": 632.780078125,
+    "width": 289.23251953125,
+    "height": 17.4,
+    "size": 17.4,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "Measured quality label (AUPR)",
+    "x": 591.929833984375,
+    "y": 657.691796875,
+    "width": 246.14033203124998,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "training-candidates"
+  },
+  {
+    "text": "Describe each candidate",
+    "x": 1022.0,
+    "y": 330.765625,
+    "width": 332.765625,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "One table row per candidate network",
+    "x": 1022.0,
+    "y": 364.083984375,
+    "width": 317.64599609375,
+    "height": 17.0,
+    "size": 17.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Blend",
+    "x": 1048.91796875,
+    "y": 469.603515625,
+    "width": 48.1640625,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "weights",
+    "x": 1039.656494140625,
+    "y": 490.603515625,
+    "width": 66.68701171875,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Objective",
+    "x": 1115.020751953125,
+    "y": 469.603515625,
+    "width": 79.95849609375,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "values",
+    "x": 1127.589111328125,
+    "y": 490.603515625,
+    "width": 54.82177734375,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Network",
+    "x": 1201.283447265625,
+    "y": 469.603515625,
+    "width": 71.43310546875,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "structure",
+    "x": 1197.7568359375,
+    "y": 490.603515625,
+    "width": 78.486328125,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Data",
+    "x": 1299.067138671875,
+    "y": 469.603515625,
+    "width": 39.86572265625,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "context",
+    "x": 1286.967529296875,
+    "y": 490.603515625,
+    "width": 64.06494140625,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Quality",
+    "x": 1382.418603515625,
+    "y": 469.907421875,
+    "width": 59.16279296875,
+    "height": 14.6,
+    "size": 14.6,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "labels",
+    "x": 1387.5478515625,
+    "y": 490.907421875,
+    "width": 48.904296875,
+    "height": 14.6,
+    "size": 14.6,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "A",
+    "x": 1024.4725341796875,
+    "y": 523.7107421875,
+    "width": 9.054931640625,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "B",
+    "x": 1024.5410888671875,
+    "y": 539.7107421875,
+    "width": 8.917822265625,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "C",
+    "x": 1024.7067626953126,
+    "y": 555.7107421875,
+    "width": 8.586474609375001,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "D",
+    "x": 1024.14404296875,
+    "y": 571.7107421875,
+    "width": 9.7119140625,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "E",
+    "x": 1025.0038330078125,
+    "y": 587.7107421875,
+    "width": 7.9923339843750005,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Network descriptors vary by candidate;",
+    "x": 1069.9855712890626,
+    "y": 633.3119140625,
+    "width": 330.028857421875,
+    "height": 16.7,
+    "size": 16.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "expression context is shared by a front.",
+    "x": 1068.725732421875,
+    "y": 657.3119140625,
+    "width": 332.54853515625,
+    "height": 16.7,
+    "size": 16.7,
+    "horizontal_scale": 1.0,
+    "region": "training-features"
+  },
+  {
+    "text": "Learn to rank within each front",
+    "x": 1562.0,
+    "y": 331.525390625,
+    "width": 405.2626953125,
+    "height": 23.0,
+    "size": 23.0,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Features predict an ordering, not a cutoff",
+    "x": 1562.0,
+    "y": 364.4638671875,
+    "width": 342.1494140625,
+    "height": 16.5,
+    "size": 16.5,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Candidate A",
+    "x": 1597.0,
+    "y": 426.3509765625,
+    "width": 86.971435546875,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Candidate C",
+    "x": 1597.0,
+    "y": 457.3509765625,
+    "width": 86.462939453125,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Candidate B",
+    "x": 1597.0,
+    "y": 488.3509765625,
+    "width": 86.82260742187499,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Candidate C",
+    "x": 1919.0,
+    "y": 426.3509765625,
+    "width": 86.462939453125,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Candidate B",
+    "x": 1919.0,
+    "y": 457.3509765625,
+    "width": 86.82260742187499,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Candidate A",
+    "x": 1919.0,
+    "y": 488.3509765625,
+    "width": 86.971435546875,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Prefer candidates with higher quality labels",
+    "x": 1575.397216796875,
+    "y": 522.8560546875,
+    "width": 429.20556640625,
+    "height": 17.3,
+    "size": 17.3,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Grouped validation",
+    "x": 1562.0,
+    "y": 550.93203125,
+    "width": 185.6474609375,
+    "height": 17.2,
+    "size": 17.2,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Keep fronts intact",
+    "x": 1562.0,
+    "y": 573.93203125,
+    "width": 175.8212890625,
+    "height": 17.2,
+    "size": 17.2,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Training folds",
+    "x": 1806.7685302734376,
+    "y": 592.3509765625,
+    "width": 86.462939453125,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Validation folds",
+    "x": 1914.9084228515626,
+    "y": 592.3509765625,
+    "width": 98.183154296875,
+    "height": 12.7,
+    "size": 12.7,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Save the ranker + feature schema",
+    "x": 1616.0,
+    "y": 633.628125,
+    "width": 340.25234375,
+    "height": 17.6,
+    "size": 17.6,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "Refit on all labelled fronts after CV",
+    "x": 1616.0,
+    "y": 657.14765625,
+    "width": 269.67890625,
+    "height": 15.6,
+    "size": 15.6,
+    "horizontal_scale": 1.0,
+    "region": "training-decision"
+  },
+  {
+    "text": "New study data",
+    "x": 102.0,
+    "y": 920.765625,
+    "width": 211.95703125,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "Expression + base networks",
+    "x": 102.0,
+    "y": 953.93203125,
+    "width": 244.3693359375,
+    "height": 17.2,
+    "size": 17.2,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "Gene expression",
+    "x": 103.0359375,
+    "y": 1112.691796875,
+    "width": 135.928125,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "Base GRNs",
+    "x": 285.517236328125,
+    "y": 1112.691796875,
+    "width": 88.96552734375,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "No reference network",
+    "x": 160.0,
+    "y": 1182.7923828125,
+    "width": 229.94243164062502,
+    "height": 18.7,
+    "size": 18.7,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "is needed here",
+    "x": 160.0,
+    "y": 1207.7923828125,
+    "width": 156.59423828125,
+    "height": 18.7,
+    "size": 18.7,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "Only experimental inputs",
+    "x": 160.0,
+    "y": 1238.75546875,
+    "width": 187.5365234375,
+    "height": 14.8,
+    "size": 14.8,
+    "horizontal_scale": 1.0,
+    "region": "application-data"
+  },
+  {
+    "text": "Explore candidate networks",
+    "x": 522.0,
+    "y": 921.1455078125,
+    "width": 370.33154296875,
+    "height": 23.5,
+    "size": 23.5,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "Multi-objective consensus optimization",
+    "x": 522.0,
+    "y": 954.53984375,
+    "width": 319.31152343749994,
+    "height": 16.4,
+    "size": 16.4,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "Objective 2",
+    "x": 558.0,
+    "y": 1004.275,
+    "width": 72.90625,
+    "height": 12.8,
+    "size": 12.8,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "Objective 1",
+    "x": 663.09375,
+    "y": 1116.275,
+    "width": 72.90625,
+    "height": 12.8,
+    "size": 12.8,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "A",
+    "x": 577.618193359375,
+    "y": 1030.346484375,
+    "width": 8.20361328125,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "B",
+    "x": 606.560302734375,
+    "y": 1036.346484375,
+    "width": 8.07939453125,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "C",
+    "x": 643.190400390625,
+    "y": 1044.746484375,
+    "width": 7.77919921875,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "D",
+    "x": 677.6405859375,
+    "y": 1059.146484375,
+    "width": 8.798828125,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "E",
+    "x": 698.179541015625,
+    "y": 1077.146484375,
+    "width": 7.24091796875,
+    "height": 10.6,
+    "size": 10.6,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "A",
+    "x": 791.0,
+    "y": 1000.034765625,
+    "width": 9.132324218750002,
+    "height": 11.8,
+    "size": 11.8,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "B",
+    "x": 799.0,
+    "y": 1039.034765625,
+    "width": 8.994042968750001,
+    "height": 11.8,
+    "size": 11.8,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "C",
+    "x": 807.0,
+    "y": 1078.034765625,
+    "width": 8.65986328125,
+    "height": 11.8,
+    "size": 11.8,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "One point = one weighted consensus.",
+    "x": 524.0,
+    "y": 1147.3119140625,
+    "width": 318.221435546875,
+    "height": 16.7,
+    "size": 16.7,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "The Pareto front contains trade-offs.",
+    "x": 524.0,
+    "y": 1171.3119140625,
+    "width": 303.82094726562497,
+    "height": 16.7,
+    "size": 16.7,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "Several alternatives.",
+    "x": 612.0379638671875,
+    "y": 1222.7041015625,
+    "width": 205.92407226562503,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "No reference-based quality label.",
+    "x": 550.023193359375,
+    "y": 1246.7041015625,
+    "width": 329.95361328125006,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": "application-candidates"
+  },
+  {
+    "text": "Describe each candidate",
+    "x": 1022.0,
+    "y": 920.765625,
+    "width": 332.765625,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "One table row per candidate network",
+    "x": 1022.0,
+    "y": 954.083984375,
+    "width": 317.64599609375,
+    "height": 17.0,
+    "size": 17.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Blend",
+    "x": 1048.91796875,
+    "y": 1059.603515625,
+    "width": 48.1640625,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "weights",
+    "x": 1039.656494140625,
+    "y": 1080.603515625,
+    "width": 66.68701171875,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Objective",
+    "x": 1115.020751953125,
+    "y": 1059.603515625,
+    "width": 79.95849609375,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "values",
+    "x": 1127.589111328125,
+    "y": 1080.603515625,
+    "width": 54.82177734375,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Network",
+    "x": 1201.283447265625,
+    "y": 1059.603515625,
+    "width": 71.43310546875,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "structure",
+    "x": 1197.7568359375,
+    "y": 1080.603515625,
+    "width": 78.486328125,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Data",
+    "x": 1299.067138671875,
+    "y": 1059.603515625,
+    "width": 39.86572265625,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "context",
+    "x": 1286.967529296875,
+    "y": 1080.603515625,
+    "width": 64.06494140625,
+    "height": 15.0,
+    "size": 15.0,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Quality",
+    "x": 1385.91533203125,
+    "y": 1059.907421875,
+    "width": 52.1693359375,
+    "height": 14.6,
+    "size": 14.6,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "labels",
+    "x": 1390.5419921875,
+    "y": 1080.907421875,
+    "width": 42.916015625,
+    "height": 14.6,
+    "size": 14.6,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "A",
+    "x": 1024.4725341796875,
+    "y": 1113.7107421875,
+    "width": 9.054931640625,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "B",
+    "x": 1024.5410888671875,
+    "y": 1129.7107421875,
+    "width": 8.917822265625,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "C",
+    "x": 1024.7067626953126,
+    "y": 1145.7107421875,
+    "width": 8.586474609375001,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "D",
+    "x": 1024.14404296875,
+    "y": 1161.7107421875,
+    "width": 9.7119140625,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "E",
+    "x": 1025.0038330078125,
+    "y": 1177.7107421875,
+    "width": 7.9923339843750005,
+    "height": 11.7,
+    "size": 11.7,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Use the same predictor columns",
+    "x": 1076.0,
+    "y": 1223.083984375,
+    "width": 309.685546875,
+    "height": 17.0,
+    "size": 17,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "and order saved during training.",
+    "x": 1076.0,
+    "y": 1247.083984375,
+    "width": 313.1552734375,
+    "height": 17.0,
+    "size": 17,
+    "horizontal_scale": 1.0,
+    "region": "application-features"
+  },
+  {
+    "text": "Score, rank and recommend",
+    "x": 1562.0,
+    "y": 920.765625,
+    "width": 381.22265625,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "Apply the saved AMIGA model",
+    "x": 1562.0,
+    "y": 954.083984375,
+    "width": 257.1416015625,
+    "height": 17.0,
+    "size": 17.0,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "Predicted order",
+    "x": 1590.25390625,
+    "y": 989.84375,
+    "width": 141.4921875,
+    "height": 16.0,
+    "size": 16.0,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "1",
+    "x": 1575.6075439453125,
+    "y": 1025.2236328125,
+    "width": 10.784912109375,
+    "height": 15.5,
+    "size": 15.5,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "C",
+    "x": 1628.0,
+    "y": 1026.36328125,
+    "width": 10.2744140625,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "2",
+    "x": 1575.6075439453125,
+    "y": 1059.2236328125,
+    "width": 10.784912109375,
+    "height": 15.5,
+    "size": 15.5,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "A",
+    "x": 1628.0,
+    "y": 1060.36328125,
+    "width": 10.8349609375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "3",
+    "x": 1575.6075439453125,
+    "y": 1093.2236328125,
+    "width": 10.784912109375,
+    "height": 15.5,
+    "size": 15.5,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "E",
+    "x": 1628.0,
+    "y": 1094.36328125,
+    "width": 9.5634765625,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "4",
+    "x": 1575.6075439453125,
+    "y": 1127.2236328125,
+    "width": 10.784912109375,
+    "height": 15.5,
+    "size": 15.5,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "B",
+    "x": 1628.0,
+    "y": 1128.36328125,
+    "width": 10.6708984375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "5",
+    "x": 1575.6075439453125,
+    "y": 1161.2236328125,
+    "width": 10.784912109375,
+    "height": 15.5,
+    "size": 15.5,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "D",
+    "x": 1628.0,
+    "y": 1162.36328125,
+    "width": 11.62109375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "TOP CHOICE",
+    "x": 1875.4251953125,
+    "y": 1011.18671875,
+    "width": 79.149609375,
+    "height": 11.6,
+    "size": 11.6,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "Top-ranked candidate",
+    "x": 1810.456005859375,
+    "y": 1185.1599609375,
+    "width": 209.08798828124998,
+    "height": 16.9,
+    "size": 16.9,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "Choose one network or a short list",
+    "x": 1610.0,
+    "y": 1232.5521484375,
+    "width": 344.71787109375003,
+    "height": 17.7,
+    "size": 17.7,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "Output: score + rank within each front",
+    "x": 1648.765673828125,
+    "y": 1268.907421875,
+    "width": 282.46865234375,
+    "height": 14.6,
+    "size": 14.6,
+    "horizontal_scale": 1.0,
+    "region": "application-decision"
+  },
+  {
+    "text": "Reuse the learned decision rule",
+    "x": 1578.0,
+    "y": 758.868359375,
+    "width": 332.60214843750003,
+    "height": 18.6,
+    "size": 18.6,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Trained model + saved predictor columns",
+    "x": 1578.0,
+    "y": 784.84375,
+    "width": 336.859375,
+    "height": 16.0,
+    "size": 16,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Quality labels supervise learning; they are not prediction inputs.",
+    "x": 125.0,
+    "y": 761.5890625,
+    "width": 791.806640625,
+    "height": 21.6,
+    "size": 21.6,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "AMIGA prioritizes existing candidates; it does not generate a new network.",
+    "x": 64.0,
+    "y": 1340.5767578125,
+    "width": 863.6916503906251,
+    "height": 20.3,
+    "size": 20.3,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Schematics, not experimental results. Ranking scores are not measured network accuracy.",
+    "x": 64.0,
+    "y": 1372.907421875,
+    "width": 667.5080078125,
+    "height": 14.6,
+    "size": 14.6,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "AMIGA core workflow · 1eaef45bee2d",
+    "x": 1790.95029296875,
+    "y": 1373.2873046875,
+    "width": 265.04970703124997,
+    "height": 14.1,
+    "size": 14.1,
+    "horizontal_scale": 1.0,
+    "region": null
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "title": "AMIGA — learning which consensus network to choose",
+  "output_basename": "AMIGA_graphical_abstract",
+  "canvas": {"width": 2120, "height": 1400, "physical_width_mm": 320},
+  "font_family": "DejaVu Sans",
+  "fonts": {"regular": "DejaVuSans.ttf", "bold": "DejaVuSans-Bold.ttf"},
+  "palette": {
+    "ink": "#142F43", "muted": "#536B80", "line": "#D7E2EA", "white": "#FFFFFF",
+    "blue": "#3C76CB", "blue_light": "#ECF3FC", "teal": "#008A85", "teal_light": "#E9F7F4",
+    "gold": "#BF801A", "gold_light": "#FFF5D9", "purple": "#8265B0", "purple_light": "#F3EEFA",
+    "coral": "#CF7960", "soft": "#F6F9FB", "gray": "#AABAC6"
+  },
+  "provenance": "Conceptual AMIGA core workflow, based on repository commit 1eaef45bee2d58807e8563b01eefee4724fe4b2f. All matrices, fronts, network diagrams and score bars are schematic, not empirical results. No reference image or generative image model is used by the builder.",
+  "repository": "AdrianSeguraOrtiz/AMIGA",
+  "commit": "1eaef45bee2d58807e8563b01eefee4724fe4b2f",
+  "preview_dpi": 150,
+  "png_dpi": 300
+}
