@@ -10,12 +10,15 @@ every compressed container and restored file. Individual containers stay below
 | Deposit | Scope | Status |
 | --- | --- | --- |
 | `comparison-v0.3.0/` | Processed benchmark inputs, phase 1–4 figure inputs/results, saved five-formulation and objective-selector evaluation predictions | Complete; artifact tag `amiga-exp-benchmarks-v0.3.0` |
-| `supplementary-v0.3.0/` | Learning curves, native deployment models, TCGA contextual support and cost measurements | Available after the full supplementary pipeline completes |
+| `supplementary-v0.3.0/` | Extended learning curves, deployment and cost measurements | Not available; extended execution stopped before completion |
 
 The supplementary execution is independent of the completed benchmark phases.
-A source release or a running process does not establish completed evidence.
-The [workflow guide](../docs/experiments/supplementary.md) specifies selection,
-seeds, metrics, intervals, monitoring and technical resumption.
+Its automatic publication has been stopped. No supplementary deposit or artifact
+tag has been created. The [experimental overview](../docs/experiments.md#supplementary-evaluation-blocks)
+records the reduced, unexecuted scope. The
+[extended workflow guide](../docs/experiments/supplementary.md) and archiving
+commands below document implemented functionality; they are not additional
+steps required to reproduce the completed benchmark phases.
 
 ## Verify and restore
 

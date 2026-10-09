@@ -69,8 +69,8 @@ scripts/experiments/amiga-exp supplement restore-archive \
 For a fresh full execution, copy only the two processed input CSVs from the
 restored evidence to another checkout. Restoring completed summaries/job
 receipts and then trying to use their paths as new execution destinations will
-correctly fail. TCGA-BRCA resources and supplementary completion have a separate
-scope documented in the [supplementary guide](supplementary.md).
+correctly fail. TCGA-BRCA resources and supplementary analyses have a separate
+scope and status in the [experimental overview](../experiments.md#supplementary-evaluation-blocks).
 
 ## Execution order
 
@@ -84,8 +84,9 @@ scope documented in the [supplementary guide](supplementary.md).
    preceding comparator outputs and require the documented directory layout.
 5. Run the [supervised report](reporting.md) to regenerate the final rank tables,
    exploratory tests and figures from those completed summaries.
-6. Generate the [phase figures](figures.md), then freeze and run the separate
-   [learning-curve/deployment/cost pipeline](supplementary.md).
+6. Generate the [phase figures](figures.md). This completes reproduction of the
+   recorded benchmark phases; supplementary analyses have a separate scope and
+   are not required to reproduce these results.
 
 The detailed specifications contain freeze, run, summarize, resume and status
 commands. Completed recorded runs use the `full-001` and `evaluation-001`

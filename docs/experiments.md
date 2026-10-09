@@ -101,30 +101,40 @@ The reporting command is included in the 0.3.0 source release.
 
 ## Supplementary evaluation blocks
 
-Phases 0–4 and the additional classifier evaluations are complete. The
-[`supplement` workflow](experiments/supplementary.md) adds separate analyses:
+Phases 0–4 and the additional classifier evaluations are complete. The extended
+supplementary execution has been stopped; its partial outputs are not completed
+learning-curve or application evidence. No replacement execution is scheduled.
+The reduced supplementary scope is planned, not yet implemented or executed:
 
-- Learning curves: repeat complete selection using only 10/20/40 labelled
-  topology groups, with three nested subsamples and five final seeds; reuse the
-  completed full-size endpoint.
-- TCGA-BRCA application: grouped selection over all 104 benchmark fronts,
-  native deployment export, scoring of the existing real front and contextual
-  support against one fixed evidence snapshot.
-- Costs: isolated feature preparation, stored fitting times/peak memory and
-  repeated real-front scoring.
-- Data accessibility: versioned [benchmark deposits](../benchmark-artifacts/README.md)
-  contain processed inputs, saved predictions and figure evidence.
+- Learning curves for AMIGA only: reuse the family, relevance labels,
+  hyperparameters and exact predictor columns already selected for each outer
+  fold. Refit at smaller labelled training sizes, retaining the original test
+  partitions and final seeds. Reuse the completed full-size endpoint. This
+  measures data-size sensitivity conditional on fixed model selection; it does
+  not repeat selection or compare supervised alternatives.
+- TCGA-BRCA application: retain the existing real-case analysis and evidence
+  resources, updating the AMIGA model and its resulting ranking. Do not add a
+  new supervised comparison or a new full model-selection search.
+- Costs: measure prediction and ranking on a prepared front. Feature generation,
+  upstream inference, evolutionary optimization and training are outside this
+  timing scope.
+- Reproducibility: retain versioned source, processed inputs, saved predictions,
+  figures and instructions in the existing
+  [benchmark deposits](../benchmark-artifacts/README.md). This is artifact
+  distribution and verification, not another experimental phase.
 
-Monitor a launched supplementary pipeline with:
+The implemented [extended workflow](experiments/supplementary.md) is retained as
+a reference for its frozen contract, not as the current supplementary plan.
+Inspect its stopped execution with:
 
 ```bash
 scripts/experiments/amiga-exp supplement status \
   --run experiments/supplementary/full-001
 ```
 
-The source implementation does not by itself establish completion: require a
-`complete` pipeline state and verified output manifests. The supplementary
-guide lists output paths and all selection/aggregation rules.
+Completed analyses require a `complete` state and verified output manifests.
+The stopped extended execution must not be resumed as the reduced analysis:
+its contract specifies different methods and model-selection rules.
 
 Leave-family-out evaluation is outside this supplementary scope. Earlier
 exclusion results describe their own fixed configuration; they cannot be

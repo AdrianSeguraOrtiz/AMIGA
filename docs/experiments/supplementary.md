@@ -1,4 +1,13 @@
-# Learning curves, deployment and computational costs
+# Extended supplementary workflow (reference)
+
+The extended execution described here was stopped before completion. This
+specification documents the implemented workflow and its frozen contract;
+it is not the current supplementary plan and no resumption is scheduled.
+Partial fitting outputs do not establish completed learning curves, deployment
+models or application results. The reduced, unexecuted scope is recorded in
+the [experimental overview](../experiments.md#supplementary-evaluation-blocks).
+Commands below are reference documentation, not instructions to launch the
+reduced analysis.
 
 The `supplement` workflow extends completed phases 0–4 without changing their
 contracts, predictions, figures or primary metric. It uses the same processed
