@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "amiga-grn"
-version = "0.1.0"
+version = "0.2.0"
 description = "Learning-to-rank for post-Pareto selection of consensus gene regulatory networks"
 authors = ["Adrián Segura-Ortiz <adrianseor.99@uma.es>"]
 readme = "README.md"

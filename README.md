@@ -13,6 +13,11 @@ fronts where no gold standard is available.
 The project is distributed on PyPI as `amiga-grn`; the import package and CLI
 entry point are both named `amiga`.
 
+[![AMIGA workflow: learning from labelled benchmark fronts and ranking new candidates without reference labels](docs/graphical_abstract/AMIGA_graphical_abstract_preview.png)](docs/graphical_abstract/AMIGA_graphical_abstract.pdf)
+
+The [graphical overview](docs/graphical_abstract/README.md) includes editable SVG,
+vector PDF and the code needed to regenerate the figure.
+
 ## Installation
 
 ```bash
@@ -254,84 +259,50 @@ main top-k metrics include:
 This design focuses on the practical decision problem: placing high-quality
 candidate networks near the top of a short recommendation list.
 
-## Research Workflow
+## Experimental workflow
 
-The installable `amiga` package contains the reusable software core: feature
-extraction, data construction, model training, cross-validation, reporting and
-ranking.
+The repository includes `amiga-exp` for the documented benchmark protocol,
+real-data application and prediction-cost measurements. It shares the AMIGA
+project version. The source prepared for the next release is **0.2.0**;
+`pip install amiga-grn` installs the currently published PyPI package.
 
-The repository also contains an article-oriented workflow called `amiga-exp`
-under `scripts/experiments/amiga_exp/`. It is not published as part of the PyPI
-package in this release. It is tied to the repository layout, versioned case
-manifests and publication plots, so it should be treated as a reproducible
-research protocol rather than as a stable public API.
-
-To use it, clone the repository and install the experiment dependency group:
+Install the repository workflow with:
 
 ```bash
 git clone https://github.com/AdrianSeguraOrtiz/AMIGA.git
 cd AMIGA
-poetry install --with experiments
+POETRY_VIRTUALENVS_IN_PROJECT=true poetry install --with experiments
 scripts/experiments/amiga-exp --help
+scripts/experiments/amiga-exp --version
 ```
 
-The expected case directory contains a `data/` folder with `data_*.csv` files
-and an `audit/` subfolder. The wrapper sets the repository on `PYTHONPATH`, so
-it can call the local `amiga` implementation without requiring a separate
-PyPI-only install.
+The commands follow the scientific design:
 
-Recommended command order:
+| Scope | Command | Purpose |
+| --- | --- | --- |
+| Benchmark phases 1–3 | `benchmark selection` | Labels, parameters, columns and ranker family |
+| Benchmark phase 4 | `benchmark comparison` | Held-out supervised and objective-selector comparisons |
+| Benchmark phase 5 | `benchmark learning` | Fixed-AMIGA learning curves |
+| Real-data application | `real` | Saved-model ranking and contextual regulatory support |
+| Prediction costs | `costs` | Prediction and sorting of a prepared candidate front |
 
-```bash
-scripts/experiments/amiga-exp inspect <case_dir>
-scripts/experiments/amiga-exp validate <case_dir>
-scripts/experiments/amiga-exp init-results <case_dir>
-scripts/experiments/amiga-exp run-all <case_dir>
-scripts/experiments/amiga-exp plot-all --case-dir <case_dir> --force
-```
+`benchmark figures` and `benchmark statistics` generate figures and statistical
+reports from saved outputs. `prepare`, `run` and `status` manage the shared
+learning-curve and deployment execution after the comparison is complete.
+`organize` creates a local index of verified results.
 
-Useful lower-level commands:
+The experimental component runs from the repository; it is not installed by
+the PyPI package. The repository contains source, tests, dependency locks and
+input/protocol metadata. Datasets, fitted models, numerical results and
+experimental figures remain in Git-ignored local folders.
 
-```bash
-scripts/experiments/amiga-exp run-phase <case_dir> 01_model_screening
-scripts/experiments/amiga-exp run-phase <case_dir> 02_hyperparameter_tuning
-scripts/experiments/amiga-exp run-phase <case_dir> final_test
-scripts/experiments/amiga-exp run-phase <case_dir> 03_ablation
-scripts/experiments/amiga-exp run-phase <case_dir> 04_decision_baselines
-scripts/experiments/amiga-exp summarize-paper <case_dir>
-scripts/experiments/amiga-exp plot-phase --case-dir <case_dir> --phase 01_model_screening
-scripts/experiments/amiga-exp real-world-validate experiments/BIO-INSIGHT/real-world/tcga_brca
-```
-
-The standard phases are:
-
-- `01_model_screening`: compare ranker families and label modes;
-- `02_hyperparameter_tuning`: tune shortlisted configurations on development fronts;
-- `final_test`: evaluate the frozen selected configuration on held-out fronts;
-- `03_ablation`: quantify feature-block contributions;
-- `04_decision_baselines`: compare AMIGA with post-Pareto decision baselines.
-
-The `real-world-validate` command is specific to the TCGA-BRCA case reported in
-the manuscript. It regenerates only the published real-world validation table:
-Top1 recommendations for the five BIO-INSIGHT finalists, CollecTRI/DoRothEA/
-TRRUST/JASPAR at top-250, Cistrome Cancer BRCA-COR at top-5000, and the two
-reported metrics (`TF-target` and `TF-source`). It does not run the TCGA
-download, BIO-INSIGHT optimization, AMIGA training or exploratory validation
-analyses.
-
-For now, `amiga-grn[exp]` is intentionally not provided. An optional PyPI extra
-would install dependencies, but it would not make the article-specific case
-manifests, plots and workflow a clean reusable API. If the experiment runner is
-generalized later, it should become either a documented extra or a separate
-research package.
-
-See [`docs/experiments.md`](./docs/experiments.md) for the article-specific
-workflow.
+See the [workflow guide](docs/experiments.md),
+[installation and input requirements](docs/experiments/reproducibility.md), and
+[scientific design](docs/experiments/design.md).
 
 ## Citation
 
-If you use AMIGA, please cite the corresponding software release. A related
-manuscript is currently in preparation.
+If you use AMIGA, please cite the software using [CITATION.cff](CITATION.cff).
 
 ## License
 

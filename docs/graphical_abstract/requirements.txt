@@ -1,0 +1,6 @@
+# Tested drawing dependencies; the AMIGA package is not needed to render.
+reportlab==4.4.9
+PyMuPDF==1.26.7
+fonttools==4.63.0
+pillow==12.3.0
+charset-normalizer==3.5.2
