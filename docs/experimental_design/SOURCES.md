@@ -24,11 +24,13 @@ The current design and benchmark documentation were read in full. The executable
 - The two cases contain 104 fronts each from the same 87 topology groups. They are two generator-specific analyses, not 208 independent biological networks.
 - Five outer partitions and three inner folds are drawn as a small fold matrix. It is a grouping diagram, not the observed allocation of individual topologies.
 - Phase 1 applies to learning-to-rank. Regression and the classification formulations have fixed targets and bypass the relevance-label search; their own parameter, family and column searches follow the same phase-2/3 policy.
+- The five-candidate rank-label example uses relevances 4/3/2/1/0, matching the implemented dense/average labels for distinct quality values. Higher relevance means better candidate quality.
 - The phase-4 panel shows AMIGA, direct AUPR regression and classification at top-5%, top-10% and top-20% without asterisks or separate implementation-status labels. The classifiers use the same parameter and feature-selection policy; their methodological interpretation is documented in the linked experimental design.
 - Only the domain products (27/36/36) are numeric counts in the parameter diagram. The miniature grids are icons, not one tile per tested setting.
 - Retained feature percentages are fractions of the original column set. The elimination path is training-only, but inner validation selects the retained fraction and family. Masks must be relearned on the outer training complement, not copied from an inner fit.
+- The feature path refits the model and recalculates training-only importance before each subsequent reduction; it does not rank all columns once and reuse that ordering throughout.
 - Phase 4 averages seed-specific metrics, not prediction scores. The five final training seeds apply to the supervised estimators, not to deterministic objective-only rules.
 - The quality bars explain the definition of Regret@5. Their lengths are illustrative and are not measured AUPR values. Score ties are handled by the exact expectation in the experiment implementation.
 - The phase-5 axis deliberately contains a question mark and no measured y-values or invented trend. Its full-size point refers to existing phase-4 predictions.
 - Phase 5 keeps exact phase-4 columns and procedures. It is conditional data-size sensitivity, not reselection under scarce labels and not another supervised-method comparison.
-- The common aggregation footer abbreviates the hierarchy: phase 5 additionally averages the three subset draws within each front before conditions are aggregated by topology.
+- The aggregation footer distinguishes phase 4 from phase 5. Phase 4 averages seed-specific metrics within fronts, then conditions within topology. Phase 5 first averages seeds within each subset/front, then the three subset draws within each front, then conditions within topology. Topologies receive equal final weight in both phases.

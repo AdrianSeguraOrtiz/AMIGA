@@ -127,7 +127,8 @@
       "Regret: quality missed in the top k"
     ],
     [
-      "Seeds → fronts → topology groups"
+      "Phase 4: seeds → fronts → topologies",
+      "Phase 5: seeds → subsets → fronts → topologies"
     ],
     [
       "Internal evaluation on reused benchmarks"

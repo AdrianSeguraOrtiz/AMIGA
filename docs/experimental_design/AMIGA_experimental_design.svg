@@ -205,15 +205,15 @@
 <path d="M 215 214 L 207 218.64 L 207 209.36 Z" stroke-width="0" fill="#3C76CB" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="0" y="0" transform="translate(235.864,140) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#3C76CB" xml:space="preserve">Rank order</text>
 <rect x="233" y="160" width="118" height="17" rx="3" fill="#D6E2F4" stroke-width="1"/>
-<text x="0" y="0" transform="translate(287.199,173) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">5</text>
+<text x="0" y="0" transform="translate(287.199,173) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">4</text>
 <rect x="233" y="180" width="118" height="17" rx="3" fill="#DDE7F6" stroke-width="1"/>
-<text x="0" y="0" transform="translate(287.199,193) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">4</text>
+<text x="0" y="0" transform="translate(287.199,193) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">3</text>
 <rect x="233" y="200" width="118" height="17" rx="3" fill="#E4ECF8" stroke-width="1"/>
-<text x="0" y="0" transform="translate(287.199,213) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">3</text>
+<text x="0" y="0" transform="translate(287.199,213) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">2</text>
 <rect x="233" y="220" width="118" height="17" rx="3" fill="#EBF1FA" stroke-width="1"/>
-<text x="0" y="0" transform="translate(287.199,233) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">2</text>
+<text x="0" y="0" transform="translate(287.199,233) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">1</text>
 <rect x="233" y="240" width="118" height="17" rx="3" fill="#F1F5FB" stroke-width="1"/>
-<text x="0" y="0" transform="translate(287.199,253) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">1</text>
+<text x="0" y="0" transform="translate(287.199,253) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">0</text>
 <text x="0" y="0" transform="translate(224.883,280) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.6" font-weight="normal" fill="#536B80" xml:space="preserve">dense / average</text>
 <text x="0" y="0" transform="translate(372.055,140) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#3C76CB" xml:space="preserve">Relative quality</text>
 <rect x="393" y="160" width="118" height="17" rx="3" fill="#D6E2F4" stroke-width="1"/>
@@ -639,8 +639,9 @@
 <rect x="670" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
 <text x="0" y="0" transform="translate(590.064,272) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">25%</text>
 <text x="0" y="0" transform="translate(181.556,300) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.5" font-weight="normal" fill="#536B80" xml:space="preserve">Columns retained from the original table</text>
-<text x="0" y="0" transform="translate(26,334) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">Inner validation chooses the retained fraction</text>
-<text x="0" y="0" transform="translate(26,360) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">and the model family.</text>
+<text x="0" y="0" transform="translate(228.806,323) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#8265B0" xml:space="preserve">Refit after each reduction</text>
+<text x="0" y="0" transform="translate(26,348) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">Inner validation chooses the retained fraction</text>
+<text x="0" y="0" transform="translate(26,374) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">and the model family.</text>
 <rect x="24" y="391" width="672" height="43" rx="10.75" fill="#F6F4F9" stroke="#D4CBE4" stroke-width="1"/>
 <text x="0" y="0" transform="translate(167.452,419.85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#8265B0" xml:space="preserve">Keep a feature budget + learner</text>
 <text x="0" y="0" transform="translate(100.754,457) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.4" font-weight="normal" fill="#536B80" xml:space="preserve">Relearn the selected column mask before outer evaluation.</text>
@@ -918,7 +919,8 @@
 <circle cx="1221" cy="1715" r="5" fill="#8265B0" stroke-width="1"/>
 <circle cx="1233" cy="1715" r="5" fill="#8265B0" stroke-width="1"/>
 <text x="0" y="0" transform="translate(1254,1720) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#8265B0" xml:space="preserve">AGGREGATE</text>
-<text x="0" y="0" transform="translate(1202,1754) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Seeds → fronts → topology groups</text>
+<text x="0" y="0" transform="translate(1202,1744) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Phase 4: seeds → fronts → topologies</text>
+<text x="0" y="0" transform="translate(1202,1764) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Phase 5: seeds → subsets → fronts → topologies</text>
 <path d="M 1747 1698 L 1747 1757" stroke="#D7E2EA" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="1789" cy="1715" r="16" fill="#FFFFFF" stroke="#008A85" stroke-width="1.5"/>
 <text x="0" y="0" transform="translate(1785.92,1721) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#008A85" xml:space="preserve">i</text>

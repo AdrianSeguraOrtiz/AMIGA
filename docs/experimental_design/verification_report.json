@@ -34,14 +34,14 @@
   "svg": {
     "AMIGA_experimental_design.svg": {
       "raster_images": 0,
-      "text_nodes": 153
+      "text_nodes": 155
     },
     "AMIGA_experimental_design_outlined.svg": {
       "raster_images": 0,
       "text_nodes": 0
     }
   },
-  "text_elements": 153,
+  "text_elements": 155,
   "text_box_overlap_check": "passed",
   "text_region_bounds_check": "passed",
   "verified_generation_inputs": 5,
@@ -60,43 +60,43 @@
     "artifacts": {
       "AMIGA_experimental_design.pdf": {
         "identical": true,
-        "delivered_sha256": "24e0858f08a4a31a385e19f85a0b4a97dabcc15719802159bc1b717d9d6387d7",
-        "rebuilt_sha256": "24e0858f08a4a31a385e19f85a0b4a97dabcc15719802159bc1b717d9d6387d7"
+        "delivered_sha256": "20f0d0d80f8e1536587166f8929d7cac68f8608cd36837de7a622c75aaf4d870",
+        "rebuilt_sha256": "20f0d0d80f8e1536587166f8929d7cac68f8608cd36837de7a622c75aaf4d870"
       },
       "AMIGA_experimental_design.svg": {
         "identical": true,
-        "delivered_sha256": "42795d0df90203d258620ea7ec64dee5c15d9e5a64c4e895475c64c00ab797cb",
-        "rebuilt_sha256": "42795d0df90203d258620ea7ec64dee5c15d9e5a64c4e895475c64c00ab797cb"
+        "delivered_sha256": "a46794d5f5d5a70c210fe39e86d8cd3719830a14d8810e222f9d7d00388a5dbd",
+        "rebuilt_sha256": "a46794d5f5d5a70c210fe39e86d8cd3719830a14d8810e222f9d7d00388a5dbd"
       },
       "AMIGA_experimental_design_outlined.svg": {
         "identical": true,
-        "delivered_sha256": "5b43ba77f34213ec7d3bf2bf4f1c18a517ecab49cab306cc317a7ad4a61f89c0",
-        "rebuilt_sha256": "5b43ba77f34213ec7d3bf2bf4f1c18a517ecab49cab306cc317a7ad4a61f89c0"
+        "delivered_sha256": "0d7866c26e1c78a73ae9779a5d9a0bac5e4ae783f64f6c84c676808896b50af5",
+        "rebuilt_sha256": "0d7866c26e1c78a73ae9779a5d9a0bac5e4ae783f64f6c84c676808896b50af5"
       },
       "AMIGA_experimental_design.png": {
         "identical": true,
-        "delivered_sha256": "510ddf53054045f0b91dc2adc23f850e9fc3cf6e6a9d3618b5ab488e9721a8e8",
-        "rebuilt_sha256": "510ddf53054045f0b91dc2adc23f850e9fc3cf6e6a9d3618b5ab488e9721a8e8"
+        "delivered_sha256": "7761d4f774691636a00fb5100ab5bf899b91d04e7192fdf9db2684a64018dc27",
+        "rebuilt_sha256": "7761d4f774691636a00fb5100ab5bf899b91d04e7192fdf9db2684a64018dc27"
       },
       "AMIGA_experimental_design_preview.png": {
         "identical": true,
-        "delivered_sha256": "e0949a433c3ae239be163a269aafb70c4b6ef4ecade636c7cf7e7c28bb89b3a7",
-        "rebuilt_sha256": "e0949a433c3ae239be163a269aafb70c4b6ef4ecade636c7cf7e7c28bb89b3a7"
+        "delivered_sha256": "3d7879ce8ba3a538beef16433727dfad0d2c18088d7786901e522d629f43f91a",
+        "rebuilt_sha256": "3d7879ce8ba3a538beef16433727dfad0d2c18088d7786901e522d629f43f91a"
       },
       "phase_details/phase1.pdf": {
         "identical": true,
-        "delivered_sha256": "7b76bf1f4a591ecdbb6170924d991b376d42e151da123389ae46b031eef6daf2",
-        "rebuilt_sha256": "7b76bf1f4a591ecdbb6170924d991b376d42e151da123389ae46b031eef6daf2"
+        "delivered_sha256": "57606fdf6b5041769342f78d8e30bb4b4e95bdaedaee1326fb7482ec8f30d294",
+        "rebuilt_sha256": "57606fdf6b5041769342f78d8e30bb4b4e95bdaedaee1326fb7482ec8f30d294"
       },
       "phase_details/phase1.png": {
         "identical": true,
-        "delivered_sha256": "37827f112c33baaddfb4307a8da811ad898d161d829ae4d3f560a54da622e049",
-        "rebuilt_sha256": "37827f112c33baaddfb4307a8da811ad898d161d829ae4d3f560a54da622e049"
+        "delivered_sha256": "e3e0a11a53f2d6234542af01dd71f82461f130fdf2bdb06abe6ec002ef4f630b",
+        "rebuilt_sha256": "e3e0a11a53f2d6234542af01dd71f82461f130fdf2bdb06abe6ec002ef4f630b"
       },
       "phase_details/phase2.pdf": {
         "identical": true,
-        "delivered_sha256": "aa901bc8fe75bb2d242cd64091b2dc90262ae119ef6f46b9acd7f75e0e2f1fb2",
-        "rebuilt_sha256": "aa901bc8fe75bb2d242cd64091b2dc90262ae119ef6f46b9acd7f75e0e2f1fb2"
+        "delivered_sha256": "5b99569c1cacb063b5a6f228c37dfba064699c8db8a0103a0a87b0504a37ddf5",
+        "rebuilt_sha256": "5b99569c1cacb063b5a6f228c37dfba064699c8db8a0103a0a87b0504a37ddf5"
       },
       "phase_details/phase2.png": {
         "identical": true,
@@ -105,18 +105,18 @@
       },
       "phase_details/phase3.pdf": {
         "identical": true,
-        "delivered_sha256": "b6260b802103db2f4356386fb0f2d033e80648cb672395e4099199ddae4865ce",
-        "rebuilt_sha256": "b6260b802103db2f4356386fb0f2d033e80648cb672395e4099199ddae4865ce"
+        "delivered_sha256": "bfe1f7604b9a4e474267a2e51fe109ffedc7d7fc09aa4609abd734f03bed702c",
+        "rebuilt_sha256": "bfe1f7604b9a4e474267a2e51fe109ffedc7d7fc09aa4609abd734f03bed702c"
       },
       "phase_details/phase3.png": {
         "identical": true,
-        "delivered_sha256": "0c07d1b00341e4f6d01f93adcbb321d7f994bc1127aeff0c7137c63fb51ad027",
-        "rebuilt_sha256": "0c07d1b00341e4f6d01f93adcbb321d7f994bc1127aeff0c7137c63fb51ad027"
+        "delivered_sha256": "2215862a78fc9c3e31f40e96cfd24dcbfceab78672e51ecb4c6d3a49894cb04e",
+        "rebuilt_sha256": "2215862a78fc9c3e31f40e96cfd24dcbfceab78672e51ecb4c6d3a49894cb04e"
       },
       "phase_details/phase4.pdf": {
         "identical": true,
-        "delivered_sha256": "f9c2f3c84c3d5a9207e884fb6866118b81cb8ca2631f737e3c31c6aee68d9e9c",
-        "rebuilt_sha256": "f9c2f3c84c3d5a9207e884fb6866118b81cb8ca2631f737e3c31c6aee68d9e9c"
+        "delivered_sha256": "f3d55ef58a56456ca99218c6c72896c034fcbb46c96af6511db5574ff47abc84",
+        "rebuilt_sha256": "f3d55ef58a56456ca99218c6c72896c034fcbb46c96af6511db5574ff47abc84"
       },
       "phase_details/phase4.png": {
         "identical": true,
@@ -125,8 +125,8 @@
       },
       "phase_details/phase5.pdf": {
         "identical": true,
-        "delivered_sha256": "0ff02c87f1e3b77517b5110d4aff1ae02c7b757990ca8b202e0019f1b6e05333",
-        "rebuilt_sha256": "0ff02c87f1e3b77517b5110d4aff1ae02c7b757990ca8b202e0019f1b6e05333"
+        "delivered_sha256": "726d08a525ccdaf97795bb590e4ff71cebabc1411735884eb6909c4234a33c4a",
+        "rebuilt_sha256": "726d08a525ccdaf97795bb590e4ff71cebabc1411735884eb6909c4234a33c4a"
       },
       "phase_details/phase5.png": {
         "identical": true,

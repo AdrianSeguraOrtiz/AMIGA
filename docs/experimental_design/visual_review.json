@@ -4,7 +4,7 @@
     "Poppler pdftoppm (independent PDF rendering)",
     "Inkscape (independent outlined-SVG rendering)"
   ],
-  "reviewed": "Corrected full-page PDF and outlined SVG inspected visually; labels remain readable and no visible clipping or unintended overlaps were identified.",
+  "reviewed": "Full-page PDF and outlined SVG inspected after the zero-based label, recursive-refit annotation and phase-specific aggregation updates; no visible clipping or unintended overlaps identified.",
   "phase4_classifier_labels": [
     "Classification · top 5%",
     "Classification · top 10%",
@@ -15,9 +15,23 @@
   "automatic_check_scope": "Text ascent/descent bounds and panel rectangles; not a proof of every graphical intersection.",
   "measured_experimental_values_plotted": false,
   "inspected_artifacts_sha256": {
-    "AMIGA_experimental_design.pdf": "24e0858f08a4a31a385e19f85a0b4a97dabcc15719802159bc1b717d9d6387d7",
-    "AMIGA_experimental_design_outlined.svg": "5b43ba77f34213ec7d3bf2bf4f1c18a517ecab49cab306cc317a7ad4a61f89c0",
-    "AMIGA_experimental_design_preview.png": "e0949a433c3ae239be163a269aafb70c4b6ef4ecade636c7cf7e7c28bb89b3a7",
+    "AMIGA_experimental_design.pdf": "20f0d0d80f8e1536587166f8929d7cac68f8608cd36837de7a622c75aaf4d870",
+    "AMIGA_experimental_design_outlined.svg": "0d7866c26e1c78a73ae9779a5d9a0bac5e4ae783f64f6c84c676808896b50af5",
+    "AMIGA_experimental_design_preview.png": "3d7879ce8ba3a538beef16433727dfad0d2c18088d7786901e522d629f43f91a",
+    "phase_details/phase1.png": "e3e0a11a53f2d6234542af01dd71f82461f130fdf2bdb06abe6ec002ef4f630b",
+    "phase_details/phase3.png": "2215862a78fc9c3e31f40e96cfd24dcbfceab78672e51ecb4c6d3a49894cb04e",
     "phase_details/phase4.png": "4cd7189a0a9afca72948e91d19efd0c6b8734b5408af6810ea6e639053b093dd"
+  },
+  "phase1_rank_example": [
+    4,
+    3,
+    2,
+    1,
+    0
+  ],
+  "phase3_refit_annotation": "Refit after each reduction",
+  "aggregation_hierarchies": {
+    "phase4": "seeds → fronts → topologies",
+    "phase5": "seeds → subsets → fronts → topologies"
   }
 }

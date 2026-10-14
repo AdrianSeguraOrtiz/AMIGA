@@ -360,7 +360,7 @@
     "region": "phase-1"
   },
   {
-    "text": "5",
+    "text": "4",
     "x": 343.198974609375,
     "y": 637.515234375,
     "width": 9.602050781250002,
@@ -370,7 +370,7 @@
     "region": "phase-1"
   },
   {
-    "text": "4",
+    "text": "3",
     "x": 343.198974609375,
     "y": 657.515234375,
     "width": 9.602050781250002,
@@ -380,7 +380,7 @@
     "region": "phase-1"
   },
   {
-    "text": "3",
+    "text": "2",
     "x": 343.198974609375,
     "y": 677.515234375,
     "width": 9.602050781250002,
@@ -390,7 +390,7 @@
     "region": "phase-1"
   },
   {
-    "text": "2",
+    "text": "1",
     "x": 343.198974609375,
     "y": 697.515234375,
     "width": 9.602050781250002,
@@ -400,7 +400,7 @@
     "region": "phase-1"
   },
   {
-    "text": "1",
+    "text": "0",
     "x": 343.198974609375,
     "y": 717.515234375,
     "width": 9.602050781250002,
@@ -860,9 +860,19 @@
     "region": "phase-3"
   },
   {
+    "text": "Refit after each reduction",
+    "x": 1892.8056640625,
+    "y": 784.32421875,
+    "width": 262.38867187500006,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
     "text": "Inner validation chooses the retained fraction",
     "x": 1690.0,
-    "y": 793.8046875,
+    "y": 807.8046875,
     "width": 518.69140625,
     "height": 20.0,
     "size": 20,
@@ -872,7 +882,7 @@
   {
     "text": "and the model family.",
     "x": 1690.0,
-    "y": 819.8046875,
+    "y": 833.8046875,
     "width": 247.001953125,
     "height": 20.0,
     "size": 20,
@@ -1460,12 +1470,22 @@
     "region": null
   },
   {
-    "text": "Seeds → fronts → topology groups",
+    "text": "Phase 4: seeds → fronts → topologies",
     "x": 1202.0,
-    "y": 1739.564453125,
-    "width": 323.41748046875,
-    "height": 19.0,
-    "size": 19,
+    "y": 1730.32421875,
+    "width": 334.08105468750006,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Phase 5: seeds → subsets → fronts → topologies",
+    "x": 1202.0,
+    "y": 1750.32421875,
+    "width": 429.70605468750006,
+    "height": 18.0,
+    "size": 18,
     "horizontal_scale": 1.0,
     "region": null
   },

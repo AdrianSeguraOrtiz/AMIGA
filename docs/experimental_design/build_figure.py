@@ -149,7 +149,7 @@ def phase1(f:Figure,t:dict[str,Any],d:dict[str,Any],w:float,co:str)->None:
         f.rect(34,173+18*r,l,12,blend(f.c['gold'],'#FFFFFF',.16+r*.12),r=3)
     f.text(93,278,t['quality_measure'],17,True,f.c['gold'],anchor='middle')
     f.arrow(174,214,215,214,co,2.2,8)
-    values=[['5','4','3','2','1'],['1.00','0.75','0.50','0.25','0.00'],['high','high','mid','low','low']]
+    values=[['4','3','2','1','0'],['1.00','0.75','0.50','0.25','0.00'],['high','high','mid','low','low']]
     for j,cx in enumerate([292,452,612]):
         f.text(cx,140,t['label_heads'][j],18,True,co,anchor='middle')
         for r,v in enumerate(values[j]):
@@ -199,7 +199,8 @@ def phase3(f:Figure,t:dict[str,Any],d:dict[str,Any],w:float,co:str)->None:
         f.text(cx,272,t['feature_all'] if j==0 else str(round(frac*100))+'%',20,True,co,anchor='middle')
         if j<3:f.arrow(cx+76,200,cx+94,200,co,1.9,6)
     f.text(w/2,300,t['feature_retained'],17.5,color=f.c['muted'],anchor='middle')
-    f.text(26,334,t['feature_select'],20,True,co,leading=26,maxw=w-52)
+    f.text(w/2,323,t['feature_refit'],18,True,co,anchor='middle',maxw=w-52)
+    f.text(26,348,t['feature_select'],20,True,co,leading=26,maxw=w-52)
     output_strip(f,w,t['feature_output'],co)
     f.text(w/2,457,t['feature_note'],17.4,color=f.c['muted'],anchor='middle')
 
@@ -296,7 +297,10 @@ def footer(f:Figure,t:dict[str,Any])->None:
             f.circle(x+17,1715,16,'#FFFFFF',co,1.5)
             f.text(x+17,1721,'i',18,True,co,anchor='middle')
         f.text(x+52,1720,title,18.5,True,co)
-        f.text(x,1754,lines,19,color=f.c['muted'],maxw=560)
+        if i==2:
+            f.text(x,1744,lines,18,color=f.c['muted'],leading=20,maxw=540)
+        else:
+            f.text(x,1754,lines,19,color=f.c['muted'],maxw=560)
     f.text(56,1810,t['scope_footer'],19,True,maxw=1600)
     f.text(56,1833,t['schematic_footer'],15.5,color=f.c['muted'])
     f.text(2384,1810,'AMIGA · experimental design',18,color=f.c['muted'],anchor='end')
