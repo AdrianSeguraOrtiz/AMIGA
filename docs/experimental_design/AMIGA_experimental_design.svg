@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2440" height="1870" viewBox="0 0 2440 1870">
+<title>AMIGA experimental design: five phases</title>
+<desc>Design schematic of AMIGA Study 1 at commit f31d550b2e66d8459f143e0f39eaa20aabc028b9. Five scientific phases, not a literal execution DAG. Glyphs, candidate bars and tables are schematic; no empirical results are plotted. Study 2 and prediction costs are outside scope. Generated from Python, not a raster reference.</desc>
+<defs></defs>
+<rect x="0" y="0" width="2440" height="1870" rx="0" fill="#FFFFFF" stroke-width="1"/>
+<text x="0" y="0" transform="translate(56,101) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="67" font-weight="bold" fill="#008A85" xml:space="preserve">AMIGA</text>
+<path d="M 360 48 L 360 116" stroke="#D7E2EA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(399,85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="44" font-weight="bold" fill="#142F43" xml:space="preserve">Experimental design: five phases</text>
+<text x="0" y="0" transform="translate(401,118) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="normal" fill="#536B80" xml:space="preserve">Study 1 · labelled benchmark evaluation</text>
+<path d="M 2168 86 L 2214 86" stroke="#D7E2EA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="2168" cy="86" r="13" fill="#3C76CB" stroke-width="1"/>
+<text x="0" y="0" transform="translate(2163.13,91) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#FFFFFF" xml:space="preserve">1</text>
+<path d="M 2214 86 L 2260 86" stroke="#D7E2EA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="2214" cy="86" r="13" fill="#008A85" stroke-width="1"/>
+<text x="0" y="0" transform="translate(2209.13,91) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#FFFFFF" xml:space="preserve">2</text>
+<path d="M 2260 86 L 2306 86" stroke="#D7E2EA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="2260" cy="86" r="13" fill="#8265B0" stroke-width="1"/>
+<text x="0" y="0" transform="translate(2255.13,91) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#FFFFFF" xml:space="preserve">3</text>
+<path d="M 2306 86 L 2352 86" stroke="#D7E2EA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="2306" cy="86" r="13" fill="#BF801A" stroke-width="1"/>
+<text x="0" y="0" transform="translate(2301.13,91) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#FFFFFF" xml:space="preserve">4</text>
+<circle cx="2352" cy="86" r="13" fill="#008A85" stroke-width="1"/>
+<text x="0" y="0" transform="translate(2347.13,91) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="14" font-weight="bold" fill="#FFFFFF" xml:space="preserve">5</text>
+<text x="0" y="0" transform="translate(56,159) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="25" font-weight="normal" fill="#536B80" xml:space="preserve">Choose how to rank. Test on held-out topologies. Vary the amount of labelled data.</text>
+<g id="benchmark-inputs" transform="translate(56,192)">
+<rect x="0" y="0" width="930" height="201" rx="16" fill="#F6F9FB" stroke="#D7E2EA" stroke-width="1.2"/>
+<text x="0" y="0" transform="translate(24,34) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#142F43" xml:space="preserve">Two generators, the same benchmark problems</text>
+<rect x="46" y="53" width="91" height="78" rx="9" fill="#FFFFFF" stroke="#D7E2EA" stroke-width="1"/>
+<path d="M 77.54996259949836 71.84206732090294 L 71.2240448320983 83.22871930222306" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 69.8157 85.7638 L 69.7537 82.4119 L 72.6944 84.0456 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 82.68808898479415 69.27019395247193 L 97.44767335983308 71.28286454906815" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 100.321 71.6747 L 97.2204 72.9494 L 97.6749 69.6163 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 106.31630331233985 75.39260662467971 L 113.0595636652103 88.87912733042063" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 114.356 91.473 L 111.555 89.6313 L 114.564 88.1269 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 68.6219388074906 93.01859194546803 L 71.35761252894235 102.31988259840402" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 72.1759 105.102 L 69.744 102.794 L 72.9713 101.845 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 76.84940796434333 110.0973789017975 L 91.72970379975466 113.14107577722254" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 94.5709 113.722 L 91.3926 114.789 L 92.0668 111.493 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 80.61572095224085 71.99652809491259 L 96.04252280817884 107.84115593665089" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 97.189 110.505 L 94.4975 108.506 L 97.5875 107.176 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 114.01909867689284 98.05499145541789 L 103.92432521969278 109.15924225833794" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 101.974 111.305 L 102.68 108.028 L 105.169 110.291 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="67.64" cy="89.68" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="79.24" cy="68.8" r="3.48" fill="#536B80" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="104.76" cy="72.28" r="3.48" fill="#536B80" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="116.36" cy="95.48" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="98.96" cy="114.62" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="73.44" cy="109.4" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<rect x="36" y="59" width="91" height="78" rx="9" fill="#FFFFFF" stroke="#D7E2EA" stroke-width="1"/>
+<path d="M 67.54996259949836 77.84206732090294 L 61.2240448320983 89.22871930222306" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 59.8157 91.7638 L 59.7537 88.4119 L 62.6944 90.0456 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 72.68808898479415 75.27019395247193 L 87.44767335983308 77.28286454906815" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 90.3211 77.6747 L 87.2204 78.9494 L 87.6749 75.6163 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 94.2876985019056 81.72780093608924 L 89.96160490113125 113.30828422174181" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 89.568 116.181 L 88.2952 113.08 L 91.628 113.537 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 58.621938807490594 99.01859194546803 L 61.357612528942354 108.31988259840402" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 62.1759 111.102 L 59.744 108.794 L 62.9713 107.845 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 66.75025540994169 114.32640365082973 L 99.33997559615814 103.75676467151628" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 102.099 102.862 L 99.8589 105.357 L 98.8211 102.157 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 72.06581349227264 76.83105344757097 L 100.36732655949078 97.172765964634" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 102.722 98.8653 L 99.3857 98.5386 L 101.349 95.807 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 104.01909867689284 104.05499145541789 L 93.92432521969278 115.15924225833794" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 91.9736 117.305 L 92.6797 114.028 L 95.1689 116.291 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="57.64" cy="95.68" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="69.24" cy="74.8" r="3.48" fill="#536B80" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="94.76" cy="78.28" r="3.48" fill="#536B80" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="106.36" cy="101.48" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="88.96" cy="120.62" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="63.44" cy="115.4" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<rect x="26" y="65" width="91" height="78" rx="9" fill="#FFFFFF" stroke="#D7E2EA" stroke-width="1"/>
+<path d="M 57.549962599498365 83.84206732090294 L 51.2240448320983 95.22871930222306" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 49.8157 97.7638 L 49.7537 94.4119 L 52.6944 96.0456 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 62.68808898479416 81.27019395247193 L 77.44767335983308 83.28286454906815" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 80.3211 83.6747 L 77.2204 84.9494 L 77.6749 81.6163 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 86.31630331233985 87.39260662467971 L 93.0595636652103 100.87912733042063" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 94.3565 103.473 L 91.5551 101.631 L 94.564 100.127 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 48.621938807490594 105.01859194546803 L 51.357612528942354 114.31988259840402" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 52.1759 117.102 L 49.744 114.794 L 52.9713 113.845 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 56.84940796434333 122.0973789017975 L 71.72970379975466 125.14107577722254" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 74.5709 125.722 L 71.3926 126.789 L 72.0668 123.493 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 60.61572095224086 83.99652809491259 L 76.04252280817886 119.84115593665089" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 77.189 122.505 L 74.4975 120.506 L 77.5875 119.176 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 94.01909867689284 110.05499145541789 L 83.92432521969278 121.15924225833794" stroke="#8193A2" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 81.9736 123.305 L 82.6797 120.028 L 85.1689 122.291 Z" stroke-width="0" fill="#8193A2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="47.64" cy="101.68" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="59.24" cy="80.8" r="3.48" fill="#536B80" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="84.76" cy="84.28" r="3.48" fill="#536B80" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="96.36" cy="107.48" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="78.96" cy="126.62" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<circle cx="53.44" cy="121.4" r="3.48" fill="#8797A6" stroke="#FFFFFF" stroke-width="0.9"/>
+<text x="0" y="0" transform="translate(162,86) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="24" font-weight="bold" fill="#008A85" xml:space="preserve">87 topology groups</text>
+<text x="0" y="0" transform="translate(163,115) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">All conditions of a</text>
+<text x="0" y="0" transform="translate(163,139) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">topology stay together</text>
+<rect x="498" y="61" width="403" height="54" rx="10" fill="#FFFFFF" stroke="#BBCFED" stroke-width="1.2"/>
+<rect x="510" y="68" width="51" height="40" rx="9" fill="#FFFFFF" stroke="#B7CCEC" stroke-width="1.3"/>
+<path d="M 523 94 L 550 94" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 523 94 L 523 81" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 521.73 78 L 529.89 80.4 L 538.56 85.6 L 546.72 91.2 L 552.84 97.2" stroke="#9EBAE5" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="521.73" cy="78.0" r="3.7" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<circle cx="529.89" cy="80.4" r="3.7" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<circle cx="538.56" cy="85.6" r="3.7" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<circle cx="546.72" cy="91.2" r="3.7" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<circle cx="552.84" cy="97.2" r="3.7" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<text x="0" y="0" transform="translate(577,86) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#3C76CB" xml:space="preserve">BIO-INSIGHT</text>
+<text x="0" y="0" transform="translate(789.18,98) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">104 fronts</text>
+<rect x="498" y="122" width="403" height="54" rx="10" fill="#FFFFFF" stroke="#D3C9E3" stroke-width="1.2"/>
+<rect x="510" y="129" width="51" height="40" rx="9" fill="#FFFFFF" stroke="#D1C6E2" stroke-width="1.3"/>
+<path d="M 523 155 L 550 155" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 523 155 L 523 142" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 521.73 139 L 529.89 141.4 L 538.56 146.6 L 546.72 152.2 L 552.84 158.2" stroke="#C0B2D8" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="521.73" cy="139.0" r="3.7" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<circle cx="529.89" cy="141.4" r="3.7" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<circle cx="538.56" cy="146.6" r="3.7" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<circle cx="546.72" cy="152.2" r="3.7" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<circle cx="552.84" cy="158.2" r="3.7" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<text x="0" y="0" transform="translate(577,147) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">MO-GENECI</text>
+<text x="0" y="0" transform="translate(789.18,159) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">104 fronts</text>
+<path d="M 441 105 L 469 105 L 469 88 L 485 88" stroke="#536B80" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 491 88 L 485 90.88 L 485 85.12 Z" stroke-width="1.5" fill="#536B80" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 469 105 L 469 149 L 485 149" stroke="#536B80" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 491 149 L 485 151.88 L 485 146.12 Z" stroke-width="1.5" fill="#536B80" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(24,186) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Analyze each generator separately, not as 208 independent networks.</text>
+</g>
+<g id="nested-partitions" transform="translate(1020,192)">
+<rect x="0" y="0" width="1364" height="201" rx="16" fill="#F6F9FB" stroke="#D7E2EA" stroke-width="1.2"/>
+<text x="0" y="0" transform="translate(24,34) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="23" font-weight="bold" fill="#142F43" xml:space="preserve">Keep topology groups together across nested splits</text>
+<rect x="32" y="59" width="31" height="13" rx="2" fill="#CFA053" stroke-width="1"/>
+<rect x="67" y="59" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="102" y="59" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="137" y="59" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="172" y="59" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="32" y="76" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="67" y="76" width="31" height="13" rx="2" fill="#CFA053" stroke-width="1"/>
+<rect x="102" y="76" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="137" y="76" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="172" y="76" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="32" y="93" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="67" y="93" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="102" y="93" width="31" height="13" rx="2" fill="#CFA053" stroke-width="1"/>
+<rect x="137" y="93" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="172" y="93" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="32" y="110" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="67" y="110" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="102" y="110" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="137" y="110" width="31" height="13" rx="2" fill="#CFA053" stroke-width="1"/>
+<rect x="172" y="110" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="32" y="127" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="67" y="127" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="102" y="127" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="137" y="127" width="31" height="13" rx="2" fill="#BBCFED" stroke-width="1"/>
+<rect x="172" y="127" width="31" height="13" rx="2" fill="#CFA053" stroke-width="1"/>
+<text x="0" y="0" transform="translate(48.4451,167) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="bold" fill="#142F43" xml:space="preserve">5 outer folds</text>
+<path d="M 237 101 L 275.0 101.0" stroke="#536B80" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 283 101 L 275 105.64 L 275 96.36 Z" stroke-width="0" fill="#536B80" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="308" y="56" width="608" height="93" rx="12" fill="#ECF3FC" stroke="#B1C8EA" stroke-width="1.2"/>
+<text x="0" y="0" transform="translate(329,81) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#3C76CB" xml:space="preserve">Outer training topologies</text>
+<rect x="331" y="96" width="22" height="9" rx="1.5" fill="#59B3B0" stroke-width="1"/>
+<rect x="357" y="96" width="22" height="9" rx="1.5" fill="#80A6DD" stroke-width="1"/>
+<rect x="383" y="96" width="22" height="9" rx="1.5" fill="#80A6DD" stroke-width="1"/>
+<rect x="331" y="108" width="22" height="9" rx="1.5" fill="#80A6DD" stroke-width="1"/>
+<rect x="357" y="108" width="22" height="9" rx="1.5" fill="#59B3B0" stroke-width="1"/>
+<rect x="383" y="108" width="22" height="9" rx="1.5" fill="#80A6DD" stroke-width="1"/>
+<rect x="331" y="120" width="22" height="9" rx="1.5" fill="#80A6DD" stroke-width="1"/>
+<rect x="357" y="120" width="22" height="9" rx="1.5" fill="#80A6DD" stroke-width="1"/>
+<rect x="383" y="120" width="22" height="9" rx="1.5" fill="#59B3B0" stroke-width="1"/>
+<text x="0" y="0" transform="translate(436,120) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#3C76CB" xml:space="preserve">3 inner folds for phases 1–3</text>
+<rect x="963" y="56" width="375" height="93" rx="12" fill="#FFF5D9" stroke="#E6CDA6" stroke-width="1.2"/>
+<path d="M 984.87 101 L 984.87 94.8 C 984.87 85.81 999.13 85.81 999.13 94.8 L 999.13 101" stroke="#BF801A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="981.15" y="100.38" width="21.7" height="14.879999999999999" rx="2.48" fill="#BF801A" stroke-width="1"/>
+<circle cx="992" cy="106.58" r="1.705" fill="#FFFFFF" stroke-width="1"/>
+<text x="0" y="0" transform="translate(1019,82) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20.5" font-weight="bold" fill="#BF801A" xml:space="preserve">Outer test topologies</text>
+<text x="0" y="0" transform="translate(1019,108) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Reserved for</text>
+<text x="0" y="0" transform="translate(1019,130) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">phases 4–5</text>
+<text x="0" y="0" transform="translate(309,182) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Repeat the complete protocol for every outer split.</text>
+</g>
+<text x="0" y="0" transform="translate(57,440) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="22" font-weight="bold" fill="#008A85" xml:space="preserve">DEVELOP THE PROCEDURE</text>
+<text x="0" y="0" transform="translate(454,440) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="normal" fill="#536B80" xml:space="preserve">Training + inner validation only</text>
+<path d="M 1918.1 432 L 1918.1 426 C 1918.1 417.3 1931.9 417.3 1931.9 426 L 1931.9 432" stroke="#BF801A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1914.5" y="431.4" width="21.0" height="14.399999999999999" rx="2.4" fill="#BF801A" stroke-width="1"/>
+<circle cx="1925" cy="437.4" r="1.65" fill="#FFFFFF" stroke-width="1"/>
+<text x="0" y="0" transform="translate(1953,440) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#BF801A" xml:space="preserve">Outer test data stay untouched</text>
+<rect x="56" y="479" width="720" height="470" rx="20" fill="#EBF0F4" stroke-width="1"/>
+<rect x="56" y="475" width="720" height="470" rx="20" fill="#FFFFFF" stroke="#A3BFE7" stroke-width="1.5"/>
+<g id="phase-1" transform="translate(56,475)">
+<circle cx="45" cy="41" r="23" fill="#3C76CB" stroke-width="1"/>
+<text x="0" y="0" transform="translate(36.6504,49) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="24" font-weight="bold" fill="#FFFFFF" xml:space="preserve">1</text>
+<text x="0" y="0" transform="translate(82,48) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#142F43" xml:space="preserve">Choose the relevance labels</text>
+<text x="0" y="0" transform="translate(25,85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Translate known network quality into learning targets.</text>
+<path d="M 25 103 L 695 103" stroke="#E0E9F7" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(29,132) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#142F43" xml:space="preserve">Known quality</text>
+<text x="0" y="0" transform="translate(29,155) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#142F43" xml:space="preserve">within a front</text>
+<rect x="34" y="173" width="121" height="12" rx="3" fill="#F7F0E4" stroke-width="1"/>
+<rect x="34" y="173" width="112" height="12" rx="3" fill="#C9943F" stroke-width="1"/>
+<rect x="34" y="191" width="121" height="12" rx="3" fill="#F7F0E4" stroke-width="1"/>
+<rect x="34" y="191" width="88" height="12" rx="3" fill="#D1A45A" stroke-width="1"/>
+<rect x="34" y="209" width="121" height="12" rx="3" fill="#F7F0E4" stroke-width="1"/>
+<rect x="34" y="209" width="65" height="12" rx="3" fill="#D9B376" stroke-width="1"/>
+<rect x="34" y="227" width="121" height="12" rx="3" fill="#F7F0E4" stroke-width="1"/>
+<rect x="34" y="227" width="38" height="12" rx="3" fill="#E0C291" stroke-width="1"/>
+<rect x="34" y="245" width="121" height="12" rx="3" fill="#F7F0E4" stroke-width="1"/>
+<rect x="34" y="245" width="17" height="12" rx="3" fill="#E8D1AD" stroke-width="1"/>
+<text x="0" y="0" transform="translate(66.7446,278) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#BF801A" xml:space="preserve">AUPR</text>
+<path d="M 174 214 L 207.0 214.0" stroke="#3C76CB" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 215 214 L 207 218.64 L 207 209.36 Z" stroke-width="0" fill="#3C76CB" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(235.864,140) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#3C76CB" xml:space="preserve">Rank order</text>
+<rect x="233" y="160" width="118" height="17" rx="3" fill="#D6E2F4" stroke-width="1"/>
+<text x="0" y="0" transform="translate(287.199,173) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">5</text>
+<rect x="233" y="180" width="118" height="17" rx="3" fill="#DDE7F6" stroke-width="1"/>
+<text x="0" y="0" transform="translate(287.199,193) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">4</text>
+<rect x="233" y="200" width="118" height="17" rx="3" fill="#E4ECF8" stroke-width="1"/>
+<text x="0" y="0" transform="translate(287.199,213) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">3</text>
+<rect x="233" y="220" width="118" height="17" rx="3" fill="#EBF1FA" stroke-width="1"/>
+<text x="0" y="0" transform="translate(287.199,233) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">2</text>
+<rect x="233" y="240" width="118" height="17" rx="3" fill="#F1F5FB" stroke-width="1"/>
+<text x="0" y="0" transform="translate(287.199,253) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">1</text>
+<text x="0" y="0" transform="translate(224.883,280) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.6" font-weight="normal" fill="#536B80" xml:space="preserve">dense / average</text>
+<text x="0" y="0" transform="translate(372.055,140) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#3C76CB" xml:space="preserve">Relative quality</text>
+<rect x="393" y="160" width="118" height="17" rx="3" fill="#D6E2F4" stroke-width="1"/>
+<text x="0" y="0" transform="translate(434.976,173) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">1.00</text>
+<rect x="393" y="180" width="118" height="17" rx="3" fill="#DDE7F6" stroke-width="1"/>
+<text x="0" y="0" transform="translate(434.976,193) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">0.75</text>
+<rect x="393" y="200" width="118" height="17" rx="3" fill="#E4ECF8" stroke-width="1"/>
+<text x="0" y="0" transform="translate(434.976,213) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">0.50</text>
+<rect x="393" y="220" width="118" height="17" rx="3" fill="#EBF1FA" stroke-width="1"/>
+<text x="0" y="0" transform="translate(434.976,233) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">0.25</text>
+<rect x="393" y="240" width="118" height="17" rx="3" fill="#F1F5FB" stroke-width="1"/>
+<text x="0" y="0" transform="translate(434.976,253) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">0.00</text>
+<text x="0" y="0" transform="translate(398.297,280) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.6" font-weight="normal" fill="#536B80" xml:space="preserve">0–1 per front</text>
+<text x="0" y="0" transform="translate(551.105,140) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#3C76CB" xml:space="preserve">Quality bins</text>
+<rect x="553" y="160" width="118" height="17" rx="3" fill="#D6E2F4" stroke-width="1"/>
+<text x="0" y="0" transform="translate(594.871,173) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">high</text>
+<rect x="553" y="180" width="118" height="17" rx="3" fill="#DDE7F6" stroke-width="1"/>
+<text x="0" y="0" transform="translate(594.871,193) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">high</text>
+<rect x="553" y="200" width="118" height="17" rx="3" fill="#E4ECF8" stroke-width="1"/>
+<text x="0" y="0" transform="translate(597.506,213) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">mid</text>
+<rect x="553" y="220" width="118" height="17" rx="3" fill="#EBF1FA" stroke-width="1"/>
+<text x="0" y="0" transform="translate(598.52,233) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">low</text>
+<rect x="553" y="240" width="118" height="17" rx="3" fill="#F1F5FB" stroke-width="1"/>
+<text x="0" y="0" transform="translate(598.52,253) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="13.8" font-weight="bold" fill="#3C76CB" xml:space="preserve">low</text>
+<text x="0" y="0" transform="translate(549.653,280) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.6" font-weight="normal" fill="#536B80" xml:space="preserve">5 / 10 / 15 bins</text>
+<rect x="25" y="296" width="670" height="39" rx="9" fill="#F6F9FB" stroke="#D7E2EA" stroke-width="1" stroke-dasharray="4 3"/>
+<path d="M 46 306 L 46.0 320.0" stroke="#AABAC6" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 46 325 L 43.1 320 L 48.9 320 Z" stroke-width="0" fill="#AABAC6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 59 325 L 59.0 311.0" stroke="#AABAC6" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 59 306 L 61.9 311 L 56.1 311 Z" stroke-width="0" fill="#AABAC6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(83,322) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Also test reversed + shuffled labels (controls)</text>
+<rect x="25" y="349" width="208" height="29" rx="7.25" fill="#F1F5FB" stroke="#BDD0ED" stroke-width="1"/>
+<text x="0" y="0" transform="translate(82.5571,369.45) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#3C76CB" xml:space="preserve">LightGBM</text>
+<rect x="256" y="349" width="208" height="29" rx="7.25" fill="#F1F5FB" stroke="#BDD0ED" stroke-width="1"/>
+<text x="0" y="0" transform="translate(319.189,369.45) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#3C76CB" xml:space="preserve">XGBoost</text>
+<rect x="487" y="349" width="208" height="29" rx="7.25" fill="#F1F5FB" stroke="#BDD0ED" stroke-width="1"/>
+<text x="0" y="0" transform="translate(547.682,369.45) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17" font-weight="bold" fill="#3C76CB" xml:space="preserve">CatBoost</text>
+<rect x="24" y="391" width="672" height="43" rx="10.75" fill="#F1F5FB" stroke="#BDD0ED" stroke-width="1"/>
+<text x="0" y="0" transform="translate(153.389,419.85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#3C76CB" xml:space="preserve">Keep one label scheme per learner</text>
+<text x="0" y="0" transform="translate(147.472,457) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Regression and classification use fixed targets.</text>
+</g>
+<rect x="860" y="479" width="720" height="470" rx="20" fill="#EBF0F4" stroke-width="1"/>
+<rect x="860" y="475" width="720" height="470" rx="20" fill="#FFFFFF" stroke="#87C8C6" stroke-width="1.5"/>
+<g id="phase-2" transform="translate(860,475)">
+<circle cx="45" cy="41" r="23" fill="#008A85" stroke-width="1"/>
+<text x="0" y="0" transform="translate(36.6504,49) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="24" font-weight="bold" fill="#FFFFFF" xml:space="preserve">2</text>
+<text x="0" y="0" transform="translate(82,48) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#142F43" xml:space="preserve">Tune each learner</text>
+<text x="0" y="0" transform="translate(25,85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Try predefined parameter combinations.</text>
+<path d="M 25 103 L 695 103" stroke="#D6ECEB" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(80.3613,136) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#3C76CB" xml:space="preserve">LightGBM</text>
+<path d="M 135 154 L 122.02 170.52" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 135 154 L 147.98 170.52" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 122.02 170.52 L 112.58 190.57999999999998" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 122.02 170.52 L 130.28 190.57999999999998" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 147.98 170.52 L 139.72 190.57999999999998" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 147.98 170.52 L 157.42000000000002 190.57999999999998" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="135" cy="154" r="4.5" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<circle cx="122.02" cy="170.52" r="4.5" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<circle cx="147.98" cy="170.52" r="4.5" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.6"/>
+<rect x="108.58" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#3C76CB" stroke-width="1"/>
+<rect x="126.28" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#3C76CB" stroke-width="1"/>
+<rect x="135.72" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#3C76CB" stroke-width="1"/>
+<rect x="153.42000000000002" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#3C76CB" stroke-width="1"/>
+<rect x="66" y="205" width="20" height="18" rx="3" fill="#D0DEF3" stroke-width="1"/>
+<rect x="90" y="205" width="20" height="18" rx="3" fill="#D8E4F5" stroke-width="1"/>
+<rect x="114" y="205" width="20" height="18" rx="3" fill="#E0E9F7" stroke-width="1"/>
+<rect x="138" y="205" width="20" height="18" rx="3" fill="#D0DEF3" stroke-width="1"/>
+<rect x="162" y="205" width="20" height="18" rx="3" fill="#D8E4F5" stroke-width="1"/>
+<rect x="186" y="205" width="20" height="18" rx="3" fill="#E0E9F7" stroke-width="1"/>
+<rect x="66" y="227" width="20" height="18" rx="3" fill="#D8E4F5" stroke-width="1"/>
+<rect x="90" y="227" width="20" height="18" rx="3" fill="#E0E9F7" stroke-width="1"/>
+<rect x="114" y="227" width="20" height="18" rx="3" fill="#D0DEF3" stroke-width="1"/>
+<rect x="138" y="227" width="20" height="18" rx="3" fill="#D8E4F5" stroke-width="1"/>
+<rect x="162" y="227" width="20" height="18" rx="3" fill="#E0E9F7" stroke-width="1"/>
+<rect x="186" y="227" width="20" height="18" rx="3" fill="#D0DEF3" stroke-width="1"/>
+<rect x="66" y="249" width="20" height="18" rx="3" fill="#E0E9F7" stroke-width="1"/>
+<rect x="90" y="249" width="20" height="18" rx="3" fill="#D0DEF3" stroke-width="1"/>
+<rect x="114" y="249" width="20" height="18" rx="3" fill="#D8E4F5" stroke-width="1"/>
+<rect x="138" y="249" width="20" height="18" rx="3" fill="#E0E9F7" stroke-width="1"/>
+<rect x="162" y="249" width="20" height="18" rx="3" fill="#D0DEF3" stroke-width="1"/>
+<rect x="186" y="249" width="20" height="18" rx="3" fill="#D8E4F5" stroke-width="1"/>
+<text x="0" y="0" transform="translate(114.822,293) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="29" font-weight="bold" fill="#3C76CB" xml:space="preserve">27</text>
+<text x="0" y="0" transform="translate(69.5844,319) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.5" font-weight="normal" fill="#536B80" xml:space="preserve">settings tested</text>
+<text x="0" y="0" transform="translate(311.987,136) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#008A85" xml:space="preserve">XGBoost</text>
+<path d="M 360 154 L 347.02 170.52" stroke="#008A85" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 360 154 L 372.98 170.52" stroke="#008A85" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 347.02 170.52 L 337.58 190.57999999999998" stroke="#008A85" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 347.02 170.52 L 355.28 190.57999999999998" stroke="#008A85" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 372.98 170.52 L 364.72 190.57999999999998" stroke="#008A85" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 372.98 170.52 L 382.42 190.57999999999998" stroke="#008A85" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="360" cy="154" r="4.5" fill="#FFFFFF" stroke="#008A85" stroke-width="1.6"/>
+<circle cx="347.02" cy="170.52" r="4.5" fill="#FFFFFF" stroke="#008A85" stroke-width="1.6"/>
+<circle cx="372.98" cy="170.52" r="4.5" fill="#FFFFFF" stroke="#008A85" stroke-width="1.6"/>
+<rect x="333.58" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#008A85" stroke-width="1"/>
+<rect x="351.28" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#008A85" stroke-width="1"/>
+<rect x="360.72" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#008A85" stroke-width="1"/>
+<rect x="378.42" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#008A85" stroke-width="1"/>
+<rect x="291" y="205" width="20" height="18" rx="3" fill="#C2E3E2" stroke-width="1"/>
+<rect x="315" y="205" width="20" height="18" rx="3" fill="#CCE8E7" stroke-width="1"/>
+<rect x="339" y="205" width="20" height="18" rx="3" fill="#D6ECEB" stroke-width="1"/>
+<rect x="363" y="205" width="20" height="18" rx="3" fill="#C2E3E2" stroke-width="1"/>
+<rect x="387" y="205" width="20" height="18" rx="3" fill="#CCE8E7" stroke-width="1"/>
+<rect x="411" y="205" width="20" height="18" rx="3" fill="#D6ECEB" stroke-width="1"/>
+<rect x="291" y="227" width="20" height="18" rx="3" fill="#CCE8E7" stroke-width="1"/>
+<rect x="315" y="227" width="20" height="18" rx="3" fill="#D6ECEB" stroke-width="1"/>
+<rect x="339" y="227" width="20" height="18" rx="3" fill="#C2E3E2" stroke-width="1"/>
+<rect x="363" y="227" width="20" height="18" rx="3" fill="#CCE8E7" stroke-width="1"/>
+<rect x="387" y="227" width="20" height="18" rx="3" fill="#D6ECEB" stroke-width="1"/>
+<rect x="411" y="227" width="20" height="18" rx="3" fill="#C2E3E2" stroke-width="1"/>
+<rect x="291" y="249" width="20" height="18" rx="3" fill="#D6ECEB" stroke-width="1"/>
+<rect x="315" y="249" width="20" height="18" rx="3" fill="#C2E3E2" stroke-width="1"/>
+<rect x="339" y="249" width="20" height="18" rx="3" fill="#CCE8E7" stroke-width="1"/>
+<rect x="363" y="249" width="20" height="18" rx="3" fill="#D6ECEB" stroke-width="1"/>
+<rect x="387" y="249" width="20" height="18" rx="3" fill="#C2E3E2" stroke-width="1"/>
+<rect x="411" y="249" width="20" height="18" rx="3" fill="#CCE8E7" stroke-width="1"/>
+<text x="0" y="0" transform="translate(339.822,293) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="29" font-weight="bold" fill="#008A85" xml:space="preserve">36</text>
+<text x="0" y="0" transform="translate(294.584,319) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.5" font-weight="normal" fill="#536B80" xml:space="preserve">settings tested</text>
+<text x="0" y="0" transform="translate(534.038,136) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">CatBoost</text>
+<path d="M 585 154 L 572.02 170.52" stroke="#8265B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 585 154 L 597.98 170.52" stroke="#8265B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 572.02 170.52 L 562.58 190.57999999999998" stroke="#8265B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 572.02 170.52 L 580.28 190.57999999999998" stroke="#8265B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 597.98 170.52 L 589.72 190.57999999999998" stroke="#8265B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 597.98 170.52 L 607.42 190.57999999999998" stroke="#8265B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="585" cy="154" r="4.5" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<circle cx="572.02" cy="170.52" r="4.5" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<circle cx="597.98" cy="170.52" r="4.5" fill="#FFFFFF" stroke="#8265B0" stroke-width="1.6"/>
+<rect x="558.58" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#8265B0" stroke-width="1"/>
+<rect x="576.28" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#8265B0" stroke-width="1"/>
+<rect x="585.72" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#8265B0" stroke-width="1"/>
+<rect x="603.42" y="186.57999999999998" width="8" height="8" rx="1.5" fill="#8265B0" stroke-width="1"/>
+<rect x="516" y="205" width="20" height="18" rx="3" fill="#E1DAEC" stroke-width="1"/>
+<rect x="540" y="205" width="20" height="18" rx="3" fill="#E6E0EF" stroke-width="1"/>
+<rect x="564" y="205" width="20" height="18" rx="3" fill="#EBE6F2" stroke-width="1"/>
+<rect x="588" y="205" width="20" height="18" rx="3" fill="#E1DAEC" stroke-width="1"/>
+<rect x="612" y="205" width="20" height="18" rx="3" fill="#E6E0EF" stroke-width="1"/>
+<rect x="636" y="205" width="20" height="18" rx="3" fill="#EBE6F2" stroke-width="1"/>
+<rect x="516" y="227" width="20" height="18" rx="3" fill="#E6E0EF" stroke-width="1"/>
+<rect x="540" y="227" width="20" height="18" rx="3" fill="#EBE6F2" stroke-width="1"/>
+<rect x="564" y="227" width="20" height="18" rx="3" fill="#E1DAEC" stroke-width="1"/>
+<rect x="588" y="227" width="20" height="18" rx="3" fill="#E6E0EF" stroke-width="1"/>
+<rect x="612" y="227" width="20" height="18" rx="3" fill="#EBE6F2" stroke-width="1"/>
+<rect x="636" y="227" width="20" height="18" rx="3" fill="#E1DAEC" stroke-width="1"/>
+<rect x="516" y="249" width="20" height="18" rx="3" fill="#EBE6F2" stroke-width="1"/>
+<rect x="540" y="249" width="20" height="18" rx="3" fill="#E1DAEC" stroke-width="1"/>
+<rect x="564" y="249" width="20" height="18" rx="3" fill="#E6E0EF" stroke-width="1"/>
+<rect x="588" y="249" width="20" height="18" rx="3" fill="#EBE6F2" stroke-width="1"/>
+<rect x="612" y="249" width="20" height="18" rx="3" fill="#E1DAEC" stroke-width="1"/>
+<rect x="636" y="249" width="20" height="18" rx="3" fill="#E6E0EF" stroke-width="1"/>
+<text x="0" y="0" transform="translate(564.822,293) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="29" font-weight="bold" fill="#8265B0" xml:space="preserve">36</text>
+<text x="0" y="0" transform="translate(519.584,319) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.5" font-weight="normal" fill="#536B80" xml:space="preserve">settings tested</text>
+<rect x="48" y="344" width="26" height="23" rx="4" fill="#D6ECEB" stroke="#80C4C2" stroke-width="1"/>
+<path d="M 54 351 L 68 351" stroke="#008A85" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 54 359 L 68 359" stroke="#008A85" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="79" y="344" width="26" height="23" rx="4" fill="#D6ECEB" stroke="#80C4C2" stroke-width="1"/>
+<path d="M 85 351 L 99 351" stroke="#008A85" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 85 359 L 99 359" stroke="#008A85" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="110" y="344" width="26" height="23" rx="4" fill="#D6ECEB" stroke="#80C4C2" stroke-width="1"/>
+<path d="M 116 351 L 130 351" stroke="#008A85" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 116 359 L 130 359" stroke="#008A85" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(164,364) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#008A85" xml:space="preserve">Score each setting on 3 inner folds</text>
+<rect x="24" y="391" width="672" height="43" rx="10.75" fill="#EDF7F6" stroke="#A8D7D6" stroke-width="1"/>
+<text x="0" y="0" transform="translate(117.916,419.85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#008A85" xml:space="preserve">Keep parameters for each learner × task</text>
+<text x="0" y="0" transform="translate(122.563,457) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Same search policy for each supervised formulation.</text>
+</g>
+<rect x="1664" y="479" width="720" height="470" rx="20" fill="#EBF0F4" stroke-width="1"/>
+<rect x="1664" y="475" width="720" height="470" rx="20" fill="#FFFFFF" stroke="#C4B7DA" stroke-width="1.5"/>
+<g id="phase-3" transform="translate(1664,475)">
+<circle cx="45" cy="41" r="23" fill="#8265B0" stroke-width="1"/>
+<text x="0" y="0" transform="translate(36.6504,49) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="24" font-weight="bold" fill="#FFFFFF" xml:space="preserve">3</text>
+<text x="0" y="0" transform="translate(82,48) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#142F43" xml:space="preserve">Choose descriptors + learner</text>
+<text x="0" y="0" transform="translate(25,85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Remove less useful predictors using training data.</text>
+<path d="M 25 103 L 695 103" stroke="#EBE6F2" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(25,131) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.7" font-weight="normal" fill="#536B80" xml:space="preserve">Training-only importance for candidate ordering (TreeSHAP)</text>
+<rect x="39" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="39" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="39" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="39" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="39" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="50" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="50" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="50" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="50" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="50" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="61" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="61" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="61" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="61" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="61" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="72" y="155" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="72" y="173" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="72" y="191" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="72" y="209" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="72" y="227" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="83" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="83" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="83" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="83" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="83" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="94" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="94" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="94" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="94" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="94" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="105" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="105" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="105" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="105" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="105" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="116" y="155" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="116" y="173" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="116" y="191" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="116" y="209" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="116" y="227" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="127" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="127" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="127" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="127" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="127" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="138" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="138" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="138" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="138" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="138" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="149" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="149" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="149" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="149" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="149" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="160" y="155" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="160" y="173" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="160" y="191" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="160" y="209" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="160" y="227" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<text x="0" y="0" transform="translate(39.0879,272) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">All columns</text>
+<path d="M 180 200 L 192.0 200.0" stroke="#8265B0" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 198 200 L 192 203.48 L 192 196.52 Z" stroke-width="0" fill="#8265B0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="209" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="209" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="209" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="209" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="209" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="220" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="220" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="220" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="220" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="220" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="231" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="231" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="231" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="231" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="231" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="242" y="155" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="242" y="173" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="242" y="191" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="242" y="209" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="242" y="227" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="253" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="253" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="253" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="253" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="253" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="264" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="264" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="264" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="264" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="264" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="275" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="275" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="275" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="275" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="275" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="286" y="155" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="286" y="173" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="286" y="191" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="286" y="209" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="286" y="227" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="297" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="297" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="297" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="297" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="297" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="308" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="308" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="308" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="308" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="308" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="319" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="319" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="319" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="319" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="319" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="330" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="330" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="330" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="330" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="330" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<text x="0" y="0" transform="translate(250.064,272) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">75%</text>
+<path d="M 350 200 L 362.0 200.0" stroke="#8265B0" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 368 200 L 362 203.48 L 362 196.52 Z" stroke-width="0" fill="#8265B0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="379" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="379" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="379" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="379" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="379" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="390" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="390" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="390" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="390" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="390" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="401" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="401" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="401" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="401" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="401" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="412" y="155" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="412" y="173" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="412" y="191" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="412" y="209" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="412" y="227" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="423" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="423" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="423" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="423" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="423" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="434" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="434" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="434" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="434" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="434" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="445" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="445" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="445" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="445" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="445" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="456" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="456" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="456" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="456" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="456" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="467" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="467" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="467" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="467" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="467" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="478" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="478" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="478" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="478" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="478" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="489" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="489" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="489" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="489" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="489" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="500" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="500" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="500" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="500" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="500" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<text x="0" y="0" transform="translate(420.064,272) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">50%</text>
+<path d="M 520 200 L 532.0 200.0" stroke="#8265B0" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 538 200 L 532 203.48 L 532 196.52 Z" stroke-width="0" fill="#8265B0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="549" y="155" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="549" y="173" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="549" y="191" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="549" y="209" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="549" y="227" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="560" y="155" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="560" y="173" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="560" y="191" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="560" y="209" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="560" y="227" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="571" y="155" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="571" y="173" width="9" height="15" rx="1.6" fill="#D1C6E2" stroke-width="1"/>
+<rect x="571" y="191" width="9" height="15" rx="1.6" fill="#BAAAD4" stroke-width="1"/>
+<rect x="571" y="209" width="9" height="15" rx="1.6" fill="#C2B4D8" stroke-width="1"/>
+<rect x="571" y="227" width="9" height="15" rx="1.6" fill="#C9BDDD" stroke-width="1"/>
+<rect x="582" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="582" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="582" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="582" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="582" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="593" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="593" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="593" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="593" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="593" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="604" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="604" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="604" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="604" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="604" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="615" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="615" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="615" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="615" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="615" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="626" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="626" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="626" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="626" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="626" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="637" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="637" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="637" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="637" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="637" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="648" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="648" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="648" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="648" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="648" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="659" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="659" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="659" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="659" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="659" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="670" y="155" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="670" y="173" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="670" y="191" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="670" y="209" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<rect x="670" y="227" width="9" height="15" rx="1.6" fill="#EEF1F5" stroke-width="1"/>
+<text x="0" y="0" transform="translate(590.064,272) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">25%</text>
+<text x="0" y="0" transform="translate(181.556,300) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.5" font-weight="normal" fill="#536B80" xml:space="preserve">Columns retained from the original table</text>
+<text x="0" y="0" transform="translate(26,334) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">Inner validation chooses the retained fraction</text>
+<text x="0" y="0" transform="translate(26,360) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#8265B0" xml:space="preserve">and the model family.</text>
+<rect x="24" y="391" width="672" height="43" rx="10.75" fill="#F6F4F9" stroke="#D4CBE4" stroke-width="1"/>
+<text x="0" y="0" transform="translate(167.452,419.85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#8265B0" xml:space="preserve">Keep a feature budget + learner</text>
+<text x="0" y="0" transform="translate(100.754,457) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.4" font-weight="normal" fill="#536B80" xml:space="preserve">Relearn the selected column mask before outer evaluation.</text>
+</g>
+<rect x="56" y="1124" width="1112" height="530" rx="20" fill="#EBF0F4" stroke-width="1"/>
+<rect x="56" y="1120" width="1112" height="530" rx="20" fill="#FFFFFF" stroke="#E1C393" stroke-width="1.5"/>
+<g id="phase-4" transform="translate(56,1120)">
+<circle cx="45" cy="41" r="23" fill="#BF801A" stroke-width="1"/>
+<text x="0" y="0" transform="translate(36.6504,49) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="24" font-weight="bold" fill="#FFFFFF" xml:space="preserve">4</text>
+<text x="0" y="0" transform="translate(82,48) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="29" font-weight="bold" fill="#142F43" xml:space="preserve">Compare on held-out topologies</text>
+<text x="0" y="0" transform="translate(25,85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Refit selected procedures; predict before reading test quality labels.</text>
+<path d="M 25 103 L 1087 103" stroke="#F5EBDA" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="23" y="122" width="164" height="184" rx="12" fill="#FFF5D9" stroke="#E7CFA8" stroke-width="1.1"/>
+<path d="M 100.25 140 L 100.25 135 C 100.25 127.75 111.75 127.75 111.75 135 L 111.75 140" stroke="#BF801A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="97.25" y="139.5" width="17.5" height="12.0" rx="2.0" fill="#BF801A" stroke-width="1"/>
+<circle cx="106" cy="144.5" r="1.375" fill="#FFFFFF" stroke-width="1"/>
+<rect x="63" y="157" width="100" height="67" rx="9" fill="#FFFFFF" stroke="#E7D0AA" stroke-width="1.3"/>
+<path d="M 76 210 L 152 210" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 76 210 L 76 170" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 86 173.75 L 102 177.77 L 119 186.48 L 135 195.86 L 147 205.91" stroke="#DFC08C" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="86.0" cy="173.75" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="102.0" cy="177.77" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="119.0" cy="186.48" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="135.0" cy="195.86" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="147.0" cy="205.91" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<rect x="55" y="162" width="100" height="67" rx="9" fill="#FFFFFF" stroke="#E7D0AA" stroke-width="1.3"/>
+<path d="M 68 215 L 144 215" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 68 215 L 68 175" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 78 178.75 L 94 182.77 L 111 191.48 L 127 200.86 L 139 210.91" stroke="#DFC08C" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="78.0" cy="178.75" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="94.0" cy="182.77" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="111.0" cy="191.48" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="127.0" cy="200.86" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="139.0" cy="210.91" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<rect x="47" y="167" width="100" height="67" rx="9" fill="#FFFFFF" stroke="#E7D0AA" stroke-width="1.3"/>
+<path d="M 60 220 L 136 220" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 60 220 L 60 180" stroke="#AABAC6" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 70 183.75 L 86 187.77 L 103 196.48 L 119 205.86 L 131 215.91" stroke="#DFC08C" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="70.0" cy="183.75" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="86.0" cy="187.77" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="103.0" cy="196.48" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="119.0" cy="205.86" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<circle cx="131.0" cy="215.91" r="3.7" fill="#FFFFFF" stroke="#BF801A" stroke-width="1.6"/>
+<text x="0" y="0" transform="translate(30.1121,268) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#BF801A" xml:space="preserve">Same held-out</text>
+<text x="0" y="0" transform="translate(48.8334,291) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#BF801A" xml:space="preserve">candidates</text>
+<path d="M 196 217 L 226.0 217.0" stroke="#BF801A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 234 217 L 226 221.64 L 226 212.36 Z" stroke-width="0" fill="#BF801A" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(257,136) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20.5" font-weight="bold" fill="#142F43" xml:space="preserve">Five supervised selectors</text>
+<rect x="250" y="150" width="409" height="25" rx="6" fill="#E9F7F4" stroke="#B2DCDA" stroke-width="1"/>
+<circle cx="265" cy="162.5" r="4.3" fill="#008A85" stroke-width="1"/>
+<text x="0" y="0" transform="translate(280,168) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#008A85" xml:space="preserve">AMIGA · learn an order</text>
+<rect x="250" y="179" width="409" height="25" rx="6" fill="#F6F9FB" stroke="#CBD3D9" stroke-width="1"/>
+<circle cx="265" cy="191.5" r="4.3" fill="#536B80" stroke-width="1"/>
+<text x="0" y="0" transform="translate(280,197) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Regression · predict AUPR</text>
+<rect x="250" y="208" width="409" height="25" rx="6" fill="#F6F9FB" stroke="#CBD3D9" stroke-width="1"/>
+<circle cx="265" cy="220.5" r="4.3" fill="#536B80" stroke-width="1"/>
+<text x="0" y="0" transform="translate(280,226) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Classification · top 5%</text>
+<rect x="250" y="237" width="409" height="25" rx="6" fill="#F6F9FB" stroke="#CBD3D9" stroke-width="1"/>
+<circle cx="265" cy="249.5" r="4.3" fill="#536B80" stroke-width="1"/>
+<text x="0" y="0" transform="translate(280,255) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Classification · top 10%</text>
+<rect x="250" y="266" width="409" height="25" rx="6" fill="#F6F9FB" stroke="#CBD3D9" stroke-width="1"/>
+<circle cx="265" cy="278.5" r="4.3" fill="#536B80" stroke-width="1"/>
+<text x="0" y="0" transform="translate(280,284) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Classification · top 20%</text>
+<path d="M 672 217 L 703.0 217.0" stroke="#BF801A" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 711 217 L 703 221.64 L 703 212.36 Z" stroke-width="0" fill="#BF801A" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(786.358,136) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="22" font-weight="bold" fill="#BF801A" xml:space="preserve">Assess the first 5</text>
+<text x="0" y="0" transform="translate(739,171) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Best in the front</text>
+<rect x="739" y="181" width="322" height="18" rx="4" fill="#F7EEE1" stroke-width="1"/>
+<rect x="739" y="181" width="296" height="18" rx="4" fill="#BF801A" stroke-width="1"/>
+<text x="0" y="0" transform="translate(739,227) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Best among top 5</text>
+<rect x="739" y="237" width="322" height="18" rx="4" fill="#E0F1F0" stroke-width="1"/>
+<rect x="739" y="237" width="214" height="18" rx="4" fill="#008A85" stroke-width="1"/>
+<path d="M 953 258 L 953 277 L 1035 277 L 1035 204" stroke="#BF801A" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<text x="0" y="0" transform="translate(741.681,311) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#BF801A" xml:space="preserve">Missed quality = Regret@5</text>
+<rect x="24" y="334" width="1064" height="58" rx="10" fill="#F6F9FB" stroke="#D7E2EA" stroke-width="1"/>
+<text x="0" y="0" transform="translate(43,358) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="bold" fill="#142F43" xml:space="preserve">Separate panel: objective-only rules + exact random reference</text>
+<text x="0" y="0" transform="translate(43,381) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.2" font-weight="normal" fill="#536B80" xml:space="preserve">The AUPR oracle is a nondeployable ceiling, not a competitor.</text>
+<rect x="28" y="414" width="28" height="33" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 34.44 423.24 L 49.56 423.24" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 34.44 430.5 L 49.56 430.5" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 34.44 437.76 L 49.56 437.76" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="67" y="414" width="28" height="33" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 73.44 423.24 L 88.56 423.24" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 73.44 430.5 L 88.56 430.5" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 73.44 437.76 L 88.56 437.76" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="106" y="414" width="28" height="33" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 112.44 423.24 L 127.56 423.24" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 112.44 430.5 L 127.56 430.5" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 112.44 437.76 L 127.56 437.76" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="145" y="414" width="28" height="33" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 151.44 423.24 L 166.56 423.24" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 151.44 430.5 L 166.56 430.5" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 151.44 437.76 L 166.56 437.76" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="184" y="414" width="28" height="33" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 190.44 423.24 L 205.56 423.24" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 190.44 430.5 L 205.56 430.5" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 190.44 437.76 L 205.56 437.76" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(8.17163,473) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#3C76CB" xml:space="preserve">5 final training seeds</text>
+<path d="M 235 431 L 283.0 431.0" stroke="#3C76CB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 291 431 L 283 435.64 L 283 426.36 Z" stroke-width="0" fill="#3C76CB" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="316" y="410" width="772" height="73" rx="12" fill="#FFF5D9" stroke="#E9D3AF" stroke-width="1.1"/>
+<text x="0" y="0" transform="translate(338,438) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="22" font-weight="bold" fill="#BF801A" xml:space="preserve">Equal weight per topology</text>
+<text x="0" y="0" transform="translate(338,468) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="normal" fill="#536B80" xml:space="preserve">Regret@5 primary · Friedman + Holm, per generator</text>
+<text x="0" y="0" transform="translate(24,514) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">No seed selection or prediction ensemble; all five final seeds contribute.</text>
+</g>
+<rect x="1272" y="1124" width="1112" height="530" rx="20" fill="#EBF0F4" stroke-width="1"/>
+<rect x="1272" y="1120" width="1112" height="530" rx="20" fill="#FFFFFF" stroke="#87C8C6" stroke-width="1.5"/>
+<g id="phase-5" transform="translate(1272,1120)">
+<circle cx="45" cy="41" r="23" fill="#008A85" stroke-width="1"/>
+<text x="0" y="0" transform="translate(36.6504,49) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="24" font-weight="bold" fill="#FFFFFF" xml:space="preserve">5</text>
+<text x="0" y="0" transform="translate(82,48) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="29" font-weight="bold" fill="#142F43" xml:space="preserve">Learn with fewer labelled topologies</text>
+<text x="0" y="0" transform="translate(25,85) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Keep the AMIGA recipe and exact feature columns from phase 4.</text>
+<path d="M 25 103 L 1087 103" stroke="#D6ECEB" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="24" y="115" width="1064" height="42" rx="10" fill="#E9F7F4" stroke="#A6D6D4" stroke-width="1.1"/>
+<path d="M 41.25 137 L 41.25 132 C 41.25 124.75 52.75 124.75 52.75 132 L 52.75 137" stroke="#008A85" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="38.25" y="136.5" width="17.5" height="12.0" rx="2.0" fill="#008A85" stroke-width="1"/>
+<circle cx="47" cy="141.5" r="1.375" fill="#FFFFFF" stroke-width="1"/>
+<text x="0" y="0" transform="translate(75,142) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#008A85" xml:space="preserve">Fixed model family · labels · parameters · exact columns</text>
+<text x="0" y="0" transform="translate(26,186) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Labelled training topology groups</text>
+<rect x="98" y="278" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="112" y="278" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="126" y="278" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="140" y="278" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="154" y="278" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="98" y="292" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="112" y="292" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="126" y="292" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="140" y="292" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="154" y="292" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<text x="0" y="0" transform="translate(113.213,339) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#008A85" xml:space="preserve">10</text>
+<path d="M 196 271 L 277.0 271.0" stroke="#59B3B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 285 271 L 277 275.64 L 277 266.36 Z" stroke-width="0" fill="#59B3B0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="322" y="250" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="336" y="250" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="350" y="250" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="364" y="250" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="378" y="250" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="322" y="264" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="336" y="264" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="350" y="264" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="364" y="264" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="378" y="264" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="322" y="278" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="336" y="278" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="350" y="278" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="364" y="278" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="378" y="278" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="322" y="292" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="336" y="292" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="350" y="292" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="364" y="292" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="378" y="292" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<text x="0" y="0" transform="translate(337.213,339) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#008A85" xml:space="preserve">20</text>
+<path d="M 420 271 L 501.0 271.0" stroke="#59B3B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 509 271 L 501 275.64 L 501 266.36 Z" stroke-width="0" fill="#59B3B0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="546" y="194" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="560" y="194" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="574" y="194" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="588" y="194" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="602" y="194" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="546" y="208" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="560" y="208" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="574" y="208" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="588" y="208" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="602" y="208" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="546" y="222" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="560" y="222" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="574" y="222" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="588" y="222" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="602" y="222" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="546" y="236" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="560" y="236" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="574" y="236" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="588" y="236" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="602" y="236" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="546" y="250" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="560" y="250" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="574" y="250" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="588" y="250" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="602" y="250" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="546" y="264" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="560" y="264" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="574" y="264" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="588" y="264" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="602" y="264" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="546" y="278" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="560" y="278" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="574" y="278" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="588" y="278" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="602" y="278" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="546" y="292" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="560" y="292" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<rect x="574" y="292" width="11" height="11" rx="1.8" fill="#6EBCB9" stroke-width="1"/>
+<rect x="588" y="292" width="11" height="11" rx="1.8" fill="#87C8C6" stroke-width="1"/>
+<rect x="602" y="292" width="11" height="11" rx="1.8" fill="#54B1AD" stroke-width="1"/>
+<text x="0" y="0" transform="translate(561.213,339) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="27" font-weight="bold" fill="#008A85" xml:space="preserve">40</text>
+<rect x="787" y="204" width="290" height="119" rx="13" fill="none" stroke="#3C76CB" stroke-width="1.3" stroke-dasharray="4 3"/>
+<rect x="808" y="224" width="41" height="51" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 817.43 238.28 L 839.57 238.28" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 817.43 249.5 L 839.57 249.5" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 817.43 260.72 L 839.57 260.72" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(865,228) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#3C76CB" xml:space="preserve">Full training set</text>
+<text x="0" y="0" transform="translate(865,253) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.7" font-weight="normal" fill="#536B80" xml:space="preserve">Reuse phase-4</text>
+<text x="0" y="0" transform="translate(865,276) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="17.7" font-weight="normal" fill="#536B80" xml:space="preserve">predictions</text>
+<text x="0" y="0" transform="translate(890.96,347) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="25" font-weight="bold" fill="#3C76CB" xml:space="preserve">69–70</text>
+<text x="0" y="0" transform="translate(24,380) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20.5" font-weight="bold" fill="#008A85" xml:space="preserve">3 nested subset draws × 5 seeds · unchanged test folds</text>
+<path d="M 44 466 L 378.0 466.0" stroke="#AABAC6" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 384 466 L 378 469.48 L 378 462.52 Z" stroke-width="0" fill="#AABAC6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 44 466 L 44.0 408.0" stroke="#AABAC6" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 44 402 L 47.48 408 L 40.52 408 Z" stroke-width="0" fill="#AABAC6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 83 466 L 83 472" stroke="#AABAC6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(72.6931,491) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.2" font-weight="normal" fill="#536B80" xml:space="preserve">10</text>
+<path d="M 83 454 L 83 418" stroke="#BFE2E0" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M 166 466 L 166 472" stroke="#AABAC6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(155.693,491) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.2" font-weight="normal" fill="#536B80" xml:space="preserve">20</text>
+<path d="M 166 454 L 166 418" stroke="#BFE2E0" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M 267 466 L 267 472" stroke="#AABAC6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(256.693,491) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.2" font-weight="normal" fill="#536B80" xml:space="preserve">40</text>
+<path d="M 267 454 L 267 418" stroke="#BFE2E0" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M 353 466 L 353 472" stroke="#AABAC6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(340.514,491) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="16.2" font-weight="normal" fill="#536B80" xml:space="preserve">full</text>
+<path d="M 353 454 L 353 418" stroke="#BFE2E0" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<text x="0" y="0" transform="translate(200.559,448) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="36" font-weight="bold" fill="#008A85" xml:space="preserve">?</text>
+<text x="0" y="0" transform="translate(416,417) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="22" font-weight="bold" fill="#008A85" xml:space="preserve">Measure learning curves</text>
+<text x="0" y="0" transform="translate(416,446) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="bold" fill="#142F43" xml:space="preserve">Regret@5 and Hit@5</text>
+<text x="0" y="0" transform="translate(756,417) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.2" font-weight="normal" fill="#536B80" xml:space="preserve">Conditional 95% intervals</text>
+<text x="0" y="0" transform="translate(756,441) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.2" font-weight="normal" fill="#536B80" xml:space="preserve">from topology bootstrap</text>
+<text x="0" y="0" transform="translate(416,480) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="bold" fill="#008A85" xml:space="preserve">AMIGA only · no new model or column selection</text>
+<text x="0" y="0" transform="translate(24,514) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">Conditional on the recipe chosen with the full training complement.</text>
+</g>
+<path d="M 787 708 L 837.0 708.0" stroke="#008A85" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 848 708 L 837 714.38 L 837 701.62 Z" stroke-width="0" fill="#008A85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 1591 708 L 1641.0 708.0" stroke="#008A85" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 1652 708 L 1641 714.38 L 1641 701.62 Z" stroke-width="0" fill="#008A85" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="56" y="970" width="1524" height="78" rx="12" fill="#F6F9FB" stroke="#D7E2EA" stroke-width="1"/>
+<text x="0" y="0" transform="translate(78,1000) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#142F43" xml:space="preserve">Selection rule: minimize missed quality among the first 5 recommendations</text>
+<text x="0" y="0" transform="translate(78,1031) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">Regret@5 → Regret@1 → fewer columns in phase 3 → stable tie-break</text>
+<path d="M 2024 949 L 2024.0 956.0" stroke="#8265B0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 2024 963 L 2019.94 956 L 2028.06 956 Z" stroke-width="0" fill="#8265B0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1664" y="967" width="720" height="64" rx="12" fill="#F3EEFA" stroke="#C4B7DA" stroke-width="1.2"/>
+<path d="M 1687.56 993 L 1687.56 987.4 C 1687.56 979.28 1700.44 979.28 1700.44 987.4 L 1700.44 993" stroke="#8265B0" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1684.2" y="992.44" width="19.599999999999998" height="13.44" rx="2.24" fill="#8265B0" stroke-width="1"/>
+<circle cx="1694" cy="998.04" r="1.54" fill="#FFFFFF" stroke-width="1"/>
+<text x="0" y="0" transform="translate(1724,992) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#8265B0" xml:space="preserve">Freeze the procedure for this outer split</text>
+<text x="0" y="0" transform="translate(1724,1018) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.8" font-weight="normal" fill="#536B80" xml:space="preserve">Model family · labels · parameters · feature budget</text>
+<path d="M 2024 1035 L 2024 1080 L 612 1080 L 612 1101" stroke="#8265B0" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 612 1111 L 607.2 1101 L 616.8 1101 Z" stroke-width="1.5" fill="#8265B0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(56,1105) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="21" font-weight="bold" fill="#BF801A" xml:space="preserve">EVALUATE FIXED PROCEDURES</text>
+<text x="0" y="0" transform="translate(1269,1105) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="20" font-weight="normal" fill="#536B80" xml:space="preserve">No test-driven selection</text>
+<path d="M 1181 1385 L 1246.0 1385.0" stroke="#008A85" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 1258 1385 L 1246 1391.96 L 1246 1378.04 Z" stroke-width="0" fill="#008A85" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="56" y="1680" width="2328" height="94" rx="16" fill="#F6F9FB" stroke="#D7E2EA" stroke-width="1.1"/>
+<rect x="82" y="1702" width="18" height="22" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 86.14 1708.16 L 95.86 1708.16" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 86.14 1713.0 L 95.86 1713.0" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 86.14 1717.84 L 95.86 1717.84" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="91" y="1702" width="18" height="22" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 95.14 1708.16 L 104.86 1708.16" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 95.14 1713.0 L 104.86 1713.0" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 95.14 1717.84 L 104.86 1717.84" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="100" y="1702" width="18" height="22" rx="4" fill="#FFFFFF" stroke="#3C76CB" stroke-width="1.3"/>
+<path d="M 104.14 1708.16 L 113.86 1708.16" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 104.14 1713.0 L 113.86 1713.0" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 104.14 1717.84 L 113.86 1717.84" stroke="#3C76CB" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="0" y="0" transform="translate(134,1720) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#3C76CB" xml:space="preserve">PARTITION</text>
+<text x="0" y="0" transform="translate(82,1754) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Whole topologies stay together</text>
+<path d="M 617 1698 L 617 1757" stroke="#D7E2EA" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="642" y="1704" width="32" height="5" rx="1" fill="#BF801A" stroke-width="1"/>
+<rect x="642" y="1712" width="24" height="5" rx="1" fill="#BF801A" stroke-width="1"/>
+<rect x="642" y="1720" width="17" height="5" rx="1" fill="#BF801A" stroke-width="1"/>
+<text x="0" y="0" transform="translate(694,1720) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#BF801A" xml:space="preserve">MEASURE</text>
+<text x="0" y="0" transform="translate(642,1754) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Regret: quality missed in the top k</text>
+<path d="M 1177 1698 L 1177 1757" stroke="#D7E2EA" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1209" cy="1715" r="5" fill="#8265B0" stroke-width="1"/>
+<circle cx="1221" cy="1715" r="5" fill="#8265B0" stroke-width="1"/>
+<circle cx="1233" cy="1715" r="5" fill="#8265B0" stroke-width="1"/>
+<text x="0" y="0" transform="translate(1254,1720) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#8265B0" xml:space="preserve">AGGREGATE</text>
+<text x="0" y="0" transform="translate(1202,1754) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Seeds → fronts → topology groups</text>
+<path d="M 1747 1698 L 1747 1757" stroke="#D7E2EA" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1789" cy="1715" r="16" fill="#FFFFFF" stroke="#008A85" stroke-width="1.5"/>
+<text x="0" y="0" transform="translate(1785.92,1721) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="bold" fill="#008A85" xml:space="preserve">i</text>
+<text x="0" y="0" transform="translate(1824,1720) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18.5" font-weight="bold" fill="#008A85" xml:space="preserve">INTERPRET</text>
+<text x="0" y="0" transform="translate(1772,1754) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="normal" fill="#536B80" xml:space="preserve">Internal evaluation on reused benchmarks</text>
+<text x="0" y="0" transform="translate(56,1810) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="19" font-weight="bold" fill="#142F43" xml:space="preserve">Study 2 (TCGA-BRCA) and prediction costs are separate analyses, not extra phases here.</text>
+<text x="0" y="0" transform="translate(56,1833) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="15.5" font-weight="normal" fill="#536B80" xml:space="preserve">Design schematic · icons and bars are illustrative, not experimental results.</text>
+<text x="0" y="0" transform="translate(2122.25,1810) scale(1.00000000,1)" font-family="DejaVu Sans" font-size="18" font-weight="normal" fill="#536B80" xml:space="preserve">AMIGA · experimental design</text>
+</svg>

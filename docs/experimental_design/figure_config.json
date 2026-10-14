@@ -1,0 +1,69 @@
+{
+  "title": "AMIGA experimental design: five phases",
+  "output_basename": "AMIGA_experimental_design",
+  "canvas": {
+    "width": 2440,
+    "height": 1870,
+    "physical_width_mm": 420
+  },
+  "font_family": "DejaVu Sans",
+  "fonts": {
+    "regular": "DejaVuSans.ttf",
+    "bold": "DejaVuSans-Bold.ttf"
+  },
+  "palette": {
+    "ink": "#142F43",
+    "muted": "#536B80",
+    "line": "#D7E2EA",
+    "white": "#FFFFFF",
+    "blue": "#3C76CB",
+    "blue_light": "#ECF3FC",
+    "teal": "#008A85",
+    "teal_light": "#E9F7F4",
+    "gold": "#BF801A",
+    "gold_light": "#FFF5D9",
+    "purple": "#8265B0",
+    "purple_light": "#F3EEFA",
+    "coral": "#CF7960",
+    "soft": "#F6F9FB",
+    "gray": "#AABAC6",
+    "navy": "#193C57"
+  },
+  "provenance": "Design schematic of AMIGA Study 1 at commit f31d550b2e66d8459f143e0f39eaa20aabc028b9. Five scientific phases, not a literal execution DAG. Glyphs, candidate bars and tables are schematic; no empirical results are plotted. Study 2 and prediction costs are outside scope. Generated from Python, not a raster reference.",
+  "repository": "AdrianSeguraOrtiz/AMIGA",
+  "commit": "f31d550b2e66d8459f143e0f39eaa20aabc028b9",
+  "preview_dpi": 150,
+  "png_dpi": 300,
+  "panels": {
+    "phase1": [
+      56,
+      475,
+      720,
+      470
+    ],
+    "phase2": [
+      860,
+      475,
+      720,
+      470
+    ],
+    "phase3": [
+      1664,
+      475,
+      720,
+      470
+    ],
+    "phase4": [
+      56,
+      1120,
+      1112,
+      530
+    ],
+    "phase5": [
+      1272,
+      1120,
+      1112,
+      530
+    ]
+  }
+}

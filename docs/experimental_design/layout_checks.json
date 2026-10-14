@@ -1,0 +1,47 @@
+{
+  "text_elements": 153,
+  "vector_primitives": 757,
+  "pdf_drawing_objects": 757,
+  "pdf_text_spans": 153,
+  "raster_images_in_pdf": 0,
+  "text_outside_regions": [],
+  "text_box_overlaps": [],
+  "reference_image_used_by_builder": false,
+  "bbox_note": "Font ascent/descent boxes; no claim of a complete geometry proof.",
+  "commit": "f31d550b2e66d8459f143e0f39eaa20aabc028b9",
+  "scientific_scope": "Study 1: labelled benchmark evaluation; phases 1\u20135",
+  "font_files": {
+    "regular": {
+      "name": "DejaVuSans.ttf",
+      "sha256": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648"
+    },
+    "bold": {
+      "name": "DejaVuSans-Bold.ttf",
+      "sha256": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b"
+    }
+  },
+  "sources_sha256": {
+    "build_figure.py": "37a54568d7158701b0ac5e120a6f0aacbea19813771ecea6c7fef1619b882407",
+    "vector_engine.py": "71692c78d1cdcf44270ac03366f882bc5c5104babd68ddd3b6a46f50b4233f76",
+    "figure_text.json": "3578f479fb65e85b53f07a8bf20476fe529e8dd90a548497038d82eca6d95506",
+    "figure_config.json": "d71fabfa3300d1f54d4b130917b3f9c8280d590bdfd57e824bf8265442f144fd",
+    "design_snapshot.json": "d3a4e12fc0b3feb1068dbdedb5646c3a1b4a46a490f41383488f26053ee2cf5a"
+  },
+  "artifacts": {
+    "AMIGA_experimental_design.pdf": "24e0858f08a4a31a385e19f85a0b4a97dabcc15719802159bc1b717d9d6387d7",
+    "AMIGA_experimental_design.svg": "42795d0df90203d258620ea7ec64dee5c15d9e5a64c4e895475c64c00ab797cb",
+    "AMIGA_experimental_design_outlined.svg": "5b43ba77f34213ec7d3bf2bf4f1c18a517ecab49cab306cc317a7ad4a61f89c0",
+    "AMIGA_experimental_design.png": "510ddf53054045f0b91dc2adc23f850e9fc3cf6e6a9d3618b5ab488e9721a8e8",
+    "AMIGA_experimental_design_preview.png": "e0949a433c3ae239be163a269aafb70c4b6ef4ecade636c7cf7e7c28bb89b3a7",
+    "phase_details/phase1.pdf": "7b76bf1f4a591ecdbb6170924d991b376d42e151da123389ae46b031eef6daf2",
+    "phase_details/phase1.png": "37827f112c33baaddfb4307a8da811ad898d161d829ae4d3f560a54da622e049",
+    "phase_details/phase2.pdf": "aa901bc8fe75bb2d242cd64091b2dc90262ae119ef6f46b9acd7f75e0e2f1fb2",
+    "phase_details/phase2.png": "ae0181980d739600f1817e0699b4ca470a99c9c34e77e34b24ceed47500afe09",
+    "phase_details/phase3.pdf": "b6260b802103db2f4356386fb0f2d033e80648cb672395e4099199ddae4865ce",
+    "phase_details/phase3.png": "0c07d1b00341e4f6d01f93adcbb321d7f994bc1127aeff0c7137c63fb51ad027",
+    "phase_details/phase4.pdf": "f9c2f3c84c3d5a9207e884fb6866118b81cb8ca2631f737e3c31c6aee68d9e9c",
+    "phase_details/phase4.png": "4cd7189a0a9afca72948e91d19efd0c6b8734b5408af6810ea6e639053b093dd",
+    "phase_details/phase5.pdf": "0ff02c87f1e3b77517b5110d4aff1ae02c7b757990ca8b202e0019f1b6e05333",
+    "phase_details/phase5.png": "446a7b6e14bf443ce38f409b5176a6b0b33292e2a714739e67c837b92314a9dc"
+  }
+}

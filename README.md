@@ -261,6 +261,11 @@ candidate networks near the top of a short recommendation list.
 
 ## Experimental workflow
 
+[![AMIGA experimental design in five phases](docs/experimental_design/AMIGA_experimental_design_preview.png)](docs/experimental_design/AMIGA_experimental_design.pdf)
+
+The [experimental-design diagram](docs/experimental_design/README.md) includes
+editable sources, vector exports and instructions to regenerate all five phases.
+
 The repository includes `amiga-exp` for the documented benchmark protocol,
 real-data application and prediction-cost measurements. It shares the AMIGA
 project version. The source prepared for the next release is **0.2.0**;

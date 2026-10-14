@@ -1,5 +1,10 @@
 # Experimental workflow
 
+[![Five-phase benchmark protocol](experimental_design/AMIGA_experimental_design_preview.png)](experimental_design/AMIGA_experimental_design.pdf)
+
+See the [diagram sources and regeneration guide](experimental_design/README.md)
+for editable vector exports and individual phase details.
+
 `amiga-exp` shares the AMIGA project version. The source is prepared for version
 0.2.0; release tags are created when a release is finalized.
 

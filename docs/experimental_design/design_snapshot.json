@@ -1,0 +1,170 @@
+{
+  "repository": "AdrianSeguraOrtiz/AMIGA",
+  "commit": "f31d550b2e66d8459f143e0f39eaa20aabc028b9",
+  "scope": "Study 1: labelled benchmark evaluation; phases 1\u20135",
+  "cases": [
+    {
+      "name": "BIO-INSIGHT",
+      "fronts": 104
+    },
+    {
+      "name": "MO-GENECI",
+      "fronts": 104
+    }
+  ],
+  "shared_topology_groups": 87,
+  "outer_folds": 5,
+  "inner_folds": 3,
+  "selection_seed": 1101,
+  "final_seeds": [
+    1201,
+    1202,
+    1203,
+    1204,
+    1205
+  ],
+  "families": [
+    "LightGBM",
+    "XGBoost",
+    "CatBoost"
+  ],
+  "label_modes": [
+    "dense ranks",
+    "average ranks",
+    "continuous relevance",
+    "quantiles (5 bins)",
+    "quantiles (10 bins)",
+    "quantiles (15 bins)",
+    "reversed (control)",
+    "shuffled (control)"
+  ],
+  "grid_domains": {
+    "LightGBM": {
+      "num_leaves": [
+        31,
+        63,
+        127
+      ],
+      "min_child_samples": [
+        30,
+        50,
+        100
+      ],
+      "learning_rate": [
+        0.03,
+        0.05,
+        0.1
+      ]
+    },
+    "XGBoost": {
+      "max_depth": [
+        4,
+        6,
+        8
+      ],
+      "subsample": [
+        0.8,
+        1.0
+      ],
+      "min_child_weight": [
+        1,
+        5,
+        10
+      ],
+      "learning_rate": [
+        0.03,
+        0.05
+      ]
+    },
+    "CatBoost": {
+      "depth": [
+        4,
+        6,
+        8
+      ],
+      "l2_leaf_reg": [
+        3,
+        5,
+        7,
+        10
+      ],
+      "learning_rate": [
+        0.03,
+        0.05,
+        0.1
+      ]
+    }
+  },
+  "feature_fractions": [
+    1.0,
+    0.75,
+    0.5,
+    0.25
+  ],
+  "selection_rule": [
+    "topology-mean Regret@5",
+    "topology-mean Regret@1",
+    "fewer columns in phase 3",
+    "stable ID"
+  ],
+  "requested_iterations": {
+    "reference": 2000,
+    "tuning_feature_selection_final": 3000
+  },
+  "early_stopping": false,
+  "supervised_formulations": [
+    {
+      "name": "AMIGA",
+      "target": "selected intra-front relevance"
+    },
+    {
+      "name": "Direct AUPR regression",
+      "target": "original AUPR"
+    },
+    {
+      "name": "Top-5% classification",
+      "target": "top-5% membership",
+      "exploratory": true
+    },
+    {
+      "name": "Top-10% classification",
+      "target": "top-10% membership",
+      "exploratory": true
+    },
+    {
+      "name": "Top-20% classification",
+      "target": "top-20% membership"
+    }
+  ],
+  "phase5": {
+    "methods": [
+      "AMIGA"
+    ],
+    "training_topologies": [
+      10,
+      20,
+      40
+    ],
+    "full_training_topologies": [
+      69,
+      70
+    ],
+    "nested_subset_draws": 3,
+    "jobs": 90,
+    "fits": 450,
+    "reselection": false,
+    "keep_exact_phase4_columns": true,
+    "reuse_full_size_predictions": true,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 1401
+  },
+  "notes": [
+    "Fronts are learning-to-rank queries; topology groups control data partitioning, training weights and aggregation.",
+    "The same 87 topology groups appear for both front generators; generators are analyzed separately.",
+    "Outer test data do not enter model selection.",
+    "Phase 3 chooses a fraction; its feature identities must be relearned on each complete outer training complement.",
+    "Phase 5 reuses exact phase-4 columns and fixed recipes; these were selected using the original full training complement.",
+    "Top-5% and top-10% classification are exploratory extensions using the same phase-2/3 policies, not additional scientific phases.",
+    "Phase 5 is conditional training-size sensitivity, not a fresh scarce-label selection experiment."
+  ]
+}

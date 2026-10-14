@@ -1,0 +1,23 @@
+{
+  "renderers": [
+    "PyMuPDF (builder previews and phase details)",
+    "Poppler pdftoppm (independent PDF rendering)",
+    "Inkscape (independent outlined-SVG rendering)"
+  ],
+  "reviewed": "Corrected full-page PDF and outlined SVG inspected visually; labels remain readable and no visible clipping or unintended overlaps were identified.",
+  "phase4_classifier_labels": [
+    "Classification · top 5%",
+    "Classification · top 10%",
+    "Classification · top 20%"
+  ],
+  "classification_asterisks": false,
+  "classification_status_footnote": false,
+  "automatic_check_scope": "Text ascent/descent bounds and panel rectangles; not a proof of every graphical intersection.",
+  "measured_experimental_values_plotted": false,
+  "inspected_artifacts_sha256": {
+    "AMIGA_experimental_design.pdf": "24e0858f08a4a31a385e19f85a0b4a97dabcc15719802159bc1b717d9d6387d7",
+    "AMIGA_experimental_design_outlined.svg": "5b43ba77f34213ec7d3bf2bf4f1c18a517ecab49cab306cc317a7ad4a61f89c0",
+    "AMIGA_experimental_design_preview.png": "e0949a433c3ae239be163a269aafb70c4b6ef4ecade636c7cf7e7c28bb89b3a7",
+    "phase_details/phase4.png": "4cd7189a0a9afca72948e91d19efd0c6b8734b5408af6810ea6e639053b093dd"
+  }
+}

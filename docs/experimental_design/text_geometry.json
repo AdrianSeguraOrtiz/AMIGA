@@ -1,0 +1,1532 @@
+[
+  {
+    "text": "AMIGA",
+    "x": 56.0,
+    "y": 50.095703125,
+    "width": 250.30126953125003,
+    "height": 67.0,
+    "size": 67,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Experimental design: five phases",
+    "x": 399.0,
+    "y": 51.5703125,
+    "width": 825.837890625,
+    "height": 44.0,
+    "size": 44,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Study 1 · labelled benchmark evaluation",
+    "x": 401.0,
+    "y": 102.044921875,
+    "width": 425.90625,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "1",
+    "x": 2163.12939453125,
+    "y": 80.36328125,
+    "width": 9.7412109375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "2",
+    "x": 2209.12939453125,
+    "y": 80.36328125,
+    "width": 9.7412109375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "3",
+    "x": 2255.12939453125,
+    "y": 80.36328125,
+    "width": 9.7412109375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "4",
+    "x": 2301.12939453125,
+    "y": 80.36328125,
+    "width": 9.7412109375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "5",
+    "x": 2347.12939453125,
+    "y": 80.36328125,
+    "width": 9.7412109375,
+    "height": 14.0,
+    "size": 14,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Choose how to rank. Test on held-out topologies. Vary the amount of labelled data.",
+    "x": 56.0,
+    "y": 140.005859375,
+    "width": 1044.44580078125,
+    "height": 25.0,
+    "size": 25,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Two generators, the same benchmark problems",
+    "x": 80.0,
+    "y": 208.525390625,
+    "width": 621.763671875,
+    "height": 23.0,
+    "size": 23,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "87 topology groups",
+    "x": 218.0,
+    "y": 259.765625,
+    "width": 263.33203125,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "All conditions of a",
+    "x": 219.0,
+    "y": 293.32421875,
+    "width": 160.46191406250003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "topology stay together",
+    "x": 219.0,
+    "y": 317.32421875,
+    "width": 205.67285156250003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "BIO-INSIGHT",
+    "x": 633.0,
+    "y": 262.8046875,
+    "width": 140.810546875,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "104 fronts",
+    "x": 845.1796875,
+    "y": 275.564453125,
+    "width": 97.8203125,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "MO-GENECI",
+    "x": 633.0,
+    "y": 323.8046875,
+    "width": 127.802734375,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "104 fronts",
+    "x": 845.1796875,
+    "y": 336.564453125,
+    "width": 97.8203125,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "Analyze each generator separately, not as 208 independent networks.",
+    "x": 80.0,
+    "y": 364.32421875,
+    "width": 636.0644531250001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "benchmark-inputs"
+  },
+  {
+    "text": "Keep topology groups together across nested splits",
+    "x": 1044.0,
+    "y": 208.525390625,
+    "width": 674.04150390625,
+    "height": 23.0,
+    "size": 23,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "5 outer folds",
+    "x": 1068.445068359375,
+    "y": 344.564453125,
+    "width": 137.10986328125,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "Outer training topologies",
+    "x": 1349.0,
+    "y": 257.044921875,
+    "width": 300.48046875,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "3 inner folds for phases 1–3",
+    "x": 1456.0,
+    "y": 296.044921875,
+    "width": 328.19677734375,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "Outer test topologies",
+    "x": 2039.0,
+    "y": 258.4248046875,
+    "width": 247.371337890625,
+    "height": 20.5,
+    "size": 20.5,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "Reserved for",
+    "x": 2039.0,
+    "y": 286.32421875,
+    "width": 115.05761718750001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "phases 4–5",
+    "x": 2039.0,
+    "y": 308.32421875,
+    "width": 101.32031250000001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "Repeat the complete protocol for every outer split.",
+    "x": 1329.0,
+    "y": 358.8046875,
+    "width": 509.775390625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "nested-partitions"
+  },
+  {
+    "text": "DEVELOP THE PROCEDURE",
+    "x": 57.0,
+    "y": 423.28515625,
+    "width": 328.990234375,
+    "height": 22.0,
+    "size": 22,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Training + inner validation only",
+    "x": 454.0,
+    "y": 424.044921875,
+    "width": 332.0625,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Outer test data stay untouched",
+    "x": 1953.0,
+    "y": 424.044921875,
+    "width": 373.3037109375,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "1",
+    "x": 92.650390625,
+    "y": 505.765625,
+    "width": 16.69921875,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Choose the relevance labels",
+    "x": 138.0,
+    "y": 502.486328125,
+    "width": 428.150390625,
+    "height": 27.0,
+    "size": 27,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Translate known network quality into learning targets.",
+    "x": 81.0,
+    "y": 544.8046875,
+    "width": 545.25390625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Known quality",
+    "x": 85.0,
+    "y": 593.32421875,
+    "width": 145.36230468750003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "within a front",
+    "x": 85.0,
+    "y": 616.32421875,
+    "width": 138.37500000000003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "AUPR",
+    "x": 122.74462890625,
+    "y": 740.083984375,
+    "width": 52.51074218750001,
+    "height": 17.0,
+    "size": 17,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Rank order",
+    "x": 291.8642578125,
+    "y": 601.32421875,
+    "width": 112.27148437500001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "5",
+    "x": 343.198974609375,
+    "y": 637.515234375,
+    "width": 9.602050781250002,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "4",
+    "x": 343.198974609375,
+    "y": 657.515234375,
+    "width": 9.602050781250002,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "3",
+    "x": 343.198974609375,
+    "y": 677.515234375,
+    "width": 9.602050781250002,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "2",
+    "x": 343.198974609375,
+    "y": 697.515234375,
+    "width": 9.602050781250002,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "1",
+    "x": 343.198974609375,
+    "y": 717.515234375,
+    "width": 9.602050781250002,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "dense / average",
+    "x": 280.882666015625,
+    "y": 742.387890625,
+    "width": 134.23466796875,
+    "height": 16.599999999999998,
+    "size": 16.6,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Relative quality",
+    "x": 428.0546875,
+    "y": 601.32421875,
+    "width": 159.89062500000003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "1.00",
+    "x": 490.975732421875,
+    "y": 637.515234375,
+    "width": 34.048535156250004,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "0.75",
+    "x": 490.975732421875,
+    "y": 657.515234375,
+    "width": 34.048535156250004,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "0.50",
+    "x": 490.975732421875,
+    "y": 677.515234375,
+    "width": 34.048535156250004,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "0.25",
+    "x": 490.975732421875,
+    "y": 697.515234375,
+    "width": 34.048535156250004,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "0.00",
+    "x": 490.975732421875,
+    "y": 717.515234375,
+    "width": 34.048535156250004,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "0–1 per front",
+    "x": 454.297216796875,
+    "y": 742.387890625,
+    "width": 107.40556640625,
+    "height": 16.599999999999998,
+    "size": 16.6,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Quality bins",
+    "x": 607.10498046875,
+    "y": 601.32421875,
+    "width": 121.79003906250001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "high",
+    "x": 650.8712890625,
+    "y": 637.515234375,
+    "width": 34.257421875000006,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "high",
+    "x": 650.8712890625,
+    "y": 657.515234375,
+    "width": 34.257421875000006,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "mid",
+    "x": 653.50595703125,
+    "y": 677.515234375,
+    "width": 28.988085937500003,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "low",
+    "x": 654.520068359375,
+    "y": 697.515234375,
+    "width": 26.95986328125,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "low",
+    "x": 654.520068359375,
+    "y": 717.515234375,
+    "width": 26.95986328125,
+    "height": 13.8,
+    "size": 13.8,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "5 / 10 / 15 bins",
+    "x": 605.652734375,
+    "y": 742.387890625,
+    "width": 124.69453125,
+    "height": 16.599999999999998,
+    "size": 16.6,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Also test reversed + shuffled labels (controls)",
+    "x": 139.0,
+    "y": 782.564453125,
+    "width": 435.58056640625,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "LightGBM",
+    "x": 138.55712890625,
+    "y": 831.533984375,
+    "width": 92.8857421875,
+    "height": 17.0,
+    "size": 17,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "XGBoost",
+    "x": 375.189208984375,
+    "y": 831.533984375,
+    "width": 81.62158203125,
+    "height": 17.0,
+    "size": 17,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "CatBoost",
+    "x": 603.682373046875,
+    "y": 831.533984375,
+    "width": 86.63525390625,
+    "height": 17.0,
+    "size": 17,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Keep one label scheme per learner",
+    "x": 209.388916015625,
+    "y": 878.894921875,
+    "width": 413.22216796875,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "Regression and classification use fixed targets.",
+    "x": 203.47167968749997,
+    "y": 918.32421875,
+    "width": 425.05664062500006,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-1"
+  },
+  {
+    "text": "2",
+    "x": 896.650390625,
+    "y": 505.765625,
+    "width": 16.69921875,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "Tune each learner",
+    "x": 942.0,
+    "y": 502.486328125,
+    "width": 275.68212890625,
+    "height": 27.0,
+    "size": 27,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "Try predefined parameter combinations.",
+    "x": 885.0,
+    "y": 544.8046875,
+    "width": 406.416015625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "LightGBM",
+    "x": 940.361328125,
+    "y": 595.8046875,
+    "width": 109.27734375,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "27",
+    "x": 974.82177734375,
+    "y": 745.966796875,
+    "width": 40.3564453125,
+    "height": 29.0,
+    "size": 29,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "settings tested",
+    "x": 929.5843505859375,
+    "y": 780.7041015625,
+    "width": 130.831298828125,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "XGBoost",
+    "x": 1171.9873046875,
+    "y": 595.8046875,
+    "width": 96.025390625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "36",
+    "x": 1199.82177734375,
+    "y": 745.966796875,
+    "width": 40.3564453125,
+    "height": 29.0,
+    "size": 29,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "settings tested",
+    "x": 1154.5843505859375,
+    "y": 780.7041015625,
+    "width": 130.831298828125,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "CatBoost",
+    "x": 1394.0380859375,
+    "y": 595.8046875,
+    "width": 101.923828125,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "36",
+    "x": 1424.82177734375,
+    "y": 745.966796875,
+    "width": 40.3564453125,
+    "height": 29.0,
+    "size": 29,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "settings tested",
+    "x": 1379.5843505859375,
+    "y": 780.7041015625,
+    "width": 130.831298828125,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "Score each setting on 3 inner folds",
+    "x": 1024.0,
+    "y": 823.044921875,
+    "width": 414.2578125,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "Keep parameters for each learner × task",
+    "x": 977.91552734375,
+    "y": 878.894921875,
+    "width": 484.16894531250006,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "Same search policy for each supervised formulation.",
+    "x": 982.5634765625,
+    "y": 918.32421875,
+    "width": 474.87304687500006,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-2"
+  },
+  {
+    "text": "3",
+    "x": 1700.650390625,
+    "y": 505.765625,
+    "width": 16.69921875,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Choose descriptors + learner",
+    "x": 1746.0,
+    "y": 502.486328125,
+    "width": 443.74658203125,
+    "height": 27.0,
+    "size": 27,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Remove less useful predictors using training data.",
+    "x": 1689.0,
+    "y": 544.8046875,
+    "width": 503.681640625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Training-only importance for candidate ordering (TreeSHAP)",
+    "x": 1689.0,
+    "y": 591.7923828125,
+    "width": 563.7575195312501,
+    "height": 18.7,
+    "size": 18.7,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "All columns",
+    "x": 1703.087890625,
+    "y": 731.8046875,
+    "width": 129.82421875,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "75%",
+    "x": 1914.064453125,
+    "y": 731.8046875,
+    "width": 47.87109375,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "50%",
+    "x": 2084.064453125,
+    "y": 731.8046875,
+    "width": 47.87109375,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "25%",
+    "x": 2254.064453125,
+    "y": 731.8046875,
+    "width": 47.87109375,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Columns retained from the original table",
+    "x": 1845.556396484375,
+    "y": 761.7041015625,
+    "width": 356.88720703125006,
+    "height": 17.5,
+    "size": 17.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Inner validation chooses the retained fraction",
+    "x": 1690.0,
+    "y": 793.8046875,
+    "width": 518.69140625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "and the model family.",
+    "x": 1690.0,
+    "y": 819.8046875,
+    "width": 247.001953125,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Keep a feature budget + learner",
+    "x": 1831.4521484375,
+    "y": 878.894921875,
+    "width": 385.095703125,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "Relearn the selected column mask before outer evaluation.",
+    "x": 1764.754443359375,
+    "y": 918.780078125,
+    "width": 518.4911132812499,
+    "height": 17.4,
+    "size": 17.4,
+    "horizontal_scale": 1.0,
+    "region": "phase-3"
+  },
+  {
+    "text": "4",
+    "x": 92.650390625,
+    "y": 1150.765625,
+    "width": 16.69921875,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Compare on held-out topologies",
+    "x": 138.0,
+    "y": 1145.966796875,
+    "width": 526.021484375,
+    "height": 29.0,
+    "size": 29,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Refit selected procedures; predict before reading test quality labels.",
+    "x": 81.0,
+    "y": 1189.8046875,
+    "width": 684.931640625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Same held-out",
+    "x": 86.112060546875,
+    "y": 1373.9443359375,
+    "width": 151.77587890625,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "candidates",
+    "x": 104.8333740234375,
+    "y": 1396.9443359375,
+    "width": 114.333251953125,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Five supervised selectors",
+    "x": 313.0,
+    "y": 1240.4248046875,
+    "width": 294.607421875,
+    "height": 20.5,
+    "size": 20.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "AMIGA · learn an order",
+    "x": 336.0,
+    "y": 1274.32421875,
+    "width": 231.53906250000003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Regression · predict AUPR",
+    "x": 336.0,
+    "y": 1303.32421875,
+    "width": 234.67675781250003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Classification · top 5%",
+    "x": 336.0,
+    "y": 1332.32421875,
+    "width": 200.03906250000003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Classification · top 10%",
+    "x": 336.0,
+    "y": 1361.32421875,
+    "width": 211.49121093750003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Classification · top 20%",
+    "x": 336.0,
+    "y": 1390.32421875,
+    "width": 211.49121093750003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Assess the first 5",
+    "x": 842.35791015625,
+    "y": 1239.28515625,
+    "width": 215.2841796875,
+    "height": 22.0,
+    "size": 22,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Best in the front",
+    "x": 795.0,
+    "y": 1277.32421875,
+    "width": 146.18847656250003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Best among top 5",
+    "x": 795.0,
+    "y": 1333.32421875,
+    "width": 160.38281250000003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Missed quality = Regret@5",
+    "x": 797.6806640625,
+    "y": 1415.8046875,
+    "width": 304.638671875,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Separate panel: objective-only rules + exact random reference",
+    "x": 99.0,
+    "y": 1462.8046875,
+    "width": 710.830078125,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "The AUPR oracle is a nondeployable ceiling, not a competitor.",
+    "x": 99.0,
+    "y": 1487.93203125,
+    "width": 532.0830078125,
+    "height": 17.2,
+    "size": 17.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "5 final training seeds",
+    "x": 64.171630859375,
+    "y": 1578.9443359375,
+    "width": 221.65673828125,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Equal weight per topology",
+    "x": 394.0,
+    "y": 1541.28515625,
+    "width": 327.271484375,
+    "height": 22.0,
+    "size": 22,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "Regret@5 primary · Friedman + Holm, per generator",
+    "x": 394.0,
+    "y": 1573.9443359375,
+    "width": 491.38818359375,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "No seed selection or prediction ensemble; all five final seeds contribute.",
+    "x": 80.0,
+    "y": 1620.32421875,
+    "width": 652.3681640625001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-4"
+  },
+  {
+    "text": "5",
+    "x": 1308.650390625,
+    "y": 1150.765625,
+    "width": 16.69921875,
+    "height": 24.0,
+    "size": 24,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Learn with fewer labelled topologies",
+    "x": 1354.0,
+    "y": 1145.966796875,
+    "width": 599.541015625,
+    "height": 29.0,
+    "size": 29,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Keep the AMIGA recipe and exact feature columns from phase 4.",
+    "x": 1297.0,
+    "y": 1189.8046875,
+    "width": 650.87890625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Fixed model family · labels · parameters · exact columns",
+    "x": 1347.0,
+    "y": 1246.044921875,
+    "width": 670.28759765625,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Labelled training topology groups",
+    "x": 1298.0,
+    "y": 1291.564453125,
+    "width": 320.4765625,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "10",
+    "x": 1385.21337890625,
+    "y": 1438.486328125,
+    "width": 37.5732421875,
+    "height": 27.0,
+    "size": 27,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "20",
+    "x": 1609.21337890625,
+    "y": 1438.486328125,
+    "width": 37.5732421875,
+    "height": 27.0,
+    "size": 27,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "40",
+    "x": 1833.21337890625,
+    "y": 1438.486328125,
+    "width": 37.5732421875,
+    "height": 27.0,
+    "size": 27,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Full training set",
+    "x": 2137.0,
+    "y": 1334.32421875,
+    "width": 161.99121093750003,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Reuse phase-4",
+    "x": 2137.0,
+    "y": 1359.5521484375,
+    "width": 131.202978515625,
+    "height": 17.7,
+    "size": 17.7,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "predictions",
+    "x": 2137.0,
+    "y": 1382.5521484375,
+    "width": 98.413037109375,
+    "height": 17.7,
+    "size": 17.7,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "69–70",
+    "x": 2162.9599609375,
+    "y": 1448.005859375,
+    "width": 82.080078125,
+    "height": 25.0,
+    "size": 25,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "3 nested subset draws × 5 seeds · unchanged test folds",
+    "x": 1296.0,
+    "y": 1484.4248046875,
+    "width": 648.182373046875,
+    "height": 20.5,
+    "size": 20.5,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "10",
+    "x": 1344.69306640625,
+    "y": 1598.691796875,
+    "width": 20.6138671875,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "20",
+    "x": 1427.69306640625,
+    "y": 1598.691796875,
+    "width": 20.6138671875,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "40",
+    "x": 1528.69306640625,
+    "y": 1598.691796875,
+    "width": 20.6138671875,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "full",
+    "x": 1612.513818359375,
+    "y": 1598.691796875,
+    "width": 24.972363281249997,
+    "height": 16.2,
+    "size": 16.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "?",
+    "x": 1472.55859375,
+    "y": 1540.6484375,
+    "width": 20.882812500000004,
+    "height": 36.0,
+    "size": 36,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Measure learning curves",
+    "x": 1688.0,
+    "y": 1520.28515625,
+    "width": 306.1845703125,
+    "height": 22.0,
+    "size": 22,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Regret@5 and Hit@5",
+    "x": 1688.0,
+    "y": 1551.564453125,
+    "width": 221.57080078125,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Conditional 95% intervals",
+    "x": 2028.0,
+    "y": 1523.172265625,
+    "width": 233.9517578125,
+    "height": 18.2,
+    "size": 18.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "from topology bootstrap",
+    "x": 2028.0,
+    "y": 1547.172265625,
+    "width": 221.563671875,
+    "height": 18.2,
+    "size": 18.2,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "AMIGA only · no new model or column selection",
+    "x": 1688.0,
+    "y": 1585.564453125,
+    "width": 510.1240234375,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Conditional on the recipe chosen with the full training complement.",
+    "x": 1296.0,
+    "y": 1620.32421875,
+    "width": 609.3808593750001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": "phase-5"
+  },
+  {
+    "text": "Selection rule: minimize missed quality among the first 5 recommendations",
+    "x": 78.0,
+    "y": 984.044921875,
+    "width": 899.50341796875,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Regret@5 → Regret@1 → fewer columns in phase 3 → stable tie-break",
+    "x": 78.0,
+    "y": 1015.8046875,
+    "width": 702.822265625,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Freeze the procedure for this outer split",
+    "x": 1724.0,
+    "y": 976.044921875,
+    "width": 478.42675781250006,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Model family · labels · parameters · feature budget",
+    "x": 1724.0,
+    "y": 1003.71640625,
+    "width": 479.455078125,
+    "height": 18.8,
+    "size": 18.8,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "EVALUATE FIXED PROCEDURES",
+    "x": 56.0,
+    "y": 1089.044921875,
+    "width": 366.2490234375,
+    "height": 21.0,
+    "size": 21,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "No test-driven selection",
+    "x": 1269.0,
+    "y": 1089.8046875,
+    "width": 238.720703125,
+    "height": 20.0,
+    "size": 20,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "PARTITION",
+    "x": 134.0,
+    "y": 1705.9443359375,
+    "width": 112.3369140625,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Whole topologies stay together",
+    "x": 82.0,
+    "y": 1739.564453125,
+    "width": 298.18310546875,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "MEASURE",
+    "x": 694.0,
+    "y": 1705.9443359375,
+    "width": 100.59375,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Regret: quality missed in the top k",
+    "x": 642.0,
+    "y": 1739.564453125,
+    "width": 329.5126953125,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "AGGREGATE",
+    "x": 1254.0,
+    "y": 1705.9443359375,
+    "width": 126.329345703125,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Seeds → fronts → topology groups",
+    "x": 1202.0,
+    "y": 1739.564453125,
+    "width": 323.41748046875,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "i",
+    "x": 1785.9150390625,
+    "y": 1707.32421875,
+    "width": 6.169921875000001,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "INTERPRET",
+    "x": 1824.0,
+    "y": 1705.9443359375,
+    "width": 114.929443359375,
+    "height": 18.5,
+    "size": 18.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Internal evaluation on reused benchmarks",
+    "x": 1772.0,
+    "y": 1739.564453125,
+    "width": 403.6572265625,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Study 2 (TCGA-BRCA) and prediction costs are separate analyses, not extra phases here.",
+    "x": 56.0,
+    "y": 1795.564453125,
+    "width": 954.52734375,
+    "height": 19.0,
+    "size": 19,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "Design schematic · icons and bars are illustrative, not experimental results.",
+    "x": 56.0,
+    "y": 1821.2236328125,
+    "width": 588.205322265625,
+    "height": 15.5,
+    "size": 15.5,
+    "horizontal_scale": 1.0,
+    "region": null
+  },
+  {
+    "text": "AMIGA · experimental design",
+    "x": 2122.2529296875,
+    "y": 1796.32421875,
+    "width": 261.74707031250006,
+    "height": 18.0,
+    "size": 18,
+    "horizontal_scale": 1.0,
+    "region": null
+  }
+]

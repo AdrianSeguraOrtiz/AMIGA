@@ -6,6 +6,9 @@ This figure describes the reusable AMIGA workflow: learning from labelled
 benchmark fronts, saving a ranker and predictor schema, and ranking candidates
 for new data without reference labels. The illustrations are schematic.
 
+The [experimental-design diagram](../experimental_design/README.md) describes
+the five benchmark phases in more detail.
+
 ## Files and formats
 
 | File | Purpose |

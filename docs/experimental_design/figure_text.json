@@ -1,0 +1,138 @@
+{
+  "brand": "AMIGA",
+  "headline": "Experimental design: five phases",
+  "header_subtitle": "Study 1 · labelled benchmark evaluation",
+  "tagline": "Choose how to rank. Test on held-out topologies. Vary the amount of labelled data.",
+  "inputs_title": "Two generators, the same benchmark problems",
+  "topologies": "topology groups",
+  "conditions": [
+    "All conditions of a",
+    "topology stay together"
+  ],
+  "separate_cases": "Analyze each generator separately, not as 208 independent networks.",
+  "split_title": "Keep topology groups together across nested splits",
+  "outer_train": "Outer training topologies",
+  "outer_test": "Outer test topologies",
+  "test_use": [
+    "Reserved for",
+    "phases 4–5"
+  ],
+  "split_note": "Repeat the complete protocol for every outer split.",
+  "selection_heading": "DEVELOP THE PROCEDURE",
+  "selection_subheading": "Training + inner validation only",
+  "test_guard": "Outer test data stay untouched",
+  "phase_titles": [
+    "Choose the relevance labels",
+    "Tune each learner",
+    "Choose descriptors + learner",
+    "Compare on held-out topologies",
+    "Learn with fewer labelled topologies"
+  ],
+  "phase_subtitles": [
+    "Translate known network quality into learning targets.",
+    "Try predefined parameter combinations.",
+    "Remove less useful predictors using training data.",
+    "Refit selected procedures; predict before reading test quality labels.",
+    "Keep the AMIGA recipe and exact feature columns from phase 4."
+  ],
+  "quality_input": [
+    "Known quality",
+    "within a front"
+  ],
+  "quality_measure": "AUPR",
+  "label_heads": [
+    "Rank order",
+    "Relative quality",
+    "Quality bins"
+  ],
+  "label_details": [
+    "dense / average",
+    "0–1 per front",
+    "5 / 10 / 15 bins"
+  ],
+  "label_controls": "Also test reversed + shuffled labels (controls)",
+  "label_output": "Keep one label scheme per learner",
+  "label_fixed": "Regression and classification use fixed targets.",
+  "grid_unit": "settings tested",
+  "grid_inner": "Score each setting on 3 inner folds",
+  "grid_output": "Keep parameters for each learner × task",
+  "grid_note": "Same search policy for each supervised formulation.",
+  "feature_importance": "Training-only importance for candidate ordering (TreeSHAP)",
+  "feature_all": "All columns",
+  "feature_retained": "Columns retained from the original table",
+  "feature_refit": "Refit after each reduction",
+  "feature_select": [
+    "Inner validation chooses the retained fraction",
+    "and the model family."
+  ],
+  "feature_output": "Keep a feature budget + learner",
+  "feature_note": "Relearn the selected column mask before outer evaluation.",
+  "selection_rule_title": "Selection rule: minimize missed quality among the first 5 recommendations",
+  "selection_rule_detail": "Regret@5 → Regret@1 → fewer columns in phase 3 → stable tie-break",
+  "frozen_title": "Freeze the procedure for this outer split",
+  "frozen_detail": "Model family · labels · parameters · feature budget",
+  "evaluation_heading": "EVALUATE FIXED PROCEDURES",
+  "evaluation_subheading": "No test-driven selection",
+  "test_candidates": [
+    "Same held-out",
+    "candidates"
+  ],
+  "supervised": "Five supervised selectors",
+  "supervised_rows": [
+    "AMIGA · learn an order",
+    "Regression · predict AUPR",
+    "Classification · top 5%",
+    "Classification · top 10%",
+    "Classification · top 20%"
+  ],
+  "top5_title": "Assess the first 5",
+  "best_front": "Best in the front",
+  "best_top5": "Best among top 5",
+  "regret_label": "Missed quality = Regret@5",
+  "objective_panel": "Separate panel: objective-only rules + exact random reference",
+  "oracle_note": "The AUPR oracle is a nondeployable ceiling, not a competitor.",
+  "seed_average": "Average metrics, not scores",
+  "topology_weight": "Equal weight per topology",
+  "statistics": "Regret@5 primary · Friedman + Holm, per generator",
+  "prediction_note": "No seed selection or prediction ensemble; all five final seeds contribute.",
+  "recipe_lock": "Fixed model family · labels · parameters · exact columns",
+  "training_amount": "Labelled training topology groups",
+  "full_size": "Full training set",
+  "full_reuse": [
+    "Reuse phase-4",
+    "predictions"
+  ],
+  "learning_repetitions": "3 nested subset draws × 5 seeds · unchanged test folds",
+  "learning_title": "Measure learning curves",
+  "learning_metrics": "Regret@5 and Hit@5",
+  "learning_interval": [
+    "Conditional 95% intervals",
+    "from topology bootstrap"
+  ],
+  "learning_question": "How do the recommendations change?",
+  "learning_scope": "AMIGA only · no new model or column selection",
+  "learning_qualification": "Conditional on the recipe chosen with the full training complement.",
+  "axis_training": "labelled training size",
+  "footer_titles": [
+    "PARTITION",
+    "MEASURE",
+    "AGGREGATE",
+    "INTERPRET"
+  ],
+  "footer_lines": [
+    [
+      "Whole topologies stay together"
+    ],
+    [
+      "Regret: quality missed in the top k"
+    ],
+    [
+      "Seeds → fronts → topology groups"
+    ],
+    [
+      "Internal evaluation on reused benchmarks"
+    ]
+  ],
+  "scope_footer": "Study 2 (TCGA-BRCA) and prediction costs are separate analyses, not extra phases here.",
+  "schematic_footer": "Design schematic · icons and bars are illustrative, not experimental results."
+}
